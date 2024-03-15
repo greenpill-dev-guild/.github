@@ -1,5 +1,4 @@
-## Hi there 👋
-
+The Greenpill Dev Guild is centered around creating products that use emerging web3 technologies from quadratic funding, hypercerts, attestations and more to help chapters and communities coordinate around public good actions. We’ve been actively building with a focus on simplifying onboarding into the regen space, measuring the impact of public good actions, and coordinating within regen communities.
 <!--
 
 **Here are some ideas to get you started:**
