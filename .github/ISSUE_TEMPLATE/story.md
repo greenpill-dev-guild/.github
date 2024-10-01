@@ -1,8 +1,8 @@
 ---
 name: Story
 about: Create a user story to complete for a project
-title: ''
-labels: ''
+title: "[STORY]"
+labels: story
 assignees: ''
 
 ---
@@ -15,11 +15,11 @@ assignees: ''
 
 ### Tasks
 
-- [] Designs
-- [] React Components
-- [] State Management
-- [] API
-- [] Contracts
+- [ ] Designs
+- [ ] React Components
+- [ ] State Management
+- [ ] API
+- [ ] Contracts
 
 ### Requirements
 
