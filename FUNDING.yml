@@ -1,0 +1,19 @@
+# Example funding.yml for GitHub Sponsors
+
+# These are the platforms you want to use for receiving funding. 
+# Include the URLs to your funding profiles for each platform.
+
+github: [greenpill-dev-guild] # Your GitHub Sponsors username, if applicable
+patreon: your-patreon-username # Your Patreon username, if applicable
+open_collective: greenpill # Open Collective ID, if applicable
+ko_fi: your-kofi-username # Ko-fi username, if applicable
+buymeacoffee: your-buymeacoffee-username # Buy Me a Coffee username, if applicable
+liberapay: your-liberapay-username # Liberapay username, if applicable
+issuehunt: your-issuehunt-username # IssueHunt username, if applicable
+otechie: your-otechie-username # Otechie username, if applicable
+lfx_crowdfunding: your-lfx-crowdfunding-username # LFX Crowdfunding username, if applicable
+
+# Custom sponsor URLs
+custom: 
+  - url: https://your-custom-sponsor-link.com
+    label: Greenpill Dev Guild Funding
