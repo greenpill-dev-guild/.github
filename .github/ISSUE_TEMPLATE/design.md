@@ -1,8 +1,8 @@
 ---
-name: Feature request
+name: Design
 about: Suggest an idea for this project
-title: ''
-labels: ''
+title: "[DESIGN]"
+labels: design
 assignees: ''
 
 ---
