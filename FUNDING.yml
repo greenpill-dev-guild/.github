@@ -4,16 +4,10 @@
 # Include the URLs to your funding profiles for each platform.
 
 github: [greenpill-dev-guild] # Your GitHub Sponsors username, if applicable
-patreon: your-patreon-username # Your Patreon username, if applicable
-open_collective: greenpill # Open Collective ID, if applicable
-ko_fi: your-kofi-username # Ko-fi username, if applicable
-buymeacoffee: your-buymeacoffee-username # Buy Me a Coffee username, if applicable
-liberapay: your-liberapay-username # Liberapay username, if applicable
-issuehunt: your-issuehunt-username # IssueHunt username, if applicable
-otechie: your-otechie-username # Otechie username, if applicable
-lfx_crowdfunding: your-lfx-crowdfunding-username # LFX Crowdfunding username, if applicable
 
 # Custom sponsor URLs
-custom: 
-  - url: https://your-custom-sponsor-link.com
-    label: Greenpill Dev Guild Funding
+custom:
+  - url: https://explorer.gitcoin.co/#/projects/0x4f354435756ee1c1ea18402a559874cd2bb918ad795b7e361e1257425e57a7de
+    label: Gitcoin
+  - url: https://giveth.io/project/greenpill-dev-guild
+    label: Giveth
