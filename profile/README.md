@@ -1,4 +1,56 @@
-The Greenpill Dev Guild is centered around creating products that use emerging web3 technologies from quadratic funding, hypercerts, attestations and more to help chapters and communities coordinate around public good actions. We’ve been actively building with a focus on simplifying onboarding into the regen space, measuring the impact of public good actions, and coordinating within regen communities.
+![Greenpill Dev Guild Banner](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/c2f34287-eb64-48ae-a5f5-1738f0125965/Frame-122-copy.png)
+
+We are a community of builders supporting Greenpill Chapters and regen communities with regenerative tools, guides and workshops focused on impact measurement, capital allocation and community coordination. Since October 2023, the Greenpill Dev Guild has been building a thriving community with weekly meetings, impactful workshops and collaborative projects that members actively contribute to. The Guild operates several grant rounds with Grant Ships and Gitcoin, funding regenerative projects across the gaming and public goods space. We welcome all to join us in advancing the regen movement and making meaningful impact!
+
+# Mission
+
+![Fellowship Walking On Adventure](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/d3c5db5e-df5c-4d87-9790-fc54d59c5bfc/1a718c4f-e9ef-4f01-b5ea-e05ef0fd4450.png)
+
+We aim to foster positive-sum actions where impact = profit, ensuring that meaningful change and prosperity go hand in hand as we work together to defeat Moloch.
+
+
+# Projects
+
+Discover our projects and why we build them.
+
+## 🌿 [Green Goods](https://greengoods.app)
+
+![Green Goods Community Event](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/b1425acd-d074-4d30-b95e-9d4cbb736fde/05d9e212-5613-43c7-84fb-8693a0c2f5de.png)
+
+Green Goods is a project focused on bringing biodiversity onchain to better measure, track and reward impact on green spaces. We are building this to support Greenpill Brasil and create the foundation for a simple tool that captures environmental impact in a meaningful way.
+
+
+## 🪸 [Impact Reef](https://impactreef.app)
+
+![Impact Reef Homepage](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/532e5f5d-e130-4200-b7e3-6ad6c7bd591b/social-image.png)
+
+Impact Reef is designed to capture qualitative data for public good projects, backed by community endorsements. This initiative aims to surface the value and impact of these projects, making it easier for them to gain additional funding and support.
+
+
+## 🚢 [Grant Ships](https://app.grantships.fun/ship/0x95582289B2cDc12925663bD9121307Dca6F21Cc3)
+
+![Greenpill Dev Ship profile](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/0c42a39d-e7db-4511-85ee-ab14c29f40c9/Screenshot-2024-10-14-at-3.31.57-AM.png) 
+
+Grant Ships is a grant allocation game where the Greenpill Dev Guild competes with other allocators to fund games on Arbitrum. Using a retroactive and proactive funding mechanism, the Guild helps bring regenerative features into games, turning degens into regens and demonstrating the effectiveness of our unique funding model.
+
+
+## 🛠️ [Workshops](https://app.charmverse.io/greenpill-dev-guild/workshops-5495125818712396)
+
+![Hypercerts Workshop Screenshot](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/fe196273-6a59-4538-95e9-335832978d58/Screenshot-2024-10-15-at-1.23.53-PM.png)
+
+[Hypercerts Workshop Highlights](https://youtu.be/5zf9ynSXppE)
+
+Our workshops focus on various regen tools, including hypercerts, attestations and multisigs. We conduct these workshops to create valuable resources for Greenpill and other regen communities, helping them achieve their initiative goals.
+
+
+## 🏹 [Allo Yeeter](https://github.com/greenpill-dev-guild/allo-yeeter)
+
+Allo Yeeter is a simple strategy that allows funds to be sent to multiple addresses in just a few transactions. This project supports the growth of Gitcoin by offering an easy mechanism to allocate funds efficiently and quickly through Allo.
+
+
+## 📈 [Allo Advancement](https://app.charmverse.io/greenpill-dev-guild/gg22-allo-builders-advancement-014822420619412524)
+
+Allo Advancement is a project that fosters the growth of the Allo protocol by operating a Gitcoin grant round to fund builders growing the protocol. This initiative connects builders across the Allo ecosystem and supports the continued development of grants through Gitcoin RFPs and community rounds.
 <!--
 
 **Here are some ideas to get you started:**
