@@ -1,5 +1,3 @@
-![Greenpill Dev Guild Banner](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/c2f34287-eb64-48ae-a5f5-1738f0125965/Frame-122-copy.png)
-
 We are a community of builders supporting Greenpill Chapters and regen communities with regenerative tools, guides and workshops focused on impact measurement, capital allocation and community coordination. Since October 2023, the Greenpill Dev Guild has been building a thriving community with weekly meetings, impactful workshops and collaborative projects that members actively contribute to. The Guild operates several grant rounds with Grant Ships and Gitcoin, funding regenerative projects across the gaming and public goods space. We welcome all to join us in advancing the regen movement and making meaningful impact!
 
 # Mission
