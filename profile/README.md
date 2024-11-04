@@ -7,7 +7,8 @@ Discover our projects and why we build them.
 
 ## 🌿 [Green Goods](https://greengoods.app)
 
-![Green Goods Community Event](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/b1425acd-d074-4d30-b95e-9d4cbb736fde/05d9e212-5613-43c7-84fb-8693a0c2f5de.png)
+![Green Goods Community Event](https://github.com/user-attachments/assets/23e4c76c-b8d0-4e3e-a082-9f17d445db6e)
+
 
 Green Goods is a project focused on bringing biodiversity onchain to better measure, track and reward impact on green spaces. We are building this to support Greenpill Brasil and create the foundation for a simple tool that captures environmental impact in a meaningful way.
 
