@@ -1,12 +1,4 @@
-# Overview
-
 We are a community of builders supporting Greenpill Chapters and regen communities with regenerative tools, guides and workshops focused on impact measurement, capital allocation and community coordination. Since October 2023, the Greenpill Dev Guild has been building a thriving community with weekly meetings, impactful workshops and collaborative projects that members actively contribute to. The Guild operates several grant rounds with Grant Ships and Gitcoin, funding regenerative projects across the gaming and public goods space. We welcome all to join us in advancing the regen movement and making meaningful impact!
-
-# Mission
-
-![Fellowship Walking On Adventure](https://cdn.charmverse.io/user-content/5e36d65b-e9d7-4667-b1c7-f551832414e3/d3c5db5e-df5c-4d87-9790-fc54d59c5bfc/1a718c4f-e9ef-4f01-b5ea-e05ef0fd4450.png)
-
-We aim to foster positive-sum actions where impact = profit, ensuring that meaningful change and prosperity go hand in hand as we work together to defeat Moloch.
 
 
 # Projects
