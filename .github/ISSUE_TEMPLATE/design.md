@@ -7,14 +7,21 @@ assignees: ''
 
 ---
 
-**Is your feature request related to a problem? Please describe.**
-A clear and concise description of what the problem is. Ex. I'm always frustrated when [...]
+### Done State
 
-**Describe the solution you'd like**
-A clear and concise description of what you want to happen.
+- [ ] Task 1
+- [ ] Task 2
+- [ ] Task 3
 
-**Describe alternatives you've considered**
-A clear and concise description of any alternative solutions or features you've considered.
+### Design Requirements
 
-**Additional context**
-Add any other context or screenshots about the feature request here.
+- Designs align with branding of project
+- Components created, organized and optimized for export
+- Screen layouted in a clear and easy to navigate manner
+
+### Resources
+
+- [Project Figma]()
+- [Project Miro Board]()
+- [Project PRD]()
+
