@@ -1,0 +1,92 @@
+name: ✨ Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: dropdown
+    id: package
+    attributes:
+      label: Target Package(s)
+      description: Which package(s) will this feature affect?
+      multiple: true
+      options:
+        - client (PWA)
+        - admin (Dashboard)
+        - shared (Hooks/Utils)
+        - contracts (Solidity)
+        - indexer (GraphQL)
+        - agent (Bot)
+        - docs (Documentation)
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem Statement
+      description: What problem does this feature solve?
+      placeholder: "As a [user type], I want to [action] so that [benefit]..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: Proposed Solution
+      description: How should this work?
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives Considered
+      description: What other solutions did you consider?
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: How do we know this is complete?
+      placeholder: |
+        - [ ] Criterion 1
+        - [ ] Criterion 2
+        - [ ] Criterion 3
+    validations:
+      required: true
+
+  - type: dropdown
+    id: offline
+    attributes:
+      label: Offline Behavior
+      description: How should this feature work offline?
+      options:
+        - Not applicable (online only)
+        - Should work offline (queue for sync)
+        - Read-only offline (sync on reconnect)
+        - Full offline support required
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Notes
+      description: |
+        Optional guidance for implementers: file paths, patterns to follow, dependencies.
+        AI assistants can populate this section with codebase analysis.
+      placeholder: |
+        ## Suggested Approach
+        1. Create hook in `packages/shared/src/hooks/`
+        2. Follow pattern from `useGarden.ts`
+
+        ## Files to Create/Modify
+        - `packages/shared/src/hooks/useFeature.ts`
+        - `packages/client/src/views/Feature/index.tsx`
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      description: Links to designs, docs, or related issues
+      placeholder: |
+        - [Figma Design](link)
+        - Related to #123

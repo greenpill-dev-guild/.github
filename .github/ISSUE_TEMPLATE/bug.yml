@@ -1,0 +1,107 @@
+name: 🐛 Bug Report
+description: Report a bug to help us improve
+title: "[BUG]: "
+labels: ["bug", "triage"]
+assignees: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this bug! Please fill out the form below.
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Affected Package
+      description: Which package(s) are affected?
+      multiple: true
+      options:
+        - client (PWA)
+        - admin (Dashboard)
+        - shared (Hooks/Utils)
+        - contracts (Solidity)
+        - indexer (GraphQL)
+        - agent (Bot)
+        - docs (Documentation)
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Bug Description
+      description: A clear description of what the bug is
+      placeholder: When I click the submit button, the form doesn't submit...
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Steps to Reproduce
+      description: Detailed steps to reproduce the behavior
+      placeholder: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll down to '...'
+        4. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What should happen instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: Screenshots/Recordings
+      description: Add screenshots or screen recordings if applicable
+
+  - type: dropdown
+    id: environment
+    attributes:
+      label: Environment
+      options:
+        - Production
+        - Staging
+        - Local Development
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser/OS
+      placeholder: "Chrome 120, macOS 14.2"
+
+  - type: dropdown
+    id: offline
+    attributes:
+      label: Offline Related?
+      description: Does this occur when offline or during sync?
+      options:
+        - "No"
+        - "Yes - offline mode"
+        - "Yes - during sync"
+        - "Not sure"
+
+  - type: textarea
+    id: ai-context
+    attributes:
+      label: Additional Context / AI Notes
+      description: |
+        Add any relevant code snippets, file paths, error messages, or investigation findings.
+        AI assistants can populate this section with investigation results.
+      placeholder: |
+        ## Files Involved
+        - `packages/client/src/views/...`
+
+        ## Error Messages
+        ```
+        Error stack trace here
+        ```

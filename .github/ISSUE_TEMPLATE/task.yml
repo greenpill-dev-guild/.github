@@ -1,0 +1,89 @@
+name: 🔧 Engineering Task
+description: Create a specific engineering task
+title: "[TASK]: "
+labels: ["task"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Task Type
+      options:
+        - Implementation
+        - Refactor
+        - Performance
+        - Security
+        - Testing
+        - Documentation
+        - DevOps/Infrastructure
+    validations:
+      required: true
+
+  - type: dropdown
+    id: package
+    attributes:
+      label: Affected Package(s)
+      multiple: true
+      options:
+        - client (PWA)
+        - admin (Dashboard)
+        - shared (Hooks/Utils)
+        - contracts (Solidity)
+        - indexer (GraphQL)
+        - agent (Bot)
+        - docs (Documentation)
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Task Summary
+      description: What needs to be done?
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-state
+    attributes:
+      label: Done State
+      description: What does "done" look like?
+      placeholder: |
+        - [ ] Task completed
+        - [ ] Tests passing
+        - [ ] Code reviewed
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical-requirements
+    attributes:
+      label: Technical Requirements
+      description: Specific technical constraints or requirements
+      placeholder: |
+        - Must use existing patterns from...
+        - Performance budget: <100ms
+        - No new dependencies
+
+  - type: textarea
+    id: implementation-notes
+    attributes:
+      label: Implementation Notes
+      description: Files to modify, patterns to follow, dependencies
+      placeholder: |
+        ## Files to Modify
+        - `packages/shared/src/...`
+
+        ## Pattern Reference
+        See `packages/shared/src/hooks/useGarden.ts`
+
+        ## Testing
+        - Add unit tests in `__tests__/`
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      description: Links to docs, designs, related issues
+      placeholder: |
+        - [Design in Figma](link)
+        - Related to #123
