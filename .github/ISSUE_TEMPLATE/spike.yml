@@ -1,0 +1,67 @@
+name: 🔬 Spike / Investigation
+description: Research or investigation task
+title: "[SPIKE]: "
+labels: ["spike"]
+body:
+  - type: textarea
+    id: question
+    attributes:
+      label: Research Question
+      description: What are we trying to learn or understand?
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Why do we need this investigation?
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What's in and out of scope for this investigation?
+      placeholder: |
+        **In Scope:**
+        - Area 1
+        - Area 2
+
+        **Out of Scope:**
+        - Area 3
+    validations:
+      required: true
+
+  - type: input
+    id: timebox
+    attributes:
+      label: Timebox
+      description: Maximum time to spend on this investigation
+      placeholder: "2 hours / 1 day / 3 days"
+    validations:
+      required: true
+
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: What should come out of this spike?
+      placeholder: |
+        - [ ] Written summary of findings
+        - [ ] Recommendation for next steps
+        - [ ] POC code (if applicable)
+        - [ ] Follow-up issues created
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Starting Resources
+      description: Any initial resources or leads to explore
+      placeholder: |
+        - [Documentation](link)
+        - [Related PR](link)
+        - [External resource](link)

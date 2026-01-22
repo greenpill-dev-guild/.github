@@ -1,0 +1,59 @@
+name: 🎨 Design Request
+description: Request design work for a feature or component
+title: "[DESIGN]: "
+labels: ["design"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Design Type
+      options:
+        - New Feature Design
+        - Component Design
+        - Icon/Asset Design
+        - UX Flow
+        - Design System Update
+        - Visual Polish
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What design work is needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: requirements
+    attributes:
+      label: Design Requirements
+      description: Specific requirements for the design
+      placeholder: |
+        - Must align with existing design system
+        - Mobile-first responsive design
+        - Accessibility considerations (WCAG 2.1 AA)
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-state
+    attributes:
+      label: Done State
+      placeholder: |
+        - [ ] Designs created in Figma
+        - [ ] Components properly organized
+        - [ ] Assets optimized for export
+        - [ ] Design reviewed with engineering
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      placeholder: |
+        - [Project Figma](https://figma.com/...)
+        - [Design System](link)
+        - [Reference](link)

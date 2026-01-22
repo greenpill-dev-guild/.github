@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 Ask a Question
+    url: https://t.me/greenpilldevguild
+    about: Get help from the Greenpill Dev Guild community
+  - name: 📚 Documentation
+    url: https://docs.greengoods.app
+    about: Check our developer documentation first
+  - name: 🌱 Green Goods App
+    url: https://app.greengoods.app
+    about: Visit the live application

@@ -1,0 +1,84 @@
+name: 🪝 Shared Hook
+description: Create a new hook in the shared package
+title: "[HOOK]: "
+labels: ["component"]
+body:
+  - type: input
+    id: hook-name
+    attributes:
+      label: Hook Name
+      description: Name of the hook (e.g., useFeature)
+      placeholder: useFeatureName
+    validations:
+      required: true
+
+  - type: textarea
+    id: purpose
+    attributes:
+      label: Purpose
+      description: What does this hook do?
+    validations:
+      required: true
+
+  - type: textarea
+    id: api
+    attributes:
+      label: Hook API
+      description: Expected parameters and return values
+      placeholder: |
+        ```typescript
+        function useFeature(options?: {
+          enabled?: boolean;
+        }): {
+          data: FeatureData | undefined;
+          isLoading: boolean;
+          error: Error | null;
+          refetch: () => void;
+        }
+        ```
+    validations:
+      required: true
+
+  - type: dropdown
+    id: data-source
+    attributes:
+      label: Data Source
+      options:
+        - GraphQL (Indexer)
+        - Contract Read
+        - Local Storage / IndexedDB
+        - Zustand Store
+        - External API
+        - Computed (no external data)
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-state
+    attributes:
+      label: Done State
+      placeholder: |
+        - [ ] Hook implemented in `packages/shared/src/hooks/`
+        - [ ] TypeScript types exported
+        - [ ] Unit tests with 80%+ coverage
+        - [ ] Re-exported from package index
+        - [ ] Used in at least one view
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Notes
+      placeholder: |
+        ## Pattern Reference
+        Follow `packages/shared/src/hooks/useGarden.ts`
+
+        ## TanStack Query Integration
+        - Query key: `['feature', id]`
+        - Stale time: 5 minutes
+
+        ## Testing
+        ```bash
+        cd packages/shared && bun test useFeature
+        ```

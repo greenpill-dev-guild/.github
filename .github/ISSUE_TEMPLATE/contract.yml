@@ -1,0 +1,93 @@
+name: 📜 Smart Contract
+description: Create or modify a smart contract
+title: "[CONTRACT]: "
+labels: ["contract"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Contract Type
+      options:
+        - New Contract
+        - Upgrade (UUPS)
+        - Bug Fix
+        - Gas Optimization
+        - Security Fix
+        - Test Addition
+    validations:
+      required: true
+
+  - type: textarea
+    id: summary
+    attributes:
+      label: Summary
+      description: What contract work is needed?
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-state
+    attributes:
+      label: Done State
+      description: Acceptance criteria for completion
+      placeholder: |
+        - [ ] Contract implemented
+        - [ ] Unit tests (100% coverage)
+        - [ ] Fuzz tests for parameters
+        - [ ] Gas snapshot updated
+        - [ ] NatSpec documentation
+    validations:
+      required: true
+
+  - type: textarea
+    id: security
+    attributes:
+      label: Security Considerations
+      description: Security requirements and review needs
+      placeholder: |
+        - [ ] CEI pattern followed
+        - [ ] Reentrancy guards where needed
+        - [ ] Access control verified
+        - [ ] Events emitted for state changes
+        - [ ] No tx.origin for authorization
+        - [ ] Input validation
+
+  - type: dropdown
+    id: upgrade
+    attributes:
+      label: Upgrade Impact
+      description: Does this affect existing deployments?
+      options:
+        - N/A - New contract
+        - Safe upgrade (storage compatible)
+        - Breaking change (migration needed)
+        - Gas-only change
+    validations:
+      required: true
+
+  - type: textarea
+    id: implementation
+    attributes:
+      label: Implementation Notes
+      description: Contract locations, inheritance, patterns
+      placeholder: |
+        ## Contract Location
+        `packages/contracts/src/...`
+
+        ## Inheritance
+        - Inherits from OpenZeppelin `...`
+        - Uses EAS schema `...`
+
+        ## Testing
+        ```bash
+        cd packages/contracts && forge test --match-contract TestName
+        ```
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      placeholder: |
+        - [Foundry](https://getfoundry.sh/)
+        - [OpenZeppelin](https://docs.openzeppelin.com/contracts/5.x/)
+        - [EAS](https://docs.attest.org/docs/welcome)

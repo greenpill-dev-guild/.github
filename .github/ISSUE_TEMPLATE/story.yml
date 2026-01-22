@@ -1,0 +1,63 @@
+name: 📖 User Story
+description: Create a user story for product development
+title: "[STORY]: "
+labels: ["story"]
+body:
+  - type: textarea
+    id: user-story
+    attributes:
+      label: User Story
+      description: The user story in standard format
+      placeholder: "As a [user type], I want to [action] so that [benefit]"
+    validations:
+      required: true
+
+  - type: textarea
+    id: done-state
+    attributes:
+      label: Done State
+      description: What does "done" look like for this story?
+      placeholder: |
+        - [ ] User can perform action
+        - [ ] Feedback is shown
+        - [ ] Data is persisted
+    validations:
+      required: true
+
+  - type: textarea
+    id: tasks
+    attributes:
+      label: Tasks
+      description: Break down into implementation tasks
+      placeholder: |
+        - [ ] Design (Figma)
+        - [ ] React Components
+        - [ ] Shared Hooks
+        - [ ] State Management
+        - [ ] API/Indexer
+        - [ ] Smart Contracts
+        - [ ] Tests
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance Criteria
+      description: Specific criteria for acceptance
+      placeholder: |
+        **Given** [context]
+        **When** [action]
+        **Then** [expected result]
+    validations:
+      required: true
+
+  - type: textarea
+    id: resources
+    attributes:
+      label: Resources
+      description: Links to PRD, designs, research
+      placeholder: |
+        - [PRD](link)
+        - [Figma Design](link)
+        - [Miro Board](link)
