@@ -1,0 +1,165 @@
+# Greenpill Dev Guild — shared label manifest
+#
+# Single source of truth for labels that should exist across every guild repo
+# that opts into the labels-sync reusable workflow (see
+# .github/workflows/labels-sync.yml once Phase 2 is wired up).
+#
+# Consumer usage:
+#
+#   # In any guild repo, at .github/workflows/labels-sync.yml:
+#   on:
+#     workflow_dispatch:
+#     push:
+#       branches: [main]
+#       paths: [.github/workflows/labels-sync.yml]
+#   jobs:
+#     sync:
+#       uses: greenpill-dev-guild/.github/.github/workflows/labels-sync.yml@main
+#
+# Design:
+# - Start with `delete: false` (add-missing mode) so the sync does not prune
+#   any repo-specific labels while the guild consolidates.
+# - Repos that need additional, project-specific labels define them locally
+#   (e.g., package-scope labels `admin`, `client`, `contract` in green-goods).
+#   The sync only governs labels declared in this file.
+# - Flip to `delete: true` once every consuming repo has been audited and
+#   everyone agrees on the canonical set.
+#
+# Tool: https://github.com/EndBug/label-sync (YAML format; `delete-other-labels` flag controls prune behavior)
+
+# ─── GitHub defaults ─────────────────────────────────────────────────────────
+# Standard labels shipped with every new repo. Listed here so the manifest is
+# authoritative about colors/descriptions and drift across repos gets fixed.
+
+- name: bug
+  color: 'd73a4a'
+  description: Something isn't working
+- name: documentation
+  color: '0075ca'
+  description: Improvements or additions to documentation
+- name: duplicate
+  color: 'cfd3d7'
+  description: This issue or pull request already exists
+- name: enhancement
+  color: 'a2eeef'
+  description: New feature or request
+- name: good first issue
+  color: '7057ff'
+  description: Good for newcomers
+- name: help wanted
+  color: '008672'
+  description: Extra attention is needed
+- name: invalid
+  color: 'e4e669'
+  description: This doesn't seem right
+- name: question
+  color: 'd876e3'
+  description: Further information is requested
+- name: wontfix
+  color: 'ffffff'
+  description: This will not be worked on
+
+# ─── Dependency & workflow state ─────────────────────────────────────────────
+
+- name: dependencies
+  color: '0366d6'
+  description: Pull requests that update a dependency file
+- name: triage
+  color: 'fbca04'
+  description: Needs initial review and prioritization
+
+# ─── Work-type labels ────────────────────────────────────────────────────────
+# Aligned with the guild's ISSUE_TEMPLATE taxonomy. Used to describe the kind
+# of work an issue represents.
+
+- name: api
+  color: 'D93F0B'
+  description: Fetch some data and make it pretty
+- name: component
+  color: 'FEF2C0'
+  description: UI-based component
+- name: database
+  color: 'F9D0C4'
+  description: CRUD at its finest
+- name: state-logic
+  color: 'C5DEF5'
+  description: Business logic
+- name: story
+  color: 'C2E0C6'
+  description: User story defining expected user experience
+- name: spike
+  color: 'C5DEF5'
+  description: Research or investigation task
+
+# ─── Automation umbrella ─────────────────────────────────────────────────────
+# Catch-all for "this was authored by an automation (routine, action, bot)."
+
+- name: automated/claude
+  color: '0075ca'
+  description: Authored by a Claude automation (routine or event)
+
+- name: automated/codex
+  color: '0075ca'
+  description: PR created by Codex automation
+
+# ─── Routine category labels ─────────────────────────────────────────────────
+# Each routine tags issues/PRs with a category label so the same routine can
+# dedupe (find existing open issues in its namespace) and humans can filter.
+
+# Morning-watch — operational health checks
+- name: routine:watch:indexer
+  color: '0e8a16'
+  description: 'gg-morning-watch: indexer lag signals'
+- name: routine:watch:pilot-activity
+  color: '0e8a16'
+  description: 'gg-morning-watch: Season One garden activity signals'
+- name: routine:watch:ci-pulse
+  color: '0e8a16'
+  description: 'gg-morning-watch: CI failure signals'
+- name: routine:watch:onchain-sanity
+  color: '0e8a16'
+  description: 'gg-morning-watch: vault & yield-split invariant signals'
+
+# Data-analyst — metrics anomalies
+- name: routine:metrics:anomaly
+  color: 'd73a4a'
+  description: 'gg-data-analyst: Dune/PostHog metrics anomaly'
+
+# Client-polish — rotating audit + user feedback ingestion
+- name: routine:polish:notes
+  color: 'c5def5'
+  description: 'gg-client-polish: findings from Drive meeting notes'
+- name: routine:polish:discord
+  color: '5865F2'
+  description: 'gg-client-polish: bug reports sourced from Discord'
+- name: routine:polish:telegram
+  color: '229ED9'
+  description: 'gg-client-polish: bug reports sourced from Telegram bot'
+- name: routine:polish:design
+  color: 'd4c5f9'
+  description: 'gg-client-polish: design & accessibility audit'
+- name: routine:polish:architecture
+  color: 'fbca04'
+  description: 'gg-client-polish: architecture & pattern-violation audit'
+- name: routine:polish:testing
+  color: '0e8a16'
+  description: 'gg-client-polish: test coverage & quality audit'
+- name: routine:polish:performance
+  color: 'e4e669'
+  description: 'gg-client-polish: performance & PWA audit'
+- name: routine:polish:quality
+  color: 'f9d0c4'
+  description: 'gg-client-polish: code quality & principles audit'
+
+# Grant-scout — funding opportunities
+- name: routine:grant:deadline
+  color: 'd93f0b'
+  description: 'gg-grant-scout: grant deadline within 14 days'
+
+# ─── Agent assignment ────────────────────────────────────────────────────────
+# Applied when an auto-implementer routine starts work on an issue. Removes
+# the issue from future dispatch pools; remove manually to re-dispatch.
+
+- name: agent:assigned:claude
+  color: '5319e7'
+  description: Fix-forward started implementation; remove to re-dispatch
