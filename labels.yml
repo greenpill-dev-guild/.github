@@ -18,9 +18,9 @@
 #
 # Design:
 # - Start with `delete: false` (add-missing mode) so the sync does not prune
-#   any repo-specific labels while the guild consolidates.
-# - Repos that need additional, project-specific labels define them locally
-#   (e.g., package-scope labels `admin`, `client`, `contract` in green-goods).
+#   any repo-specific labels (e.g., `admin`, `client`, `contract` package
+#   scopes in green-goods) while the guild consolidates.
+# - Repos that need additional, project-specific labels define them locally.
 #   The sync only governs labels declared in this file.
 # - Flip to `delete: true` once every consuming repo has been audited and
 #   everyone agrees on the canonical set.
@@ -28,8 +28,9 @@
 # Tool: https://github.com/EndBug/label-sync (YAML format; `delete-other-labels` flag controls prune behavior)
 
 # ─── GitHub defaults ─────────────────────────────────────────────────────────
-# Standard labels shipped with every new repo. Listed here so the manifest is
-# authoritative about colors/descriptions and drift across repos gets fixed.
+# Kept set — close-reason labels (duplicate/invalid/wontfix/question) removed
+# in favor of GitHub's native close-reasons. `help wanted` removed until
+# community activity justifies re-introducing it.
 
 - name: bug
   color: 'd73a4a'
@@ -37,59 +38,18 @@
 - name: documentation
   color: '0075ca'
   description: Improvements or additions to documentation
-- name: duplicate
-  color: 'cfd3d7'
-  description: This issue or pull request already exists
 - name: enhancement
   color: 'a2eeef'
   description: New feature or request
 - name: good first issue
   color: '7057ff'
   description: Good for newcomers
-- name: help wanted
-  color: '008672'
-  description: Extra attention is needed
-- name: invalid
-  color: 'e4e669'
-  description: This doesn't seem right
-- name: question
-  color: 'd876e3'
-  description: Further information is requested
-- name: wontfix
-  color: 'ffffff'
-  description: This will not be worked on
 
-# ─── Dependency & workflow state ─────────────────────────────────────────────
+# ─── Dependency automation ───────────────────────────────────────────────────
 
 - name: dependencies
   color: '0366d6'
   description: Pull requests that update a dependency file
-- name: triage
-  color: 'fbca04'
-  description: Needs initial review and prioritization
-
-# ─── Work-type labels ────────────────────────────────────────────────────────
-# Aligned with the guild's ISSUE_TEMPLATE taxonomy. Used to describe the kind
-# of work an issue represents.
-
-- name: api
-  color: 'D93F0B'
-  description: Fetch some data and make it pretty
-- name: component
-  color: 'FEF2C0'
-  description: UI-based component
-- name: database
-  color: 'F9D0C4'
-  description: CRUD at its finest
-- name: state-logic
-  color: 'C5DEF5'
-  description: Business logic
-- name: story
-  color: 'C2E0C6'
-  description: User story defining expected user experience
-- name: spike
-  color: 'C5DEF5'
-  description: Research or investigation task
 
 # ─── Automation umbrella ─────────────────────────────────────────────────────
 # Catch-all for "this was authored by an automation (routine, action, bot)."
@@ -103,56 +63,58 @@
   description: PR created by Codex automation
 
 # ─── Routine category labels ─────────────────────────────────────────────────
-# Each routine tags issues/PRs with a category label so the same routine can
-# dedupe (find existing open issues in its namespace) and humans can filter.
+# Category labels applied by scheduled routines for dedup + filtering.
+# No `routine:` prefix — the `automated/claude` umbrella carries the
+# "came from a routine" signal; category alone is what the routine's code
+# queries to decide "create new or append to existing."
 
 # Morning-watch — operational health checks
-- name: routine:watch:indexer
+- name: watch:indexer
   color: '0e8a16'
   description: 'gg-morning-watch: indexer lag signals'
-- name: routine:watch:pilot-activity
+- name: watch:pilot-activity
   color: '0e8a16'
   description: 'gg-morning-watch: Season One garden activity signals'
-- name: routine:watch:ci-pulse
+- name: watch:ci-pulse
   color: '0e8a16'
   description: 'gg-morning-watch: CI failure signals'
-- name: routine:watch:onchain-sanity
+- name: watch:onchain-sanity
   color: '0e8a16'
   description: 'gg-morning-watch: vault & yield-split invariant signals'
 
 # Data-analyst — metrics anomalies
-- name: routine:metrics:anomaly
+- name: metrics:anomaly
   color: 'd73a4a'
   description: 'gg-data-analyst: Dune/PostHog metrics anomaly'
 
 # Client-polish — rotating audit + user feedback ingestion
-- name: routine:polish:notes
+- name: polish:notes
   color: 'c5def5'
   description: 'gg-client-polish: findings from Drive meeting notes'
-- name: routine:polish:discord
+- name: polish:discord
   color: '5865F2'
   description: 'gg-client-polish: bug reports sourced from Discord'
-- name: routine:polish:telegram
+- name: polish:telegram
   color: '229ED9'
   description: 'gg-client-polish: bug reports sourced from Telegram bot'
-- name: routine:polish:design
+- name: polish:design
   color: 'd4c5f9'
   description: 'gg-client-polish: design & accessibility audit'
-- name: routine:polish:architecture
+- name: polish:architecture
   color: 'fbca04'
   description: 'gg-client-polish: architecture & pattern-violation audit'
-- name: routine:polish:testing
+- name: polish:testing
   color: '0e8a16'
   description: 'gg-client-polish: test coverage & quality audit'
-- name: routine:polish:performance
+- name: polish:performance
   color: 'e4e669'
   description: 'gg-client-polish: performance & PWA audit'
-- name: routine:polish:quality
+- name: polish:quality
   color: 'f9d0c4'
   description: 'gg-client-polish: code quality & principles audit'
 
 # Grant-scout — funding opportunities
-- name: routine:grant:deadline
+- name: grant:deadline
   color: 'd93f0b'
   description: 'gg-grant-scout: grant deadline within 14 days'
 
