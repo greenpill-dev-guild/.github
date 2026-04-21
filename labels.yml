@@ -28,19 +28,13 @@
 # Tool: https://github.com/EndBug/label-sync (YAML format; `delete-other-labels` flag controls prune behavior)
 
 # ─── GitHub defaults ─────────────────────────────────────────────────────────
-# Kept set — close-reason labels (duplicate/invalid/wontfix/question) removed
-# in favor of GitHub's native close-reasons. `help wanted` removed until
-# community activity justifies re-introducing it.
+# Minimal kept set — `bug` and `enhancement` removed (redundant with issue
+# templates and work-type labels). Close-reason labels (duplicate/invalid/
+# wontfix/question) removed in favor of GitHub's native close-reasons.
 
-- name: bug
-  color: 'd73a4a'
-  description: Something isn't working
 - name: documentation
   color: '0075ca'
   description: Improvements or additions to documentation
-- name: enhancement
-  color: 'a2eeef'
-  description: New feature or request
 - name: good first issue
   color: '7057ff'
   description: Good for newcomers
@@ -49,74 +43,95 @@
 
 - name: dependencies
   color: '0366d6'
-  description: Pull requests that update a dependency file
+  description: Dependency bumps from Dependabot
+
+# ─── Work-type dimensions ────────────────────────────────────────────────────
+# Dimensions describe the kind of work. They stand alone and also stack with
+# `polish` (gg-client-polish audit findings). `design` is guild-level because
+# Figma/wireframe work happens in every guild project.
+
+- name: design
+  color: 'c084fc'
+  description: Design work — Figma, wireframes, mockups, visual polish
+- name: architecture
+  color: 'fbca04'
+  description: Patterns, hook boundaries, state management
+- name: testing
+  color: '0e8a16'
+  description: Test coverage, quality, or missing scenarios
+- name: performance
+  color: 'e4e669'
+  description: Performance or PWA-specific concerns
+- name: quality
+  color: 'f9d0c4'
+  description: Code quality, principles, dead code
+
+# ─── Report sources ──────────────────────────────────────────────────────────
+# Where a report came from. Stacks with `polish` for user-reported issues
+# surfaced by gg-client-polish.
+
+- name: source:discord
+  color: '5865F2'
+  description: Reported via Discord
+- name: source:telegram
+  color: '229ED9'
+  description: Reported via Telegram bot
+- name: source:drive
+  color: 'c5def5'
+  description: Surfaced from Drive meeting notes
 
 # ─── Automation umbrella ─────────────────────────────────────────────────────
-# Catch-all for "this was authored by an automation (routine, action, bot)."
 
 - name: automated/claude
   color: '0075ca'
-  description: Authored by a Claude automation (routine or event)
-
+  description: Authored by a Claude automation
 - name: automated/codex
   color: '0075ca'
-  description: PR created by Codex automation
+  description: PR opened by Codex
 
-# ─── Routine category labels ─────────────────────────────────────────────────
-# Category labels applied by scheduled routines for dedup + filtering.
-# No `routine:` prefix — the `automated/claude` umbrella carries the
-# "came from a routine" signal; category alone is what the routine's code
-# queries to decide "create new or append to existing."
+# ─── Routine: health — ops checks (gg-morning-watch) ─────────────────────────
+# Dedupe: one open issue per category.
 
-# Morning-watch — operational health checks
-- name: watch:indexer
+- name: health:indexer
   color: '0e8a16'
-  description: 'gg-morning-watch: indexer lag signals'
-- name: watch:pilot-activity
+  description: 'Morning-watch: Envio indexer is lagging or unreachable'
+- name: health:ci
   color: '0e8a16'
-  description: 'gg-morning-watch: Season One garden activity signals'
-- name: watch:ci-pulse
+  description: 'Morning-watch: recent CI failures on main'
+- name: health:contracts
   color: '0e8a16'
-  description: 'gg-morning-watch: CI failure signals'
-- name: watch:onchain-sanity
-  color: '0e8a16'
-  description: 'gg-morning-watch: vault & yield-split invariant signals'
+  description: 'Morning-watch: on-chain state drift (vaults, yield split, garden activity)'
 
-# Data-analyst — metrics anomalies
+# ─── Routine: metrics — data-analyst (gg-data-analyst) ───────────────────────
+
 - name: metrics:anomaly
   color: 'd73a4a'
-  description: 'gg-data-analyst: Dune/PostHog metrics anomaly'
+  description: 'Data-analyst: metric anomaly in Dune or PostHog'
 
-# Client-polish — rotating audit + user feedback ingestion
-- name: polish:notes
-  color: 'c5def5'
-  description: 'gg-client-polish: findings from Drive meeting notes'
-- name: polish:discord
-  color: '5865F2'
-  description: 'gg-client-polish: bug reports sourced from Discord'
-- name: polish:telegram
-  color: '229ED9'
-  description: 'gg-client-polish: bug reports sourced from Telegram bot'
-- name: polish:design
-  color: 'd4c5f9'
-  description: 'gg-client-polish: design & accessibility audit'
-- name: polish:architecture
-  color: 'fbca04'
-  description: 'gg-client-polish: architecture & pattern-violation audit'
-- name: polish:testing
-  color: '0e8a16'
-  description: 'gg-client-polish: test coverage & quality audit'
-- name: polish:performance
-  color: 'e4e669'
-  description: 'gg-client-polish: performance & PWA audit'
-- name: polish:quality
-  color: 'f9d0c4'
-  description: 'gg-client-polish: code quality & principles audit'
+# ─── Routine: polish — umbrella (gg-client-polish) ───────────────────────────
+# Applied to every gg-client-polish output, stacked with a dimension
+# (design/architecture/testing/performance/quality) or a source label.
 
-# Grant-scout — funding opportunities
-- name: grant:deadline
+- name: polish
+  color: 'C5DEF5'
+  description: Issue raised by the gg-client-polish audit
+
+# ─── Routine: grant — lifecycle (gg-grant-scout) ─────────────────────────────
+# One issue per program; label transitions as the opportunity progresses.
+# Awarded/rejected final states live on the Project board, not as labels.
+
+- name: grant
   color: 'd93f0b'
-  description: 'gg-grant-scout: grant deadline within 14 days'
+  description: Grant opportunity or application
+- name: grant:prospect
+  color: 'd93f0b'
+  description: Grant opportunity identified, not yet acted on
+- name: grant:drafting
+  color: 'd93f0b'
+  description: Grant proposal being drafted (see Drive link in body)
+- name: grant:submitted
+  color: 'd93f0b'
+  description: Grant proposal submitted, awaiting response
 
 # ─── Agent assignment ────────────────────────────────────────────────────────
 # Applied when an auto-implementer routine starts work on an issue. Removes
@@ -124,4 +139,4 @@
 
 - name: agent:assigned:claude
   color: '5319e7'
-  description: Fix-forward started implementation; remove to re-dispatch
+  description: Claude is implementing this — remove to re-dispatch
