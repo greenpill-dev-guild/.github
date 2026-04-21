@@ -1,0 +1,71 @@
+name: Claude PR Review (reusable)
+
+# Reusable workflow that runs Claude-authored PR review against the current
+# pull request. Consumer repos opt in with a tiny local workflow that calls
+# this one.
+#
+# Consumer example (.github/workflows/claude-pr-review.yml in any guild repo):
+#
+#   name: Claude PR Review
+#   on:
+#     pull_request:
+#       types: [opened, synchronize, ready_for_review, reopened]
+#   jobs:
+#     review:
+#       uses: greenpill-dev-guild/.github/.github/workflows/claude-pr-review.yml@main
+#       secrets:
+#         CLAUDE_CODE_OAUTH_TOKEN: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+#       # Optional overrides:
+#       # with:
+#       #   prompt: "Focus on security concerns only for contract changes."
+#       #   paths: "packages/contracts/src/**"
+#
+# Design notes:
+# - The CLAUDE_CODE_OAUTH_TOKEN secret is scoped to Afo's personal Anthropic
+#   Pro account (expense-reimbursed per the 2026-04-19 funding decision).
+#   Guild repos inherit it from the org-level secret of the same name.
+# - `continue-on-error: true` — a Claude review failure never blocks the PR.
+#   Reviewer is guidance, not a gate.
+
+on:
+  workflow_call:
+    inputs:
+      prompt:
+        description: "Custom review prompt. If empty, uses a generic high-signal review prompt."
+        required: false
+        type: string
+        default: ""
+      paths:
+        description: "Optional path filter — only run if the PR touches these paths. Empty = always run."
+        required: false
+        type: string
+        default: ""
+    secrets:
+      CLAUDE_CODE_OAUTH_TOKEN:
+        required: true
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: read
+  id-token: write
+
+jobs:
+  review:
+    name: Claude review
+    runs-on: ubuntu-latest
+    continue-on-error: true  # review is guidance, never a merge gate
+    steps:
+      - name: Checkout PR head
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Run Claude review
+        uses: anthropics/claude-code-action@v1
+        with:
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          additional_permissions: |
+            actions: read
+          prompt: |
+            ${{ inputs.prompt != '' && inputs.prompt || 'Review the current pull request diff. Focus on: (1) correctness bugs the diff could plausibly introduce; (2) missing tests for new behavior; (3) security or data-loss concerns; (4) high-confidence architectural callouts. Skip style nits, naming preferences, and docs unless they obscure intent. Anchor every finding to a specific file:line in the diff. If the diff is clean, say so briefly in one sentence. Do not restate what the PR does — the reviewer already read the description.' }}

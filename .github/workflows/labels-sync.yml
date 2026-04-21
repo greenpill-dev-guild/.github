@@ -1,0 +1,77 @@
+name: Labels Sync (reusable)
+
+# Reusable workflow that syncs the guild-wide label manifest (labels.yml in the
+# root of this repo) to any consuming repo. Consumer repos opt in by adding a
+# local workflow that calls this one via `uses:`.
+#
+# Consumer example (.github/workflows/labels-sync.yml in any guild repo):
+#
+#   name: Labels Sync
+#   on:
+#     workflow_dispatch:        # manual trigger
+#     schedule:
+#       - cron: '0 12 * * 0'    # weekly drift-catcher, Sunday noon UTC
+#   permissions:
+#     issues: write
+#     contents: read
+#   jobs:
+#     sync:
+#       uses: greenpill-dev-guild/.github/.github/workflows/labels-sync.yml@main
+#       with:
+#         delete-other-labels: false  # add-missing mode; flip to true after audit
+#
+# Design notes:
+# - Default `delete-other-labels: false` so repos keep their repo-specific labels
+#   (e.g., package-scope labels in green-goods). Flip to true on a per-repo
+#   basis after the repo has been audited.
+# - The manifest is fetched from this repo's main branch at run time, so the
+#   consumer repo is always in sync with the latest guild definitions.
+# - Underlying tool: EndBug/label-sync@v2 (YAML format).
+
+on:
+  workflow_call:
+    inputs:
+      delete-other-labels:
+        description: "If true, delete labels in the consumer repo that aren't in the manifest. Default false (add-missing only)."
+        required: false
+        type: boolean
+        default: false
+      manifest-ref:
+        description: "Git ref (branch, tag, or SHA) of greenpill-dev-guild/.github to read labels.yml from. Default 'main'."
+        required: false
+        type: string
+        default: main
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  sync:
+    name: Sync labels from guild manifest
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout consumer repo
+        uses: actions/checkout@v4
+
+      - name: Checkout guild manifest
+        uses: actions/checkout@v4
+        with:
+          repository: greenpill-dev-guild/.github
+          ref: ${{ inputs.manifest-ref }}
+          path: _guild-defaults
+
+      - name: Verify manifest exists
+        run: |
+          if [ ! -f _guild-defaults/labels.yml ]; then
+            echo "::error::labels.yml not found in greenpill-dev-guild/.github@${{ inputs.manifest-ref }}"
+            exit 1
+          fi
+          echo "Manifest found. Label count:"
+          grep -c '^- name:' _guild-defaults/labels.yml || true
+
+      - name: Sync labels
+        uses: EndBug/label-sync@v2
+        with:
+          config-file: _guild-defaults/labels.yml
+          delete-other-labels: ${{ inputs.delete-other-labels }}
