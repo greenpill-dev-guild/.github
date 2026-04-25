@@ -1,0 +1,99 @@
+name: RFC (Request for Comments)
+description: Propose a guild-wide change — shared standards, vocabulary, CI policy, treasury policy, or partnership commitments.
+title: "[rfc]: "
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## When to file an RFC
+
+        Use this template when a change affects **more than one guild project** — for example:
+
+        - Cross-project CI standards or reusable workflows
+        - Vocabulary, naming, or branding conventions
+        - Treasury or bounty policy updates
+        - Partnership or external commitment proposals
+        - Adding or retiring a standard tool or framework
+
+        Single-project changes belong on the project's own issue tracker.
+
+        See the [RFC process in GOVERNANCE.md](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process).
+
+  - type: input
+    id: title
+    attributes:
+      label: Short title
+      description: One-line summary of the proposal.
+      placeholder: Adopt Bun as the default runtime for new guild repos
+    validations:
+      required: true
+
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Motivation
+      description: Why does this matter? What problem does it solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: What exactly is being proposed? Include scope, affected projects, and concrete deliverables.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else did you consider? Why is the proposed approach better?
+    validations:
+      required: true
+
+  - type: textarea
+    id: tradeoffs
+    attributes:
+      label: Tradeoffs and risks
+      description: What are the costs? Who is affected? What could go wrong?
+    validations:
+      required: true
+
+  - type: textarea
+    id: rollout
+    attributes:
+      label: Rollout plan
+      description: How would this be adopted? Phased? Opt-in? Migration path?
+    validations:
+      required: false
+
+  - type: textarea
+    id: open_questions
+    attributes:
+      label: Open questions
+      description: What still needs input from the guild?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: impact
+    attributes:
+      label: Impact level
+      options:
+        - low (single workflow, easily reversible)
+        - medium (cross-project convention, reversible with effort)
+        - high (treasury, partnership, or hard-to-reverse policy)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have discussed this with at least one other contributor before filing.
+          required: false
+        - label: I am committed to driving this RFC to a decision (close, accept, or revise).
+          required: true

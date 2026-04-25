@@ -1,0 +1,80 @@
+name: Design proposal
+description: Propose visual design, UX flow, or interaction work for a guild project.
+title: "[design]: "
+type: Task
+labels: ["design"]
+body:
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Which guild project is this design for?
+      placeholder: green-goods
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: What is the current state, and what user or contributor problem is the design solving?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the design direction. Include flow, screens affected, and key interactions.
+    validations:
+      required: true
+
+  - type: input
+    id: figma
+    attributes:
+      label: Figma or design tool link
+      description: Link to mocks, prototype, or working board.
+      placeholder: https://figma.com/file/...
+    validations:
+      required: false
+
+  - type: input
+    id: prd
+    attributes:
+      label: PRD or product brief link
+      description: Link to product requirements or written brief, if applicable.
+    validations:
+      required: false
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: What does done look like? Use a checklist if helpful.
+      placeholder: |
+        - [ ] Empty state designed for first-time users
+        - [ ] Mobile and desktop layouts complete
+        - [ ] Tokens reference the project design system
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - exploratory (low-fi sketches, direction)
+        - mid-fidelity (wireframes, flow validation)
+        - production-ready (high-fi, dev handoff)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Confirmations
+      options:
+        - label: Design aligns with the project's existing design language and branding.
+          required: true
+        - label: Components are organized and ready for export when production-ready.
+          required: false

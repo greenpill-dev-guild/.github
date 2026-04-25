@@ -36,7 +36,7 @@ on:
         type: string
         default: ""
       paths:
-        description: "Optional path filter — only run if the PR touches these paths. Empty = always run."
+        description: "Optional newline- or comma-separated path globs. Only run if the PR touches one of these paths. Empty = always run."
         required: false
         type: string
         default: ""
@@ -61,7 +61,50 @@ jobs:
         with:
           fetch-depth: 1
 
+      - name: Check path filter
+        id: path_filter
+        if: inputs.paths != ''
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+          PATH_FILTERS: ${{ inputs.paths }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${PR_NUMBER:-}" ]; then
+            echo "::warning::paths input was set, but this run has no pull_request context. Running review."
+            echo "matched=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          mapfile -t changed_files < <(gh pr diff "$PR_NUMBER" --name-only)
+          matched=false
+
+          while IFS= read -r raw_line; do
+            IFS=',' read -ra patterns <<< "$raw_line"
+            for raw_pattern in "${patterns[@]}"; do
+              pattern="${raw_pattern#"${raw_pattern%%[![:space:]]*}"}"
+              pattern="${pattern%"${pattern##*[![:space:]]}"}"
+              [ -z "$pattern" ] && continue
+
+              for changed_file in "${changed_files[@]}"; do
+                if [[ "$changed_file" == $pattern ]]; then
+                  matched=true
+                  break 3
+                fi
+              done
+            done
+          done <<< "$PATH_FILTERS"
+
+          echo "matched=$matched" >> "$GITHUB_OUTPUT"
+
+      - name: Skip Claude review
+        if: inputs.paths != '' && steps.path_filter.outputs.matched != 'true'
+        run: echo "No changed files matched the configured paths. Skipping Claude review."
+
       - name: Run Claude review
+        if: inputs.paths == '' || steps.path_filter.outputs.matched == 'true'
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}

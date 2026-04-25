@@ -1,0 +1,98 @@
+# CLAUDE.md
+
+This file provides guidance to Claude Code when working with this repository.
+
+> Copy this template into your repo root, rename to `CLAUDE.md`, and replace every `{{PLACEHOLDER}}`. Delete sections that don't apply.
+
+## Project
+
+**Name**: {{PROJECT_NAME}}
+**One-line purpose**: {{ONE_LINE_PURPOSE}}
+**Status**: {{active | dormant | experimental}}
+
+## Commands
+
+```bash
+{{INSTALL_COMMAND}}              # e.g. bun install
+{{DEV_COMMAND}}                  # e.g. bun dev
+{{TEST_COMMAND}}                 # e.g. bun run test
+{{LINT_COMMAND}}                 # e.g. bun lint
+{{BUILD_COMMAND}}                # e.g. bun build
+```
+
+> **Note**: If using Bun, prefer `bun run test` over `bun test` — the former runs the package.json script (which uses your configured runner), the latter uses Bun's built-in runner and may ignore configuration.
+
+## Architecture
+
+> One paragraph on how the codebase is organized. Mention top-level packages or directories and what each is responsible for.
+
+{{ARCHITECTURE_SUMMARY}}
+
+### Build order
+
+> If you have multiple packages with dependencies, list the build order:
+> e.g. `contracts → shared → frontend`
+
+{{BUILD_ORDER}}
+
+## Key principles
+
+> 3–5 invariants that govern this codebase. These are the rules Claude should not violate.
+
+1. {{PRINCIPLE_1}}
+2. {{PRINCIPLE_2}}
+3. {{PRINCIPLE_3}}
+
+## Criticality matrix
+
+> Mark which paths require elevated review. Claude uses this to choose review depth.
+
+- **`critical`** (read every line, run security review, no log-only error handling):
+  - `{{PATH_1}}`
+  - `{{PATH_2}}`
+- **`sensitive`** (bounded diff, explicit failure-state inspection):
+  - `{{PATH_3}}`
+- **`routine`** (lightest honest check):
+  - docs, stories, test-only refactors
+
+## Patterns to follow
+
+> Project-specific conventions. Examples (delete what doesn't apply):
+
+- **Hook boundary**: e.g. all React hooks live in `@org/shared`
+- **Type system**: e.g. domain types live in one package; use `Address` not `string` for Ethereum addresses
+- **Error handling**: e.g. use `parseContractError()` + user-friendly messages
+- **Logger**: e.g. use shared `logger`, not `console.log`
+- **i18n**: e.g. add new strings to all supported locales
+
+## Investigate before answering
+
+Never speculate about code you have not opened. If referencing a specific file, you must read it before answering. Give grounded, hallucination-free answers based on actual file contents.
+
+## Subagent discipline
+
+Spawn teammates when tasks can run in parallel, require isolated context, or involve independent workstreams. Work directly (no subagent) for single-file edits, sequential operations, or tasks needing fewer than 10 tool calls.
+
+## Git workflow
+
+**Branches**: `type/description` (e.g. `feature/x`, `bug/y`)
+
+**Commits**: Conventional Commits with scope: `type(scope): description`
+- Types: feat, fix, refactor, chore, docs, test, perf, ci
+- Scopes: {{PROJECT_SCOPES}}
+
+**Validation before committing**:
+```bash
+{{VALIDATION_COMMAND}}    # e.g. bun format && bun lint && bun run test && bun build
+```
+
+## Scope discipline
+
+- When instructions say "output in chat" or "just tell me", do not edit files.
+- For destructive changes (removing sections, replacing content): list what will be removed and added, then wait for confirmation.
+- Never replace content that was asked to be added as new.
+- When unsure about scope, ask — the cost of a clarifying question is far less than a wrong edit.
+
+## Cleanup
+
+If you create temporary files, scripts, or helpers during iteration, remove them before reporting task completion.

@@ -1,0 +1,80 @@
+name: Bounty application (GitHub-side reference)
+description: Reference issue for a guild bounty. Submit the formal application in the guild workspace.
+title: "[bounty]: "
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## How to use this
+
+        The **formal bounty application** lives in the guild workspace at `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*.
+
+        This GitHub issue is the **execution-side reference** for that bounty: it captures scope, links work, and gives reviewers a single place to track progress in the open. Use this template when:
+
+        - A steward has approved your bounty and asked you to open a tracking issue, or
+        - You want to discuss bounty scope publicly before applying.
+
+        Read the [Contributing guide](https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md#bounty-flow) and the [bounty intake routine](https://github.com/greenpill-dev-guild/.github/blob/main/routines/bounty-intake.md) before filing.
+
+  - type: input
+    id: workspace_link
+    attributes:
+      label: Workspace bounty link
+      description: Link to the formal bounty entry in the guild workspace.
+      placeholder: https://greenpill.app/dev-guild/bounties/...
+    validations:
+      required: false
+
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Which guild project does this bounty target?
+      placeholder: green-goods
+    validations:
+      required: true
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What will be delivered? Include the user-facing or technical outcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: timeline
+    attributes:
+      label: Timeline
+      description: Estimated start, milestones, and completion date.
+    validations:
+      required: true
+
+  - type: textarea
+    id: technical
+    attributes:
+      label: Technical context
+      description: Architecture notes, packages touched, dependencies, risks.
+    validations:
+      required: false
+
+  - type: textarea
+    id: contributor
+    attributes:
+      label: Contributor
+      description: Who is taking this on? Include relevant prior work or links.
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: agreements
+    attributes:
+      label: Working agreements
+      options:
+        - label: I will participate in weekly 15-minute check-ins for the duration of this bounty.
+          required: true
+        - label: All code and dependencies will be open-source.
+          required: true
+        - label: I have read the [Code of Conduct](https://github.com/greenpill-dev-guild/.github/blob/main/CODE_OF_CONDUCT.md).
+          required: true

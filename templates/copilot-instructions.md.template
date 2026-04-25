@@ -1,0 +1,54 @@
+# GitHub Copilot Instructions
+
+> Copy this file to `.github/copilot-instructions.md` in your repo and replace every `{{PLACEHOLDER}}`. This file is read by GitHub Copilot for code suggestions, PR review, and chat.
+
+## Project
+
+**Name**: {{PROJECT_NAME}}
+**Purpose**: {{ONE_LINE_PURPOSE}}
+
+## Repo invariants
+
+- **Open source only** — all dependencies must be open-source-licensed.
+- **Package manager**: {{PACKAGE_MANAGER}} (e.g. `bun` — do not introduce npm or yarn).
+- **Test command**: {{TEST_COMMAND}} (e.g. `bun run test`, never `bun test`).
+- {{PROJECT_INVARIANT_1}}
+- {{PROJECT_INVARIANT_2}}
+
+## High-risk paths
+
+These warrant extra care from Copilot review and human approval before merging:
+
+- Deployment, verification, migration, and upgrade scripts
+- `.env*`
+- `.github/workflows/**`
+- `AGENTS.md`, `CLAUDE.md`, agent configuration files
+- {{PROJECT_HIGH_RISK_PATH_1}}
+- {{PROJECT_HIGH_RISK_PATH_2}}
+
+## Validation
+
+Lightest checks that prove a change works:
+
+```bash
+{{FORMAT_AND_LINT}}              # e.g. bun run format:check && bun lint
+{{TEST_COMMAND}}                 # e.g. bun run test
+{{BUILD_COMMAND}}                # e.g. bun build
+```
+
+## Review priorities
+
+For PR review, prioritize in order:
+
+1. Correctness and behavioral regression
+2. Security and risky configuration drift
+3. Missing tests for new behavior
+4. Conventional Commit compliance
+5. Style and naming nits (lowest priority — only when other categories are clean)
+
+## Project-specific conventions
+
+> Add anything Copilot needs to know about this project's idioms — naming, patterns, directory structure, type usage. Keep terse.
+
+- {{CONVENTION_1}}
+- {{CONVENTION_2}}

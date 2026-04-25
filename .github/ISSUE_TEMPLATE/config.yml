@@ -1,0 +1,20 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Security vulnerability
+    url: mailto:security@greenpill.builders
+    about: Report a security vulnerability privately. Do NOT open a public issue.
+  - name: Bounty application (formal)
+    url: https://greenpill.app/dev-guild
+    about: Submit the formal bounty application in the guild workspace (coming soon — currently on Charmverse during migration).
+  - name: Telegram
+    url: https://t.me/+n7g-u8wYtwQ2YjVi
+    about: Async discussion with the guild.
+  - name: Discord
+    url: https://discord.gg/ZJjft2EKz7
+    about: Project channels and voice calls.
+  - name: General contact
+    url: mailto:contact@greenpill.builders
+    about: For partnerships, press, or general inquiries.
+  - name: Stewards
+    url: mailto:steward@greenpill.builders
+    about: Reach the stewardship team directly.

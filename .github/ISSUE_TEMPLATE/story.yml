@@ -1,0 +1,72 @@
+name: Story proposal
+description: Propose a new user story, capability, or scoped improvement for a guild project.
+title: "[story]: "
+type: Story
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for proposing this. For changes that span multiple guild projects or affect shared standards (CI, vocabulary, governance), please use the **RFC** template instead.
+
+  - type: input
+    id: project
+    attributes:
+      label: Project
+      description: Which guild project is this for?
+      placeholder: green-goods
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: What user or contributor problem does this solve? Why does it matter?
+      placeholder: Stewards cannot easily see which gardens have outstanding bounties without manually cross-referencing the workspace.
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposal
+      description: Describe the story or capability. Include user flow, UI considerations, and any contract or data model changes.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: What else did you consider, and why is this approach better?
+    validations:
+      required: false
+
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What is in scope and what is explicitly out of scope?
+    validations:
+      required: false
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Suggested priority
+      options:
+        - now (next bounty cycle)
+        - next (within current quarter)
+        - later (parked for prioritization)
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: confirms
+    attributes:
+      label: Confirmations
+      options:
+        - label: I have searched existing issues and confirmed this is not a duplicate.
+          required: true
+        - label: I am open to feedback and willing to scope this down if needed.
+          required: true

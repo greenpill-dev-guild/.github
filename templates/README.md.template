@@ -1,0 +1,68 @@
+# {{PROJECT_NAME}}
+
+> {{ONE_LINE_PURPOSE}}
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+{{ADDITIONAL_BADGES}}
+
+A [Greenpill Dev Guild](https://github.com/greenpill-dev-guild) project.
+
+## What is this
+
+> Two or three paragraphs that describe the problem this project solves and who it's for.
+
+{{LONG_DESCRIPTION}}
+
+## Status
+
+**{{active | dormant | experimental | archived}}** — {{STATUS_NOTES}}
+
+## Quick start
+
+```bash
+{{CLONE_COMMAND}}                # e.g. git clone https://github.com/greenpill-dev-guild/{{PROJECT_NAME}}.git
+{{INSTALL_COMMAND}}              # e.g. cd {{PROJECT_NAME}} && bun install
+{{SETUP_COMMAND}}                # e.g. cp .env.schema .env  (then fill in values)
+{{DEV_COMMAND}}                  # e.g. bun dev
+```
+
+Visit `{{LOCAL_URL}}` to see it running.
+
+## Architecture
+
+> Brief overview — link to deeper docs if applicable.
+
+{{ARCHITECTURE_SUMMARY}}
+
+For more, see [`docs/`](./docs/) or [`ARCHITECTURE.md`](./ARCHITECTURE.md).
+
+## Project layout
+
+```
+{{PROJECT_NAME}}/
+├── {{TOP_LEVEL_DIR_1}}/          # what it does
+├── {{TOP_LEVEL_DIR_2}}/          # what it does
+└── {{TOP_LEVEL_DIR_3}}/          # what it does
+```
+
+## Contributing
+
+Contributions are welcome. Read:
+
+- [Greenpill Dev Guild Contributing Guide](https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md) — guild-wide flow
+- [Code of Conduct](https://github.com/greenpill-dev-guild/.github/blob/main/CODE_OF_CONDUCT.md)
+- This repo's `CONTRIBUTING.md` (if present) for project-specific conventions
+
+Bounties for this project are in the guild workspace at `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*.
+
+## Security
+
+Found a vulnerability? **Do not open a public issue.** Email `security@greenpill.builders`. See [SECURITY.md](https://github.com/greenpill-dev-guild/.github/blob/main/SECURITY.md).
+
+## License
+
+[MIT](./LICENSE)
+
+---
+
+Built by the [Greenpill Dev Guild](https://github.com/greenpill-dev-guild) — a community of regen builders shipping public goods for impact measurement, capital allocation, and community coordination.

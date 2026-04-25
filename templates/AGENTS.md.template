@@ -1,0 +1,66 @@
+# AGENTS.md
+
+> Working agreements for AI coding assistants in this repository (Claude, Codex, Copilot, or any other).
+
+> Copy this template into your repo root, rename to `AGENTS.md`, and replace every `{{PLACEHOLDER}}`. Delete sections that don't apply.
+
+## Repository overview
+
+**Project**: {{PROJECT_NAME}}
+**Type**: {{frontend | backend | smart contracts | full-stack | library | extension}}
+**Primary stack**: {{PRIMARY_STACK}}
+
+## Repo invariants
+
+These rules apply to every change, regardless of which agent makes them.
+
+- **Open source only** — all dependencies must be open-source-licensed.
+- **No secrets in commits** — never commit `.env*`, credentials, private keys, or API tokens.
+- **Conventional Commits** — commit messages follow `type(scope): description`.
+- **Tests for new behavior** — new logic gets tests; broken tests get fixed, not deleted.
+- {{PROJECT_INVARIANT_1}}
+- {{PROJECT_INVARIANT_2}}
+
+## High-risk paths
+
+Changes here require elevated care, additional review, and explicit user confirmation:
+
+- {{HIGH_RISK_PATH_1}}
+- {{HIGH_RISK_PATH_2}}
+- `.env*`, `.github/workflows/**`, deployment scripts
+- `AGENTS.md`, `CLAUDE.md`, copilot-instructions, agent configuration
+
+## Validation
+
+Use the lightest honest check that proves the change works:
+
+```bash
+{{LIGHT_CHECK}}              # e.g. format + lint
+{{TEST_COMMAND}}             # e.g. bun run test
+{{BUILD_COMMAND}}            # e.g. bun build
+```
+
+For high-risk changes, run the full validation suite.
+
+## Working agreements
+
+- **Don't introduce abstractions beyond what the task requires.** Three similar lines is better than a premature abstraction.
+- **Don't add error handling for impossible scenarios.** Trust internal code; validate at system boundaries.
+- **Default to no comments.** Add one only when WHY is non-obvious.
+- **Don't write planning, decision, or analysis documents** unless the user asks.
+- **Match response length to the task.** A simple question gets a direct answer.
+- **Never bypass safety checks** (no `--no-verify`, no skipping hooks) without explicit user authorization.
+
+## Action authorization
+
+Some actions require user confirmation before execution. Treat these as destructive or hard-to-reverse:
+
+- Force-pushing, `git reset --hard`, deleting branches
+- Dropping database tables, deleting files
+- Modifying CI/CD pipelines, downgrading dependencies
+- Pushing to shared infrastructure, sending external messages
+- Publishing to GitHub (PR, comment, release) without explicit user direction
+
+## When in doubt
+
+Ask. The cost of a clarifying question is small; the cost of an unwanted action is large.

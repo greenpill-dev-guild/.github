@@ -2,48 +2,61 @@
 
 ## Overview
 
-The Greenpill Dev Guild is dedicated to maintaining the security and privacy of our projects and user data. This document outlines our security practices and provides guidance on how to report potential vulnerabilities. We encourage everyone to responsibly disclose security vulnerabilities to help us protect our projects and our community.
+The Greenpill Dev Guild is committed to the security and privacy of our projects and contributors. This document outlines how we handle vulnerability reports and our baseline security practices across guild repositories.
 
-## Supported Versions
+## Supported projects
 
-We currently support the latest major and minor versions of each project unless otherwise specified. For unsupported versions, security updates may not be provided.
+Security updates are provided for the latest version of each actively maintained guild project. "Actively maintained" means the project has had commits within the last 6 months or is explicitly maintained by a steward.
 
-| Project          | Supported Version | End-of-Life Policy |
-| ---------------- | ----------------- | ------------------- |
-| Green Goods  | Latest Version   | N/A for legacy versions, patches for critical issues only |
-| Impact Reef  | Latest Version   | N/A for legacy versions, patches for critical issues only |
-| Allo Yeeter | Latest Version   | N/A for legacy versions, patches for critical issues only |
-| GreenWill  | Latest Version   | N/A for legacy versions, patches for critical issues only |
-| Greenpill Commons  | Latest Version   | N/A for legacy versions, patches for critical issues only |
+| Project | Status | Notes |
+| --- | --- | --- |
+| [green-goods](https://github.com/greenpill-dev-guild/green-goods) | Active · supported | Latest version; critical-only patches for older releases |
+| [coop](https://github.com/greenpill-dev-guild/coop) | Active · supported | Latest version |
+| [cookie-jar](https://github.com/greenpill-dev-guild/cookie-jar) | Active · supported | Latest version |
+| [network-website](https://github.com/greenpill-dev-guild/network-website) | Active · supported | Latest version |
 
-## Reporting a Vulnerability
+For other guild repositories — including forks (`charmverse`, `gardens`, `octant-v2-core`, `opencred`, `greenpill-hypercerts`) and dormant projects (`greenwill`, `allo-yeeter`, `impact-reef`, `greenpill-commons`, `regen-rabbit-race`) — we do not actively patch. Critical issues affecting upstream may be reported to upstream maintainers; reports affecting guild forks specifically can still be sent to us via the channel below.
 
-If you identify a potential security vulnerability in any of our repositories, please follow these steps:
+## Reporting a vulnerability
 
-1. **Contact**: Email the issue details to our security team at [security@greenpill.builders].
+If you identify a potential security vulnerability in any guild repository, **do not open a public issue**. Instead:
+
+1. **Email** the issue details to `security@greenpill.builders`.
    - Include a detailed description of the vulnerability, the affected component(s), and the potential impact.
-   - Provide steps to reproduce the issue if possible.
+   - Provide reproduction steps if possible.
+   - Include any suggested mitigation.
+2. **Acknowledgment** — we will acknowledge receipt within **3 business days** and begin assessment.
+3. **Investigation and remediation** — we aim to address valid issues promptly. Critical issues receive immediate attention; minor vulnerabilities are addressed in due course. We will keep you updated.
+4. **Responsible disclosure** — please give us a reasonable window to address the issue before disclosing publicly. We will credit you in the fix announcement unless you prefer otherwise.
 
-2. **Acknowledgment**: We will acknowledge receipt of your report within 3 business days and begin assessing the report.
+For additional context on our disclosure approach, see [routines/responsible-disclosure.md](./routines/responsible-disclosure.md).
 
-3. **Investigation and Remediation**: We aim to address valid security issues promptly and will keep you updated on our investigation status.
-   - Critical issues will receive immediate attention, while minor vulnerabilities will be addressed in due course.
+## Security practices
 
-4. **Responsible Disclosure**: We request that you give us a reasonable time to address the issue before disclosing it publicly.
+Across guild repositories we maintain:
 
-## Security Measures and Best Practices
+- **Access control** — strict permissions; only authorized contributors can modify production-critical code; signed commits required on protected branches.
+- **Two-factor authentication** required for all org members.
+- **Dependency management** — Dependabot enabled; dependencies updated regularly; vulnerable versions patched promptly.
+- **Code review** — all changes reviewed by a maintainer before merging to protected branches; CODEOWNERS routes high-risk paths to the appropriate reviewer.
+- **Continuous monitoring** — GitHub security tooling (Dependabot, Secret Scanning, Code Scanning where applicable) on every active repo.
+- **Open source only** — all dependencies must be open-source-licensed and auditable.
 
-We implement the following security practices:
+## High-risk paths
 
-- **Access Control**: We enforce strict access control measures to ensure only authorized contributors can modify critical repositories.
-- **Dependencies Management**: We regularly update dependencies and run automated vulnerability scans on dependencies.
-- **Code Review**: Code changes undergo peer review to identify potential vulnerabilities before merging into main branches.
-- **Continuous Monitoring**: We utilize GitHub security tools (e.g., Dependabot, Code Scanning) to monitor for potential vulnerabilities.
+Across guild projects, the following paths warrant elevated review and steward sign-off:
 
-## Contact and Resources
+- Deployment, verification, migration, and upgrade scripts
+- Smart contract source code (`packages/contracts/src/**` and equivalents)
+- Authentication and authorization providers
+- Environment configuration (`.env*`)
+- CI/CD configuration (`.github/workflows/**`)
+- Dependency manifests for supply-chain-sensitive packages
 
-If you have questions about this policy or need further information:
+Project-level `CLAUDE.md` / `AGENTS.md` may extend this list with project-specific high-risk paths.
 
-- **Security Team Contact**: [security@greenpill.builders]
-- **Repository Bounty Guidelines**: Refer to the [Greenpill Dev Guild bounty guidelines](https://app.charmverse.io/greenpill-dev-guild/bounty-guide-7922917475786406) for additional context on responsible development practices.
+## Contact
 
+- **Security disclosures**: `security@greenpill.builders`
+- **General contact**: `contact@greenpill.builders`
+- **Stewards**: `steward@greenpill.builders`

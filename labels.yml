@@ -2,7 +2,7 @@
 #
 # Single source of truth for labels that should exist across every guild repo
 # that opts into the labels-sync reusable workflow (see
-# .github/workflows/labels-sync.yml once Phase 2 is wired up).
+# .github/workflows/labels-sync.yml).
 #
 # Consumer usage:
 #
@@ -28,9 +28,10 @@
 # Tool: https://github.com/EndBug/label-sync (YAML format; `delete-other-labels` flag controls prune behavior)
 
 # ─── GitHub defaults ─────────────────────────────────────────────────────────
-# Minimal kept set — `bug` and `enhancement` removed (redundant with issue
-# templates and work-type labels). Close-reason labels (duplicate/invalid/
-# wontfix/question) removed in favor of GitHub's native close-reasons.
+# Minimal kept set. Work kind is handled by GitHub issue types (`Bug`, `Story`,
+# `Epic`, `Task`) rather than labels like `bug`, `feature`, `story`, or `task`.
+# Close-reason labels (duplicate/invalid/wontfix/question) are omitted in favor
+# of GitHub's native close reasons.
 
 - name: documentation
   color: '0075ca'
@@ -116,7 +117,7 @@
   color: 'C5DEF5'
   description: Issue raised by the gg-client-polish audit
 
-# ─── Routine: grant — lifecycle (gg-grant-scout) ─────────────────────────────
+# ─── Routine: grant — lifecycle (guild-grant-scout) ─────────────────────────
 # One issue per program; label transitions as the opportunity progresses.
 # Awarded/rejected final states live on the Project board, not as labels.
 
