@@ -19,7 +19,7 @@ connectors:
   - google-drive
   - google-calendar
   - miro
-model: claude-opus-4-6
+model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # Drive + central issues + Discord, no PRs
 ---
 

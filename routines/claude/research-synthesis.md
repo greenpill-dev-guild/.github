@@ -12,7 +12,7 @@ env-vars:
   - DISCORD_USER_ID_AFO
 connectors:
   - google-drive
-model: claude-opus-4-6
+model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
 ---
 

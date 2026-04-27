@@ -25,7 +25,7 @@ connectors:
   - google-calendar
   - figma
   - miro
-model: claude-opus-4-6
+model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # Discord + Drive only, no repo writes
 ---
 
