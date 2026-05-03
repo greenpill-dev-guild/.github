@@ -25,13 +25,15 @@ Your job is hygiene. Without you, the routine system accumulates stale issues th
 
 - All env vars loaded; do not read `.env`.
 - `DISCORD_USER_ID_AFO` for the cleanup-summary @mention only when notable activity (>10 closures or any false-closure risk).
-- Active repos to sweep:
+- **GitHub access:** the cloud environment does NOT have `gh` CLI installed. There is also no GitHub PAT in env vars — `BOT_API_TOKEN` is for a different service (likely Telegram), not GitHub; do NOT pass it as a GitHub Authorization header. GitHub is reached via the platform-attached GitHub MCP whose scope equals the `sources` list on this trigger. Use the MCP tools to list, view, comment, and close issues; the `gh` snippets below are illustrative — translate them to the equivalent MCP operations.
+- Active repos to sweep (each is in this trigger's `sources`, so the GitHub MCP can reach them):
   - `greenpill-dev-guild/green-goods`
   - `greenpill-dev-guild/coop`
   - `greenpill-dev-guild/network-website`
   - `greenpill-dev-guild/cookie-jar`
   - `Greenpill9ja/TAS-Hub`
   - `greenpill-dev-guild/.github` (for `research:insight` and `grant:*` issues)
+- If GitHub access fails for ALL repos (MCP unattached or all repos missing from sources): abort the sweep, post a failure heartbeat to `#engineering` with `<@${DISCORD_USER_ID_AFO}>` so a human can fix the trigger config. Never fall back to closing issues via half-trusted credentials.
 
 ## Phase 1: Sweep
 

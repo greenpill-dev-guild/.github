@@ -75,19 +75,45 @@ If a channel has more than 100 messages in 24h, paginate via `before=<message_id
 
 Skip bot messages, pure emoji replies, link-only posts without commentary, and automated cross-posts unless they point to a grant, proposal, meeting doc, product decision, or public event.
 
+**Per-channel relevance filter:**
+
+- `#funding`, `#marketing`, `#social` — these channels carry both dev-guild content and broader Greenpill Network / ecosystem content. Include a message ONLY when it explicitly mentions a guild project (`Green Goods`, `Coop`, `Cookie Jar`, `TAS-Hub`), a Greenpill Network ecosystem moment that affects guild work (governance call, ecosystem launch, joint workshop), a tracked grant program, or a named guild contributor in a guild-work context. Pure greenpill.network promotional content, retweets, sales/BD outreach, and unrelated marketing copy are dropped.
+- `#lead-council`, `#working-capital`, `#treasury` — guild-internal by definition; ingest all substantive messages and classify per the public/private gate in Phase 4/5.
+
+If a channel produces zero in-scope messages after filtering, that's fine — log "{channel}: 0 in-scope" in the source log; do not stretch to fill.
+
 ## Phase 2: Fetch Recent Workspace Context
 
-Search Drive for documents modified in the last 48h that are relevant to the guild pulse:
+The `google-drive` connector exposes only `title`, `fullText`, `mimeType`, `modifiedTime` query terms — no folder/path globs. Use the content queries below.
 
-- meeting notes, council notes, planning docs, retros, roadmaps, grant drafts, campaign docs, budget docs
-- docs under `Greenpill Dev Guild`, `Greenpill Network`, or active project folders
-- docs linked from Discord messages in the 24h window
+**Drive query (entry point):**
 
-Check Google Calendar for:
+```
+modifiedTime > '<48h-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill') and (fullText contains 'Green Goods' or fullText contains 'Coop' or fullText contains 'Cookie Jar' or fullText contains 'TAS-Hub' or fullText contains 'Dev Guild' or fullText contains 'Greenpill Network' or fullText contains 'gardener' or fullText contains 'operator' or fullText contains 'guild lead' or fullText contains 'lead council')
+```
 
-- events in the last 24h that may need follow-up
-- events in the next 72h that the guild should remember
-- grant deadlines, contributor calls, workshops, demos, partner meetings, and governance moments
+Plus: any Drive doc directly linked from a Discord message in the 24h window — resolve link to file ID and read directly (channel-linked docs bypass the title filter but still go through the reject step below).
+
+The query is dual-clause: title indicates an intentional guild-relevant doc (drop bare 'Sync'/'Council' matches that catch personal calendar artifacts), and fullText proves the doc actually mentions a guild project, ecosystem, or known role. This routine is still the broadest reader by intent — the dual clause + reject step prevents personal-project leakage without forcing a narrow query.
+
+**Reject step (apply to every candidate, including channel-linked docs):**
+
+Drop the doc when:
+
+- `'WEFA'` or `'wefa.world'` appears in the title — Afo's separate project, never in dev-guild scope
+- `'WEFA'` appears 5+ times in the body but no guild project name appears at all — WEFA-dominated doc that incidentally mentions the guild
+- The doc is a personal-calendar-derived artifact (e.g., `'Sync'` in title with no guild project, person, or call name in the body)
+
+A doc that mentions WEFA in passing while discussing a guild project is fine. A doc whose primary topic IS WEFA, a personal call, or unrelated client work is dropped.
+
+Check Google Calendar for events in the last 24h and next 72h. Include an event ONLY when its title or description matches one of:
+
+- a guild project name (`Green Goods`, `Coop`, `Cookie Jar`, `TAS-Hub`)
+- a known guild call (`Dev Guild Sync`, `Lead Council`, `Working Capital`, `Treasury`, the literal word `guild`)
+- a Greenpill Network ecosystem moment (governance call, retro, public workshop, ecosystem AMA)
+- a tracked grant program deadline, demo day, pitch event, or submission reminder
+
+Drop personal calendar events, WEFA-tagged events, sales/client meetings, and other non-guild meetings even when they fall in the 24h/72h window. Afo's calendar contains personal projects and WEFA work that must NOT leak into the daily pulse.
 
 Check Figma for recently updated files in active project or guild design spaces:
 
@@ -210,6 +236,15 @@ Generated {YYYY-MM-DD HH:MM} local.
 Use private detail only in the Drive appendix. Even there, summarize rather than dumping raw messages unless a quote is necessary for context.
 
 ## Phase 6: Post Discord Outputs
+
+**Channel guard:** this routine has exactly two allowed Discord `POST` targets and they are not interchangeable.
+
+| Output | Allowed channel | What goes there |
+|---|---|---|
+| Public pulse | `${DISCORD_COMMUNITY_CHANNEL_ID}` | community-safe daily pulse only |
+| Private summary | `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}` | private appendix link + urgent read |
+
+Refuse any plan to send the public pulse to `#design`, `#research`, `#funding`, `#engineering`, `#lead-council`, or any other channel. Refuse any plan to send the private summary to `#community` or any public channel. If either env var is unset or invalid, skip that single post (still produce the other) and log — do not pick an alternate channel.
 
 Post the public pulse to the community channel:
 

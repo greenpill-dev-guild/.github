@@ -33,8 +33,9 @@ Green Goods no longer has a live project-local grant scout. This routine is the 
 
 - `DISCORD_BOT_TOKEN` and `DISCORD_FUNDING_CHANNEL_ID` are in the environment.
 - Google Drive, Google Calendar, and Miro connectors are available.
-- `greenpill-dev-guild/.github` is the central tracking repo for all grant lifecycle issues.
-- Active project repos are cloned: `green-goods`, `coop`, `network-website`, `cookie-jar`, `TAS-Hub`.
+- **GitHub access:** the cloud environment does NOT have `gh` CLI installed. There is also no GitHub PAT in env vars — `BOT_API_TOKEN` is for a different service (likely Telegram), not GitHub; do NOT pass it as a GitHub Authorization header. GitHub is reached via the platform-attached GitHub MCP whose scope equals the `sources` list on this trigger. Use the MCP tools to list, view, create, comment on, and edit issues; the `gh` snippets in Phase 4 are illustrative — translate them to the equivalent MCP operations.
+- `greenpill-dev-guild/.github` is the central tracking repo for all grant lifecycle issues (and is in this trigger's `sources`, so the MCP can reach it).
+- Active project repos cloned via `sources` for read-only context and (when applicable) issue creation: `green-goods`, `coop`, `network-website`, `cookie-jar`, `TAS-Hub`.
 - Do not read `.env`.
 - Do not run `bun install`, builds, or tests. Codebase exploration is read-only.
 - Do not create project-repo grant issues unless a human later promotes one.
@@ -264,7 +265,9 @@ Awarded, rejected, and archived outcomes should be represented in the issue body
 
 ## Phase 5: Discord `#funding` Summary
 
-Post a weekly roll-up to `#funding`:
+**Mandatory post.** Always POST a weekly summary to `#funding`, even when zero new opportunities surfaced and zero pipeline movement happened. A silent week is itself signal — the team needs to know the routine ran, how many sources were reviewed, and what the active pipeline looks like. Pick the format below that matches the run.
+
+### Active week (any opportunities reviewed OR any pipeline state changed)
 
 ```markdown
 **Guild Grant Scout - Week of {YYYY-MM-DD}**
@@ -286,10 +289,30 @@ Active central pipeline:
 - Submitted: {count of grant:submitted issues}
 ```
 
+### Quiet week (zero new opportunities AND zero pipeline movement)
+
+```markdown
+**Guild Grant Scout - Week of {YYYY-MM-DD}**
+
+No new high-fit opportunities surfaced this week.
+Sources reviewed: Discord {D}, Drive {V}, web {W}, calendar {C}, Miro {B}.
+
+Active central pipeline:
+- Prospecting: {count of grant:prospect issues}
+- Drafting: {count of grant:drafting issues}
+- Submitted: {count of grant:submitted issues}
+
+Upcoming deadlines, next 14 days:
+- {program} - {date}  (or `(none in window)`)
+
+— *Routine ran. Drop a grant link in `#funding` to feed next week's scout.*
+```
+
 Keep Discord high-level. Put private strategy, detailed budget assumptions, and sensitive evidence in Drive or the central issue.
 
 ## Guardrails
 
+- **Always post the weekly heartbeat to `#funding`.** Silent runs are not allowed — they make the routine indistinguishable from a broken cron. Use the Phase 5 quiet-week format when there's nothing new to report.
 - Centralize grant lifecycle issues in `greenpill-dev-guild/.github`.
 - Do not create grant issues in Green Goods, Coop, network-website, cookie-jar, or TAS-Hub unless a human explicitly promotes a tracked opportunity.
 - Never submit proposals. Draft and save only.
