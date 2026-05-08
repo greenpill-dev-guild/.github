@@ -1,7 +1,7 @@
 ---
 routine-name: guild-daily-synthesis
 trigger:
-  schedule: "30 8 * * *"  # 08:30 local, daily. Community pulse is ready by 09:00.
+  schedule: "30 8 * * *"  # Historical cron (08:30 daily). Cloud cron dropped 2026-05-08; folded into guild-weekly-synthesis (Mon 18:00 weekly).
 max-duration: 45m
 repos:
   - greenpill-dev-guild/network-website
@@ -27,7 +27,12 @@ connectors:
   - miro
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # Drive + Discord only
+status: paused  # 2026-05-08 — folded into guild-weekly-synthesis; cloud cron dropped
 ---
+
+> **PAUSED — 2026-05-08.** Folded into the new `guild-weekly-synthesis` routine (Monday 18:00 weekly, `#community` excerpt + `#lead-council` private digest). Daily cadence + the routine's tendency toward scope creep across out-of-allow-list repos was the highest user-felt quality complaint; the weekly replacement enforces a strict scope contract and a fixed output schema. This prompt remains in the repo as reference; the cloud cron has been dropped.
+>
+> **If you are an agent reading this prompt, exit immediately.** Do not run any phase below. Post a single message to `#lead-council` (channel-guarded by `DISCORD_LEAD_COUNCIL_CHANNEL_ID`) reading `guild-daily-synthesis fired but is paused — see guild-weekly-synthesis` and stop. A stale cron should not be possible (the cloud cron was deleted via the routines surface); if you are running anyway, report the unexpected fire and let the human re-check the schedule registry.
 
 # Prompt
 

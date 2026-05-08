@@ -36,6 +36,30 @@ Your job is signal compression on the design side. Without you, `#design` discus
   - `prompt-contract.md` — admin canonical palette
   - `client-prompt-contract.md` — client canonical palette
 
+## Scope contract (read first)
+
+This routine has exactly one input channel and one output channel.
+
+- **Input channel:** `#design` (`DISCORD_DESIGN_CHANNEL_ID`).
+- **Output channel:** `#design` (`DISCORD_DESIGN_CHANNEL_ID`) — the same channel.
+- **Never post to any other channel.** If you would otherwise post elsewhere, post nothing.
+- **Never read other Discord channels** (no `#funding`, `#research`, `#community`, `#lead-council`, etc.). If `#design` was quiet, the answer is a quiet-week post — not pulling material from adjacent channels.
+
+### Out-of-scope topics (drop on sight, even if they appear in Drive)
+
+This routine synthesizes design feedback only. The following content is owned by other routines and must NOT appear in this synthesis even when the Drive search surfaces it:
+
+| Topic | Owner |
+|---|---|
+| Grants, funding opportunities, proposal drafts, budgets | `guild-grant-scout` |
+| Treasury, working-capital, runway, payments | `guild-daily-synthesis` (private appendix) |
+| Lead-council operating decisions, partner contracts, agreements | `guild-daily-synthesis` (private appendix) |
+| Research papers, mechanism design, infrastructure analysis | `research-synthesis` |
+| Product roadmap, partnership strategy, integration evaluations | `guild-product-development-synthesis` |
+| Guild health, weekly recap, deadlines | `guild-weekly-checkin` |
+
+If a Drive document is primarily about any of the topics above, drop it. If a `#design` message links a grant/funding/treasury/contract doc and asks a design question about it, synthesize only the design question — not the surrounding funding context.
+
 ## Phase 1: Read
 
 Fetch the last 7 days of `#design`:
@@ -52,7 +76,37 @@ Filter to substantive content:
 - Token, palette, or typography proposals
 - Skip emojis-only, "looks good", off-topic threads
 
-Optional Drive read: search recent design docs / mockups / Figma exports modified in the last 7 days.
+### Quiet-week short-circuit (HARD GATE)
+
+Count substantive `#design` messages from the step above.
+
+- **If count < 5:** post the quiet-week message (see Phase 4) and **EXIT**. Do NOT read Drive. Do NOT widen the input. A quiet `#design` week is the answer; the routine does not invent themes from adjacent sources.
+- **If count >= 5:** continue to the optional Drive supplement below.
+
+### Optional Drive supplement (only when channel had >= 5 substantive messages)
+
+Drive is allowed only to enrich themes that are **already grounded in the `#design` messages above** — never as a primary source. The Drive connector exposes only `title`, `fullText`, `mimeType`, `modifiedTime` query terms — not folder paths — so scope is enforced by content query, not by path.
+
+**Drive query (run via the `google-drive` connector):**
+
+```
+modifiedTime > '<7d-ago RFC3339>' and (title contains 'design' or title contains 'mockup' or fullText contains 'figma.com')
+```
+
+Plus: follow Drive links explicitly shared in `#design` messages from the 7-day window. Resolve each link to its file ID and read that doc directly — channel-linked docs bypass the title/fullText filter but still go through the rejection step below.
+
+**Rejection step (apply to every candidate doc, regardless of how it was found):**
+
+Drop the doc if its primary topic matches any of the out-of-scope topics from the Setup table (grants, funding, treasury, agreements, roadmap, partnerships, research, weekly recap). Heuristic — drop when the title or first 1KB of body contains any of:
+
+- `'proposal'`, `'grant'`, `'NLnet'`, `'Octant'`, `'Gitcoin'`, `'EthGlobal'`, `'budget'`, `'milestone'` → owned by `guild-grant-scout`
+- `'treasury'`, `'multisig'`, `'runway'`, `'working capital'`, `'payment'` → owned by `guild-daily-synthesis` private appendix
+- `'agreement'`, `'contract'`, `'MoU'`, `'partnership'` → owned by `guild-daily-synthesis` private appendix
+- `'roadmap'`, `'integration evaluation'`, `'partnership strategy'` → owned by `guild-product-development-synthesis`
+- `'paper'`, `'mechanism design'`, `'protocol'`, `'EIP'` → owned by `research-synthesis`
+- `'weekly checkin'`, `'weekly recap'`, `'guild health'` → owned by `guild-weekly-checkin`
+
+If the doc passes both stages, synthesize only the design content within it.
 
 ## Phase 2: Synthesize
 
@@ -82,9 +136,25 @@ For each theme that's actionable, propose 1–2 concrete design actions:
 
 ## Phase 4: Post to #design
 
+**Channel guard:** the only allowed `POST` target for this routine is `${DISCORD_DESIGN_CHANNEL_ID}`. Refuse any plan to post to `#community`, `#funding`, `#research`, `#engineering`, `#lead-council`, or any other channel. If `${DISCORD_DESIGN_CHANNEL_ID}` is unset or invalid, abort and log — do not pick an alternate channel.
+
 ```
 POST https://discord.com/api/v10/channels/${DISCORD_DESIGN_CHANNEL_ID}/messages
 ```
+
+### Quiet-week message (when Phase 1 short-circuited)
+
+```
+**Design Synthesis — week of {YYYY-MM-DD}**
+
+Quiet week in `#design` ({N} substantive messages). No synthesis this week. Drop a Figma link, mockup, or component question to keep the loop running.
+
+— *Synthesized from {N} #design messages this week.*
+```
+
+No `@mention` on quiet weeks. No Drive content. No "we noticed activity elsewhere" filler.
+
+### Active-week message
 
 Determine if @mention is needed: any action mapped to Green Goods active work (Afo's primary surface).
 
@@ -184,11 +254,12 @@ If the synthesis surfaced patterns that should be documented in `.claude/skills/
 
 ## Guardrails
 
+- **Stay in lane.** Input = `#design`. Output = `#design`. Drive is enrichment only, scoped to design folders, and only when the channel had >=5 substantive messages. See the Setup ownership table for what other routines own.
 - **Synthesis, not capture.** Group and distill. Do not just paste every message.
 - **Cap 3 issues per run.**
 - **Read-only on Discord.** Don't respond to individual messages, don't react.
 - **No PRs.** Design changes go through the human design + plan-executor flow.
 - **No edits to design skill files.** Surface gaps only; humans author the canonical updates.
 - **Cite sources.** Every theme and action links to underlying Discord messages.
-- **Silence is fine.** If <5 substantive #design posts this week, short "quiet week" summary.
+- **Quiet weeks exit early.** <5 substantive `#design` messages → quiet-week post → STOP. Do not widen the search.
 - **Respect the surface split.** Client recommendations stay client; admin recommendations stay admin. Cross-surface items get explicit "cross-surface" flag in the action.

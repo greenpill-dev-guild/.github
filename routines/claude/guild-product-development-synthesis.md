@@ -46,6 +46,37 @@ This is not a prioritization engine. Do not rank features, score opportunities, 
 - Do not run installs, builds, or tests.
 - Do not create GitHub issues, move project boards, assign work, write repo files, edit calendar events, edit Figma files, or edit Miro boards.
 
+## Scope contract (read first)
+
+- **Output channels:** save the Drive synthesis memo (its target Drive folder is named in the Output section below) and post a private summary to `#lead-council` (`DISCORD_LEAD_COUNCIL_CHANNEL_ID`). **Never post to `#community`, `#design`, `#research`, `#funding`, `#engineering`, or any other channel.**
+- **Drive scope is content-based, not path-based.** The `google-drive` connector exposes only `title`, `fullText`, `mimeType`, `modifiedTime` query terms (no `parents`/path globs). Use the query below as the entry point; use the rejection step to enforce ownership.
+
+  **Drive query (entry point):**
+
+  ```
+  modifiedTime > '<14d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Sync' or title contains 'Workshop' or title contains 'Roadmap' or title contains 'Council' or fullText contains 'product')
+  ```
+
+  Plus: any Drive doc directly linked from Discord, Calendar, Figma, or Miro signals collected in this run.
+
+- **Other routines own these topics**; do not duplicate their work even if their content surfaces in the entry-point query:
+
+  | Topic | Owner |
+  |---|---|
+  | Grants, funding opportunities, proposal drafts, budgets | `guild-grant-scout` |
+  | Daily ops pulse / community-safe digest | `guild-daily-synthesis` |
+  | Weekly guild-health recap, deadlines, maintainer load | `guild-weekly-checkin` |
+  | Design feedback, mockups, component patterns, design tokens | `design-synthesis` |
+  | Research papers, mechanism design, ecosystem scan | `research-synthesis` |
+
+  **Rejection step (drop the doc if its primary topic is owned elsewhere):**
+  - Title or first 1KB of body contains `'proposal'`, `'grant'`, `'NLnet'`, `'Octant'`, `'Gitcoin'`, `'budget'`, `'milestone'` → owned by `guild-grant-scout`. Drop unless the doc explicitly commits to a product-development decision; in that case, summarize the product implication only — do not republish the funding context.
+  - `'treasury'`, `'multisig'`, `'runway'`, `'working capital'`, `'payment'` → owned by `guild-daily-synthesis` private appendix. Drop.
+  - `'agreement'`, `'MoU'`, `'partnership contract'` → owned by `guild-daily-synthesis` private appendix. Drop unless directly affects product scope.
+  - `'mockup'`, `'storybook'`, `'design token'`, `'palette'` → owned by `design-synthesis`. Drop.
+  - `'paper'`, `'mechanism design'`, `'protocol'`, `'EIP'` → owned by `research-synthesis`. Drop.
+  - `'weekly checkin'`, `'weekly recap'`, `'guild health'` → owned by `guild-weekly-checkin`. Drop.
+
 ## How This Differs From Weekly Check-In
 
 `guild-product-development-synthesis` is the product-context layer. It answers:
@@ -79,13 +110,9 @@ Calendar is a discovery surface. Do not edit events.
 
 ### Drive Notes And Docs
 
-Search Drive for product-development source material:
+Use the Drive query from the Scope contract above (the `google-drive` connector supports only `title`, `fullText`, `mimeType`, `modifiedTime` query terms — no folder paths). Read for **product context**, not generic action-item extraction. Do not modify source docs.
 
-- meeting notes, call notes, planning docs, workshop notes, partner notes
-- roadmaps, product briefs, integration notes, tool evaluations, demos, architecture sketches
-- grant drafts or partnership docs that imply product development commitments
-
-Read for product context, not generic action-item extraction. Do not modify source docs.
+Apply the rejection step from the Scope contract before synthesizing each candidate doc — grants/treasury/design/research material gets dropped (or, for grant material, narrowly summarized when it commits the team to a product decision).
 
 ### Discord Context
 
@@ -213,6 +240,8 @@ Generated {YYYY-MM-DD HH:MM} local.
 ```
 
 ## Discord Summary
+
+**Channel guard:** the only allowed Discord `POST` target for this routine is `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}`. Refuse any plan to post to `#community`, `#design`, `#research`, `#funding`, `#engineering`, or any other channel. If `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}` is unset or invalid, abort and log — do not pick an alternate channel.
 
 Post a private summary to `#lead-council`:
 

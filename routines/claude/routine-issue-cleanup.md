@@ -1,7 +1,7 @@
 ---
 routine-name: routine-issue-cleanup
 trigger:
-  schedule: "0 22 * * 5"  # Friday 22:00 — clear deck before weekend
+  schedule: "0 22 * * 5"  # Historical cron (Friday 22:00). Cloud cron dropped 2026-05-08; folded into routine-self-audit (Sunday 23:00).
 max-duration: 30m
 repos: []  # uses gh CLI to operate on multiple repos
 environment: guild-routines
@@ -13,7 +13,12 @@ env-vars:
 connectors: []
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # closes issues only, no PRs or branches
+status: paused  # 2026-05-08 — folded into the routine-self-audit Phase 3 upgrade
 ---
+
+> **PAUSED — 2026-05-08.** The stale-`automated/claude`-issue sweep folds into the upgraded `routine-self-audit` (Sunday 23:00 weekly, `#engineering`). Self-audit will gain a "cleanup actions" section that closes issues using the same rules this routine documented (recovered health, superseded drift snapshots, addressed-in-PR-but-not-auto-closed, stale-with-no-movement). One Friday-night Discord post becomes one Sunday-night digest with an extra section — fewer scheduled runs, same coverage.
+>
+> **If you are an agent reading this prompt, exit immediately.** Do not run any phase below. Post a single message to `#engineering` (channel-guarded by `DISCORD_ENGINEERING_CHANNEL_ID`) reading `routine-issue-cleanup fired but is paused — see routine-self-audit` and stop. A stale cron should not be possible (the cloud cron was deleted via the routines surface); if you are running anyway, report the unexpected fire and let the human re-check the schedule registry.
 
 # Prompt
 

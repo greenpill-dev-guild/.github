@@ -59,11 +59,17 @@ This routine is read-only. Do not create issues, open PRs, move boards, apply la
 Gather the week from these sources:
 
 - Discord: community, funding, marketing, social, lead-council, working-capital, and treasury channels
-- Google Drive: meeting notes, weekly call notes, planning docs, grant docs, workshop docs, retros, and project docs modified this week
+- Google Drive (content-scoped — connector supports only `title`, `fullText`, `mimeType`, `modifiedTime` query terms, no path globs):
+
+  ```
+  modifiedTime > '<7d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Sync' or title contains 'Workshop' or title contains 'Council' or title contains 'Retro' or title contains 'Roadmap' or title contains 'Greenpill' or title contains 'Dev Guild' or title contains 'Grant' or title contains 'Proposal')
+  ```
+
+  Plus: the current week's product-development synthesis memo (`title contains 'product development synthesis'` filtered to this week's run timestamp).
+
 - Google Calendar: meetings held this week, meetings coming next week, deadlines, grant dates, workshops, demos, and contributor calls
 - Figma: active project design files, recent comments, prototype/handoff movement, and design review status
 - Miro: roadmap boards, planning boards, workshop boards, retro boards, prioritization boards, and board comments
-- Product-development synthesis: the current week's `Greenpill Dev Guild / Product Development Synthesis` memo, especially its carry-forward section
 - GitHub: active repo activity, PRs, issues, CI reliability, and cross-project dependencies
 
 Use private sources to understand the guild's health, but keep public output redacted.
@@ -211,6 +217,8 @@ Generated {YYYY-MM-DD HH:MM} local.
 
 ## Phase 6: Lead-Council Digest
 
+**Channel guard (private digest):** the only allowed Discord `POST` target for this phase is `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}`. Refuse any plan to post the private digest to a public channel. If `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}` is unset or invalid, abort and log — do not pick an alternate channel.
+
 Post a compressed private digest to lead council:
 
 ```http
@@ -237,6 +245,8 @@ Community excerpt posted: {yes/no}
 ```
 
 ## Phase 7: Community-Safe Excerpt
+
+**Channel guard (community excerpt):** the only allowed Discord `POST` target for this phase is `${DISCORD_COMMUNITY_CHANNEL_ID}`. Refuse any plan to post the community excerpt to `#design`, `#research`, `#funding`, `#engineering`, `#lead-council`, or any other channel. If `${DISCORD_COMMUNITY_CHANNEL_ID}` is unset or invalid, abort and log — do not pick an alternate channel.
 
 Post a short excerpt to the community channel:
 

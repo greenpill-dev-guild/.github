@@ -29,7 +29,6 @@ Your job is closing the loop. Without you, broken or low-value routines silently
 
 | Routine | Type | Repo of output | Expected cadence |
 |---|---|---|---|
-| dream-on | guild | session-only | daily |
 | bug-intake | green-goods | issues on Bug Board #18 | weekday |
 | plan-executor | green-goods | PRs to develop | weekday |
 | health-watch | green-goods | issues on board #4 | weekday |
@@ -56,7 +55,9 @@ Look at the most recent expected window for the routine's cadence:
 
 If the routine has a known signature in GitHub (e.g., issues with specific labels, PRs from specific branches, comments from the bot), use that to detect runs.
 
-If you can't determine whether it ran (e.g., dream-on has no GitHub signature), mark as "unknown — manual check needed".
+If you can't determine whether a routine ran (no GitHub signature, no Discord post), mark as "unknown — manual check needed".
+
+Note: `dream-on` is a local Claude Code skill (not a cloud routine). It is intentionally excluded from this audit.
 
 ### What did it output?
 
@@ -116,7 +117,6 @@ Determine if @mention is needed: any silent routines OR any flagged failures fro
 
 | Routine | Ran? | Output this week | Conversion (4-wk) |
 |---|---|---|---|
-| dream-on | ✅ daily | session-only | n/a |
 | bug-intake | ✅ {n}/5 weekdays | {n} new issues | {%} → hotfix |
 | plan-executor | ✅ {n}/5 weekdays | {n} PRs ({m} merged) | {%} merged |
 | health-watch | ✅ {n}/5 weekdays | {n} anomalies | n/a |

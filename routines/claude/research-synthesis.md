@@ -1,7 +1,7 @@
 ---
 routine-name: research-synthesis
 trigger:
-  schedule: "0 17 * * 5"  # Friday 17:00 — end-of-week synthesis, posted before weekend
+  schedule: "0 17 * * 5"  # Historical cron (Friday 17:00). Cloud cron dropped 2026-05-08; folded into weekly-insights (Friday 17:00 weekly, replaces research + design synthesis).
 max-duration: 1h
 repos: []  # reads via APIs only; never checks out source
 environment: guild-routines
@@ -14,7 +14,12 @@ connectors:
   - google-drive
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
+status: paused  # 2026-05-08 — folded into weekly-insights; cloud cron dropped
 ---
+
+> **PAUSED — 2026-05-08.** Folded into the new `weekly-insights` routine (Friday 17:00 weekly, posts to `#research` + `#design`, writes Linear Issues for actionable insights). Combining research and design synthesis into one weekly post lets cross-cutting themes (research → design implications, design → research questions) surface naturally instead of being split across two routines on the same day. Insights that warrant follow-up now go to **Linear** (per the 2026-05-07 partial-migration policy), not `.github` GitHub Issues.
+>
+> **If you are an agent reading this prompt, exit immediately.** Do not run any phase below. Post a single message to `#research` (channel-guarded by `DISCORD_RESEARCH_CHANNEL_ID`) reading `research-synthesis fired but is paused — see weekly-insights` and stop. A stale cron should not be possible (the cloud cron was deleted via the routines surface); if you are running anyway, report the unexpected fire and let the human re-check the schedule registry.
 
 # Prompt
 
