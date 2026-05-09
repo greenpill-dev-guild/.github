@@ -59,9 +59,9 @@ Prior grant work to reference (do not duplicate, iterate): NLnet NGI Zero Common
 
 Before scouting this week, read the last 4 weekly grant-scout Drive memos to know:
 
-- **What's already in the pipeline** — open `grant:prospect`, `grant:drafting`, `grant:submitted` Issues in the Linear **Funding Pipeline** project. Query Linear for these at run start (status types `backlog`, `started`, plus issue label filter on `grant:*`).
+- **What's already in the pipeline** — open `funding:prospect`, `funding:drafting`, `funding:submitted` Issues in the Linear **Funding Pipeline** project. Query Linear for these at run start (status types `backlog`, `started`, plus issue label filter on `funding:*`).
 - **What was already evaluated and dismissed** — programs prior memos marked `dismiss` with rationale. Do not re-surface unless there's clear new context.
-- **Stale prospects** — any `grant:prospect` open >30 days without movement. Surface in Phase 5 for triage or auto-dismissal.
+- **Stale prospects** — any `funding:prospect` open >30 days without movement. Surface in Phase 5 for triage or auto-dismissal.
 
 Drive memo location: `Greenpill Dev Guild / Grants / YYYY-MM-DD grant scout`. File naming: `YYYY-MM-DD grant scout`.
 
@@ -103,7 +103,7 @@ Search Drive for funding/grant/proposal/meeting docs modified in the last 14 day
 
 ### 1.3 — Calendar
 
-Check the next 30 days for grant deadlines, review meetings, pitch events, demo days, or submission reminders. Use to flag any opportunity in `KNOWN_PROGRAMS` whose deadline is approaching but is not yet in `grant:drafting` status.
+Check the next 30 days for grant deadlines, review meetings, pitch events, demo days, or submission reminders. Use to flag any opportunity in `KNOWN_PROGRAMS` whose deadline is approaching but is not yet in `funding:drafting` status.
 
 ### 1.4 — Miro
 
@@ -230,17 +230,17 @@ For any high-fit opportunity, create or update one Issue in the Linear **Funding
 - Project: query Linear for project named `Funding Pipeline`
 - Team: `Product`
 - Initiative: `Sustainability & Monetization`
-- Labels: resolve all of `grant:prospect`, `grant:drafting`, `grant:submitted`, `grant:reporting`, `automation:routine`, `agent:claude`, `protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `area:research`, `work:research` by name.
+- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `automation:routine`, `agent:claude`, `protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `area:research`, `work:research` by name.
 
 ### Dedupe first
 
-Query open Issues in Funding Pipeline filtered by `grant:*` labels. Match by program name + URL. If a duplicate exists, **comment on the existing Issue** with new context (refreshed deadline, new evidence, updated fit score) — do not create a parallel Issue.
+Query open Issues in Funding Pipeline filtered by `funding:*` labels. Match by program name + URL. If a duplicate exists, **comment on the existing Issue** with new context (refreshed deadline, new evidence, updated fit score) — do not create a parallel Issue.
 
 ### Create new prospect
 
 Title: `Grant: {Program Name}`
 
-Labels: `grant:prospect`, `automation:routine`, `agent:claude`, plus the relevant `protocol:*` for primary fit and `area:research`. Add `work:research` since this is non-implementation discovery work.
+Labels: `funding:prospect`, `automation:routine`, `agent:claude`, plus the relevant `protocol:*` for primary fit and `area:research`. Add `work:research` since this is non-implementation discovery work.
 
 Body:
 
@@ -277,11 +277,11 @@ Body:
 
 ### Lifecycle transitions (handled by this routine across runs)
 
-- **When a draft is saved**: remove `grant:prospect`, add `grant:drafting`. Comment with `Draft saved: {Drive URL}`. Move Linear status from `Backlog` to `In Progress`.
-- **When a human confirms submission** (detected via #funding signal or Drive memo update): remove `grant:drafting`, add `grant:submitted`. Comment with `Submitted {date}. Awaiting response.`
-- **When awarded**: keep Issue, add `grant:reporting` (replacing `grant:submitted`). The accepted grant's delivery work is created as a NEW dedicated project (the OSV Grant pattern); the Funding Pipeline Issue links to that delivery project in a comment.
-- **When rejected**: comment with rejection reason and date, set Linear status to `Cancelled`. Do not remove the `grant:submitted` label — historical record matters.
-- **When stale** (`grant:prospect` open > 30 days with no Drive draft and no #funding signal): in Phase 5, list under "Stale prospects" for human triage. Auto-dismiss only after Afo signs off on the recommendation.
+- **When a draft is saved**: remove `funding:prospect`, add `funding:drafting`. Comment with `Draft saved: {Drive URL}`. Move Linear status from `Backlog` to `In Progress`.
+- **When a human confirms submission** (detected via #funding signal or Drive memo update): remove `funding:drafting`, add `funding:submitted`. Comment with `Submitted {date}. Awaiting response.`
+- **When awarded**: keep Issue, add `funding:active-award` (replacing `funding:submitted`). The accepted grant's delivery work is created as a NEW dedicated project (the OSV Grant pattern); the Funding Pipeline Issue links to that delivery project in a comment.
+- **When rejected**: comment with rejection reason and date, set Linear status to `Cancelled`. Do not remove the `funding:submitted` label — historical record matters.
+- **When stale** (`funding:prospect` open > 30 days with no Drive draft and no #funding signal): in Phase 5, list under "Stale prospects" for human triage. Auto-dismiss only after Afo signs off on the recommendation.
 
 ## Phase 5: Discord `#funding` Summary
 

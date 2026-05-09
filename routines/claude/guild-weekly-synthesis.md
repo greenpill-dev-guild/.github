@@ -198,7 +198,7 @@ Before posting:
 
 - **Cap: 4 community bullets, 5 council "this week ahead" bullets, 3 risks, 3 decisions** in the digest. Hard ceilings.
 - **Cap: 1 hour runtime**. Timeout → write partial output with `⚠ Failures this run: timed out at phase X`.
-- **Drive memo only**. No PRs, no GitHub issues. Ecosystem-wide visibility issues (e.g. `research:insight`) are owned by `weekly-insights` (Friday).
+- **Drive memo only**. No PRs, no GitHub issues. Actionable research insights belong in `research-synthesis` (Friday) which writes to the Linear Research team.
 - **Strict scope contract**. Out-of-allow-list content is dropped at Phase 1. No "but it was relevant" exceptions in the synthesis prompt.
 - **Public-safe by default**. The `#community` post is public; assume the audience includes contributors who are not under any NDA. The `#lead-council` post is private; even there, attribute responsibly.
 - **Channel guards** at every post. Fail loud if env var unset.
