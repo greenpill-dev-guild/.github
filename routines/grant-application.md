@@ -74,7 +74,7 @@ At least 24 hours before deadline. Stewards check:
 After submission:
 
 - Note the application in the forum and the relevant Discord channel
-- Add to the guild grants tracker (in the workspace)
+- Add or update the grant lifecycle item in Linear using the `funding:*` labels and saved funding views
 - Set a calendar reminder to follow up if no response by their stated review window
 
 ## After award
@@ -103,5 +103,5 @@ If declined:
 ## See also
 
 - [Greenpill Network](https://greenpill.network) — parent network funding context
-- Guild workspace grants tracker (target: `greenpill.app/dev-guild`, coming soon — currently on Charmverse during migration)
+- [Linear operating model](../docs/linear-operating-model.md) — funding lifecycle and saved-view model
 - [retro-cadence.md](./retro-cadence.md) — review grant outcomes during retros

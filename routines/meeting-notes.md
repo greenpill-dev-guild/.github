@@ -49,7 +49,7 @@ Where notes live right now:
     └── recording.md              # recording link or publishing status
 ```
 
-The shared Drive is the canonical notes store during the migration to `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*. The workspace tracks operational state; GitHub carries execution artifacts such as issues and PRs.
+The shared Drive is the canonical notes store. Linear tracks accepted operational state; GitHub carries public execution artifacts such as issues and PRs.
 
 ## Action item format
 

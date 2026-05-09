@@ -9,9 +9,9 @@ For project-specific PR conventions, check the project's own CONTRIBUTING.md.
 
 ## Why
 
-<!-- The motivation. Link to the bounty, issue, or RFC. -->
+<!-- The motivation. Link to the issue, RFC, Linear reference, or funded-work scope. -->
 
-Closes # <!-- issue number, bounty link, or "n/a" -->
+Closes # <!-- issue number, Linear/funded-work reference, or "n/a" -->
 
 ## What changed
 

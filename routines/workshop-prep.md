@@ -1,6 +1,6 @@
 # Workshop Prep
 
-> Running a guild workshop — Hypercerts, EAS, Charmverse, Karma GAP, or any topic the guild teaches.
+> Running a guild workshop — Hypercerts, EAS, DAO operations, Karma GAP, or any topic the guild teaches.
 
 **When to use this**: You're hosting or co-hosting a guild workshop, or supporting someone who is.
 
@@ -10,7 +10,7 @@ A guild workshop is a public, recorded session where a contributor teaches a top
 
 - Hypercerts integration
 - Ethereum Attestation Service (EAS)
-- Charmverse for DAO ops
+- DAO operations tooling
 - Karma GAP for grants tracking
 
 Workshops are a recruitment, retention, and reputation lever. They're also one of the best ways to deepen your own understanding by teaching it.
@@ -64,8 +64,8 @@ Build-alongs require more prep but deliver more value.
 Good guild workshop topics:
 
 - **Foundational regen primitives** — EAS, Hypercerts, GitcoinPassport, Allo
-- **Tools the guild uses** — Charmverse, Karma GAP, Optimism payouts
-- **Hard problems we've solved** — bounty operations, grant applications, indexer patterns
+- **Tools the guild uses** — Linear, Drive, Karma GAP, Optimism payouts
+- **Hard problems we've solved** — funded scoped work, grant applications, indexer patterns
 - **Meta-skills** — running a regen project, applying for grants, contributing to upstream
 
 Avoid:

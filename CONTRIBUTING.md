@@ -1,15 +1,15 @@
 # Contributing to the Greenpill Dev Guild
 
-Welcome! We're glad you're here. This guide covers how to get involved, claim bounties, and ship work that meets guild standards across our projects.
+Welcome! We're glad you're here. This guide covers how to get involved, take on scoped work, and ship contributions that meet guild standards across our projects.
 
 ## Table of contents
 
 - [Getting started](#getting-started)
-- [Bounty flow](#bounty-flow)
+- [Funded scoped work](#funded-scoped-work)
 - [Development guidelines](#development-guidelines)
 - [Submitting your work](#submitting-your-work)
 - [Review process](#review-process)
-- [Payment and completion](#payment-and-completion)
+- [Funded work completion](#funded-work-completion)
 - [Agentic development](#agentic-development)
 - [Resources](#resources)
 - [Code of Conduct](#code-of-conduct)
@@ -21,20 +21,21 @@ Welcome! We're glad you're here. This guide covers how to get involved, claim bo
 1. **Join our community.** Engage with us on [Telegram](https://t.me/+n7g-u8wYtwQ2YjVi) and [Discord](https://discord.gg/ZJjft2EKz7) to stay updated and ask questions.
 2. **Familiarize yourself with our projects.** Browse the active repositories pinned on [our org page](https://github.com/greenpill-dev-guild) — `green-goods`, `coop`, `cookie-jar`, `network-website` are the flagship surfaces.
 3. **Read the [Code of Conduct](./CODE_OF_CONDUCT.md).** Required for all contributors.
-4. **Skim the [routines/](./routines/)** directory if you're new to the guild — short markdown playbooks for our recurring flows (bounty intake, weekly check-ins, onboarding, retros).
+4. **Skim the [routines/](./routines/)** directory if you're new to the guild — short markdown playbooks for our recurring flows, weekly check-ins, onboarding, retros, and grants.
+5. **Know the operating model.** Linear owns project management; GitHub owns public execution, issues, PRs, and RFCs. See [docs/linear-operating-model.md](./docs/linear-operating-model.md).
 
-## Bounty flow
+## Funded scoped work
 
-The guild operates on a bounty model. End to end:
+Some guild work is volunteer open-source contribution. Paid work is grant-dependent or sponsor-dependent and must be clearly scoped before implementation starts.
 
-1. **Find a bounty** in the guild workspace at `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*.
-2. **Submit an application** with a timeline and technical context. Include relevant prior work, expected scope, and any open questions.
-3. **Receive a development stipend** on acceptance to begin work.
-4. **Check in weekly** — short 15-minute updates to report progress and surface blockers. Stay aligned with the guild's coding standards and security practices.
-5. **Submit your work** — open a PR on the relevant repo, link to the bounty, and request review (see below).
-6. **Final approval and payout** — once approved, the remainder is paid via Optimism within 2 business days.
+For funded scoped work:
 
-Detailed walkthrough: [routines/bounty-intake.md](./routines/bounty-intake.md).
+1. **Confirm the scope** with a maintainer or steward, including deliverables, acceptance criteria, review path, and expected timeline.
+2. **Confirm the funding source** before starting. Funding may come from an active grant, sponsor commitment, or maintainer-approved budget.
+3. **Track the scope in Linear** when asked, so ownership, status, funding context, and acceptance criteria are visible to maintainers.
+4. **Open a GitHub execution issue** only when public implementation or review work needs a repo-local reference.
+5. **Check in regularly** while work is active, especially if timing, risk, or scope changes.
+6. **Submit your work** through the relevant project repo and include the agreed validation.
 
 ## Development guidelines
 
@@ -50,9 +51,9 @@ These apply across all guild projects. Project-specific `AGENTS.md` / `CLAUDE.md
 ## Submitting your work
 
 1. **Branch naming** — `type/short-description` (e.g. `feature/hats-v2`, `bug/admin-fix`). Match the project's existing convention.
-2. **Pull requests** — use the project's PR template; link to the bounty issue; describe what changed and why; include a test plan.
+2. **Pull requests** — use the project's PR template; link to the relevant issue, plan, or funded-work scope; describe what changed and why; include a test plan.
 3. **CI must pass** — formatting, linting, tests, and build checks must be green before requesting review.
-4. **One bounty, one PR** where reasonable — long-running work can be split, but coordinate with the maintainer first.
+4. **One approved scope, one PR** where reasonable — long-running work can be split, but coordinate with the maintainer first.
 5. **For design work** — submit via Figma or the project's design tool, link from the PR description, and notify the project's design lead.
 
 ## Review process
@@ -61,11 +62,11 @@ These apply across all guild projects. Project-specific `AGENTS.md` / `CLAUDE.md
 - **Feedback** — if revisions are needed, you'll get a clear list. Address them and request re-review.
 - **Approval** — once approved and CI is green, the maintainer merges. For high-risk paths (deploy scripts, contracts, security-sensitive code), an additional steward review may be required.
 
-## Payment and completion
+## Funded work completion
 
-- **Approval** — once your work is merged and the bounty is marked complete in the guild workspace, the final payment is queued.
-- **Payment method** — payments are made via [Optimism](https://www.optimism.io/) within 2 business days of final approval.
-- **Total compensation** — your bounty payout combines the initial development stipend and the remainder paid on completion.
+- **Approval** — completion is based on the scoped acceptance criteria and maintainer review.
+- **Payment terms** — funded work terms vary by grant, sponsor, or budget. Confirm payment amount, timing, and method in writing before starting.
+- **No standing paid-work promise** — open issues, roadmap items, and community requests are not automatically funded work.
 
 ## Agentic development
 
@@ -82,8 +83,9 @@ If you're using an AI assistant on guild code, treat it like any other contribut
 
 - [Greenpill Dev Guild on GitHub](https://github.com/greenpill-dev-guild)
 - [Greenpill Network](https://greenpill.network) — the parent network
-- Guild workspace at `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*
 - [Routines](./routines/) — markdown playbooks for guild-wide flows
+- [Linear Operating Model](./docs/linear-operating-model.md)
+- [Partner Interface](./PARTNERS.md)
 - [Governance](./GOVERNANCE.md)
 - [Security Policy](./SECURITY.md)
 

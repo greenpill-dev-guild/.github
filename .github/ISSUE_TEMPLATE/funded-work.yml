@@ -1,6 +1,6 @@
-name: Bounty application (GitHub-side reference)
-description: Reference issue for a guild bounty. Submit the formal application in the guild workspace.
-title: "[bounty]: "
+name: Funded scoped work reference
+description: Reference issue for grant-dependent or sponsor-funded scoped work.
+title: "[funded-work]: "
 type: Task
 body:
   - type: markdown
@@ -8,21 +8,20 @@ body:
       value: |
         ## How to use this
 
-        The **formal bounty application** lives in the guild workspace at `greenpill.app/dev-guild` *(coming soon — currently on Charmverse during migration)*.
+        Funded work is not open-ended by default. It depends on an active grant, sponsor commitment, or steward-approved budget.
 
-        This GitHub issue is the **execution-side reference** for that bounty: it captures scope, links work, and gives reviewers a single place to track progress in the open. Use this template when:
+        Linear is the project-management source of truth for funded scoped work. Use this GitHub issue only as the **public execution-side reference** when repo-local implementation, review, or open discussion needs a GitHub surface.
 
-        - A steward has approved your bounty and asked you to open a tracking issue, or
-        - You want to discuss bounty scope publicly before applying.
+        Use this template when a maintainer or steward has confirmed that a GitHub execution reference is useful for accepted or proposed funded scoped work.
 
-        Read the [Contributing guide](https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md#bounty-flow) and the [bounty intake routine](https://github.com/greenpill-dev-guild/.github/blob/main/routines/bounty-intake.md) before filing.
+        Read the [Contributing guide](https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md#funded-scoped-work) before filing.
 
   - type: input
-    id: workspace_link
+    id: linear_reference
     attributes:
-      label: Workspace bounty link
-      description: Link to the formal bounty entry in the guild workspace.
-      placeholder: https://greenpill.app/dev-guild/bounties/...
+      label: Linear or funding reference
+      description: Link to the Linear issue, grant scope, sponsor approval, or maintainer note.
+      placeholder: https://linear.app/greenpill-dev-guild/...
     validations:
       required: false
 
@@ -30,7 +29,7 @@ body:
     id: project
     attributes:
       label: Project
-      description: Which guild project does this bounty target?
+      description: Which guild project does this funded work target?
       placeholder: green-goods
     validations:
       required: true
@@ -72,7 +71,7 @@ body:
     attributes:
       label: Working agreements
       options:
-        - label: I will participate in weekly 15-minute check-ins for the duration of this bounty.
+        - label: I will participate in regular check-ins for the duration of this scoped work.
           required: true
         - label: All code and dependencies will be open-source.
           required: true

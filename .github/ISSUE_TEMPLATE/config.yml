@@ -3,9 +3,9 @@ contact_links:
   - name: Security vulnerability
     url: mailto:security@greenpill.builders
     about: Report a security vulnerability privately. Do NOT open a public issue.
-  - name: Bounty application (formal)
-    url: https://greenpill.app/dev-guild
-    about: Submit the formal bounty application in the guild workspace (coming soon — currently on Charmverse during migration).
+  - name: Funded scoped work
+    url: https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md#funded-scoped-work
+    about: Funded work is scoped with maintainers and tracked in Linear once accepted.
   - name: Telegram
     url: https://t.me/+n7g-u8wYtwQ2YjVi
     about: Async discussion with the guild.

@@ -1,8 +1,8 @@
 # Weekly Check-in
 
-> The 15-minute weekly cadence that keeps bounty work visible and unblocked.
+> The lightweight cadence that keeps active scoped work visible and unblocked.
 
-**When to use this**: You're on an active bounty, or you're a maintainer/steward running the call.
+**When to use this**: You're on active funded scoped work, volunteer implementation, research, design, or maintainer-led project work.
 
 ## Why we do this
 
@@ -15,11 +15,11 @@ Three things, in order of importance:
 ## Cadence
 
 - **Frequency**: weekly
-- **Duration**: 15 minutes per active bounty (cap the total call length by capping the number of bounties reported on)
+- **Duration**: about 5 minutes per active work item; cap the total call length by limiting what gets discussed live
 - **Format**: synchronous voice (Discord) preferred; async written acceptable when needed
 - **Day/time**: posted in Telegram and on the forum; check the current schedule there
 
-## Format per bounty
+## Format per work item
 
 Each contributor reports for ~5 minutes:
 
@@ -32,8 +32,8 @@ Each contributor reports for ~5 minutes:
 
 Stewards listen for:
 
-- Bounties trending toward late or stuck
-- Cross-bounty conflicts (two contributors touching the same code)
+- Active work trending toward late or stuck
+- Cross-work conflicts (two contributors touching the same code, design, or partner surface)
 - Opportunities to connect contributors who can help each other
 
 ## Async fallback
@@ -56,18 +56,18 @@ Async is acceptable. Disappearing is not.
 
 ## What stewards do after the call
 
-- Update bounty status in the guild workspace
+- Update Linear status, owner, or links when the work is tracked there
 - Ping unblockers (other contributors, external partners) for items raised
-- Flag at-risk bounties for follow-up
+- Flag at-risk work for follow-up
 
 ## Common pitfalls
 
-- **Reporting on inactive bounties** — if you're not making progress, say so explicitly and ask for help or pause it.
+- **Reporting on inactive work** — if you're not making progress, say so explicitly and ask for help or pause it.
 - **Burying blockers** — if you're stuck, lead with the blocker, not the completed work.
 - **Giving the same update three weeks running** — that's a signal something is wrong; raise it.
-- **Skipping multiple weeks without word** — the bounty will be marked at-risk; this can lead to rescission.
+- **Skipping multiple weeks without word** — the work should be marked at-risk or paused in Linear.
 
 ## See also
 
-- [bounty-intake.md](./bounty-intake.md) — full bounty flow
+- [funded-work-intake.md](./funded-work-intake.md) — funded scoped work flow
 - [retro-cadence.md](./retro-cadence.md) — quarterly retros take a longer view

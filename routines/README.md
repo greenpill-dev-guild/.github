@@ -1,17 +1,17 @@
 # Routines
 
-> Markdown playbooks for guild-wide flows - bounties, check-ins, onboarding, retros, grants, workshops, meetings, and more.
+> Markdown playbooks for guild-wide flows - funded scoped work, check-ins, onboarding, retros, grants, workshops, meetings, and more.
 
 These are **documentation, not enforcement**. Each playbook describes how the guild has agreed to handle a recurring flow. Anyone in the guild can adopt or adapt them; project teams can override locally as needed.
 
-Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prompts for **scheduled Claude automations**. The playbooks here describe manual guild processes; the Claude routines automate specific slices of daily synthesis, grant scouting, product-development synthesis, and weekly guild-health check-ins.
+Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prompts for **scheduled Claude automations**. The playbooks here describe manual guild processes; the Claude routines automate specific slices of weekly synthesis, grant scouting, and research synthesis.
 
 ## Index
 
 ### Working with the guild
 
-- [bounty-intake.md](./bounty-intake.md) - End-to-end bounty flow from "I see an opportunity" to "I got paid"
-- [weekly-checkin.md](./weekly-checkin.md) - How the 15-minute weekly check-ins work and what they're for
+- [funded-work-intake.md](./funded-work-intake.md) - Scoping grant-dependent, sponsor-funded, or steward-approved paid work
+- [weekly-checkin.md](./weekly-checkin.md) - How lightweight active-work check-ins work and what they're for
 - [newcomer-onboarding.md](./newcomer-onboarding.md) - First-week path for new contributors
 
 ### Operations
@@ -28,10 +28,9 @@ Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prom
 
 ### Automated (Claude routines)
 
-- [claude/guild-daily-synthesis.md](./claude/guild-daily-synthesis.md) - Daily 08:30 Discord, Drive, Calendar, Figma, and Miro pulse with urgent read, public community post, and private appendix
-- [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Weekly Wednesday 19:00 grant scouting across 5 active projects, with Miro context when relevant, tracked centrally in `.github`
-- [claude/guild-product-development-synthesis.md](./claude/guild-product-development-synthesis.md) - Weekly Sunday 18:30 synthesis of product-development notes from calls, tools, integrations, partnerships, and working artifacts
-- [claude/guild-weekly-checkin.md](./claude/guild-weekly-checkin.md) - Sunday 20:00 guild-health pulse with private check-in and community-safe excerpt
+- [claude/guild-weekly-synthesis.md](./claude/guild-weekly-synthesis.md) - Monday 18:00 cross-project synthesis with public community excerpt, private lead-council digest, and Drive memo
+- [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Wednesday 19:00 grant scouting with Linear `funding:*` saved-view lifecycle, Discord funding summary, and Drive memo
+- [claude/research-synthesis.md](./claude/research-synthesis.md) - Friday 17:00 research synthesis with Discord digest, accepted Research team Issues, and Drive memo
 
 See [claude/README.md](./claude/README.md) for environment setup, schedule overview, and the manual-skill overlap policy.
 
@@ -45,7 +44,7 @@ The live scheduled automations are only the prompts under [`claude/`](./claude/)
 
 - Each playbook is **self-contained** - readable without other context.
 - Each starts with **when to use it** and ends with **common pitfalls**.
-- Playbooks reference the guild workspace target (`greenpill.app/dev-guild`, coming soon — currently on Charmverse during migration) for operational state, and GitHub for execution.
+- Playbooks follow the [Linear operating model](../docs/linear-operating-model.md): Linear owns project management, GitHub owns public execution/RFCs/code review, Drive owns memos and evidence, and Discord/Telegram/calls own discussion.
 - Updates to playbooks follow the [RFC process](../GOVERNANCE.md#rfc-process) for substantive changes; small clarifications can go through normal PR review.
 
 ## Promoting A Project Routine To The Guild

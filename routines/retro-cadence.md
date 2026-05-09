@@ -12,7 +12,7 @@ Retros that don't change behavior are theater. The guild does retros to honestly
 
 | Type | Frequency | Length | Output |
 | --- | --- | --- | --- |
-| **Project retro** | End of each major bounty / milestone | 30–45 min | Project-specific changes |
+| **Project retro** | End of each major funded scope, volunteer push, or milestone | 30–45 min | Project-specific changes |
 | **Quarterly guild retro** | Every 3 months | 60–90 min | Forum post, action items |
 | **Annual review** | Every 12 months | 2 hours | Quarterly overview, steward rotation |
 

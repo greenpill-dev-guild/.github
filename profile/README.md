@@ -35,14 +35,13 @@ Notable earlier artifacts — public, open-source, and worth referencing:
 
 ## How we work
 
-Contribution flows through our **bounty model**:
+Contribution flows through scoped project work. Some work is volunteer open-source contribution; paid work depends on active grants, sponsors, or steward-approved budgets.
 
-1. **Find** a bounty in the guild workspace at `greenpill.app/dev-guild` (coming soon — currently on Charmverse during migration).
-2. **Apply** with a timeline and technical context.
-3. **Stipend** on acceptance to begin work.
-4. **Check in** weekly (15 minutes) to report progress.
-5. **Submit** a PR on GitHub linked to the relevant issue.
-6. **Review and payout** — reviewed for quality, scope, and tests; paid via Optimism within 2 business days of approval.
+1. **Start** with a project issue, proposal, or maintainer-scoped work item.
+2. **Confirm** deliverables, acceptance criteria, and review path before implementation.
+3. **Confirm funding** separately when compensation is part of the work.
+4. **Submit** a PR or design artifact linked to the agreed scope.
+5. **Review** for quality, scope, tests, and project fit.
 
 Our working cadence is a **weekly** public call, **monthly** Twitter/X Spaces and/or forum updates, **quarterly** overviews, and regular workshops on Hypercerts, EAS, and other regen primitives.
 
@@ -52,7 +51,7 @@ Full contributor flow: [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/
 
 **Funded by**: [GitHub Sponsors](https://github.com/sponsors/greenpill-dev-guild) · [Gitcoin](https://explorer.gitcoin.co/) · [Giveth](https://giveth.io/project/greenpill-dev-guild) · [Octant](https://octant.app/) (Epoch 5 grantee).
 
-**We fund**: regenerative projects across gaming and public goods through Grant Ships rounds, Gitcoin community rounds (including the GreenPill x Octant round), and direct guild bounties.
+**We fund**: regenerative projects across gaming and public goods through Grant Ships rounds, Gitcoin community rounds (including the GreenPill x Octant round), and clearly scoped grant-dependent work.
 
 ---
 
@@ -61,13 +60,15 @@ Full contributor flow: [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/
 | You are... | Start here |
 | --- | --- |
 | A **developer or designer** wanting to ship regen tools | Join [Telegram](https://t.me/+n7g-u8wYtwQ2YjVi) · [Discord](https://discord.gg/ZJjft2EKz7) · read [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/.github/blob/main/CONTRIBUTING.md) |
-| A **partner** building regen infrastructure | Email `contact@greenpill.builders` |
+| A **partner** building regen infrastructure | Read [PARTNERS.md](https://github.com/greenpill-dev-guild/.github/blob/main/PARTNERS.md) · email `contact@greenpill.builders` |
 | A **funder or sponsor** | See our [funding profiles](https://github.com/greenpill-dev-guild/.github/blob/main/FUNDING.yml) |
 | A **chapter or community** wanting tools | Open an issue on the relevant project repo |
 
 ## Governance and contact
 
 Guild operations are stewarded by a **stewardship team** that handles Code of Conduct enforcement, governance, and treasury. See [GOVERNANCE.md](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md).
+
+Project management runs through Linear; GitHub remains the public surface for code, issues, pull requests, and RFCs. See the [Linear operating model](https://github.com/greenpill-dev-guild/.github/blob/main/docs/linear-operating-model.md).
 
 | Channel | Email |
 | --- | --- |

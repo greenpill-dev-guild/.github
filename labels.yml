@@ -117,23 +117,6 @@
   color: 'C5DEF5'
   description: Issue raised by the gg-client-polish audit
 
-# ─── Routine: grant — lifecycle (guild-grant-scout) ─────────────────────────
-# One issue per program; label transitions as the opportunity progresses.
-# Awarded/rejected final states live on the Project board, not as labels.
-
-- name: grant
-  color: 'd93f0b'
-  description: Grant opportunity or application
-- name: grant:prospect
-  color: 'd93f0b'
-  description: Grant opportunity identified, not yet acted on
-- name: grant:drafting
-  color: 'd93f0b'
-  description: Grant proposal being drafted (see Drive link in body)
-- name: grant:submitted
-  color: 'd93f0b'
-  description: Grant proposal submitted, awaiting response
-
 # ─── Agent assignment ────────────────────────────────────────────────────────
 # Applied when an auto-implementer routine starts work on an issue. Removes
 # the issue from future dispatch pools; remove manually to re-dispatch.

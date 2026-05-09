@@ -12,7 +12,9 @@ This file gives Claude Code repo-specific guidance for `greenpill-dev-guild/.git
 
 ```bash
 rg -n "app\\.charmverse\\.io|greenpill\\.network/dev-guild|FOMO|virality|leaderboards|streaks|AI-first" .
-rg -n "greenpill\\.app/dev-guild" .
+# Also run a stale-term search for the former dev-guild PM URL,
+# retired funded-work file names, old GitHub grant lifecycle labels,
+# and retired Claude routine filenames.
 python3 - <<'PY'
 from pathlib import Path
 import re
@@ -67,7 +69,7 @@ This repo is documentation-first. Top-level community-health files and `.github/
 ## Patterns to follow
 
 - Use absolute GitHub URLs in `profile/README.md` for links back into this repo.
-- Use `greenpill.app/dev-guild` with the migration qualifier in human-facing copy.
+- Name Linear as the project-management source of truth; use GitHub for public execution/RFCs/code review, Drive for memos/evidence, and Discord/Telegram/calls for discussion.
 - Use GitHub issue types (`Bug`, `Story`, `Epic`, `Task`) for work classification; avoid labels that duplicate issue type.
 - If a doc tells someone to "open" an issue or RFC, link to the issue-creation flow, not just the source template file.
 - When updating a directory's contents, update its index README in the same change.

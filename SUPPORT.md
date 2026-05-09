@@ -10,7 +10,8 @@
 | To report a bug | The project's repo · use the **Bug** issue template |
 | To propose a story or capability | The project's repo · use the **Story** issue template |
 | To report a security vulnerability | **Do not open a public issue** · email `security@greenpill.builders` (see [SECURITY.md](./SECURITY.md)) |
-| To apply for a bounty | The guild workspace at `greenpill.app/dev-guild` (coming soon — currently on Charmverse during migration) |
+| To discuss funded scoped work | Confirm scope and funding with a maintainer or steward; accepted funded work is tracked in Linear |
+| To discuss a partnership | Read [PARTNERS.md](./PARTNERS.md), then email `contact@greenpill.builders` |
 | To propose a guild-wide change (CI, vocabulary, governance) | Open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) on this `.github` repo |
 | To reach a steward | Email `steward@greenpill.builders` |
 | General questions | Email `contact@greenpill.builders` |
@@ -29,7 +30,7 @@ We are a small, mostly volunteer guild. Reasonable expectations:
 - **Bug reports** — triaged within a week; severity governs response time
 - **Story proposals** — discussed at the next applicable working session
 - **Security disclosures** — acknowledged within **3 business days** (see [SECURITY.md](./SECURITY.md))
-- **Bounty applications** — reviewed at the weekly call cadence
+- **Funded scoped work proposals** — reviewed when there is an active grant, sponsor commitment, or steward-approved budget
 
 ## Per-project support
 
@@ -37,4 +38,4 @@ Each project repo carries its own `README.md` and may have its own `SUPPORT.md` 
 
 ## Commercial support
 
-The guild does not offer commercial support contracts. For partnership inquiries that would benefit from a more formal arrangement, email `contact@greenpill.builders`.
+The guild does not offer general commercial support contracts. For partnership inquiries that would benefit from a formal collaboration, read [PARTNERS.md](./PARTNERS.md) and email `contact@greenpill.builders`.

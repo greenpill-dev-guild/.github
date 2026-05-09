@@ -22,7 +22,7 @@ body:
     attributes:
       label: Problem
       description: What user or contributor problem does this solve? Why does it matter?
-      placeholder: Stewards cannot easily see which gardens have outstanding bounties without manually cross-referencing the workspace.
+      placeholder: Stewards cannot easily see which gardens have active funded work without checking Linear.
     validations:
       required: true
 
@@ -55,7 +55,7 @@ body:
     attributes:
       label: Suggested priority
       options:
-        - now (next bounty cycle)
+        - now (next funded-work cycle)
         - next (within current quarter)
         - later (parked for prioritization)
     validations:

@@ -9,7 +9,7 @@ The guild is one of several skill-specific Guilds under the [Greenpill Network](
 A small, accountable group responsible for:
 
 - **Code of Conduct enforcement** — investigating reports, deciding consequences (see [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md))
-- **Treasury and bounty approval** — sign-off on stipend releases and final payouts
+- **Treasury and funded-work approval** — sign-off on scoped budgets, payment terms, and completion
 - **Org access** — granting and revoking GitHub org membership, repo access, and elevated roles
 - **Strategic direction** — quarterly overview decisions, partnership commitments, grant applications
 - **Conflict resolution** — mediating disputes between contributors or maintainers
@@ -23,7 +23,7 @@ The guild operates with the following recognized roles (sourced from our Guild.x
 - **Stewards** · core governance, treasury, partnerships
 - **Admins** · org-level GitHub administration, security, infrastructure
 - **Engineering / Product / Community / Growth Leads** · domain leadership for active workstreams
-- **Contributors** · bounty workers and ongoing project contributors (Brand, Social, Community, Engineering)
+- **Contributors** · funded scoped workers, volunteer contributors, and ongoing project contributors (Brand, Social, Community, Engineering)
 - **Treasury Manager** and **Work Capital Manager** · financial operations
 - **Partners** · external organizations and individuals with formal collaboration agreements
 
@@ -37,7 +37,7 @@ Decisions are made at the lowest reasonable scope:
 | --- | --- | --- |
 | **Project-level technical** (e.g. green-goods architecture) | Project maintainers | PR review, repo CODEOWNERS |
 | **Cross-project standards** (e.g. shared CI, this `.github` repo) | Engineering Lead + Stewards | RFC + lazy consensus on the forum |
-| **Treasury and bounty payouts** | Stewards | Multi-sig sign-off |
+| **Treasury and funded-work payouts** | Stewards | Multi-sig sign-off |
 | **Org membership and access** | Admins + Stewards | Steward sign-off required |
 | **Code of Conduct cases** | Stewardship team | Confidential, see CoC |
 | **Partnerships and external commitments** | Stewards | Public announcement after decision |

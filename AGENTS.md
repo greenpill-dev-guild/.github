@@ -9,8 +9,8 @@ This repository is the org-level `.github` defaults repo for `greenpill-dev-guil
 
 ## Repo invariants
 
-- Every human-facing reference to the guild workspace uses `greenpill.app/dev-guild` with the qualifier `coming soon — currently on Charmverse during migration`, unless the field is URL-only.
-- Do not conflate the workspace migration with the org's `charmverse` fork.
+- Linear is the project-management source of truth. GitHub owns public execution/RFCs/code review, Drive owns memos and evidence, and Discord/Telegram/calls own discussion.
+- Do not reintroduce the former dev-guild PM URL or old migration language for project-management state.
 - Bun is the recommended default for new JavaScript repos, but inherited guidance must stay stack-neutral for existing repos.
 - Use GitHub issue types (`Bug`, `Story`, `Epic`, `Task`) for work classification; labels are for cross-cutting dimensions, sources, routines, and automation state.
 - Do not introduce guild-wide "Season" framing.
@@ -31,7 +31,9 @@ Use the lightest honest checks that prove the docs still hold together:
 
 ```bash
 rg -n "app\\.charmverse\\.io|greenpill\\.network/dev-guild|FOMO|virality|leaderboards|streaks|AI-first" .
-rg -n "greenpill\\.app/dev-guild" .
+# Also run a stale-term search for the former dev-guild PM URL,
+# retired funded-work file names, old GitHub grant lifecycle labels,
+# and retired Claude routine filenames.
 python3 - <<'PY'
 from pathlib import Path
 import re
