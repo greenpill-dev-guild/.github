@@ -27,6 +27,7 @@ connectors:
   - canva
   - linear
   - posthog
+  - vercel
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # Drive + Discord only, no Git writes
 status: active
@@ -119,6 +120,19 @@ Include only files that match ONE of:
 
 Pull design implications (handoff status, prototype review needs, design system changes) — not design critique.
 
+**Vercel** (deployment activity per project):
+
+For each guild project deployed on Vercel (`client`, `admin`, `network-website`, plus any others as they're added), pull last-7-days deploy activity:
+
+- Total deploys to production + preview
+- Deploy outcomes (succeeded / failed / canceled)
+- Notable rollbacks (an aborted prod deploy followed by a redeploy of an earlier SHA, or a manual promotion of an older deploy)
+- Author distribution if more than one person shipped this week
+
+**Vercel reject step**: drop projects outside the active 6 (`green-goods`, `coop`, `pgsp`, `network-website`, `cookie-jar`, `TAS-Hub`). If Vercel returns deploys for personal/WEFA projects, ignore them — same WEFA discipline as Drive.
+
+Use case: surface "green-goods: 5 deploys to develop, 1 prod release, 0 rollbacks" or "network-website: 1 prod deploy with a rollback midweek" in the council digest's per-project bullets. NOT for runtime errors — that's `health-watch` territory.
+
 **Canva** (pitch decks + slides):
 
 Include only designs that match ONE of:
@@ -184,9 +198,9 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 {if any_action_required: "<@${DISCORD_USER_ID_AFO}> "}**Guild Pulse — Week of {YYYY-MM-DD}** (private)
 
 ⚙ **Per-project activity (last 7d)**
-• green-goods: {1-sentence summary combining GitHub + Linear movement; e.g., "3 PRs merged on develop, 5 Linear Issues moved to Done, project status update on Green Goods Seasons & Campaigns flagged X"}
+• green-goods: {1-sentence summary combining GitHub + Linear + Vercel movement; e.g., "3 PRs merged on develop, 5 Linear Issues moved to Done, 4 prod deploys (0 rollbacks), project status update on Green Goods Seasons & Campaigns flagged X"}
 • coop: {same shape}
-• pgsp: {same shape — Linear `protocol:pgsp` plus GitHub if any}
+• pgsp: {same shape — Linear `protocol:pgsp` plus GitHub if any; PGSP doesn't currently have a Vercel deploy}
 • network-website: {same shape}
 • cookie-jar: {same shape}
 • TAS-Hub: {same shape}

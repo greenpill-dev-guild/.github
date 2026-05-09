@@ -79,7 +79,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 
 | Routine | Connectors | Why each |
 |---|---|---|
-| `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog | Linear = source of truth for cross-project work · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) |
+| `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog, Vercel | Linear = source of truth for cross-project work · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) · Vercel = deploy activity counts in per-project bullets (color, never primary) |
 | `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `Funding Pipeline` lifecycle · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
 | `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
 
