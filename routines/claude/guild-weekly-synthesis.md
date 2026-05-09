@@ -47,13 +47,37 @@ This routine reads ONLY from:
 - `Greenpill9ja/TAS-Hub`
 - `greenpill-dev-guild/.github`
 
-**Drive folders** (allow-list — content keyword filtering alone is too loose):
-- The dev-guild shared folder for cross-project notes.
-- Per-project folders for each of the 5 active repos.
-- The `Lead Council` private folder.
+**Drive** (the connector does NOT expose folder-path filtering — it exposes only `title`, `fullText`, `mimeType`, `modifiedTime`. So scope is enforced by the content query plus a hard reject step on every candidate doc):
 
-**Calendar**:
-- The dev-guild shared calendar.
+The Drive query (entry point):
+
+```
+modifiedTime > '<7d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill') and (fullText contains 'Green Goods' or fullText contains 'Coop' or fullText contains 'Cookie Jar' or fullText contains 'TAS-Hub' or fullText contains 'PGSP' or fullText contains 'Public Goods Staking' or fullText contains 'Dev Guild' or fullText contains 'Greenpill Network' or fullText contains 'gardener' or fullText contains 'operator' or fullText contains 'guild lead' or fullText contains 'lead council')
+```
+
+Plus: any Drive doc directly linked from a `#community` or `#lead-council` message in the 7-day window — resolve link to file ID and read directly. Channel-linked docs bypass the title filter but still go through the reject step below.
+
+**Drive reject step (apply to every candidate, including channel-linked docs):**
+
+Drop the doc when ANY of these is true:
+
+- `'WEFA'` or `'wefa.world'` appears in the title — Afo's separate project, never in dev-guild scope
+- `'WEFA'` appears 5+ times in the body but no guild project name appears at all — WEFA-dominated doc that incidentally mentions the guild
+- The doc is a personal-calendar-derived artifact (e.g., `'Sync'` or `'1:1'` in title with no guild project, person, or call name in the body)
+- The doc's primary topic is grants / funding / treasury / payments / contracts / agreements (owned by `guild-grant-scout` or the private digest's appendix)
+
+A doc that mentions WEFA in passing while discussing a guild project is fine. A doc whose primary topic IS WEFA, a personal call, or unrelated client work is dropped.
+
+**Calendar** (the dev-guild shared calendar plus Afo's calendar — but Afo's calendar contains personal projects and WEFA work that must NOT leak):
+
+Include an event ONLY when its title or description matches one of:
+
+- a guild project name (`Green Goods`, `Coop`, `Cookie Jar`, `TAS-Hub`, `PGSP`, `Public Goods Staking`, `GreenWill`)
+- a known guild call (`Dev Guild Sync`, `Lead Council`, `Working Capital`, `Treasury`, the literal word `guild`)
+- a Greenpill Network ecosystem moment (governance call, retro, public workshop, ecosystem AMA)
+- a tracked grant program deadline, demo day, pitch event, or submission reminder
+
+Drop personal calendar events, WEFA-tagged events, sales/client meetings, and other non-guild meetings even when they fall in the 7-day window.
 
 It does NOT read from:
 
@@ -130,9 +154,11 @@ A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild shared
 
 ### Phase 1: Read the allow-list
 
-For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For each allow-listed Drive folder, list documents modified in the last 7 days. For the calendar, query the next 7 days of events.
+For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query from the Scope contract and apply the reject step to every candidate doc (including channel-linked docs). For Calendar, query the next 7 days of events and apply the calendar reject heuristics from the Scope contract.
 
 For every input, immediately check the source against the allow-list. Reject + log + drop if it fails. Carry only allow-listed inputs forward.
+
+**The reject step is mandatory, not advisory.** WEFA / personal-calendar / non-guild content has slipped into prior synthesis runs even with the allow-list in place — the content rejects are the actual scope enforcement, not the title filter.
 
 ### Phase 2: Synthesize per-repo activity
 

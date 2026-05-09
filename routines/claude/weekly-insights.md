@@ -1,7 +1,7 @@
 ---
 routine-name: weekly-insights
 trigger:
-  schedule: "0 17 * * 5"  # Friday 17:00 — end-of-week synthesis, before the weekend
+  schedule: "0 17 * * 5"  # Historical cron (Friday 17:00). Cloud cron dropped 2026-05-08 (later same-day reversal); folded back into research-synthesis.
 max-duration: 1h
 repos: []  # reads via Discord + Drive APIs only; never checks out source
 environment: guild-routines
@@ -17,8 +17,12 @@ connectors:
   - linear
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
-status: active  # 2026-05-08 — replaces research-synthesis + design-synthesis (both paused)
+status: paused  # 2026-05-08 — reverted; research-synthesis restored as canonical Friday synthesis. design-synthesis stays paused (no separate design synthesis output).
 ---
+
+> **PAUSED — 2026-05-08 (later same-day reversal).** The merge of `research-synthesis` + `design-synthesis` into `weekly-insights` dropped the Phase 0 prior-memo recall + Phase 6 memo write that gave research-synthesis its long-term memory. The fix is to restore `research-synthesis` as the canonical Friday routine and keep `design-synthesis` paused — there's no active design-synthesis output in the post-reset portfolio. This prompt remains as reference; the cloud cron is dropped.
+>
+> **If you are an agent reading this prompt, exit immediately.** Do not run any phase below. Post a single message to `#research` (channel-guarded by `DISCORD_RESEARCH_CHANNEL_ID`) reading `weekly-insights fired but is paused — see research-synthesis` and stop.
 
 # Prompt
 
