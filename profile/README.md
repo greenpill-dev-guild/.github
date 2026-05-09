@@ -1,6 +1,6 @@
 # Greenpill Dev Guild
 
-> A community of regen builders shipping public goods for impact measurement, capital allocation, and community coordination.
+> A community of regen builders shipping public goods for impact measurement, capital allocation, capital formation and community coordination.
 
 We are one of several skill-specific Guilds under the [Greenpill Network](https://greenpill.network) — a decentralized community of regional Chapters and skill-specific Guilds working to turn degens into regens. Since October 2023 we've been building tools, running grant rounds, and supporting Greenpill Chapters across the world.
 
