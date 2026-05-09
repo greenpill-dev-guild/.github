@@ -2,19 +2,19 @@
 
 Source-of-truth prompts for scheduled Claude automations operating at the guild level. Each routine's active configuration lives on [claude.ai/code/routines](https://claude.ai/code/routines) under Afo's personal Anthropic Pro account; the files here exist so the setup is rebuildable if routines are lost or the research-preview API surface changes.
 
-Distinct from `../*.md` markdown playbooks for manual guild processes like bounty intake, RFCs, retros, grants, and meeting notes. Playbooks are reference docs; routines are executable prompts.
+Distinct from `../*.md` markdown playbooks for manual guild processes like funded work intake, RFCs, retros, grants, and meeting notes. Playbooks are reference docs; routines are executable prompts.
 
 ## Portfolio
 
 | File | Status | Cadence | Channel | Issue surface |
 |---|---|---|---|---|
 | `guild-weekly-synthesis.md` | active | Mon 18:00 weekly | `#community` excerpt + `#lead-council` private digest | Drive memo (no tracker) |
-| `guild-grant-scout.md` | active | Wed 19:00 weekly | `#funding` + Drive memo | Linear `Funding Pipeline` project (`funding:*` lifecycle) |
-| `research-synthesis.md` | active | Fri 17:00 weekly | `#research` + Drive memo | Linear `Research` team (unprojected, `work:research`) |
+| `guild-grant-scout.md` | active | Wed 19:00 weekly | `#funding` + Drive memo | Linear Product (unprojected staging, `funding:*` lifecycle); accepted awards route into a dedicated `Grant Proposal / Award Stewardship` project |
+| `research-synthesis.md` | active | Fri 17:00 weekly | `#research` + Drive memo | Linear Research team (unprojected, `activity:research`) |
 
 Three scheduled runs per week. Monday opens with the cross-project synthesis that primes the week. Wednesday handles grants midweek. Friday closes the week with research synthesis. No daily-cadence routines.
 
-Anything else previously in this folder (`guild-daily-synthesis`, `weekly-insights`, `design-synthesis`, `guild-product-development-synthesis`, `guild-weekly-checkin`, `routine-issue-cleanup`, `routine-self-audit`) has been removed — folded into the surviving routines or cut as noise.
+Anything else previously in this folder has been removed — folded into the surviving routines or cut as noise.
 
 The Green Goods routines portfolio (4 GG-scoped routines, separate from this guild set) lives at [`greenpill-dev-guild/green-goods/docs/routines/`](https://github.com/greenpill-dev-guild/green-goods/tree/main/docs/routines).
 
@@ -73,15 +73,15 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_RESEARCH_CHANNEL_ID`
 - `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
-- `LINEAR_API_KEY` — used by `guild-grant-scout` (Funding Pipeline) and `research-synthesis` (Research team)
+- `LINEAR_API_KEY` — used by `guild-grant-scout` (`funding:*` lifecycle saved views) and `research-synthesis` (Research team)
 
 **Connector matrix:**
 
 | Routine | Connectors | Why each |
 |---|---|---|
-| `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog, Vercel | Linear = source of truth for cross-project work · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) · Vercel = deploy activity counts in per-project bullets (color, never primary) |
-| `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `Funding Pipeline` lifecycle · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
-| `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
+| `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog, Vercel | Linear = source of truth for cross-project work (initiatives, projects, issues, customer needs) · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) · Vercel = deploy activity counts in per-project bullets (color, never primary) |
+| `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `funding:*` lifecycle saved views; accepted awards graduate to a bounded award/delivery project · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
+| `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal (Linear Research team, unprojected) · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
 
 Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
 
@@ -93,14 +93,38 @@ Keep this environment separate from Green Goods product environments so a misbeh
 
 The lean portfolio is anchored on three surfaces:
 
-- **Linear** is the source of truth for actionable tracking. `guild-grant-scout` writes the `Funding Pipeline` project lifecycle. `research-synthesis` writes the `Research` team's actionable insights. `guild-weekly-synthesis` writes nothing to Linear — cross-project pulse is observation, not tracker work.
+- **Linear** is the source of truth for actionable tracking — issues, customer signal, roadmap projects, accepted research, and funding lifecycle saved views. `guild-grant-scout` writes Product Issues labeled with `funding:*` and routes won awards into bounded award/delivery projects. `research-synthesis` writes the Research team's accepted research insights, unprojected by default. `guild-weekly-synthesis` writes nothing to Linear — cross-project pulse is observation, not tracker work.
 - **Drive memos** are memory substrate, not output destination. Each synthesis routine writes a memo at run end so the next run's Phase 0 prior-recall can pick up open threads. The user is not expected to read Drive regularly; the routines do.
 - **Discord** is the human-readable pulse channel — a single weekly read per channel, scoped to that channel's audience.
 
+GitHub is not a durable backlog — it stays in scope only for PRs and code review. Routines never file GitHub Issues.
+
+## Linear taxonomy
+
+All Linear writes use the canonical label scheme:
+
+- `protocol:*` — protocol/project (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:cookie-jar`, `protocol:tas-hub`)
+- `package:*` — code package surface (`package:client`, `package:admin`, `package:shared`, `package:contracts`, `package:indexer`, `package:agent`)
+- `activity:*` — activity type (`activity:research`, `activity:qa`, `activity:maintenance`)
+- `task:*` — user-task semantics (`task:funding-pathway`, `task:evidence`, `task:access-participation`)
+- `funding:*` — funding lifecycle (`funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`)
+- `source:*` — provenance of the originating signal (`source:discord`, `source:telegram`, `source:drive`)
+- `agent:*` — routine/authored provenance (`agent:claude`, `agent:codex`)
+
+Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, `source:linear`) are retired. Do not reintroduce them. Routines apply `agent:claude` to mark authored provenance — note this is provenance, not human priority.
+
+### Project routing
+
+- **Customer Needs** = raw signal. They live unprojected and carry `source:*` for provenance.
+- **Linear Issues** = accepted product work or accepted research. Issues are unprojected by default and graduate into a bounded active project only when the match is clear.
+- **Do not route new work into completed/staging projects** like `Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, or `Story Board`. These remain as historical containers; new work goes unprojected on the relevant team (Product or Research) until a bounded active project owns it.
+- **Accepted grants** create or route into a bounded award/delivery project — never stay as loose pipeline noise.
+- Green Goods `.plans/` remains the execution truth for agent implementation details; Linear is the upstream backlog, `.plans/` is the per-feature plan.
+
 ## Conventions
 
-- Synthesis routines do not open PRs. `research-synthesis` files Linear Issues for actionable insights (Research team, unprojected).
-- Grant lifecycle Issues live in the Linear `Funding Pipeline` project (Product team, Sustainability & Monetization initiative). They carry `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award` plus `automation:routine` + `agent:claude`.
+- Synthesis routines do not open PRs. `research-synthesis` files Linear Issues in the Research team for accepted research insights (unprojected).
+- Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, `task:funding-pathway`, the relevant `protocol:*`, and `agent:claude`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
 - `guild-weekly-synthesis` creates no GitHub or Linear issues. It produces a Drive memo + two Discord posts.
 
 ## Rebuilding a routine
