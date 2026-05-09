@@ -77,11 +77,13 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 
 **Connector matrix:**
 
-| Routine | Connectors |
-|---|---|
-| `guild-weekly-synthesis` | Google Drive, Google Calendar |
-| `guild-grant-scout` | Google Drive, Google Calendar, Miro, Linear |
-| `research-synthesis` | Google Drive, Linear |
+| Routine | Connectors | Why each |
+|---|---|---|
+| `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog | Linear = source of truth for cross-project work · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) |
+| `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `Funding Pipeline` lifecycle · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
+| `research-synthesis` | Google Drive, Linear | Linear = Research team Issue surface · Drive = research notes + memo continuity |
+
+Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
 
 **Network access:** full (Discord API, GitHub API, Drive, Calendar, external web research)
 

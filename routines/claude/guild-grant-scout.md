@@ -11,17 +11,21 @@ repos:
   - greenpill-dev-guild/cookie-jar
   - Greenpill9ja/TAS-Hub
 environment: guild-routines
-network-access: full  # Discord API + web search + Drive + Calendar + Miro + Linear
+network-access: full  # Discord API + web search + Drive + Calendar + Miro + Canva + Linear + PostHog
 env-vars:
   - DISCORD_BOT_TOKEN
   - DISCORD_FUNDING_CHANNEL_ID
   - DISCORD_USER_ID_AFO
   - LINEAR_API_KEY
+  - POSTHOG_PROJECT_API_KEY
+  - POSTHOG_HOST
 connectors:
   - google-drive
   - google-calendar
   - miro
+  - canva
   - linear
+  - posthog
 model: claude-opus-4-7[1m]
 allow-unrestricted-branch-pushes: false  # Drive + Linear + Discord, no PRs
 ---
@@ -34,9 +38,11 @@ This is the canonical grant-scouting routine for Green Goods, Coop, network-webs
 
 ## Setup
 
-- `DISCORD_BOT_TOKEN`, `DISCORD_FUNDING_CHANNEL_ID`, `DISCORD_USER_ID_AFO`, and `LINEAR_API_KEY` are in the environment.
-- Google Drive, Google Calendar, Miro, and Linear connectors are available.
+- `DISCORD_BOT_TOKEN`, `DISCORD_FUNDING_CHANNEL_ID`, `DISCORD_USER_ID_AFO`, `LINEAR_API_KEY`, `POSTHOG_PROJECT_API_KEY`, and `POSTHOG_HOST` are in the environment.
+- Connectors available: Google Drive, Google Calendar, Miro, **Canva**, Linear, **PostHog**. (Gmail is intentionally NOT wired — personal-inbox pollution risk.)
 - **Linear is the canonical surface for grant lifecycle**, replacing the old `greenpill-dev-guild/.github` issue tracker. Pipeline project: **Funding Pipeline** (Product team, `Sustainability & Monetization` initiative). Resolve project/team/label IDs by name at the start of every run.
+- **Canva** is read-only enrichment. Use to find existing pitch decks / slides that can inform new proposals or be referenced for visual narrative continuity. Reject step: drop personal-folder Canva content, drop designs whose title contains `'WEFA'` or `'wefa.world'`.
+- **PostHog** is a subtle, secondary evidence signal — never the primary discovery surface. Use for grant evidence enrichment in Phase 2 (fit assessment) and Phase 3 (proposal drafting) only. Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere.
 - Active project repos cloned via `sources` for read-only context: `green-goods`, `coop`, `network-website`, `cookie-jar`, `TAS-Hub`, `.github`.
 - Do not read `.env`. Do not run `bun install`, builds, or tests. Do not modify source files in any project repo or edit Miro boards.
 
@@ -109,7 +115,19 @@ Check the next 30 days for grant deadlines, review meetings, pitch events, demo 
 
 Use Miro when it can improve fit assessment, proposal framing, or evidence gathering. Prioritize boards linked from Discord/Drive/Calendar that are tied to grants, roadmaps, workshops, retros, user journeys, or impact mapping. Do not modify boards.
 
-### 1.5 — Active web discovery (the proactive surface)
+### 1.5 — Canva (existing pitch decks + slides)
+
+Search Canva for designs modified in the last 30 days that could inform new proposals — funder pitch decks, conference talks tied to guild projects, workshop slides, community announcement assets. Use to:
+
+- Avoid duplicating an existing deck (a 2026-Q1 NLnet pitch deck shouldn't get rebuilt from scratch for a 2026-Q2 NLnet round)
+- Reference visual narrative continuity (deck colors, charts, evidence framing) in new proposals
+- Identify decks that need refreshing if the underlying program / data has shifted
+
+**Canva reject step**: drop designs whose title contains `'WEFA'` or `'wefa.world'`, drop personal-folder content, drop scratch/draft files with no guild-project context.
+
+Read-only — never modify Canva designs.
+
+### 1.6 — Active web discovery (the proactive surface)
 
 **This is the substep that earns the routine its keep.** The goal is to find NEW programs and rounds, not check ones you already know about.
 
@@ -148,6 +166,8 @@ Search strategies — run a meaningful subset every week, rotate which strategie
 
 ## Phase 2: Fit Assessment
 
+**Optional PostHog evidence enrichment** (subtle, secondary): when a candidate's fit clearly depends on production-traction signals (Green Goods grants that ask "show user growth" or "show retention"), pull a single headline metric from PostHog using a curated question name from `green-goods/.claude/skills/posthog-questions/SKILL.md`. Privacy mode: public. Use this to inform fit scores and Phase 3 evidence — never paste raw HogQL or private fields into the assessment. If PostHog is unreachable, skip the enrichment and continue with the assessment based on existing evidence.
+
 For each candidate (NEW or pipeline-existing-needing-update), assess against the active projects:
 
 ```markdown
@@ -179,6 +199,11 @@ Proceed to drafting only for opportunities scoring 3 or higher on at least one p
 ## Phase 3: Proposal Drafting
 
 Draft at most one high-quality proposal per run, plus lightweight outlines for any other urgent opportunities.
+
+**Reuse existing assets where they exist:**
+- Reference the matching Canva pitch deck if Phase 1.5 found one — link to it from the draft for visual narrative continuity
+- Pull production metrics from PostHog (privacy-public mode, curated questions only) for the "Impact and metrics" section. Examples: number of active gardens, recent action volume, retention numbers. Cite the question name (e.g., `gardens.engagement-summary`) and the sample timestamp. Never paste raw HogQL or private fields.
+- Pull existing proposal language from prior Drive drafts (NLnet, Octant, OSV) where the new proposal targets a similar program or angle.
 
 Save drafts to Drive:
 
@@ -396,5 +421,7 @@ If the Drive write fails, still consider the run successful (Discord post + Line
 - **Never submit proposals.** Human review owns final submission.
 - **Only claim capabilities that exist in the code today.** Planned work must be labeled as proposed.
 - **Don't share sensitive metrics, unannounced strategy, private counterparties, or budget details in Discord.** Those go to Drive + Linear.
-- **Do not modify source files in any project repo or edit Miro boards.**
+- **Do not modify source files in any project repo or edit Miro boards or Canva designs.** All design-surface reads are read-only.
+- **PostHog is privacy-public mode only.** Never paste replay URLs, session IDs, distinct IDs, wallet addresses, or any private field. Curated question names only — no raw HogQL in the routine reasoning.
+- **Gmail is intentionally NOT wired.** If a future iteration considers Gmail, the personal-inbox pollution + private-information leakage risk needs an explicit scope contract first.
 - **2-hour runtime cap.** At 1h45m, wrap up: save draft progress, update Linear Issues, post the summary, write the memo, and exit.
