@@ -254,7 +254,7 @@ For any high-fit opportunity, create or update one Linear Issue using the canoni
 ### Resolve IDs at run start (never hardcode)
 
 - Team: `Product`
-- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `agent:claude`, `activity:research`, `task:funding-pathway`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:cookie-jar`, `protocol:tas-hub`) by name. Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
+- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `agent:routine`, `activity:research`, `task:funding-pathway`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:tas`) by name. Cookie Jar work routes to `protocol:green-goods` (Cookie Jar project is completed; new vault/crowdfunding/funding-pool work lives under Green Goods seasons). Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
 - Award/delivery projects: resolve any existing bounded award or delivery project by name when transitioning a submission to `funding:active-award` (Phase 4 lifecycle transitions). Do **not** route new prospects into umbrella, staging, or completed projects.
 
 ### Dedupe first
@@ -267,7 +267,7 @@ Title: `Grant: {Program Name}`
 
 Project: leave unprojected unless a bounded award/delivery project already exists and the Issue is `funding:active-award`.
 
-Labels: `funding:prospect`, `activity:research`, `task:funding-pathway`, `agent:claude`, plus the relevant `protocol:*` for primary fit.
+Labels: `funding:prospect`, `activity:research`, `task:funding-pathway`, `agent:routine`, plus the relevant `protocol:*` for primary fit.
 
 Body:
 

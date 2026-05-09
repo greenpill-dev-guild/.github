@@ -103,15 +103,15 @@ GitHub is not a durable backlog — it stays in scope only for PRs and code revi
 
 All Linear writes use the canonical label scheme:
 
-- `protocol:*` — protocol/project (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:cookie-jar`, `protocol:tas-hub`)
-- `package:*` — code package surface (`package:client`, `package:admin`, `package:shared`, `package:contracts`, `package:indexer`, `package:agent`)
-- `activity:*` — activity type (`activity:research`, `activity:qa`, `activity:maintenance`)
-- `task:*` — user-task semantics (`task:funding-pathway`, `task:evidence`, `task:access-participation`)
+- `protocol:*` — protocol/project (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:tas`)
+- `package:*` — code package surface. Green Goods packages: `package:client`, `package:admin`, `package:shared`, `package:contracts`, `package:indexer`, `package:agent`, `package:docs`. Coop packages: `package:app`, `package:api`, `package:extension`. (Each protocol owns its own package set; `protocol:*` partitions the namespace.)
+- `activity:*` — activity type (`activity:research`, `activity:qa`, `activity:maintenance`, `activity:architecture`, `activity:build`, `activity:design`)
+- `task:*` — user-task semantics (`task:funding-pathway`, `task:evidence`, `task:access-participation`, `task:reputation-identity`, `task:data-input`, `task:local-onboarding`, `task:evaluator-review`)
 - `funding:*` — funding lifecycle (`funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`)
-- `source:*` — provenance of the originating signal (`source:discord`, `source:telegram`, `source:drive`)
-- `agent:*` — routine/authored provenance (`agent:claude`, `agent:codex`)
+- `source:*` — provenance of the originating signal (`source:discord`, `source:telegram`, `source:drive`, `source:plans`, `source:github`)
+- `agent:*` — routine/authored provenance. Apply **`agent:routine`** to every routine-authored Issue/Customer Need (canonical for "scheduled routine" output, matches existing Linear convention). Optionally add `agent:claude` or `agent:codex` to identify which agent ran the routine when that distinction matters.
 
-Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, `source:linear`) are retired. Do not reintroduce them. Routines apply `agent:claude` to mark authored provenance — note this is provenance, not human priority.
+Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, `source:linear`) are retired. Do not reintroduce them. Routines apply `agent:routine` to mark authored provenance — note this is provenance, not human priority. Cookie Jar and Story Board are not first-class protocols (Cookie Jar work routes to `protocol:green-goods` per Linear admin; Story Board is retired).
 
 ### Project routing
 
@@ -124,7 +124,7 @@ Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `heal
 ## Conventions
 
 - Synthesis routines do not open PRs. `research-synthesis` files Linear Issues in the Research team for accepted research insights (unprojected).
-- Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, `task:funding-pathway`, the relevant `protocol:*`, and `agent:claude`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
+- Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, `task:funding-pathway`, the relevant `protocol:*`, and `agent:routine`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
 - `guild-weekly-synthesis` creates no GitHub or Linear issues. It produces a Drive memo + two Discord posts.
 
 ## Rebuilding a routine
