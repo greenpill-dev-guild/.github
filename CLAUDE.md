@@ -47,6 +47,13 @@ This repo is documentation-first. Top-level community-health files and `.github/
 3. Keep the guild voice grounded in public goods, transparency, and building in public; avoid hype framing.
 4. When process docs drift, fix the cross-reference at the same time instead of leaving two truths in the repo.
 
+## Supply-chain and agent safety
+
+- Do not install or upgrade npm, Python, or package-manager dependencies unless the user explicitly approves that install in the current task.
+- Prefer existing repo tooling, checked-in lockfiles, and standard library options over adding new packages.
+- Treat `package.json`, lockfiles, package-manager config, `.github/workflows/**`, `AGENTS.md`, `CLAUDE.md`, `.codex/**`, and `.claude/**` as security-sensitive surfaces. Call out any changes to them in final summaries.
+- Keep dependency installs on the checked-in lockfile path and preserve the repo's release-age gate configuration.
+
 ## Criticality matrix
 
 - **`critical`**

@@ -19,6 +19,13 @@ This repository is the org-level `.github` defaults repo for `greenpill-dev-guil
 - Avoid growth-hacking and trend-chasing voice: no FOMO, virality, leaderboards, streaks, or "AI-first" framing.
 - Treat contact emails, disclosure SLAs, payout timing, and governance claims as sensitive public commitments. Do not change them casually.
 
+## Supply-chain and agent safety
+
+- Do not install or upgrade npm, Python, or package-manager dependencies unless the user explicitly approves that install in the current task.
+- Prefer existing repo tooling, checked-in lockfiles, and standard library options over adding new packages.
+- Treat `package.json`, lockfiles, package-manager config, `.github/workflows/**`, `AGENTS.md`, `CLAUDE.md`, `.codex/**`, and `.claude/**` as security-sensitive surfaces. Call out any changes to them in final summaries.
+- Keep dependency installs on the checked-in lockfile path and preserve the repo's release-age gate configuration.
+
 ## Criticality
 
 - **Critical**: `CONTRIBUTING.md`, `GOVERNANCE.md`, `SECURITY.md`, `SUPPORT.md`, `profile/README.md`, `.github/ISSUE_TEMPLATE/*`, `.github/PULL_REQUEST_TEMPLATE.md`

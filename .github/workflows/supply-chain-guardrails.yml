@@ -1,0 +1,74 @@
+name: Supply Chain Guardrails (reusable)
+
+# Reusable read-only guardrail check for dependency release-age gates and
+# high-risk GitHub Actions supply-chain patterns. Consumer repos opt in with a
+# small local workflow that calls this one.
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        description: "Audit mode. ci exits nonzero on critical findings; advisory only reports."
+        required: false
+        type: string
+        default: ci
+      fail-on-warning:
+        description: "If true, warnings also fail the job. Default false."
+        required: false
+        type: boolean
+        default: false
+      working-directory:
+        description: "Path inside the consumer repo to audit."
+        required: false
+        type: string
+        default: "."
+      guardrails-ref:
+        description: "Ref of greenpill-dev-guild/.github to read the audit script from for external callers."
+        required: false
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    name: Supply-chain guardrails
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout consumer repo
+        uses: actions/checkout@v4
+        with:
+          path: consumer
+          fetch-depth: 1
+
+      - name: Checkout guardrail source
+        if: github.repository != 'greenpill-dev-guild/.github'
+        uses: actions/checkout@v4
+        with:
+          repository: greenpill-dev-guild/.github
+          ref: ${{ inputs.guardrails-ref }}
+          path: _guild-defaults
+          fetch-depth: 1
+
+      - name: Resolve audit script
+        id: guardrails
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.repository }}" = "greenpill-dev-guild/.github" ]; then
+            script="$GITHUB_WORKSPACE/consumer/scripts/audit-supply-chain-guardrails.mjs"
+          else
+            script="$GITHUB_WORKSPACE/_guild-defaults/scripts/audit-supply-chain-guardrails.mjs"
+          fi
+          if [ ! -f "$script" ]; then
+            echo "::error::Supply-chain guardrail script not found: $script"
+            exit 1
+          fi
+          echo "script=$script" >> "$GITHUB_OUTPUT"
+
+      - name: Run supply-chain guardrails audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          node "${{ steps.guardrails.outputs.script }}"             --mode="${{ inputs.mode }}"             --fail-on-warning="${{ inputs.fail-on-warning }}"             "$GITHUB_WORKSPACE/consumer/${{ inputs.working-directory }}"
