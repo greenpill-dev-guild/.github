@@ -22,6 +22,15 @@ If a discussion creates real work, move the commitment into Linear or GitHub dep
 
 Raw signal should start as Customer Needs or discussion. Linear Issues are for accepted work with a clear next step.
 
+Use [Linear templates](./linear-templates.md) as the canonical body reference for connector-created Linear records. Linear UI templates can still be used manually when available, but connector-based agents should follow the documented template names and body shapes.
+
+## Routing model
+
+- Customer Needs are raw signal. They preserve customer, partner, funder, garden, cohort, squad, or internal-ops needs before the guild commits to delivery or research.
+- Stories and issues are accepted units of work with a clear next action.
+- Projects are bounded containers made from multiple related stories, issues, or research tasks.
+- Initiatives are outcome arcs that group projects around a durable strategic outcome.
+
 ## Linear labels
 
 Use these label families for Linear Issues:
@@ -33,6 +42,8 @@ Use these label families for Linear Issues:
 - `funding:*` — grant/funding lifecycle: `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`.
 - `source:*` — originating signal, such as `source:github`, `source:discord`, `source:telegram`, `source:drive`, or `source:plans`.
 - `agent:*` — authored or maintained by a routine or agent, such as `agent:claude`, `agent:codex`, or `agent:copilot`.
+
+Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `task:*`, `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
 
 Do not recreate retired GitHub-era label families in Linear. In particular, avoid `area:*`, `work:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, and `source:linear`.
 
