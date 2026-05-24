@@ -56,6 +56,8 @@ This routine reads ONLY from:
 - `Greenpill9ja/TAS-Hub`
 - `greenpill-dev-guild/.github`
 
+**Active shipping branch (mandatory):** Resolve each repo's active branch before counting commits — it is NOT always the GitHub default. `green-goods` ships on `main` (default branch is `develop`); `cookie-jar` ships on `main` (default branch is `dev`); `coop` / `network-website` / `TAS-Hub` ship on `main`. A default-branch-only commit query reported this week's 15 `green-goods` and 4 `cookie-jar` commits as `0`. Always cross-check commit counts against Vercel deploy SHAs / branch refs (which reveal real shipping activity) so a repo that shipped to a non-default branch is never reported `quiet`.
+
 **Linear** (the source of truth for active project work — issues, customer signal, roadmap projects, accepted research):
 - Teams: `Product` and `Research` only
 - Initiatives — read every initiative for status, scope, and momentum context (Linear initiatives are the planning truth)
@@ -78,6 +80,8 @@ Drive query (entry point):
 ```
 modifiedTime > '<7d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill') and (fullText contains 'Green Goods' or fullText contains 'Coop' or fullText contains 'Cookie Jar' or fullText contains 'TAS-Hub' or fullText contains 'PGSP' or fullText contains 'Public Goods Staking' or fullText contains 'Dev Guild' or fullText contains 'Greenpill Network' or fullText contains 'gardener' or fullText contains 'operator' or fullText contains 'guild lead' or fullText contains 'lead council')
 ```
+
+**Run this as STAGED queries, not one compound call** — the connector returns `Internal error encountered` on the full title×fullText boolean above. Issue the parts separately and union the results: (a) `modifiedTime > '<7d-ago>' and title contains 'Notes by Gemini'`; (b) `modifiedTime > '<7d-ago>' and (title contains 'Dev Guild' or title contains 'Greenpill' or title contains 'Lead Sync' or title contains 'Steward' or title contains 'Octant')`. Apply the reject step to the union.
 
 Plus: any Drive doc directly linked from a `#community` or `#lead-council` message in the 7-day window — resolve link to file ID and read directly. Channel-linked docs bypass the title filter but still go through the reject step below.
 
@@ -111,6 +115,8 @@ Include only boards that match ONE of:
 
 Treat Miro as planning context, not as a source of decisions unless the board or related notes clearly mark a decision as settled. Do not modify boards.
 
+**Tool limit:** `board_search_boards` returns board name + URL only — `modified_at` / `created_at` come back `null`, so the "modified in the last 7 days" filter above is NOT satisfiable. Match boards by title / guild-project name only, treat them as low-confidence planning context, and never claim a board "moved this week."
+
 **Figma** (design surfaces):
 
 Include only files that match ONE of:
@@ -121,6 +127,8 @@ Include only files that match ONE of:
 **Figma reject step**: drop files whose title contains `'WEFA'`, `'wefa.world'`, or personal-client tags. Skip files that are pure scratch / explore branches with no guild-project linkage.
 
 Pull design implications (handoff status, prototype review needs, design system changes) — not design critique.
+
+**Tool limit:** the Figma Dev-Mode MCP cannot enumerate files by team or modified date — it only inspects a specific linked file URL (its tools are `whoami` / `get_design_context` / `get_metadata` / `get_screenshot`, with no file lister). The "modified in the last 7 days in a guild team" criterion above is NOT satisfiable on its own. Surface Figma movement ONLY when a file is linked from an allow-listed channel / Drive / Linear in-window; otherwise emit nothing for Figma — that is expected, not a failure.
 
 **Vercel** (deployment activity per project):
 
@@ -256,7 +264,7 @@ For every input, immediately check the source against the allow-list. Reject + l
 
 For each of the 6 active projects (`green-goods`, `coop`, `pgsp`, `network-website`, `cookie-jar`, `TAS-Hub`):
 
-1. **GitHub side**: pull commit messages, PR titles, issue updates, release notes from the last 7 days for the matching repo (where one exists — PGSP doesn't have its own repo yet; rely on Linear).
+1. **GitHub side**: pull commit messages, PR titles, issue updates, release notes from the last 7 days for the matching repo on its **active shipping branch** (see the Repos note — not always the GitHub default; cross-check against Vercel deploy SHAs so a non-default-branch repo is never miscounted as quiet), where one exists — PGSP doesn't have its own repo yet; rely on Linear.
 2. **Linear side**: pull Issues with `protocol:<project>` label moved this week, project status updates authored on bounded delivery projects, milestone changes.
 3. **Combine** into a 1-sentence summary aimed at the leadership audience. Mention specific commit/PR titles + Linear status update authors only when decision-grade. Otherwise stay at the "track of work" level.
 4. **Note any signals** that warrant escalation (a security commit, a breaking-change PR, a multi-day stalled Linear Issue in `In Review`, a release without a PR, a project status update flagging a risk).
