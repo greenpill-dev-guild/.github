@@ -12,6 +12,7 @@ These are **opt-in templates**, not org-wide enforcement. Anything in this direc
 | [`AGENTS.md.template`](./AGENTS.md.template) | Documenting agent invariants and working agreements for any AI coding assistant. |
 | [`copilot-instructions.md.template`](./copilot-instructions.md.template) | Setting up `.github/copilot-instructions.md` for GitHub Copilot. |
 | [`README.md.template`](./README.md.template) | Bootstrapping the README for a new guild project. |
+| [`agentic-modern-web.md`](./agentic-modern-web.md) | Adding advisory modern-web guidance, `llms.txt` scope, and WebMCP strategy language to browser-facing projects. |
 
 ## How to adopt
 
