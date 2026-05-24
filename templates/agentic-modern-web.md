@@ -43,3 +43,4 @@ Only publish `llms.txt` from already-public app/docs roots. Keep it focused on p
 - Each tool has an explicit confirmation rule for writes, submissions, purchases, publishes, or navigation that changes user state.
 - Forbidden tools are listed in the repo strategy doc.
 - Browser proof includes screenshots or DOM checks, console health, accessibility-tree sanity, and reduced-motion behavior when motion is present.
+- Before runtime rollout, use Chrome DevTools MCP or Puppeteer WebMCP to prove tool discovery, schema validity, graceful errors, and absence of forbidden tools. Add evals for wrong-tool, wrong-order, wrong-argument, stale-state, and confirmation-boundary cases.
