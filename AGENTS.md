@@ -68,3 +68,4 @@ PY
 - If you change a process doc, update the index or cross-reference in the same pass.
 - Prefer tightening wording over adding more prose.
 - When a claim is uncertain, soften it or link the source instead of presenting it as settled fact.
+- For browser-facing templates or repo guidance, keep the shared posture Brave-first for local Codex, Claude, and human/agent walkthroughs, with Chrome/Chromium-compatible fallback for contributors and CI.

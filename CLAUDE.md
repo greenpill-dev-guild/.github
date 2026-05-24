@@ -94,3 +94,4 @@ Work directly for single-file or tightly related doc edits. Only split work when
 - Do not add new workflows, scripts, or automation config without explicit approval.
 - Do not introduce new contact emails, SLAs, or governance structures based on guesswork.
 - For destructive edits to shared guidance, describe the change clearly in the PR or final summary.
+- For browser-facing templates or repo guidance, keep the shared posture Brave-first for local Codex, Claude, and human/agent walkthroughs, with Chrome/Chromium-compatible fallback for contributors and CI.

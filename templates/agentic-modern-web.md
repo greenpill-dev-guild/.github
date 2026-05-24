@@ -7,7 +7,7 @@ Use this template when a Greenpill project has a public web, docs, PWA, extensio
 - Baseline target: Baseline Widely Available.
 - Enforcement: advisory scripts first; CI gates only after the proof loop is stable.
 - `llms.txt`: public/docs surfaces only.
-- Local agent browser: Brave first for human/agent walkthroughs, WebMCP validation, and DevTools MCP proof. Keep Chrome/Chromium-compatible fallbacks for contributors and CI.
+- Local agent browser: Brave first for Codex, Claude, and other human/agent walkthroughs, WebMCP validation, and DevTools MCP proof. Keep Chrome/Chromium-compatible fallbacks for contributors and CI.
 - WebMCP: strategy first; no runtime tools until explicitly approved.
 
 ## Repo Guidance Snippet
@@ -16,7 +16,7 @@ Use this template when a Greenpill project has a public web, docs, PWA, extensio
 - Prefer semantic HTML, native controls, platform CSS, and browser primitives before custom JavaScript or new dependencies.
 - Keep the DOM and accessibility tree legible: one clear `main`, meaningful headings, labels, accessible names, visible focus, keyboard paths, touch targets, loading/error/empty states, and reduced-motion behavior.
 - Run `bun run agentic:check` as the advisory proof front door. Use `bun run agentic:browser-proof` for rendered proof when layout, interaction, motion, or public routes change. Keep `agentic:verify` as the repo's existing heavier lane when it already has that name.
-- For local browser walkthroughs, prefer a Brave-backed DevTools MCP server or Brave executable override with an isolated/non-default profile. Do not require Brave in CI or for contributors who only have Chrome/Chromium; the repo proof commands should remain browser-compatible unless a task explicitly requires Brave-only WebMCP validation.
+- For local browser walkthroughs in Codex, Claude, or another agent, prefer a Brave-backed DevTools MCP server, browser extension, or Brave executable override with an isolated/non-default profile. Do not require Brave in CI or for contributors who only have Chrome/Chromium; the repo proof commands should remain browser-compatible unless a task explicitly requires Brave-only WebMCP validation.
 - WebMCP is strategy-only until approved. Future tools must be visible, user-confirmable, public-safe, scoped to the page, and forbidden from exposing secrets, private data, hidden admin actions, destructive operations, onchain writes, or background-only actions.
 
 ## Suggested Scripts
