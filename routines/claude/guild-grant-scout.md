@@ -42,7 +42,7 @@ This routine is **centered on three primary funding targets — Coop, Green Good
 - Connectors available: Google Drive, Google Calendar, Miro, **Canva**, Linear, **PostHog**. (Gmail is intentionally NOT wired — personal-inbox pollution risk.)
 - **Linear is the canonical surface for grant lifecycle.** Prospects/drafts/submissions live as Linear Product Issues surfaced through saved views over the canonical `funding:*` lifecycle labels. **Awarded grants graduate** into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management. Resolve team/project/label IDs by name at the start of every run.
 - **Canva** is read-only enrichment. Use to find existing pitch decks / slides that can inform new proposals or be referenced for visual narrative continuity. Reject step: drop personal-folder Canva content, drop designs whose title contains `'WEFA'` or `'wefa.world'`.
-- **PostHog** is a subtle, secondary evidence signal — never the primary discovery surface. Use for grant evidence enrichment in Phase 2 (fit assessment) and Phase 3 (proposal drafting) only. Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere.
+- **PostHog** is a subtle, secondary evidence signal — never the primary discovery surface. Use for grant evidence enrichment in Phase 2 (fit assessment) and Phase 3 (proposal drafting) only. Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere. **When using the PostHog connector, call `switch-project` to the App project (`163591`) before any query** — the connector defaults to the wrong project and silently returns zero, which would make evidence enrichment quietly empty without flagging it.
 - Active project repos cloned via `sources` for read-only context: `green-goods`, `coop`, `network-website`, `cookie-jar`, `TAS-Hub`, `.github`.
 - Do not read `.env`. Do not run `bun install`, builds, or tests. Do not modify source files in any project repo or edit Miro boards.
 
@@ -70,7 +70,9 @@ Before scouting this week, read the last 4 weekly grant-scout Drive memos to kno
 - **What was already evaluated and dismissed** — programs prior memos marked `dismiss` with rationale. Do not re-surface unless there's clear new context.
 - **Stale prospects** — any `funding:prospect` open >30 days without movement. Surface in Phase 5 for triage or auto-dismissal.
 
-Drive memo location: `Greenpill Dev Guild / Grants / YYYY-MM-DD grant scout`. File naming: `YYYY-MM-DD grant scout`.
+Drive memo retrieval (the connector **cannot** query by folder path — only `title` / `fullText` / `modifiedTime`; see `drive-map.md`): find prior memos via `title contains 'grant scout'`, sorted by `modifiedTime` descending, and take the most recent 4. The memo title convention is `YYYY-MM-DD grant scout` — keep naming new memos exactly that way so this title search stays reliable.
+
+**Same-cycle guard (run once per cycle).** This routine can be manually re-triggered, so before scouting, check whether this cycle already ran: a Phase-6 memo whose title carries the current ISO week already exists, **or** the bot's own heartbeat for this week is already the latest `guild-grant-scout` post in `#funding` (you read the last 100 messages in Phase 1.1). If either is true, the weekly run already happened — enter **supplementary-only mode**: do NOT post a second heartbeat (Phase 5) and do NOT re-create prospects; dedupe strictly against the existing pipeline and limit work to deepening discovery on clusters the prior run logged empty. Only the first run of a cycle posts the heartbeat.
 
 If no prior memos exist (first run after this rewrite), skip recall but still write the Phase 6 memo so future runs can recall.
 
@@ -157,6 +159,7 @@ Read-only — never modify Canva designs.
 - Compare every candidate against `KNOWN_PROGRAMS` from Phase 0. Mark as `NEW` only if not already represented.
 - **Record cadence for everything you touch** — even programs that just closed or open next quarter. Feed `{program, cadence, last/next deadline, fit}` into the Phase 0 `PROGRAM_CYCLES` calendar, and add strong-fit near-misses reopening within ~8 weeks to `REOPEN_WATCH`. A recorded near-miss is a future win; a forgotten one is recurring regret.
 - If you spend < 30 minutes on Phase 1.6 in a run, the routine is failing its core job — extend coverage.
+- **Cover all three primary targets every run.** The pipeline has historically over-indexed Green Goods while Coop and PGSP stay thin — do not let GG candidates fill the run's quota and crowd out the others. Each run, scan at least one funder for Coop's stack (Filecoin ProPGF / devgrants, Safe grants) and one for PGSP's stack (Lido CSM / LEGO, SSV / DVT, Obol), and actually hit the decentralized-identity surface named in Cluster D (DIF, OpenWallet, Trust-over-IP) — the shared passkey/identity primitive spans GG + Coop and is the most under-scouted lane.
 - If a cluster returns zero, record the exact queries/URLs that came back empty in the Phase 6 memo so the next run fixes the query rather than re-running a dead one.
 
 ## Phase 2: Fit Assessment
@@ -191,6 +194,10 @@ For each candidate (NEW or pipeline-existing-needing-update), assess against the
 
 **Primary-target priority: Coop, Green Goods, and PGSP come first.** An opportunity scoring 3+ on a primary project outranks a same-score TAS / network-website / cookie-jar fit. A TAS-only (or network-only) opportunity with no Coop/GG/PGSP tie is `monitor`, not `prospect`, unless it's exceptional (large amount, low effort, deadline soon). Proceed to drafting only for opportunities scoring 3 or higher on at least one project AND marked `NEW` or freshly re-surfaced. Dismiss low-fit opportunities in the Discord summary without creating Linear Issues.
 
+**Hard rejects (note as FYI — never create a Linear Issue):**
+- **Platform-migration cost.** Opportunities that require building on a new chain/platform as the price of entry (e.g. Stellar/Soroban-class ecosystem grants) are `dismiss` unless there is explicit, current appetite to invest in that platform. Record the find in the memo + Discord summary so it isn't rediscovered, but do not create a prospect. (The team has standing low appetite for Stellar-specific builds.)
+- **Out-of-guild scope.** Opportunities tied to a project, product, or person outside the guild's active set (e.g. the Greenpill Podcast — not a guild deliverable) are rejected here — no Issue, no draft. Fit alone is not enough; the work must advance a guild project.
+
 ## Phase 3: Proposal Drafting
 
 Draft at most one high-quality proposal per run, plus lightweight outlines for any other urgent opportunities.
@@ -202,8 +209,7 @@ Draft at most one high-quality proposal per run, plus lightweight outlines for a
 
 Save drafts to Drive:
 
-- Folder: `Greenpill Dev Guild / Grants`
-- File name: `{YYYY-MM-DD} {Program Name} - {Project or Umbrella} Draft.md`
+- The connector addresses Drive by title/content, not folder path (see `drive-map.md`) — so the **title is the addressable key**. Save with the title convention `{YYYY-MM-DD} {Program Name} - {Project or Umbrella} Draft`; if the connector supports a target folder, place it in the guild Grants folder, but rely on the dated title for retrieval.
 - If a prior draft exists, create a new dated version or append a clear revision note. Do not overwrite.
 
 General draft structure:
@@ -298,6 +304,8 @@ Body:
 
 ### Lifecycle transitions (handled by this routine across runs)
 
+**Detect human-driven transitions from Linear first.** Read each open funding Issue's own Linear state, comments, and assignee — not only `#funding` / Drive chatter — to see whether a human has moved it (submitted, won, declined). Linear is the canonical surface, so it must be the primary *read* source for transitions, not just the write target; `#funding` and Drive are secondary corroborating signals. This is what keeps stages from drifting (e.g. a draft a human submitted off-channel must still flip `drafting → submitted`).
+
 - **When a draft is saved**: remove `funding:prospect`, add `funding:drafting`. Comment with `Draft saved: {Drive URL}`. Move Linear status from `Backlog` to `In Progress`.
 - **When a human confirms submission** (detected via #funding signal or Drive memo update): remove `funding:drafting`, add `funding:submitted`. Comment with `Submitted {date}. Awaiting response.`
 - **When awarded**: replace `funding:submitted` with `funding:active-award`, then graduate the Issue into a bounded award/delivery project if delivery, reporting, compliance, or funder follow-through needs project-level management. Delivery work links back to the originating Issue.
@@ -310,7 +318,7 @@ For each program in `REOPEN_WATCH` (Phase 0) whose next cycle opens within ~8 we
 
 ## Phase 5: Discord `#funding` Summary
 
-**Mandatory post.** Always post a weekly summary, even on a quiet week. Pick the format below that matches the run.
+**Post once per cycle.** The **first** run of each weekly cycle always posts a summary, even on a quiet week — pick the format below that matches the run. On a **subsequent same-cycle run** (a manual re-trigger caught by the Phase 0 same-cycle guard), **suppress the heartbeat** — do not post a duplicate to the shared channel. "Always post" means once per cycle: never zero, never twice.
 
 **Channel guard:** the only allowed `POST` target is `${DISCORD_FUNDING_CHANNEL_ID}`. If unset, log and skip — do not pick an alternate channel.
 
@@ -370,7 +378,7 @@ Keep Discord high-level. Sensitive evidence, budget assumptions, and detailed st
 
 ## Phase 6: Drive memo (memory substrate)
 
-After posting to #funding, save a memo at `Greenpill Dev Guild / Grants / YYYY-MM-DD grant scout`. This memo is the prior-run input that future runs pick up in Phase 0. **Always write it**, even on quiet weeks — the continuity record is what makes Phase 0 work.
+After posting to #funding, save a memo titled `YYYY-MM-DD grant scout` (title convention only — the connector addresses Drive by title, not folder path; see `drive-map.md`). This title is exactly what Phase 0 recall searches for via `title contains 'grant scout'`, so the naming must stay consistent. This memo is the prior-run input that future runs pick up in Phase 0. **Always write it**, even on quiet weeks — the continuity record is what makes Phase 0 (and the same-cycle guard) work.
 
 ```markdown
 # Grant Scout — {YYYY-MM-DD}
@@ -421,8 +429,9 @@ If the Drive write fails, still consider the run successful (Discord post + Line
 
 - **Active discovery is the job.** ≥ 3 NEW (not-in-`KNOWN_PROGRAMS`) candidates is the floor, **6–8 the target** — never satisfice at 3. Rotate the Phase 1.6 clusters so a month of runs covers the whole funder universe (web3, climate, Africa/dev, OSS-infra). Discord/Drive/Calendar reads are signal-feeds, not the discovery surface.
 - **Linear `funding:*` lifecycle is the canonical surface.** Prospects/drafts/submissions are surfaced through saved views over Product team labels; awarded grants graduate into bounded award/delivery projects when needed. Do not write grant lifecycle Issues anywhere else — not `.github` (no GitHub Issues, ever), not project repos, and not umbrella, staging, or completed Linear projects.
-- **Always post the weekly heartbeat** to `#funding`. Silent runs are not allowed.
+- **Post the weekly heartbeat exactly once per cycle** to `#funding`. The first run of the cycle must post (silent first-runs are not allowed); a subsequent same-cycle manual re-trigger must suppress the duplicate (see the Phase 0 same-cycle guard).
 - **Always write the Phase 6 memo.** It is the substrate that lets Phase 0 work — skipping it breaks future continuity.
+- **Populate the cycle calendar every run.** `PROGRAM_CYCLES` / `REOPEN_WATCH` (Phase 0) must capture recurring funders even when currently closed (e.g. UNICEF Venture Fund ~annual, Gitcoin GG rounds, GSMA / EEP / AECF cohorts, Shuttleworth's Nov/Mar intakes). A closed window recorded with its reopen date is a future win; an unrecorded one is the routine rediscovering a program a cycle too late — the single most common way this routine loses value.
 - **One full draft per run max.** Lightweight outlines for additional urgent opportunities are fine.
 - **Never submit proposals.** Human review owns final submission.
 - **Only claim capabilities that exist in the code today.** Planned work must be labeled as proposed.
