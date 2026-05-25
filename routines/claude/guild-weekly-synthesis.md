@@ -105,6 +105,8 @@ Include an event ONLY when its title or description matches one of:
 
 Drop personal calendar events, WEFA-tagged events, sales/client meetings, and other non-guild meetings even when they fall in the 7-day window.
 
+**Join / RSVP links (include for every surfaced event):** capture an actionable link per event — prefer a **Luma RSVP link** if the event's description/location contains a `lu.ma`/`luma.com` URL, else the **Google Meet** link (`conferenceUrl`), else the **event page** (`htmlLink`). The guild's public Luma calendar is `https://luma.com/greenpilldevguild` — surface it as a standing RSVP pointer. Only attach join/RSVP links for **public/attendable** events in the public `#community` post — never for private calls (Capital/Treasury/Council syncs).
+
 **Miro** (boards as planning context):
 
 Include only boards that match ONE of:
@@ -189,7 +191,7 @@ When other guild projects (Coop, PGSP, etc.) get their own growth-pulse-equivale
 {at most 4 bullets, one per active repo or cross-project theme; each bullet ≤ 1 sentence; pull from GitHub + Linear together so commit-only weeks still surface meaningful work}
 
 📅 **This week's calendar highlights**
-{at most 3 bullets — public meetings, demos, deadlines that the community can attend or care about}
+{at most 3 bullets — public meetings, demos, deadlines that the community can attend or care about; append each event's join/RSVP link (Luma > Google Meet > event page). End the section with a standing line: `RSVP to upcoming guild events on Luma → https://luma.com/greenpilldevguild`}
 
 🎨 **Design + community assets**
 {at most 2 bullets — guild-relevant Miro / Figma / Canva movement that's safe to share publicly: shipped designs, finalized workshop materials, public pitch decks released. Omit this section entirely if nothing is shareable.}
@@ -238,7 +240,7 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 
 ### Drive memo (archive)
 
-A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild shared folder. Body is the long-form synthesis: full per-project paragraphs (GitHub + Linear together), full council discussion summary (with attribution), full calendar context, full design-asset narrative, full risks/decisions narrative, full PostHog/growth-pulse context. The Discord posts are excerpts of this memo.
+A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shared-drive** folder **"Weekly Synthesis"** (folder ID `137N3WClmFANFBk1kv5yZsbuPNJA5dRmM`). Body is the long-form synthesis: full per-project paragraphs (GitHub + Linear together), full council discussion summary (with attribution), full calendar context, full design-asset narrative, full risks/decisions narrative, full PostHog/growth-pulse context. The Discord posts are excerpts of this memo.
 
 ## Phases
 
@@ -304,10 +306,23 @@ Before posting:
 
 ### Phase 6: Post
 
-1. Create the Drive memo first. If creation fails, log and continue — the Discord posts can still go out without the memo URL (with a `⚠ Drive memo creation failed` line in the failure block).
-2. Post the `#community` excerpt. Channel-guarded.
-3. Post the `#lead-council` digest. Channel-guarded.
-4. If either Discord channel ID env var is unset, log and skip that post — never substitute an alternate channel.
+**There is NO Discord MCP in this environment — post via the Discord REST API with Bash + `curl`. Do NOT search for a Discord tool/connector, and NEVER degrade to "manual posting": an unsent post is a failure-block line, not a silent no-op.** The credentials are provided as env vars: `DISCORD_BOT_TOKEN`, `DISCORD_COMMUNITY_CHANNEL_ID`, `DISCORD_LEAD_COUNCIL_CHANNEL_ID`, `DISCORD_USER_ID_AFO`.
+
+1. **Create the Drive memo first**, as a Google Doc with **`parentId` = `137N3WClmFANFBk1kv5yZsbuPNJA5dRmM`** (the **"Weekly Synthesis"** folder in the guild **shared drive** — verified writable by the routine's Google account). Do NOT use folder-name discovery and do NOT fall back to My Drive or a drive root. If the create into that folder fails, surface `⚠ Drive memo: could not write to folder 137N3WClmFANFBk1kv5yZsbuPNJA5dRmM (<error>)` in the failure block and continue — the posts can still go out without the memo URL.
+2. **Post each message via the Discord API.** Build the JSON payload with `jq` (or `python3` — never raw string interpolation; the body has newlines, backticks, and emoji), then POST:
+   ```bash
+   jq -nc --arg c "$MSG" '{content:$c, allowed_mentions:{parse:["users"]}}' \
+     | curl -sS -w '\n%{http_code}' -X POST \
+         "https://discord.com/api/v10/channels/${CHANNEL_ID}/messages" \
+         -H "Authorization: Bot ${DISCORD_BOT_TOKEN}" \
+         -H "Content-Type: application/json" --data-binary @-
+   ```
+   - **2000-char limit:** Discord rejects `content` > 2000 chars. Split overflowing posts on section/bullet boundaries into ordered chunks ≤ 1900 chars and POST sequentially (~0.5s between chunks for rate limits). The `#community` excerpt usually fits in one message; the `#lead-council` digest usually needs 2–3.
+   - **`allowed_mentions.parse:["users"]`** lets the single `<@${DISCORD_USER_ID_AFO}>` council ping resolve while blocking accidental `@everyone`/`@here`/role pings.
+3. **Post the `#community` excerpt** to `${DISCORD_COMMUNITY_CHANNEL_ID}` first.
+4. **Post the `#lead-council` digest** to `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}` second.
+5. **Verify every POST.** A `2xx` with a JSON message object (has `id`) = sent; record messages-sent-per-channel in the run log. Any non-2xx → capture status + response body in the failure block and do NOT claim success: `401` = bad/expired token, `403` = bot lacks channel access, `404` = wrong channel ID, `429` = rate-limited (honor `retry_after`, retry once).
+6. **Guards:** `DISCORD_BOT_TOKEN` unset → skip both posts + flag. A channel ID env var unset → skip that channel + flag. Never substitute an alternate channel.
 
 ## Caps and guardrails
 
