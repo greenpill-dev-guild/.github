@@ -170,15 +170,15 @@ Every rejection is logged. The Phase 5 umbrella check confirms the rejection cou
 
 ## PostHog usage
 
-**Primary path**: link to the most recent `growth-pulse` digest PR rather than re-computing PostHog metrics. `growth-pulse` runs Monday 09:00 PT and lands a digest PR (`claude/growth-pulse/YYYY-WW` → `develop`) before this routine fires at 18:00. Find that PR via the GitHub API, pull the headline numbers from its body, and link the PR URL in the council digest. This avoids drift between two routines reading PostHog the same Monday.
+**Primary path**: link to the most recent `growth-pulse` weekly digest rather than re-computing PostHog metrics. As of 2026-05-25 that digest is a **Linear initiative status update** on the **Sustainability & Monetization** initiative (`daa9d2a8-290e-46d6-b2f5-9397d7fd04bf`), NOT a GitHub PR (the `develop` digest PR was retired). `growth-pulse` runs Monday 09:00 PT and posts the status update before this routine fires at 18:00. Read the latest status update on that initiative via the Linear MCP, pull the headline numbers from its body, and link the status-update URL in the council digest. This avoids drift between two routines reading PostHog the same Monday.
 
-**Fallback path** (use only when growth-pulse digest is unreachable OR the council asks a specific cross-project question PostHog can answer):
+**Fallback path** (use only when the growth-pulse status update is unreachable/stale OR the council asks a specific cross-project question PostHog can answer):
 - Query PostHog directly via `POSTHOG_PROJECT_API_KEY` + `POSTHOG_HOST` env vars OR the `posthog` MCP connector if attached
 - Limit to one named question from `green-goods/.claude/skills/posthog-questions/SKILL.md` per run (typically `funnel.onboarding` for a headline conversion number)
 - Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere.
-- If you fall back to direct PostHog reads, note `⚠ growth-pulse digest unavailable — fell back to direct PostHog read` in the failure block.
+- If you fall back to direct PostHog reads, note `⚠ growth-pulse status update unavailable — fell back to direct PostHog read` in the failure block.
 
-When other guild projects (Coop, PGSP, etc.) get their own growth-pulse-equivalents, this routine surfaces those numbers the same way: link to the relevant digest PR; do not re-compute.
+When other guild projects (Coop, PGSP, etc.) get their own growth-pulse-equivalents, this routine surfaces those numbers the same way: link to the relevant status update (or whatever durable Linear artifact that routine posts); do not re-compute.
 
 ## Output schema (fixed)
 
@@ -218,7 +218,7 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 • TAS-Hub: {same shape}
 
 📊 **Metrics context**
-• Green Goods: {1-line headline pulled from latest growth-pulse digest PR} — <PR URL>
+• Green Goods: {1-line headline pulled from latest growth-pulse status update} — <status-update URL>
 {additional bullets for other projects when their growth-pulse-equivalents exist; otherwise omit}
 
 🎨 **Design + asset movement**
@@ -256,7 +256,7 @@ For Figma: list files in guild-tied teams modified in last 7d; resolve any file 
 
 For Canva: list designs in guild-tied folders/teams modified in last 7d; resolve any design URLs linked from `#community`, `#lead-council`, Drive, or Linear. Apply Canva reject step.
 
-For PostHog: locate the most recent `growth-pulse` digest PR via GitHub API. Read its body (headline numbers + commentary). Do NOT re-query PostHog unless the PR is missing.
+For PostHog: read the most recent `growth-pulse` status update on the Sustainability & Monetization initiative (Linear MCP). Read its body (headline numbers + commentary). Do NOT re-query PostHog unless the update is missing/stale.
 
 For every input, immediately check the source against the allow-list. Reject + log + drop if it fails. Carry only allow-listed inputs forward.
 
@@ -287,11 +287,11 @@ If a project had zero activity (GitHub silent + zero Linear movement), the summa
 
 ### Phase 4: Surface metrics context
 
-1. Find the most recent `growth-pulse` digest PR (`claude/growth-pulse/YYYY-WW` → `develop` in green-goods). Pull headline numbers from the PR body.
+1. Find the most recent `growth-pulse` status update on the Sustainability & Monetization initiative (`daa9d2a8-290e-46d6-b2f5-9397d7fd04bf`, via Linear MCP). Pull headline numbers from its body.
 2. If the PR is missing or older than this Monday's expected fire window, fall back to the direct PostHog path described in the **PostHog usage** section. Note the fallback in the failure block.
-3. When other guild projects' growth-pulse-equivalents exist (future), pull from those PRs the same way.
+3. When other guild projects' growth-pulse-equivalents exist (future), pull from those status updates the same way.
 
-The metrics context lands in the `📊 Metrics context` section of the council digest. Headline numbers only; the digest PR carries the full table.
+The metrics context lands in the `📊 Metrics context` section of the council digest. Headline numbers only; the growth-pulse status update carries the full table.
 
 ### Phase 5: Always-create umbrella check
 
@@ -345,7 +345,7 @@ The failure block must surface, never hide:
 - Drive memo creation failure.
 - Calendar / Miro / Figma / Canva connector unreachable (continue without that surface but flag).
 - Linear API failure (continue with GitHub-only per-project bullets; flag explicitly).
-- PostHog growth-pulse PR missing (fell back to direct PostHog query — flag).
+- PostHog growth-pulse status update missing/stale (fell back to direct PostHog query — flag).
 - Discord channel ID unset for either output channel.
 - Repo activity query failure for any of the 5 active repos (continue with what was retrievable but flag missing repos).
 - Privacy grep hit (a body had to be redacted in-flight).
