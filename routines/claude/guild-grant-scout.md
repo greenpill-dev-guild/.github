@@ -166,7 +166,7 @@ Read-only — never modify Canva designs.
 
 **Optional PostHog evidence enrichment** (subtle, secondary): when a candidate's fit clearly depends on production-traction signals (Green Goods grants that ask "show user growth" or "show retention"), pull a single headline metric from PostHog using a curated question name from `green-goods/.claude/skills/posthog-questions/SKILL.md`. Privacy mode: public. Use this to inform fit scores and Phase 3 evidence — never paste raw HogQL or private fields into the assessment. If PostHog is unreachable, skip the enrichment and continue with the assessment based on existing evidence.
 
-For each candidate (NEW or pipeline-existing-needing-update), assess against the active projects:
+For each candidate (NEW or pipeline-existing-needing-update), assess against the active projects. **Weight the Season One Africa pilot heavily** — it is real production proof that maps directly to climate / Africa / mobile-for-development funders (Cluster B/C), so don't down-score a strong-mission funder just because it isn't web3-native or needs no specific chain:
 
 ```markdown
 ### {Grant Program Name}
@@ -346,11 +346,15 @@ For each program in `REOPEN_WATCH` (Phase 0) whose next cycle opens within ~8 we
 📅 **Upcoming deadlines (next 14 days)**
 • {Program} — {date}
 
+⏭️ **Opening soon / reopen watch** (pre-staged from `REOPEN_WATCH`)
+• {Program} — reopens ~{date}, fit: {project} → <Linear URL>
+
 📊 **Pipeline snapshot**
 • Prospect: {N} · Drafting: {M} · Submitted: {K} · Active award: {R}
 
 📈 **Coverage this run**
-• Sources: Discord {D} · Drive {V} · Web search {W} · Calendar {C} · Miro {B}
+• Sources: Discord {D} · Drive {V} · Web search {W} · Calendar {C} · Miro {B} · Canva {N}
+• Clusters worked this run (Phase 1.6): {which of A–E got deep coverage}
 • Web queries that returned empty: {short list — informs next-week strategy tuning}
 ```
 
@@ -360,7 +364,7 @@ For each program in `REOPEN_WATCH` (Phase 0) whose next cycle opens within ~8 we
 **Guild Grant Scout — Week of {YYYY-MM-DD}**
 
 No new high-fit opportunities surfaced this week.
-Coverage: Discord {D} · Drive {V} · Web search {W} · Calendar {C} · Miro {B}.
+Coverage: Discord {D} · Drive {V} · Web search {W} · Calendar {C} · Miro {B} · Canva {N}.
 
 📊 **Pipeline snapshot**
 • Prospect: {N} · Drafting: {M} · Submitted: {K} · Active award: {R}
