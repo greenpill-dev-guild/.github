@@ -29,6 +29,8 @@ Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prom
 ### Automated (Claude routines)
 
 - [claude/guild-weekly-synthesis.md](./claude/guild-weekly-synthesis.md) - Monday 18:00 cross-project synthesis with public community excerpt, private lead-council digest, and Drive memo
+- [claude/network-steward-intent-pulse.md](./claude/network-steward-intent-pulse.md) - Tuesday 16:00 Greenpill Network steward-hub intent pulse with one Linear initiative status update and no automatic work creation
+- [claude/coop-intent-pulse.md](./claude/coop-intent-pulse.md) - Wednesday 15:30 Coop product-loop intent pulse with one Linear initiative status update and no automatic work creation
 - [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Wednesday 19:00 grant scouting with Linear `funding:*` saved-view lifecycle, Discord funding summary, and Drive memo
 - [claude/research-synthesis.md](./claude/research-synthesis.md) - Friday 17:00 research synthesis with Discord digest, accepted Research team Issues, and Drive memo
 

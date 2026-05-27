@@ -9,10 +9,12 @@ Distinct from `../*.md` markdown playbooks for manual guild processes like funde
 | File | Status | Cadence | Channel | Issue surface |
 |---|---|---|---|---|
 | `guild-weekly-synthesis.md` | active | Mon 18:00 weekly | `#community` excerpt + `#lead-council` private digest | Drive memo (no tracker) |
+| `network-steward-intent-pulse.md` | active | Tue 16:00 weekly | Linear only | Initiative status update on `Network Presence`; no Issues or Customer Needs |
+| `coop-intent-pulse.md` | active | Wed 15:30 weekly | Linear only | Initiative status update on `Coop Product Loop & Intent Clarity`; no Issues or Customer Needs |
 | `guild-grant-scout.md` | active | Wed 19:00 weekly | `#funding` + Drive memo | Linear Product (unprojected staging, `funding:*` lifecycle); accepted awards route into a dedicated `Grant Proposal / Award Stewardship` project |
 | `research-synthesis.md` | active | Fri 17:00 weekly | `#research` + Drive memo | Linear Research team (unprojected, `activity:research`) |
 
-Three scheduled runs per week. Monday opens with the cross-project synthesis that primes the week. Wednesday handles grants midweek. Friday closes the week with research synthesis. No daily-cadence routines.
+Five scheduled runs per week. Monday opens with the cross-project synthesis that primes the week. Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before product sync, then handles grants midweek. Friday closes the week with research synthesis. No daily-cadence routines.
 
 Anything else previously in this folder has been removed — folded into the surviving routines or cut as noise.
 
@@ -26,7 +28,7 @@ The guild routines read these active project repos:
 |---|---|
 | green-goods | greenpill-dev-guild |
 | coop | greenpill-dev-guild |
-| network-website | greenpill-dev-guild |
+| network | greenpill-dev-guild |
 | cookie-jar | greenpill-dev-guild |
 | TAS-Hub | Greenpill9ja |
 
@@ -38,6 +40,8 @@ Other guild repos (gardens, impact-reef, gg24-round-explorer, octant-v2(-core), 
 
 ```text
 Mon  18:00  guild-weekly-synthesis
+Tue  16:00  network-steward-intent-pulse
+Wed  15:30  coop-intent-pulse
 Wed  19:00  guild-grant-scout
 Fri  17:00  research-synthesis
 ```
@@ -48,6 +52,8 @@ Fri  17:00  research-synthesis
 |---|---|---|
 | `#community` | guild-weekly-synthesis (excerpt) | community-safe public post |
 | `#lead-council` (private) | guild-weekly-synthesis (digest) | private leadership digest |
+| Linear initiative `Network Presence` | network-steward-intent-pulse | weekly Network steward-hub intent check |
+| Linear initiative `Coop Product Loop & Intent Clarity` | coop-intent-pulse | weekly Coop product-loop intent check |
 | `#funding` | guild-grant-scout | grant opportunities + proposals |
 | `#research` | research-synthesis | weekly research digest |
 
@@ -73,13 +79,15 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_RESEARCH_CHANNEL_ID`
 - `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
-- `LINEAR_API_KEY` — used by `guild-grant-scout` (`funding:*` lifecycle saved views) and `research-synthesis` (Research team)
+- `LINEAR_API_KEY` — used by `network-steward-intent-pulse` and `coop-intent-pulse` (initiative status updates), `guild-grant-scout` (`funding:*` lifecycle saved views), and `research-synthesis` (Research team)
 
 **Connector matrix:**
 
 | Routine | Connectors | Why each |
 |---|---|---|
 | `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog, Vercel | Linear = source of truth for cross-project work (initiatives, projects, issues, customer needs) · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) · Vercel = deploy activity counts in per-project bullets (color, never primary) |
+| `network-steward-intent-pulse` | Linear | Linear = social truth for Network steward-hub status; the Network repo checkout provides `.plans` execution truth. No Discord, Drive, GitHub write, PostHog, Vercel, or design connectors. |
+| `coop-intent-pulse` | Linear | Linear = social truth for Coop intent status; the Coop repo checkout provides `.plans` execution truth. No Discord, Drive, GitHub write, PostHog, or design connectors. |
 | `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `funding:*` lifecycle saved views; accepted awards graduate to a bounded award/delivery project · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
 | `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal (Linear Research team, unprojected) · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
 
@@ -93,7 +101,7 @@ Keep this environment separate from Green Goods product environments so a misbeh
 
 The lean portfolio is anchored on three surfaces:
 
-- **Linear** is the source of truth for actionable tracking — issues, customer signal, roadmap projects, accepted research, and funding lifecycle saved views. `guild-grant-scout` writes Product Issues labeled with `funding:*` and routes won awards into bounded award/delivery projects. `research-synthesis` writes the Research team's accepted research insights, unprojected by default. `guild-weekly-synthesis` writes nothing to Linear — cross-project pulse is observation, not tracker work.
+- **Linear** is the source of truth for actionable tracking — issues, customer signal, roadmap projects, accepted research, and funding lifecycle saved views. `guild-grant-scout` writes Product Issues labeled with `funding:*` and routes won awards into bounded award/delivery projects. `research-synthesis` writes the Research team's accepted research insights, unprojected by default. `network-steward-intent-pulse` and `coop-intent-pulse` write one initiative status update each and create no work. `guild-weekly-synthesis` writes nothing to Linear — cross-project pulse is observation, not tracker work.
 - **Drive memos** are memory substrate, not output destination. Each synthesis routine writes a memo at run end so the next run's Phase 0 prior-recall can pick up open threads. The user is not expected to read Drive regularly; the routines do.
 - **Discord** is the human-readable pulse channel — a single weekly read per channel, scoped to that channel's audience.
 
@@ -124,6 +132,8 @@ Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `heal
 ## Conventions
 
 - Synthesis routines do not open PRs. `research-synthesis` files Linear Issues in the Research team for accepted research insights (unprojected).
+- `network-steward-intent-pulse` is a status-only routine. It writes to the `Network Presence` initiative and does not create Issues, Customer Needs, projects, Discord posts, Drive docs, or GitHub artifacts.
+- `coop-intent-pulse` is a status-only routine. It writes to the `Coop Product Loop & Intent Clarity` initiative and does not create Issues, Customer Needs, projects, Discord posts, Drive docs, or GitHub artifacts.
 - Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, `task:funding-pathway`, the relevant `protocol:*`, and `agent:routine`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
 - `guild-weekly-synthesis` creates no GitHub or Linear issues. It produces a Drive memo + two Discord posts.
 
