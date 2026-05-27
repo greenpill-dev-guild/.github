@@ -41,6 +41,7 @@ These directories are shared references for guild contributors, but they must be
 - [`adr/`](./adr/) — guild-level architectural decision records and template
 - [`PARTNERS.md`](./PARTNERS.md) — partner, funder, and chapter interface
 - [`docs/linear-operating-model.md`](./docs/linear-operating-model.md) — source-of-truth split for Linear, GitHub, Drive, and discussion channels
+- [`docs/linear-aware-dev-day-launcher.md`](./docs/linear-aware-dev-day-launcher.md) — agent-agnostic flow for resolving Linear work into local dev launches
 
 ## Working rules for this repo
 

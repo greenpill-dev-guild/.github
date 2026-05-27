@@ -4,6 +4,8 @@
 
 Linear is the guild's project-management source of truth. GitHub remains the public execution surface for code, issues, pull requests, and RFCs. Drive holds memos, evidence, grant drafts, meeting notes, and partner materials. Discord, Telegram, and calls are discussion and pulse channels.
 
+For local development startup, use the [Linear-aware dev day launcher](./linear-aware-dev-day-launcher.md): the active agent or script reads Linear through approved access, `dev-surfaces` resolves the local launch plan, and the human confirms before anything starts.
+
 ## Source-of-truth split
 
 | Surface | Owns | Does not own |
