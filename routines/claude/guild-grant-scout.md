@@ -59,7 +59,7 @@ What this guild is uniquely positioned to win funding for:
 
 **Distinct angles for funder pitches:** offline-first PWA infrastructure for low-connectivity contexts, on-chain regenerative impact attestation, shared identity primitives across multiple production products, real-user pilot data (Season One gardens on Arbitrum mainnet), evaluator/operator role separation as a governance pattern.
 
-Prior grant work to reference (do not duplicate, iterate): NLnet NGI Zero Commons "Evidence Commons", Octant proposal packs, OSV Grant proposal (Drive), and any Drive docs under grants/proposals.
+Prior grant *materials* to reference for reuse (iterate, do not duplicate): the NLnet NGI Zero Commons draft(s), Octant proposal packs, the OSV Grant proposal, and any Drive docs under grants/proposals. **These are application materials, not awards — never describe them as won, completed, delivered, or as a prior funding relationship unless verified (see Guardrails).** Authoritative funding status lives in the grants ledger (`database-export.csv`, Drive `Funding database export` folder): only rows marked **Completed** are wins. As of 2026-05-31: **NLnet = Applied / pending, never awarded** (no prior NLnet grant or relationship exists — do not imply one); OSV = submitted/awaiting; completed wins citable as track record = Grant Ships R1/R2, Gitcoin GG20–24, Octant Epoch 5 & 10 (Epoch 12 accepted), ReFi-in-Arbitrum, Arbitrum DAO "Building Regenerative Impact".
 
 ## Phase 0: Prior-run recall
 
