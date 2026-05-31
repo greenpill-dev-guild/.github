@@ -19,20 +19,28 @@ A payable brief carries: one named **Output** artifact · 3–6 **Acceptance cri
 
 ## Sizing — how much
 
-We do not price the insight (you can't); we price **bounded effort at one guild rate, banded at scope time by the scoper — not by the contributor.**
+We do not price the insight (you can't); we price **bounded effort at a guild rate set per brief by impact, banded at scope time by the scoper — not by the contributor.** The rate is an internal sizing tool; **work is billed as a fixed price per brief, never open hourly.**
 
-- **Guild research rate: $50/hr** — within the guild's $30–60 contributor range, upper-middle because research is senior, decision-shaping work. Explicitly below market for now; it ramps (see *Trust over time*).
-- **Bands** — assigned when we scope, before work starts; price = estimated hours × rate, then fixed for the brief:
+- **Guild research rate: $30–60/hr, set per brief by impact.** Low end for routine scouting / low-convergence work; top end for a high-impact synthesis sprint that materially moves the guild forward — we hold a lot of data, and well-aimed synthesis over a focused week is some of the highest-leverage work we have. The range is an explicit early-stage discount below market; it rises as grants grow.
+- **Relativity guardrail:** a research deliverable sizes **below a comparable engineering / integration deliverable** — integration is the heavier lift to implement. Reference: the Hypercerts + DeFi integration ran ~$4,800 (~80–200h, ≈ $24–60/hr). So a research **Deep tops out ~$2.5–3k** and never approaches what a major integration commands.
+- **Bands** — assigned when we scope, before work starts; price = estimated hours × the impact-set rate, then fixed for the brief:
 
-  | Band | Effort | Indicative price @ $50/hr | For |
+  | Band | Effort | Typical fixed price | Rate posture |
   |---|---|---|---|
-  | **Scout** | 3–10 hrs | $150–500 | bounded question, one quick artifact (incl. Stage 0 scoping) |
-  | **Brief** | 12–30 hrs | $600–1,500 | one scoped deliverable feeding a specific decision |
-  | **Deep** | 40–80 hrs | $2,000–4,000 | synthesis across sources; feeds a load-bearing decision |
+  | **Scout** | 3–10 hrs | $100–500 | low end ($30–40) — bounded question / spike / Stage 0 scoping |
+  | **Brief** | 12–30 hrs | $500–1,800 | full range by impact — a high-impact week-long synthesis sprint earns the top |
+  | **Deep** | 40–80 hrs | $1,500–3,000 | lower end — large hour-count, kept below a major integration |
 
-- **Sanity-check against decision stakes:** what does the decision this unblocks let us do, and how much funding or risk does it touch? Cheap insurance on a big decision is justified; gold-plating a minor one gets downsized.
-- **Foundational / reused** work (a taxonomy, an impact-claim spine others build on) prices at the top of its band — an exceptional Deep can reach ~$5k; one-offs sit at the bottom. Tiny Scout tasks can flex toward $60–70/hr since the absolute is small.
+- **Sanity-check against decision stakes:** what does the decision this unblocks let us do, and how much funding or risk does it touch? **Foundational / reused** work (a taxonomy, an impact-claim spine others build on) earns the top of its band.
 - This dissolves the "contributor won't put a number on the work" problem: **the guild bands it as part of scoping.** No one self-prices.
+
+## Controlling total spend
+
+The rate sizes a brief; it does not bound the budget. What keeps research affordable as the team grows:
+
+- **Grant-tied envelope.** Research is funded as a capped line-item inside the grant or initiative it supports (a set amount / % per cycle), not an open pool — and we prefer research that helps unblock the funding it draws from.
+- **WIP cap: ≤ 2–3 *paid* briefs active at once**, regardless of headcount. Five contributors do not mean five paid briefs.
+- **Most research stays unpaid signal.** The #research channel and the weekly synthesis routine capture raw exploration for free; a *paid* brief is the exception, reserved for a scoped, decision-critical question.
 
 ## Accept, revise, escalate
 
@@ -42,15 +50,16 @@ We do not price the insight (you can't); we price **bounded effort at one guild 
 
 ## Research vs product
 
-Product and research share this spine; research differs in three ways:
+Product and research share this spine; research differs in a few ways:
 
 - **Horizon & uncertainty** — research is longer and fuzzier → smaller Stage 0, more milestone-based Stage 1.
 - **Negative results are paid in full.** A rigorously-executed brief that concludes "no-go" is fully delivered and fully paid. We pay for *rigor against the criteria*, never for a particular answer — otherwise we pay people to tell us what we want to hear.
 - **Two valuation paths** — research feeding a product/strategy decision → band × rate; research feeding **funding** (proposal credibility, grant pipeline) → peg to a fraction of the funding it unblocks. Acceptance is "criteria met + decision usable," not artifact length.
+- **Relativity holds** — research sizes *below* the comparable engineering / integration work, which is the heavier implementation lift.
 
 ## Trust over time
 
-First engagement: more up front, more support. Future front-loading is **earned by delivery**; repeated misses mean quiet non-renewal, not confrontation. As budgets grow the rate steps up — **$50 → toward $60 (today's ceiling) → market** — on a stated trigger (e.g., per major grant won), and proven delivery moves a contributor up within range.
+First engagement: more up front, more support. Future front-loading is **earned by delivery**; repeated misses mean quiet non-renewal, not confrontation. Cash is not the whole package — GreenWill recognition, credited overflow pickups (`reassigned:overflow`), and a rising track record are part of how the guild values contribution. As budgets grow the **$30–60 range itself rises toward market** on a stated trigger (e.g., per major grant won), and proven delivery moves a contributor toward the top of the current range.
 
 ## Related
 
@@ -60,4 +69,4 @@ First engagement: more up front, more support. Future front-loading is **earned 
 
 ---
 
-*Status: draft for steward review. Rate set at $50/hr; band $-ranges are defaults to tune against runway. Natural first pilot — coi's scoped Impact Framework work (RESR-6 → RESR-12), introduced as "how we pay for scoped work now," not a crackdown.*
+*Status: draft for steward review. Rate = **$30–60/hr range, set per brief by impact**, research sized below comparable integration work; band $-ranges are defaults to tune against runway, and the per-cycle research envelope is set per grant. Natural first pilot — coi's scoped Impact Framework work (RESR-6 → RESR-12), introduced as "how we pay for scoped work now," not a crackdown.*
