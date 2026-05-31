@@ -50,7 +50,7 @@ This routine is **centered on three primary funding targets — Coop, Green Good
 
 What this guild is uniquely positioned to win funding for:
 
-- **Green Goods** — offline-first regenerative documentation platform. Passkey auth, EAS attestations, Arbitrum production deployment with real users (Season One: 13 live gardens), Envio indexer. Strongest grant evidence in the guild — production code + production users.
+- **Green Goods** — offline-first regenerative documentation platform. Passkey auth, EAS attestations, Arbitrum production deployment with real users (Season One pilot live on Arbitrum mainnet), Envio indexer. Strongest grant evidence in the guild — production code + production users.
 - **Coop** — browser extension and PWA for group knowledge capture; Yjs CRDT, Filecoin archival, Safe multisig, **shares Green Goods identity + attestation infrastructure**. Cross-project leverage is real, not aspirational.
 - **PGSP** — Public Goods Staking Protocol. Hoodi testnet onboarding, Lido CSM v3 readiness, validator squad operator support.
 - **Cookie Jar** — funding allowance primitive. DAO tooling, local capital allocation, funding infrastructure.
@@ -440,6 +440,8 @@ If the Drive write fails, still consider the run successful (Discord post + Line
 - **One full draft per run max.** Lightweight outlines for additional urgent opportunities are fine.
 - **Never submit proposals.** Human review owns final submission.
 - **Only claim capabilities that exist in the code today.** Planned work must be labeled as proposed.
+- **Verify factual claims against primary sources before they enter a draft or a Linear Issue.** Track record, prior funding, partnerships, "live" capabilities, and metrics must each trace to a primary source — the grants ledger (`database-export.csv`) for funding status, the indexer/PostHog for metrics, repo code for capabilities. If a claim can't be verified, omit it or mark it "unverified — confirm before submission." Never upgrade an "applied"/"in progress" item to "awarded"/"completed," and never imply a funder relationship the ledger doesn't show. A fabricated track-record claim is a credibility risk with funders and a disqualifier with several (incl. NLnet).
+- **Never hardcode production metrics in a draft.** Garden/gardener/operator/evaluator counts and similar figures drift between runs — pull them from the indexer/PostHog at run time and cite with an "as of {date}" stamp.
 - **Don't share sensitive metrics, unannounced strategy, private counterparties, or budget details in Discord.** Those go to Drive + Linear.
 - **Do not modify source files in any project repo or edit Miro boards or Canva designs.** All design-surface reads are read-only.
 - **PostHog is privacy-public mode only.** Never paste replay URLs, session IDs, distinct IDs, wallet addresses, or any private field. Curated question names only — no raw HogQL in the routine reasoning.
