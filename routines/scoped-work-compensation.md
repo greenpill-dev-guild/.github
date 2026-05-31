@@ -29,7 +29,7 @@ A payable brief carries one named **Output** · 3–6 **Acceptance criteria** ·
 Price **bounded effort at a guild rate set per brief by impact, banded at scope time by the scoper — not the contributor.** The rate is an internal sizing tool; **work is billed fixed-price per brief, never open hourly** (the exception is continuous-work hourly extras).
 
 - **Guild rate: $30–60/hr, set per brief by impact.** Low end for routine work; top end for a high-impact sprint that materially moves the guild forward. An explicit early-stage discount below market; rises as grants grow.
-- **Relativity ladder:** engineering / integration is the heaviest implementation lift → it anchors the top (reference: the Hypercerts + DeFi integration ≈ $4,800, ~80–200h). Product, marketing, research, and growth size *at or below* comparable engineering effort.
+- **Relativity ladder:** engineering / integration is the heaviest implementation lift → it anchors the top (a major integration is ~80–200h of senior work). Product, marketing, research, and growth size *at or below* comparable engineering effort.
 - **Bands** (price = estimated hours × the impact rate, fixed for the brief):
 
   | Band | Effort | Typical fixed price |
