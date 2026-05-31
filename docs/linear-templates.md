@@ -8,7 +8,7 @@ Linear UI templates may exist, but Codex and other connector-based agents cannot
 
 - Customer Needs are raw customer, partner, funder, garden, cohort, or internal-ops signal. They are not commitments to build.
 - Linear Issues are accepted units of work with a clear next action. Product issues track accepted delivery, QA, maintenance, funding, and protocol work. Research issues track accepted research tasks.
-- Grouped child labels are exclusive in Linear. Choose the primary child label for each family, such as one `task:*`, one `activity:*`, one `protocol:*`, and one `package:*` where applicable.
+- Grouped child labels are exclusive in Linear. Choose the primary child label for each family, such as one `task:*`, one `activity:*`, one `protocol:*`, one `package:*` where applicable, and one `band:*` for payable scoped briefs.
 - Projects are bounded containers made from multiple related stories, issues, or research tasks. Do not create a project for a single loose idea unless it is a deliberate scoping project.
 - Initiatives are outcome arcs. They group projects around a durable strategic outcome, not around a repo, inbox, or imported board.
 - Do not route new work into completed, canceled, staging, or retired projects such as `Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, or `Story Board`.
@@ -181,6 +181,32 @@ Research source: {#research week of YYYY-MM-DD, partner conversation, Drive memo
 ## Status
 
 Accepted - research time is committed to investigating this. Graduates into a bounded delivery project only if the investigation produces work the team commits to ship.
+```
+
+## Linear Scoped Brief - Payable Deliverable
+
+Use when a piece of work is scoped for **payment** (any discipline). This is the deliverable shape behind the [compensation playbook](../routines/scoped-work-compensation.md). The *Accepted Research Task* above is the lighter acceptance-bar intake; a paid **Stage-0 scoping** pass turns an accepted task into this payable brief.
+
+Title: `{short deliverable title}`
+
+Labels: one `activity:*` (discipline), one `band:*` (`scout` / `brief` / `deep`), primary relevant `protocol:*`, and `task:*` where applicable. Set a due date and assignee.
+
+```markdown
+## Output
+
+{the one concrete artifact this brief produces}
+
+## Acceptance criteria
+
+* {3–6 checkable bullets — what "done + accepted" means}
+
+## Boundary
+
+{what is explicitly out of scope}
+
+## Decision / exit
+
+Done when {condition}, reviewed by {steward / designated evaluator}. Feeds: {the decision this unblocks}.
 ```
 
 ## Linear Funding Issue - Grant Lifecycle
