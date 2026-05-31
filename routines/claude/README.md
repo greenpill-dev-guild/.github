@@ -13,9 +13,10 @@ Distinct from `../*.md` markdown playbooks for manual guild processes like funde
 | `coop-intent-pulse.md` | active | Wed 15:30 weekly | Linear only | Initiative status update on `Coop Product Loop & Intent Clarity`; no Issues or Customer Needs |
 | `guild-grant-scout.md` | active | Wed 19:00 weekly | `#funding` + Drive memo | Linear Product (unprojected staging, `funding:*` lifecycle); accepted awards route into a dedicated `Grant Proposal / Award Stewardship` project |
 | `research-synthesis.md` | active | Fri 17:00 weekly | `#research` + Drive memo | Linear Research team (unprojected, `activity:research`) |
+| `research-accountability-pulse.md` | active | Mon & Thu 08:00 twice-weekly | `#research` | Read-only — flags Research team slippage (past-due / stalled / due-soon); writes nothing to Linear |
 | `software-ecology-pulse.md` | source-ready | Mon 19:30 weekly | Linear + Drive + private Discord | Initiative status update on `Software Ecology & Agentic Workflow Health`; requires `Software Ecology Snapshot YYYY-WW` handoff; no Issues or Customer Needs |
 
-Five scheduled runs are active per week, plus the source-ready software ecology pulse. Monday opens with the cross-project synthesis that primes the week; the ecology pulse is intended to follow after a fresh `dev ecology --json --handoff` snapshot has been uploaded or attached as `Software Ecology Snapshot YYYY-WW`. Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before product sync, then handles grants midweek. Friday closes the week with research synthesis. No daily-cadence routines.
+Five weekly runs plus a twice-weekly research-accountability pulse are active, alongside the source-ready software ecology pulse. Monday opens with the cross-project synthesis that primes the week; the ecology pulse is intended to follow after a fresh `dev ecology --json --handoff` snapshot has been uploaded or attached as `Software Ecology Snapshot YYYY-WW`. Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before product sync, then handles grants midweek. Friday closes the week with research synthesis. The read-only research-accountability pulse runs Mon & Thu mornings (08:00) to surface Research-team slippage. No daily-cadence routines.
 
 Anything else previously in this folder has been removed — folded into the surviving routines or cut as noise.
 
@@ -42,11 +43,13 @@ Other guild repos (gardens, impact-reef, gg24-round-explorer, octant-v2(-core), 
 ## Schedule
 
 ```text
+Mon  08:00  research-accountability-pulse
 Mon  18:00  guild-weekly-synthesis
 Mon  19:30  software-ecology-pulse (source-ready; enable after snapshot handoff is configured)
 Tue  16:00  network-steward-intent-pulse
 Wed  15:30  coop-intent-pulse
 Wed  19:00  guild-grant-scout
+Thu  08:00  research-accountability-pulse
 Fri  17:00  research-synthesis
 ```
 
@@ -62,6 +65,7 @@ Fri  17:00  research-synthesis
 | Linear initiative `Software Ecology & Agentic Workflow Health` | software-ecology-pulse | weekly software-ecology health status, no work creation |
 | `#funding` | guild-grant-scout | grant opportunities + proposals |
 | `#research` | research-synthesis | weekly research digest |
+| `#research` | research-accountability-pulse | twice-weekly accountability flags (read-only) |
 
 ## Notification policy
 
@@ -70,6 +74,7 @@ Routines @mention Afo only when his action is required (via `DISCORD_USER_ID_AFO
 - `guild-weekly-synthesis` — only on the `#lead-council` post when at least one risk/decision is overdue
 - `guild-grant-scout` — when a grant deadline is < 7 days out, a new high-fit opportunity scores ≥ 4 on Green Goods, or a stale-prospect decision is needed
 - `research-synthesis` — when an action concretely maps to Green Goods active work
+- `research-accountability-pulse` — tags afo on past-due (🔴) items only
 
 The `#community` excerpt from `guild-weekly-synthesis` never mentions. Discord notifications stay signal-heavy.
 
@@ -97,6 +102,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 | `software-ecology-pulse` | Google Drive, Linear | Local `dev ecology --json --handoff` snapshot is the primary input and must be uploaded/attached as `Software Ecology Snapshot YYYY-WW`; Linear = initiative status update only; Drive = memo archive; Discord is posted through the configured bot token. No Issues, Customer Needs, PRs, repo edits, deploys, browser sessions, or heavy validation. |
 | `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `funding:*` lifecycle saved views; accepted awards graduate to a bounded award/delivery project · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
 | `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal (Linear Research team, unprojected) · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
+| `research-accountability-pulse` | Linear | Linear = read Research team issues for slippage detection (read-only); Discord posted via the shared bot token; no Drive/Calendar/design/PostHog/Mermaid |
 
 Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
 
@@ -142,6 +148,7 @@ Old label vocabularies (`area:*`, `work:*`, `migration:*`, `automation:*`, `heal
 - `network-steward-intent-pulse` is a status-only routine. It writes to the `Network Presence` initiative and does not create Issues, Customer Needs, projects, Discord posts, Drive docs, or GitHub artifacts.
 - `coop-intent-pulse` is a status-only routine. It writes to the `Coop Product Loop & Intent Clarity` initiative and does not create Issues, Customer Needs, projects, Discord posts, Drive docs, or GitHub artifacts.
 - `software-ecology-pulse` is a status-only routine. It writes to the `Software Ecology & Agentic Workflow Health` initiative, a Dev Guild shared Drive memo, and a private Discord summary. It does not create Issues, Customer Needs, projects, GitHub artifacts, repo edits, deploys, browser sessions, or `.plans` changes.
+- `research-accountability-pulse` is a read-only routine. It posts one `#research` summary flagging overdue / stalled / due-soon owned Research issues (thresholds N=7 / X=3 / M=7, grant pipeline excluded) and writes nothing to Linear in v1. A later v2 may comment/@mention on flagged issues. Canonical rule: the Research team's "Research Accountability — scope, due dates & escalation" Linear Document.
 - Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, `task:funding-pathway`, the relevant `protocol:*`, and `agent:routine`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
 - `guild-weekly-synthesis` creates no GitHub or Linear issues. It produces a Drive memo + two Discord posts.
 
