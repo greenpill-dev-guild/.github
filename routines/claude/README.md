@@ -126,7 +126,8 @@ All Linear writes use the canonical label scheme:
 
 - `protocol:*` — protocol/project (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:tas`)
 - `package:*` — code package surface. Green Goods packages: `package:client`, `package:admin`, `package:shared`, `package:contracts`, `package:indexer`, `package:agent`, `package:docs`. Coop packages: `package:app`, `package:api`, `package:extension`. (Each protocol owns its own package set; `protocol:*` partitions the namespace.)
-- `activity:*` — activity type (`activity:research`, `activity:qa`, `activity:maintenance`, `activity:architecture`, `activity:build`, `activity:design`)
+- `activity:*` — activity type (`activity:research`, `activity:qa`, `activity:maintenance`, `activity:architecture`, `activity:build`, `activity:design`, `activity:marketing`, `activity:community`, `activity:growth`)
+- `band:*` — value band for a paid scoped brief (sizing for comp): `band:scout`, `band:brief`, `band:deep`. See the scoped-work compensation playbook (`routines/scoped-work-compensation.md`).
 - `task:*` — user-task semantics (`task:funding-pathway`, `task:evidence`, `task:access-participation`, `task:reputation-identity`, `task:data-input`, `task:local-onboarding`, `task:evaluator-review`)
 - `funding:*` — funding lifecycle (`funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`)
 - `source:*` — provenance of the originating signal (`source:discord`, `source:telegram`, `source:drive`, `source:plans`, `source:github`)
