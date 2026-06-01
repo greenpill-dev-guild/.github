@@ -69,7 +69,7 @@ The rate sizes a brief; it does not bound the budget. What keeps spend affordabl
 
 ## Trust over time
 
-First engagement: more up front, more support. Future front-loading is **earned by delivery**; repeated misses mean quiet non-renewal, not confrontation. Cash isn't the whole package — recognition (GreenWill), credited overflow pickups (`reassigned:overflow`), and a rising track record all count. As budgets grow the **$30–60 range itself rises toward market** on a stated trigger (e.g. per major grant won), and proven delivery moves a contributor toward the top of the current range.
+First engagement: more up front, more support. Future front-loading is **earned by delivery**; repeated misses mean quiet non-renewal, not confrontation. Cash isn't the whole package: recognition (GreenWill), credited overflow pickups (the unearned tranche follows the work to whoever finishes it), and a rising track record all count. As budgets grow the **$30–60 range itself rises toward market** on a stated trigger (e.g. per major grant won), and proven delivery moves a contributor toward the top of the current range.
 
 ## In Linear
 
