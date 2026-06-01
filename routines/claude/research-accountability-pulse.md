@@ -48,7 +48,7 @@ You are **distinct from `research-synthesis`** (Fri): that routine *creates* acc
 List open issues from **both teams** and keep only **owned commitments** — an issue qualifies only if it has **both an assignee and a due date**:
 
 - **Research team** — all such issues.
-- **Product team** — only those that *also* have an **estimate set** (a paid scoped brief — on Product, an estimate is set only on paid briefs). This keeps Product's large backlog out — we chase paid briefs, not everything.
+- **Product team** — only those that *also* have an **estimate set** (the Linear `estimate` field is present / non-null on the issue — `list_issues` returns `estimate` only when one is set, so its presence is the gate). On Product an estimate is set only on paid scoped briefs. This keeps Product's large backlog out — we chase paid briefs, not everything.
 
 Then apply these **hard exclusions** to both teams:
 
