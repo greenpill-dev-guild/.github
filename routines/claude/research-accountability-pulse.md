@@ -58,8 +58,7 @@ Then apply these **hard exclusions** to both teams:
   owned by `guild-grant-scout`, not research-accountability misses — without this they wrongly flag.
 
 Capture for survivors: identifier, title, url, assignee (display name), dueDate, status/statusType,
-startedAt, updatedAt, labels. Separately count issues labelled `reassigned:overflow` and
-`lane:afo-research` for the tally. Use today's UTC date as the reference.
+startedAt, updatedAt, labels. Use today's UTC date as the reference.
 
 > Signal note: `updatedAt` is the proxy for "no progress"; **`gitBranchName` is NOT a work signal**
 > (every issue auto-gets one). Real start signal is `startedAt` / `statusType = started`.
@@ -72,8 +71,7 @@ startedAt, updatedAt, labels. Separately count issues labelled `reassigned:overf
 
 ## Phase 3 — Tally
 
-- afo overflow pickups: count of `reassigned:overflow` (all-time, and within the current cycle).
-- Per-owner throughput: open assigned research issues per person, and how many are currently flagged.
+- Per-owner throughput: open assigned issues per person, and how many are currently flagged.
 
 ## Phase 4 — Post to #research
 
@@ -97,9 +95,8 @@ all-clear message instead of empty sections.
 🟡 **Due within {X}d, not started** ({n})
 • {ID} {title} — due {date}, {owner} <{url}>
 
-📈 **Lane & overflow**
-• afo overflow pickups (reassigned:overflow): {n} all-time · {n} this cycle
-• Open assigned research — {owner}: {n} ({k} flagged) · …
+📈 **Throughput**
+• Open assigned ({owner}): {n} ({k} flagged) · …
 
 — *Pulse · thresholds N={N}/X={X}/M={M} · commented on {c} flagged issue(s) · rule: <https://linear.app/greenpill-dev-guild/document/research-accountability-scope-due-dates-and-escalation-7603e2acaff1>*
 ```
@@ -111,9 +108,8 @@ All-clear variant (every bucket empty):
 
 ✅ All owned research is on track — nothing past due, stalled, or due in the next {X} days.
 
-📈 **Lane & overflow**
-• afo overflow pickups (reassigned:overflow): {n} all-time · {n} this cycle
-• Open assigned research — {owner}: {n} · …
+📈 **Throughput**
+• Open assigned ({owner}): {n} · …
 
 — *Pulse · thresholds N={N}/X={X}/M={M} · rule: <https://linear.app/greenpill-dev-guild/document/research-accountability-scope-due-dates-and-escalation-7603e2acaff1>*
 ```
@@ -150,7 +146,6 @@ Rules:
 ## Why this exists
 
 Accountability is structural, not afo's job. coi's lane = Green Goods / Impact Framework; PGSP = afo +
-Matt; afo's deep/cross-cutting research = `lane:afo-research`. The escalation rule (scope → due date →
+Matt; afo's deep/cross-cutting research is a saved view (Research team, assignee = afo), not a label. The escalation rule (scope → due date →
 flag → reminder → reassign-credited / re-scope) is the linked Document; this routine is its detection +
-nudge layer. The terminal escalation (reassign to afo with `reassigned:overflow`, or re-scope) stays a
-human call — this routine never reassigns.
+nudge layer. The terminal escalation (reassign to afo, credited via the comp flow since the unearned tranche follows the work, or re-scope) stays a human call; this routine never reassigns.
