@@ -35,10 +35,10 @@ Price **bounded effort at a guild rate set per brief by impact, sized at scope t
   | Tier | Estimate | Effort | Typical fixed price |
   |---|---|---|---|
   | **Scout** | 1 | 3–10 hrs | $100–500 |
-  | **Brief** | 2 | 12–30 hrs | $500–1,800 |
-  | **Deep** | 4 | 40–80 hrs | $1,500–3,000 |
+  | **Brief** | 4 | 12–30 hrs | $500–1,800 |
+  | **Deep** | 16 | 40–80 hrs | $1,500–3,000 |
 
-  Most product / marketing / research briefs are **Scout–Brief** (clear scope, ~1–2 weeks). **Deep** is reserved for cross-cutting, load-bearing work and stays below a major integration. **Scout / Brief / Deep** stay as the shared concept names for sizing conversations; the tracked field is the exponential estimate they map to (**1 / 2 / 4**), with a major integration sitting above at 8+.
+  Most product / marketing / research briefs are **Scout–Brief** (clear scope, ~1–2 weeks). **Deep** is reserved for cross-cutting, load-bearing work and stays below a major integration. **Scout / Brief / Deep** stay as the shared concept names for sizing conversations; the tracked field is the exponential estimate they map to (**1 / 4 / 16**), with a major integration above at 32+.
 
 ## By discipline
 
@@ -73,7 +73,7 @@ First engagement: more up front, more support. Future front-loading is **earned 
 
 ## In Linear
 
-- A paid **deliverable brief** lives as an issue on its team (Product or Research), carrying the **scoped-brief shape** (the RESR-4 template), an **`activity:*` label** for its discipline (`build` / `design` / `research` / `architecture` / …), and its **estimate** set on the issue (Scout ~ 1 / Brief ~ 2 / Deep ~ 4).
+- A paid **deliverable brief** lives as an issue on its team (Product or Research), carrying the **scoped-brief shape** (the RESR-4 template), an **`activity:*` label** for its discipline (`build` / `design` / `research` / `architecture` / …), and its **estimate** set on the issue (Scout ~ 1 / Brief ~ 4 / Deep ~ 16).
 - **Growth / BD / Funding** runs through the `funding:*` lifecycle labels + the Grant Scouting project (sourced by the `guild-grant-scout` routine).
 - **Continuous roles** (community support, maintenance) are a recurring arrangement, tracked separately from per-brief issues.
 - The **research-accountability pulse + rule** govern dated, owned deliverable issues — Research today, extendable to Product.

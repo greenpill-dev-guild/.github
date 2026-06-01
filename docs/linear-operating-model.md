@@ -38,12 +38,12 @@ Use [Linear templates](./linear-templates.md) as the canonical body reference fo
 Use these label families for Linear Issues:
 
 - `protocol:*` — project or protocol surface, such as `protocol:green-goods`, `protocol:coop`, `protocol:network`, `protocol:cookie-jar`, `protocol:pgsp`, `protocol:greenwill`, or `protocol:tas-hub`.
-- `package:*` — code package surface when useful, such as `package:client`, `package:admin`, `package:contracts`, `package:indexer`, or `package:agent`.
+- `package:*` — code surface, keyed to the **repo** the code lives in and orthogonal to `protocol:*` (the product — one package can serve several products, e.g. GreenWill contracts live in green-goods). green-goods: `package:client`, `package:admin`, `package:agent`, `package:indexer`; coop: `package:app`, `package:api`, `package:extension`; shared by both repos: `package:contracts`, `package:shared`, `package:docs`. Code-touching work only — omit on research / funding / ops; single-surface repos (e.g. `network`) omit it entirely.
 - `activity:*` — work mode, such as `activity:build`, `activity:research`, `activity:design`, `activity:qa`, `activity:maintenance`, `activity:marketing`, `activity:community`, or `activity:growth`.
 - `funding:*` — grant/funding lifecycle: `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`.
 - `source:*` — originating signal, such as `source:github`, `source:discord`, `source:telegram`, `source:drive`, or `source:plans`.
 - `agent:*` — authored or maintained by a routine or agent, such as `agent:claude`, `agent:codex`, or `agent:copilot`.
-- **Estimate (Linear field)** — sizing for a paid scoped brief on the exponential scale (Scout ~ 1, Brief ~ 2, Deep ~ 4); replaces the retired `band:*` labels. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
+- **Estimate (Linear field)** — sizing for a paid scoped brief on the exponential scale (Scout ~ 1, Brief ~ 4, Deep ~ 16); replaces the retired `band:*` labels. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
 
 Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
 
