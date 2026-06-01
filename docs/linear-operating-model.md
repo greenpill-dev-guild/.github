@@ -43,7 +43,7 @@ Use these label families for Linear Issues:
 - `funding:*` — grant/funding lifecycle: `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`.
 - `source:*` — originating signal, such as `source:github`, `source:discord`, `source:telegram`, `source:drive`, or `source:plans`.
 - `agent:*` — authored or maintained by a routine or agent, such as `agent:claude`, `agent:codex`, or `agent:copilot`.
-- **Estimate (Linear field)** — sizing for a paid scoped brief (Scout ~ 1, Brief ~ 2, Deep ~ 3); replaces the retired `band:*` labels. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
+- **Estimate (Linear field)** — sizing for a paid scoped brief on the exponential scale (Scout ~ 1, Brief ~ 2, Deep ~ 4); replaces the retired `band:*` labels. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
 
 Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
 

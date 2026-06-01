@@ -189,7 +189,7 @@ Use when a piece of work is scoped for **payment** (any discipline). This is the
 
 Title: `{short deliverable title}`
 
-Labels: one `activity:*` (discipline) and primary relevant `protocol:*`. Set an **estimate** (Scout ~ 1 / Brief ~ 2 / Deep ~ 3), a due date, and an assignee.
+Labels: one `activity:*` (discipline) and primary relevant `protocol:*`. Set an **estimate** (exponential — Scout ~ 1 / Brief ~ 2 / Deep ~ 4), a due date, and an assignee.
 
 ```markdown
 ## Output
