@@ -40,19 +40,18 @@ Use these label families for Linear Issues:
 - `protocol:*` — project or protocol surface, such as `protocol:green-goods`, `protocol:coop`, `protocol:network`, `protocol:cookie-jar`, `protocol:pgsp`, `protocol:greenwill`, or `protocol:tas-hub`.
 - `package:*` — code package surface when useful, such as `package:client`, `package:admin`, `package:contracts`, `package:indexer`, or `package:agent`.
 - `activity:*` — work mode, such as `activity:build`, `activity:research`, `activity:design`, `activity:qa`, `activity:maintenance`, `activity:marketing`, `activity:community`, or `activity:growth`.
-- `task:*` — user-task semantics, such as `task:funding-pathway`, `task:evidence`, `task:access-participation`, `task:data-input`, or `task:local-onboarding`.
 - `funding:*` — grant/funding lifecycle: `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`.
 - `source:*` — originating signal, such as `source:github`, `source:discord`, `source:telegram`, `source:drive`, or `source:plans`.
 - `agent:*` — authored or maintained by a routine or agent, such as `agent:claude`, `agent:codex`, or `agent:copilot`.
-- `band:*` — value band for a paid scoped brief (sizing for compensation): `band:scout`, `band:brief`, or `band:deep`. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
+- **Estimate (Linear field)** — sizing for a paid scoped brief (Scout ~ 1, Brief ~ 2, Deep ~ 3); replaces the retired `band:*` labels. See the [scoped-work compensation playbook](../routines/scoped-work-compensation.md).
 
-Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `task:*`, `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
+Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
 
-Do not recreate retired GitHub-era label families in Linear. In particular, avoid `area:*`, `work:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, and `source:linear`.
+Do not recreate retired GitHub-era label families in Linear. In particular, avoid `area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, and `source:linear`.
 
-## Scoped work, bands & accountability
+## Scoped work, sizing & accountability
 
-Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries a `band:*` label and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
 
 ## Funding lifecycle
 

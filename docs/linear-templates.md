@@ -8,7 +8,7 @@ Linear UI templates may exist, but Codex and other connector-based agents cannot
 
 - Customer Needs are raw customer, partner, funder, garden, cohort, or internal-ops signal. They are not commitments to build.
 - Linear Issues are accepted units of work with a clear next action. Product issues track accepted delivery, QA, maintenance, funding, and protocol work. Research issues track accepted research tasks.
-- Grouped child labels are exclusive in Linear. Choose the primary child label for each family, such as one `task:*`, one `activity:*`, one `protocol:*`, one `package:*` where applicable, and one `band:*` for payable scoped briefs.
+- Grouped child labels are exclusive in Linear. Choose the primary child label for each family, such as one `activity:*`, one `protocol:*`, and one `package:*` where applicable. Set an **estimate** on payable scoped briefs (replaces `band:*`).
 - Projects are bounded containers made from multiple related stories, issues, or research tasks. Do not create a project for a single loose idea unless it is a deliberate scoping project.
 - Initiatives are outcome arcs. They group projects around a durable strategic outcome, not around a repo, inbox, or imported board.
 - Do not route new work into completed, canceled, staging, or retired projects such as `Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, or `Story Board`.
@@ -90,7 +90,7 @@ Use when a project is real enough to keep visible but does not yet have scoped i
 
 Title: `scope: {Project Name}`
 
-Labels: primary relevant `protocol:*`, `activity:*`, and `task:*`. Add `funding:*` only for funding lifecycle work.
+Labels: primary relevant `protocol:*` and `activity:*`. Add `funding:*` only for funding lifecycle work.
 
 ```markdown
 ## Project Scoping Issue
@@ -146,7 +146,7 @@ Use only after the research acceptance bar is met.
 
 Title: `Research: {short action title}`
 
-Labels: `activity:research`, primary relevant `protocol:*`, and primary relevant `task:*`. Add `agent:routine` for routine-authored issues.
+Labels: `activity:research` and primary relevant `protocol:*`. Add `agent:routine` for routine-authored issues.
 
 ```markdown
 ## Accepted Research Task
@@ -189,7 +189,7 @@ Use when a piece of work is scoped for **payment** (any discipline). This is the
 
 Title: `{short deliverable title}`
 
-Labels: one `activity:*` (discipline), one `band:*` (`scout` / `brief` / `deep`), primary relevant `protocol:*`, and `task:*` where applicable. Set a due date and assignee.
+Labels: one `activity:*` (discipline) and primary relevant `protocol:*`. Set an **estimate** (Scout ~ 1 / Brief ~ 2 / Deep ~ 3), a due date, and an assignee.
 
 ```markdown
 ## Output
@@ -217,7 +217,7 @@ Title: `Grant: {Program Name}`
 
 Project: leave unprojected unless a bounded award or delivery project already exists and the issue is `funding:active-award`.
 
-Labels: one current `funding:*` label, `activity:research`, `task:funding-pathway`, primary relevant `protocol:*`, and `agent:routine` when routine-authored.
+Labels: one current `funding:*` label, `activity:research`, primary relevant `protocol:*`, and `agent:routine` when routine-authored.
 
 ```markdown
 ## Opportunity

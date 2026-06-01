@@ -10,33 +10,33 @@ We pay for **accepted outputs, not for time.** A scoped piece of work is the uni
 
 ## Two ways we pay
 
-- **Deliverable work → scoped brief + band (fixed price).** Most work: a feature, a campaign, a logo, a spec, a research memo, a grant application, an impact report. Scope it, size it, pay on acceptance.
+- **Deliverable work → scoped brief + estimate (fixed price).** Most work: a feature, a campaign, a logo, a spec, a research memo, a grant application, an impact report. Scope it, size it, pay on acceptance.
 - **Continuous work → a role / retainer per cycle.** Ongoing coverage that isn't a single artifact — community support, ongoing engineering maintenance, funding tracking. Paid as a **monthly role stipend**, with **extra scoped sessions tracked per hour** (e.g. a dedicated onboarding or support session beyond the baseline).
 
-The per-discipline table says which mode each discipline uses. The stages, bands, and acceptance flow below describe **deliverable** work.
+The per-discipline table says which mode each discipline uses. The stages, sizing, and acceptance flow below describe **deliverable** work.
 
 ## The unit (deliverable work)
 
-A payable brief carries one named **Output** · 3–6 **Acceptance criteria** · a **Boundary** · a **Decision/exit** (done-when + the decision it feeds) · a **value band**. No clear artifact + criteria ⇒ not payable yet — it's still in scoping, which is itself paid (Stage 0). Research uses the RESR-4 issue template; the same shape works for any discipline.
+A payable brief carries one named **Output** · 3–6 **Acceptance criteria** · a **Boundary** · a **Decision/exit** (done-when + the decision it feeds) · an **estimate** (its sizing tier). No clear artifact + criteria ⇒ not payable yet — it's still in scoping, which is itself paid (Stage 0). Research uses the RESR-4 issue template; the same shape works for any discipline.
 
 ## Two stages (deliverable work)
 
-- **Stage 0 — Paid scoping (Scout band, up front).** The deliverable *is the brief*: output + acceptance criteria + boundary + decision/exit + a proposed execution band. How a contributor gets "paid to explore" — but the money buys a reviewable output. If Stage 0 yields only vagueness, execution isn't funded: a small, bounded spend and a clean exit.
-- **Stage 1 — Execution (banded + tranched).** Fund the accepted brief at its band, across 2–3 tranches on its milestones; the final tranche releases on decision/exit acceptance.
+- **Stage 0 — Paid scoping (Scout tier, up front).** The deliverable *is the brief*: output + acceptance criteria + boundary + decision/exit + a proposed execution estimate. How a contributor gets "paid to explore" — but the money buys a reviewable output. If Stage 0 yields only vagueness, execution isn't funded: a small, bounded spend and a clean exit.
+- **Stage 1 — Execution (sized + tranched).** Fund the accepted brief at its estimate tier, across 2–3 tranches on its milestones; the final tranche releases on decision/exit acceptance.
 
 ## Sizing — how much
 
-Price **bounded effort at a guild rate set per brief by impact, banded at scope time by the scoper — not the contributor.** The rate is an internal sizing tool; **work is billed fixed-price per brief, never open hourly** (the exception is continuous-work hourly extras).
+Price **bounded effort at a guild rate set per brief by impact, sized at scope time by the scoper — not the contributor.** The rate is an internal sizing tool; **work is billed fixed-price per brief, never open hourly** (the exception is continuous-work hourly extras).
 
 - **Guild rate: $30–60/hr, set per brief by impact.** Low end for routine work; top end for a high-impact sprint that materially moves the guild forward. An explicit early-stage discount below market; rises as grants grow.
 - **Relativity ladder:** engineering / integration is the heaviest implementation lift → it anchors the top (a major integration is ~80–200h of senior work). Product, marketing, research, and growth size *at or below* comparable engineering effort.
-- **Bands** (price = estimated hours × the impact rate, fixed for the brief):
+- **Sizing tiers** — recorded as each issue's Linear **estimate** (price = estimated hours × the impact rate, fixed for the brief):
 
-  | Band | Effort | Typical fixed price |
-  |---|---|---|
-  | **Scout** | 3–10 hrs | $100–500 |
-  | **Brief** | 12–30 hrs | $500–1,800 |
-  | **Deep** | 40–80 hrs | $1,500–3,000 |
+  | Tier | Estimate | Effort | Typical fixed price |
+  |---|---|---|---|
+  | **Scout** | 1 | 3–10 hrs | $100–500 |
+  | **Brief** | 2 | 12–30 hrs | $500–1,800 |
+  | **Deep** | 3 | 40–80 hrs | $1,500–3,000 |
 
   Most product / marketing / research briefs are **Scout–Brief** (clear scope, ~1–2 weeks). **Deep** is reserved for cross-cutting, load-bearing work and stays below a major integration.
 
@@ -44,12 +44,12 @@ Price **bounded effort at a guild rate set per brief by impact, banded at scope 
 
 | Discipline | Unit / output | "Accepted" means | How it's paid |
 |---|---|---|---|
-| **Engineering** | a shippable change — feature, fix, integration (PR-backed) | merged + meets AC + verified working | deliverable bands; heaviest lift, anchors the top. Ongoing maintenance → continuous role. |
-| **Product** | a scoped product artifact — spec, flow, UX design, brief | approved vs the brief + build-ready | deliverable bands; clear scopes, ~1–2 weeks |
-| **Marketing** | a campaign / content / brand asset (incl. logo, creative) | shipped + meets the brief | deliverable bands; clear scopes, ~1–2 weeks |
+| **Engineering** | a shippable change — feature, fix, integration (PR-backed) | merged + meets AC + verified working | deliverable tiers; heaviest lift, anchors the top. Ongoing maintenance → continuous role. |
+| **Product** | a scoped product artifact — spec, flow, UX design, brief | approved vs the brief + build-ready | deliverable tiers; clear scopes, ~1–2 weeks |
+| **Marketing** | a campaign / content / brand asset (incl. logo, creative) | shipped + meets the brief | deliverable tiers; clear scopes, ~1–2 weeks |
 | **Community** | supporting users + members — onboarding, support, engagement | coverage held / session delivered | **monthly support-role stipend** + **per-hour** for extra onboarding or dedicated support sessions |
-| **Research** | a decision-ready artifact — memo, taxonomy, readiness plan | AC met + decision usable (incl. a rigorous "no-go") | deliverable bands (Scout / Brief / Deep), sized below engineering |
-| **Growth / BD / Funding** | grant application, impact report, partnership, funding tracking | submitted / delivered / partnership advanced | funding-pegged bands (a fraction of the funding unblocked); grant **sourcing + tracking** are pipeline / continuous |
+| **Research** | a decision-ready artifact — memo, taxonomy, readiness plan | AC met + decision usable (incl. a rigorous "no-go") | deliverable tiers (Scout / Brief / Deep), sized below engineering |
+| **Growth / BD / Funding** | grant application, impact report, partnership, funding tracking | submitted / delivered / partnership advanced | funding-pegged tiers (a fraction of the funding unblocked); grant **sourcing + tracking** are pipeline / continuous |
 
 **Design is not a separate lane** — product / UX design is a Product artifact; brand / creative (logos, assets) is a Marketing artifact.
 
@@ -73,8 +73,8 @@ First engagement: more up front, more support. Future front-loading is **earned 
 
 ## In Linear
 
-- A paid **deliverable brief** lives as an issue on its team (Product or Research), carrying the **scoped-brief shape** (the RESR-4 template), an **`activity:*` label** for its discipline (`build` / `design` / `research` / `architecture` / …), and its **band** noted on the issue.
-- **Growth / BD / Funding** runs through the `funding:*` lifecycle labels + `task:funding-pathway` + the Grant Scouting project (sourced by the `guild-grant-scout` routine).
+- A paid **deliverable brief** lives as an issue on its team (Product or Research), carrying the **scoped-brief shape** (the RESR-4 template), an **`activity:*` label** for its discipline (`build` / `design` / `research` / `architecture` / …), and its **estimate** set on the issue (Scout ~ 1 / Brief ~ 2 / Deep ~ 3).
+- **Growth / BD / Funding** runs through the `funding:*` lifecycle labels + the Grant Scouting project (sourced by the `guild-grant-scout` routine).
 - **Continuous roles** (community support, maintenance) are a recurring arrangement, tracked separately from per-brief issues.
 - The **research-accountability pulse + rule** govern dated, owned deliverable issues — Research today, extendable to Product.
 
@@ -86,4 +86,4 @@ First engagement: more up front, more support. Future front-loading is **earned 
 
 ---
 
-*Status: draft for steward review. Disciplines: engineering · product · marketing · community · research · growth/BD/funding. Deliverable work = scoped brief + $30–60/hr impact-set bands (research sized below integration); community = monthly support role + hourly extras; product/marketing = artifact briefs, ~1–2 weeks. Spend bound = the per-grant envelope.*
+*Status: draft for steward review. Disciplines: engineering · product · marketing · community · research · growth/BD/funding. Deliverable work = scoped brief + $30–60/hr impact-set tiers (research sized below integration); community = monthly support role + hourly extras; product/marketing = artifact briefs, ~1–2 weeks. Spend bound = the per-grant envelope.*
