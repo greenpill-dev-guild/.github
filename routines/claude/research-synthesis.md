@@ -48,7 +48,7 @@ Color sources NEVER promote a non-substantive `#research` week to active mode. T
 
 - All env vars loaded; do not read `.env`.
 - `DISCORD_USER_ID_AFO` is Afo's Discord snowflake ID. Use `<@${DISCORD_USER_ID_AFO}>` to @mention only when an action maps to his active work.
-- **Linear is the canonical surface for accepted research.** Issues land in the Linear **Research** team, **unprojected by default**, scoped by canonical labels (`activity:research`, relevant `protocol:*`, relevant `task:*`, `agent:routine` for routine provenance). Graduate into a bounded active project only when one already exists for this research thread; do not create new projects from this routine, and never route into staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`). Resolve team/label IDs by name at run start.
+- **Linear is the canonical surface for accepted research.** Issues land in the Linear **Research** team, **unprojected by default**, scoped by canonical labels (`activity:research`, relevant `protocol:*`, `agent:routine` for routine provenance). Graduate into a bounded active project only when one already exists for this research thread; do not create new projects from this routine, and never route into staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`). Resolve team/label IDs by name at run start.
 - Active guild projects (referenced for context, scoping insight protocol labels):
   - `greenpill-dev-guild/green-goods` — regenerative work platform (`protocol:green-goods`)
   - `greenpill-dev-guild/coop` — browser extension + PWA (`protocol:coop`)
@@ -258,7 +258,7 @@ For actions concrete enough to commit research time to (specific surface, named 
 ### Resolve IDs at run start (never hardcode)
 
 - Team: `Research`
-- Labels: resolve by name — `activity:research`, `agent:routine`, plus relevant `protocol:*` per affected project, plus relevant `task:*` (`task:funding-pathway`, `task:evidence`, `task:access-participation`) when the user task is clear. Old `automation:routine`, `work:research`, and `area:research` labels are retired — do not apply them.
+- Labels: resolve by name — `activity:research`, `agent:routine`, plus relevant `protocol:*` per affected project. Old `automation:routine`, `work:research`, and `area:research` labels are retired — do not apply them.
 - Project: leave **unprojected**. Only graduate into a bounded active project when one already exists for this research thread; never route into the retired staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`).
 - Status: `Backlog` (accepted research that hasn't started). Move to `Todo` only when the synthesis has a named owner ready to start.
 
@@ -280,7 +280,7 @@ Query open `agent:routine` + `activity:research` Issues in the Research team (al
 
 Title: `Research: {short action title}`
 
-Labels: `activity:research`, `agent:routine`, relevant `protocol:*`, relevant `task:*` (when user-task is clear).
+Labels: `activity:research`, `agent:routine`, relevant `protocol:*`.
 
 Body:
 
