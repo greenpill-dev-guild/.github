@@ -185,7 +185,32 @@ No automatic work created.
    - Health: selected rubric value
    - Body: status update Markdown
 2. Write a Drive memo titled `Software Ecology Pulse - YYYY-WW` in the Dev Guild shared Drive context.
-3. Post the short Discord summary to `DISCORD_LEAD_COUNCIL_CHANNEL_ID`.
+3. Post the short Discord summary to the private lead-council channel.
+
+   **There is NO Discord MCP/connector in this environment — post via the Discord REST
+   API with Bash + `curl`. Do NOT search for a Discord tool/connector, and do NOT
+   degrade to "prepared but not posted": an unsent summary is a degraded-run failure
+   line, not a silent no-op.** `DISCORD_BOT_TOKEN` and `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
+   are in the environment.
+
+   **Channel guard:** the only allowed POST target is `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}`.
+   If it is unset or invalid, log `discord: channel unset`, skip the post, and surface it
+   in the run report — never substitute another channel.
+
+   Build the payload with `jq` (or `python3` — never raw string interpolation; the body
+   has newlines and backticks), POST it, and check the HTTP status:
+
+   ```bash
+   jq -nc --arg c "$SUMMARY" '{content:$c}' \
+     | curl -sS -w '\n%{http_code}' -X POST \
+         "https://discord.com/api/v10/channels/${DISCORD_LEAD_COUNCIL_CHANNEL_ID}/messages" \
+         -H "Authorization: Bot ${DISCORD_BOT_TOKEN}" \
+         -H "Content-Type: application/json" --data-binary @-
+   ```
+
+   A 2xx with a returned message id means posted. Any other status (or `channel unset`)
+   is a degraded-run line in the report — never a silent skip. The summary is well under
+   Discord's 2000-char limit, so no chunking is needed.
 
 After writing, report only:
 
