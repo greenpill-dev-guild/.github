@@ -8,8 +8,8 @@ This is not a backlog. It is an operating map for seeing whether AI-assisted dev
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
-| `dev-surfaces` | Local executable snapshot: `dev ecology --json`, Drive-ready handoff bundle via `dev ecology --json --handoff`, live dev-surface status, git state, plan counts, validation scripts, and ignored local snapshots | Durable guild policy, hosted routine setup, Linear status |
-| `.github` | Guild-level policy, routine source prompts, source-of-truth split, and shared language | Local process ownership or repo runtime launch details |
+| `dev-surfaces` | Local executable snapshot: `dev ecology --json`, local handoff bundle via `dev ecology --json --handoff`, live dev-surface status, git state, plan counts, validation scripts, and ignored local snapshots | Durable guild policy, hosted routine setup, hosted routine input, Linear status |
+| `.github` | Guild-level policy, routine source prompts, the pulse registry metadata below, source-of-truth split, and shared language | Local process ownership or repo runtime launch details |
 | Project `.plans` | Execution truth for active feature work and lane state | Cross-repo status, social priority, or release authority |
 | Linear | Roadmap/status tracking, initiatives, accepted work, and status updates | Repo implementation truth or code review |
 | Drive | Weekly memos and evidence archive | Work ownership or implementation state |
@@ -17,30 +17,51 @@ This is not a backlog. It is an operating map for seeing whether AI-assisted dev
 
 ## V1 repo set
 
-The first ecology index covers:
+The ecology index covers the three guild-org repos:
 
-| Repo | Tier | Role |
-| --- | --- | --- |
-| Green Goods | Tier 1 heavy agentic product | Reference implementation for heavy `.plans`, shared contracts, design/docs drift checks, browser proof, and release complexity |
-| Coop | Tier 1 heavy agentic product | Reference implementation for human attention, agent policy, local-first review, and validation selection |
-| Greenpill Network | Tier 1 heavy agentic product | Reference implementation for public/private route contracts and workspace/auth decision discipline |
-| WEFA | Tier 1 heavy agentic product | Reference implementation for child-safety, route-local validation, and child-facing browser proof |
-| Portfolio | Tier 2 lightweight public site | Lightweight route, contact validation, Storybook, and browser-proof surface |
-| TAS-Hub | Tier 2 lightweight public site | Lightweight public Next.js site with token, smoke, and motion/accessibility guardrails |
+| Repo | Tier | Role | Source-truth globs |
+| --- | --- | --- | --- |
+| Green Goods | Tier 1 heavy agentic product | Reference implementation for heavy `.plans`, shared contracts, design/docs drift checks, browser proof, and release complexity | `.plans/active/*/status.json`, `.plans/backlog/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
+| Coop | Tier 1 heavy agentic product | Reference implementation for human attention, agent policy, local-first review, and validation selection | `.plans/features/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
+| Greenpill Network | Tier 1 heavy agentic product | Reference implementation for public/private route contracts and workspace/auth decision discipline | `.plans/active/*/status.json`, `.plans/backlog/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
 
-Impact Reef and other dormant repos stay out of V1 until they become active work again.
+Portfolio, WEFA, and TAS-Hub left the guild V1 set in 2026-W24 (personal or guild-adjacent repos owned outside the guild org); they remain in the local dev-surfaces registry for local workflows only. Impact Reef and other dormant repos stay out of V1 until they become active work again.
+
+### Pulse registry metadata
+
+Curated judgment fields consumed by the weekly pulse. A local twin lives in the dev-surfaces registry for local workflows; the pulse reads only this section.
+
+**Green Goods**
+
+- API/privacy boundaries: Shared hooks, domain types, and public contracts live in `packages/shared`. Agent and webhook behavior lives in `packages/agent`. Contract deployment artifacts remain the address source of truth.
+- Release/rollback: Use repo-specific build, docs, design, package, browser-proof, and deploy scripts. Onchain or deploy rollback must be treated as a human-reviewed operation.
+- Likely bottleneck: Source-structure debt, dirty-tree coordination, and choosing the right validation depth before adding more concurrent agent work.
+
+**Coop**
+
+- API/privacy boundaries: Durable domain logic lives behind `@coop/shared` and `@coop/shared/app`. Review and publish remain explicit human decisions. Local-first extension state, sync, session, policy, and signing surfaces are high-risk.
+- Release/rollback: Use `validate:production-readiness` for mock-first readiness and `validate:production-live-readiness` only when live rails are intentionally in scope.
+- Likely bottleneck: Selecting the smallest sufficient validation suite across many agent, sync, policy, archive, and UI surfaces.
+
+**Greenpill Network**
+
+- API/privacy boundaries: Public website remains static and public-safe. Private runtime, database, and intake concerns stay behind `packages/agent`. Public agent routes need exported constants, shared contracts, public-safe normalization, and tests.
+- Release/rollback: Public site currently builds from `packages/website`; agent deploys use `packages/agent/fly.toml`. Workspace/auth runtime remains decision-packed before implementation.
+- Likely bottleneck: Workspace/auth boundary decisions and integration proof across website snapshot, agent route, shared contract, Directus, and Postgres.
 
 ## Signal definitions
 
-`dev ecology --json` is the machine-readable inspection snapshot. `dev ecology --json --handoff` is the hosted routine input. Both should be treated as point-in-time local snapshots, not as replacements for project repo truth.
+`dev ecology --json` is the local machine-readable inspection snapshot; `dev ecology --json --handoff` bundles it with a Markdown sibling for human review. Both are local conveniences: the hosted routine computes its own snapshot from cloud clones and does not consume these files. Treat them as point-in-time local snapshots, not as replacements for project repo truth.
 
-The snapshot records:
+The local snapshot records:
 
 - Git branch, upstream, ahead/behind, dirty count, and change-type counts.
 - Plan-hub `status.json` count and canonical lane status totals, when `.plans` exists. Raw lane vocabularies remain in JSON for audit.
 - Validation, browser-proof, release, deploy, and agentic scripts from `package.json`.
 - Workbench dev-surface status for repos registered in `dev-surfaces`.
 - Curated risk tier, source-truth surfaces, API/privacy boundaries, release/rollback notes, and likely bottleneck.
+
+The hosted pulse computes a narrower, clone-derivable subset: plan-lane counts, guidance presence, root script inventory, last-commit recency, and main-develop drift. Working-tree state and dev-surface runtime are local-only signals and never appear in the pulse.
 
 Healthy ecology signals:
 
@@ -60,15 +81,7 @@ At-risk ecology signals:
 
 ## Weekly pulse
 
-The `software-ecology-pulse` routine is status-only.
-
-Before enabling or running the hosted routine, produce the weekly handoff locally:
-
-```sh
-dev ecology --json --handoff
-```
-
-Upload or attach the generated JSON as `Software Ecology Snapshot YYYY-WW`. The Markdown sibling is for human review. This makes the routine deterministic: Claude reads the handoff snapshot and allow-listed guidance surfaces; it does not run local commands, start browsers, or infer local repo state from memory.
+The `software-ecology-pulse` routine is status-only and self-sufficient: each run computes its ecology snapshot from the fresh cloud clones of the three V1 repos (plan-lane counts, guidance presence, root script inventory, git recency, and main-develop drift where refs allow) plus the pulse registry metadata in this document. No local snapshot generation, upload, or attachment is required, and the routine must not search Drive for one.
 
 Allowed outputs:
 
@@ -85,11 +98,11 @@ Forbidden outputs:
 - No secret reads.
 - No heavy validation runs.
 
-If the local ecology handoff is missing, incomplete, or stale, the routine must mark health `atRisk`, explain which proof is missing, and avoid creating work.
+If a V1 clone is missing or unreadable, the routine marks health `atRisk`, names the missing repo, and creates no work.
 
 ## Reading the dashboard
 
-Use `dev ecology --markdown` for human review, `dev ecology --json` for machine inspection, and `dev ecology --json --handoff` for the weekly routine input.
+Use `dev ecology --markdown` for human review and `dev ecology --json` for local machine inspection.
 
 Read the output in this order:
 
