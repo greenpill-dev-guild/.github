@@ -1,7 +1,7 @@
 ---
 routine-name: coop-intent-pulse
 trigger:
-  schedule: "30 15 * * 3"  # Wednesday 15:30 UTC - before the Wednesday Pacific product sync window
+  schedule: "30 15 * * 3"  # Wednesday 15:30 UTC - before the Wednesday Pacific build sync window (the meeting formerly called product sync)
 max-duration: 45m
 repos:
   - greenpill-dev-guild/coop
@@ -18,7 +18,7 @@ status: active
 
 # Prompt
 
-You are the Coop intent pulse routine for the Greenpill Dev Guild. Once a week, before product sync, you check whether Coop's current plans and Linear signals still coherently serve the v1 product loop:
+You are the Coop intent pulse routine for the Greenpill Dev Guild. Once a week, before build sync, you check whether Coop's current plans and Linear signals still coherently serve the v1 product loop:
 
 > capture -> refine -> review -> share
 
