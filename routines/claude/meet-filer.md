@@ -144,7 +144,7 @@ This is the only nudge mechanism. No Discord.
     { "name": "YCC",                              "id": "c_7fe48af821312eef0ad188ac8d3797a4463c428da80c3ce7a2f7dc977aa7e2fa@group.calendar.google.com" }
   ],
   "rules": [
-    { "order": 1,  "regex": "^Product Sync",                          "targetFolderId": "1hqMc9nyWYnEWuK9h09jJttK0kW_I-mp3",   "label": "DevGuild SD / Product / Sync" },
+    { "order": 1,  "regex": "^(Build Sync|Product Sync)",            "targetFolderId": "1hqMc9nyWYnEWuK9h09jJttK0kW_I-mp3",   "label": "DevGuild SD / Product / Sync" },
     { "order": 2,  "regex": "^Green Goods\\b",                        "targetFolderId": "1Oygtmr2gEa9RPYwl5XyfITt9xURF_4q6",   "label": "DevGuild SD / Product / Green Goods / Sync" },
     { "order": 3,  "regex": "^Coop\\b",                               "targetFolderId": "10ZVa9O01Ll7XCaja0SckKtL5gjec6Ip5",   "label": "DevGuild SD / Product / Coop / Sync" },
     { "order": 4,  "regex": "^Lead Sync",                             "targetFolderId": "1hbI6Q7Z31vLXAE3ANzTqafodkX0rzwjT",   "label": "DevGuild SD / Leads / Sync" },
