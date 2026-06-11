@@ -146,23 +146,37 @@ Use this exact Markdown for the Linear status update and the Drive memo summary 
 
 **Release/rollback watch:** 1-3 bullets naming gaps or confirming no new gap.
 
-**Recommended clarification:** One small decision or proof target for humans.
+**Action items:** 1-4 ranked recommendations, highest priority first, each derived from the signals above (never invented). Format each as: `[P0|P1|P2]` imperative action or decision, then the repo, then the why / what it unblocks. Ranking: **P0** = a decision or fix needed before more agent work or before a risk compounds; **P1** = worth addressing this cycle; **P2** = minor or cosmetic. List only real items; if nothing is actionable, write `No action items this week.` These are recommendations for humans to act on, not work to file — the create-no-work guardrails still hold (no Issues, no Customer Needs).
 
 **No automatic work created:** Confirm that this run created no Issues, Customer Needs, projects, GitHub artifacts, repo edits, deploys, browser sessions, or `.plans` changes.
 ```
 
 Transition note: if the most recent prior status update on the initiative was produced from an uploaded snapshot (any update whose Snapshot line says "Generated at" rather than "Computed in-session"), include one line in the System read: "Metrics rebased: computed in-cloud from clones; not directly comparable to snapshot-era counts." Omit it once prior updates are already in the computed format.
 
-The Discord summary must be shorter:
+The Discord summary is a scannable lead-council read — fuller than a teaser, shorter than the full status update. Use this exact shape (normally one message, comfortably under Discord's 2000-char limit; if it ever exceeds 2000, split on a section boundary and POST the chunks sequentially):
 
 ```md
-**Software Ecology Pulse - YYYY-WW:** `health`
-One-sentence system read.
-- Strongest signal: ...
-- Watch: ...
-- Recommended clarification: ...
-No automatic work created.
+**Software Ecology Pulse · YYYY-WW · `health`** · coverage `N/3` · git: `full|partial`
+
+2-3 sentence system read using the run's actual numbers (name the one thing most worth a human's attention).
+
+**Holding up**
+- Concrete strong signal, with the number.
+- Concrete strong signal.
+
+**Watch**
+- Repo-tagged risk, with the why.
+- Repo-tagged risk.
+
+**Action items**
+1. `[P0|P1]` Action or decision — repo, the why / what it unblocks.
+2. `[P1]` Action — repo.
+
+Full analysis → <Linear status-update URL>
+No work created.
 ```
+
+The `Holding up` / `Watch` bullets are the 2 strongest entries from the status update's Strong signals / Risk signals. The `Action items` are the top 2-3 from the status update's Action items block, same ranking and wording, highest priority first (drop P2s here unless there is room). `Full analysis →` links the Linear status-update URL captured in the Write step so the reader can reach the complete analysis in one click.
 
 ## Write
 
@@ -171,8 +185,9 @@ No automatic work created.
    - Initiative: `Software Ecology & Agentic Workflow Health`
    - Health: selected rubric value
    - Body: status update Markdown
+   - Capture the returned status-update URL — the Discord post's `Full analysis →` line links it.
 2. Write a Drive memo titled `Software Ecology Pulse - YYYY-WW` in the Dev Guild shared Drive context.
-3. Post the short Discord summary to the private lead-council channel.
+3. Post the Discord summary (the medium format above, including the `Full analysis →` link to the step-1 status-update URL) to the private lead-council channel.
 
    **There is NO Discord MCP/connector in this environment — post via the Discord REST
    API with Bash + `curl`. Do NOT search for a Discord tool/connector, and do NOT
