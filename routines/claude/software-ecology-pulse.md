@@ -146,14 +146,14 @@ Use this exact Markdown for the Linear status update and the Drive memo summary 
 
 **Release/rollback watch:** 1-3 bullets naming gaps or confirming no new gap.
 
-**Action items:** 1-4 ranked recommendations, highest priority first, each derived from the signals above (never invented). Format each as: `[P0|P1|P2]` imperative action or decision, then the repo, then the why / what it unblocks. Ranking: **P0** = a decision or fix needed before more agent work or before a risk compounds; **P1** = worth addressing this cycle; **P2** = minor or cosmetic. List only real items; if nothing is actionable, write `No action items this week.` These are recommendations for humans to act on, not work to file — the create-no-work guardrails still hold (no Issues, no Customer Needs).
+**Action items:** 1-4 ranked recommendations, highest priority first, each derived from the signals above (never invented). Format each as: `[P0|P1|P2]` imperative action or decision, then the repo, then the why / what it unblocks. Ranking: **P0** = a decision or fix needed before more agent work or before a risk compounds; **P1** = worth addressing this cycle; **P2** = minor or cosmetic. List only real items; if nothing is actionable, write `No action items this week.` These are recommendations for humans to act on, not work to file; the create-no-work guardrails still hold (no Issues, no Customer Needs).
 
 **No automatic work created:** Confirm that this run created no Issues, Customer Needs, projects, GitHub artifacts, repo edits, deploys, browser sessions, or `.plans` changes.
 ```
 
 Transition note: if the most recent prior status update on the initiative was produced from an uploaded snapshot (any update whose Snapshot line says "Generated at" rather than "Computed in-session"), include one line in the System read: "Metrics rebased: computed in-cloud from clones; not directly comparable to snapshot-era counts." Omit it once prior updates are already in the computed format.
 
-The Discord summary is a scannable lead-council read — fuller than a teaser, shorter than the full status update. Use this exact shape (normally one message, comfortably under Discord's 2000-char limit; if it ever exceeds 2000, split on a section boundary and POST the chunks sequentially):
+The Discord summary is a scannable lead-council read: fuller than a teaser, shorter than the full status update. Use this exact shape, which fits one message under Discord's 2000-char limit (keep it tight; trim the system read or a bullet before length becomes a problem):
 
 ```md
 **Software Ecology Pulse · YYYY-WW · `health`** · coverage `N/3` · git: `full|partial`
