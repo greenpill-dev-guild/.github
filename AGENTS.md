@@ -68,4 +68,5 @@ PY
 - If you change a process doc, update the index or cross-reference in the same pass.
 - Prefer tightening wording over adding more prose.
 - When a claim is uncertain, soften it or link the source instead of presenting it as settled fact.
-- For browser-facing templates or repo guidance, keep the shared posture Brave-first for local Codex, Claude, and human/agent walkthroughs, with Chrome/Chromium-compatible fallback for contributors and CI.
+- For browser-facing templates or repo guidance, require local agentic browser QA to use the user's authenticated Brave QA profile. Codex-facing guidance should use the Codex browser-extension path and claim the already-open Brave tab. Claude-facing guidance should use the Claude Code Chrome/Chromium extension path (`claude --chrome` or `/chrome`) and select the authenticated Brave profile/tab when the extension is installed and connected. Do not fall back merely because the extension is branded Chrome; use Claude computer-use/visible desktop control only when the Brave extension path is unavailable or not connected.
+- Isolated Browser/Playwright/DevTools proof may be documented only as CI/clean-room proof, never as local authenticated QA. If QA-profile access is blocked, guidance should tell agents to report QA as blocked instead of substituting isolated proof.
