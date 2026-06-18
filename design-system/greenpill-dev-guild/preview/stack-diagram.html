@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Stack diagram" subtitle="App · Social · Protocol · Blockchain" viewport="700x280" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Stack diagram</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:24px;width:652px;background:var(--color-parchment);font-family:var(--font-body);}
+  .stack{display:flex;flex-direction:column;gap:4px;}
+  .layer{border-radius:14px;padding:18px 24px;display:flex;justify-content:space-between;align-items:center;}
+  .name{font-family:var(--font-display);font-weight:600;font-size:18px;}
+  .meta{font-family:var(--font-mono);font-size:11px;opacity:.7;}
+  .app{background:#FCECA6;color:#1F3D1F;}
+  .social{background:#FF6978;color:#fff;}
+  .protocol{background:#B1FDEB;color:#1F3D1F;}
+  .blockchain{background:#DCEDFF;color:#1F3D1F;}
+</style>
+</head>
+<body>
+  <div class="stack">
+    <div class="layer app"><div class="name">Green Goods</div><div class="meta">APP LAYER</div></div>
+    <div class="layer social"><div class="name">GreenWill</div><div class="meta">SOCIAL LAYER</div></div>
+    <div class="layer protocol"><div class="name">Allo Alliance</div><div class="meta">PROTOCOL LAYER</div></div>
+    <div class="layer blockchain"><div class="name">Public Good Staking</div><div class="meta">BLOCKCHAIN LAYER</div></div>
+  </div>
+</body>
+</html>

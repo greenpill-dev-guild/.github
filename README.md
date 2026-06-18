@@ -39,6 +39,7 @@ These directories are shared references for guild contributors, but they must be
 - [`templates/`](./templates/) — copy-into-repo starters for `README.md`, `AGENTS.md`, `CLAUDE.md`, and Copilot instructions
 - [`routines/`](./routines/) — guild-wide playbooks for recurring flows
 - [`adr/`](./adr/) — guild-level architectural decision records and template
+- [`design-system/`](./design-system/) — shared Dev Guild brand assets, tokens, and reusable design guidance
 - [`PARTNERS.md`](./PARTNERS.md) — partner, funder, and chapter interface
 - [`docs/linear-operating-model.md`](./docs/linear-operating-model.md) — source-of-truth split for Linear, GitHub, Drive, and discussion channels
 - [`docs/linear-aware-dev-day-launcher.md`](./docs/linear-aware-dev-day-launcher.md) — agent-agnostic flow for resolving Linear work into local dev launches
@@ -62,6 +63,7 @@ These directories are shared references for guild contributors, but they must be
 | [`SECURITY.md`](./SECURITY.md) | Public vulnerability-reporting policy |
 | [`SUPPORT.md`](./SUPPORT.md) | Support routing and expectations |
 | [`docs/`](./docs/) | Operating-model docs that support guild-wide coordination |
+| [`design-system/`](./design-system/) | Shared Dev Guild brand system, assets, and presentation components |
 | [`profile/`](./profile/) | Public org-profile README |
 | [`templates/`](./templates/) | Starters for project-level docs |
 | [`routines/`](./routines/) | Playbooks for guild operations |
