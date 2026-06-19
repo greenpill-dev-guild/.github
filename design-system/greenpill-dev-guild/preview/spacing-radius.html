@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Spacing" name="Spacing & radius" subtitle="8px base · pill is the hero" viewport="700x340" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Spacing & Radius</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:24px;width:652px;background:var(--color-parchment);font-family:var(--font-body);color:#1F3D1F;}
+  h4{font-family:var(--font-display);font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;margin:0 0 12px;color:rgba(31,61,31,0.55);}
+  .col{display:flex;gap:32px;}
+  .group{flex:1;}
+  .row{display:flex;align-items:center;gap:8px;margin-bottom:6px;}
+  .bar{background:#C2FF1A;height:14px;border-radius:4px;}
+  .num{font-family:var(--font-mono);font-size:11px;color:rgba(31,61,31,0.65);min-width:38px;}
+  .radii{display:flex;gap:10px;align-items:flex-end;}
+  .r{background:#1F3D1F;width:48px;height:48px;display:flex;align-items:flex-end;justify-content:center;color:#C2FF1A;font-family:var(--font-mono);font-size:9px;padding-bottom:4px;}
+</style>
+</head>
+<body>
+  <div class="col">
+    <div class="group">
+      <h4>Spacing · 8px base</h4>
+      <div class="row"><span class="num">4</span><div class="bar" style="width:4px;"></div></div>
+      <div class="row"><span class="num">8</span><div class="bar" style="width:8px;"></div></div>
+      <div class="row"><span class="num">12</span><div class="bar" style="width:12px;"></div></div>
+      <div class="row"><span class="num">16</span><div class="bar" style="width:16px;"></div></div>
+      <div class="row"><span class="num">24</span><div class="bar" style="width:24px;"></div></div>
+      <div class="row"><span class="num">32</span><div class="bar" style="width:32px;"></div></div>
+      <div class="row"><span class="num">48</span><div class="bar" style="width:48px;"></div></div>
+      <div class="row"><span class="num">64</span><div class="bar" style="width:64px;"></div></div>
+      <div class="row"><span class="num">96</span><div class="bar" style="width:96px;"></div></div>
+    </div>
+    <div class="group">
+      <h4>Radius</h4>
+      <div class="radii">
+        <div class="r" style="border-radius:4px;">xs</div>
+        <div class="r" style="border-radius:8px;">sm</div>
+        <div class="r" style="border-radius:14px;">md</div>
+        <div class="r" style="border-radius:20px;">lg</div>
+        <div class="r" style="border-radius:28px;">xl</div>
+        <div class="r" style="border-radius:999px;">pill</div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

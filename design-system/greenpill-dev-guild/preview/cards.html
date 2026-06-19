@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Cards" subtitle="Surface card + Forest service card" viewport="700x260" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Cards</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:24px;width:652px;background:var(--color-parchment);}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .card{border-radius:20px;padding:24px;}
+  .light{background:#fff;color:#0F1F0F;box-shadow:var(--elev-1);}
+  .dark{background:#1F3D1F;color:#FFF8E1;}
+  .title{font-family:var(--font-display);font-weight:600;font-size:20px;letter-spacing:-0.01em;margin:8px 0 6px;}
+  .body{font-family:var(--font-body);font-size:13px;line-height:1.5;opacity:.8;}
+  .eyebrow{font-family:var(--font-display);font-weight:600;font-size:10px;letter-spacing:0.18em;text-transform:uppercase;}
+  .light .eyebrow{color:#7DC400;}
+  .dark .eyebrow{color:#C2FF1A;}
+  .disc{width:40px;height:40px;border-radius:999px;background:#C2FF1A;display:flex;align-items:center;justify-content:center;}
+  .dark .disc{box-shadow:0 0 0 4px rgba(194,255,26,0.18), 0 0 24px rgba(194,255,26,0.35);}
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="card light">
+      <div class="disc">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></svg>
+      </div>
+      <div class="title">Surface Card</div>
+      <div class="body">Parchment-on-parchment. Default for content blocks on light decks and microsites.</div>
+    </div>
+    <div class="card dark">
+      <div class="eyebrow" style="margin-bottom:12px;">SERVICE · ENGINEERING</div>
+      <div class="title" style="color:#C2FF1A;">Forest Card</div>
+      <div class="body">Cal Poly Green block with parchment body. Glow disc top-left for service tiles.</div>
+    </div>
+  </div>
+</body>
+</html>

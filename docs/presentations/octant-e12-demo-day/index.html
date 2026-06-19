@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Greenpill Dev Guild · Octant Epoch 12 Demo Day</title>
+
+<link rel="stylesheet" href="colors_and_type.css" />
+<script src="deck-stage.js"></script>
+
+<style>
+  /* ============================================================
+     GP Dev Guild · Octant Epoch 12 deck (v3 — light mode)
+     Parchment throughout, uppercase display, ink-line diagrams,
+     two-column compositions, smoother motion. No watermark, no gradient.
+     ============================================================ */
+  html, body { margin: 0; background: #000; }
+  deck-stage { background: #0b140b; }
+
+  section { font-family: var(--font-body); background-color: var(--color-parchment); color: var(--color-ink); position: relative; overflow: hidden; }
+  .band { background-color: #FBF3DD; } /* a slightly deeper parchment for rhythm */
+
+  /* ---- type (uppercase display throughout) ---- */
+  .eyebrow { font-family: var(--font-display); font-weight: 600; font-size: 17px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--color-cal-poly-green); margin: 0; opacity: 0.85; }
+  .hcover { font-family: var(--font-display); font-weight: 700; font-size: 108px; line-height: 0.96; letter-spacing: -0.02em; margin: 0; color: var(--color-cal-poly-green); text-transform: uppercase; text-wrap: balance; }
+  .h1 { font-family: var(--font-display); font-weight: 700; font-size: 78px; line-height: 1.02; letter-spacing: -0.018em; margin: 0; color: var(--color-cal-poly-green); text-transform: uppercase; text-wrap: balance; max-width: 17ch; }
+  .h2 { font-family: var(--font-display); font-weight: 700; font-size: 66px; line-height: 1.03; letter-spacing: -0.015em; margin: 0; color: var(--color-cal-poly-green); text-transform: uppercase; text-wrap: balance; }
+  .h3 { font-family: var(--font-display); font-weight: 700; font-size: 50px; line-height: 1.07; letter-spacing: -0.01em; margin: 0; color: var(--color-cal-poly-green); text-transform: uppercase; text-wrap: balance; }
+  .accent { color: var(--color-steady-flame); font-style: normal; }
+  .sub { font-family: var(--font-body); font-weight: 400; font-size: 34px; line-height: 1.46; color: #36452b; margin: 22px 0 0; max-width: 46ch; }
+  .sub b { color: var(--color-cal-poly-green); font-weight: 700; }
+  .flame { font-family: var(--font-display); font-weight: 600; font-size: 26px; color: var(--color-steady-flame); margin-top: 22px; text-transform: uppercase; letter-spacing: 0.01em; }
+  .mono { font-family: var(--font-mono); }
+
+  /* ---- chrome ---- */
+  .eyebrow.tl { position: absolute; top: 60px; left: 72px; z-index: 6; }
+  .pageno { position: absolute; bottom: 56px; right: 72px; z-index: 6; font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.12em; color: rgba(31,61,31,0.5); }
+  .brandmark { position: absolute; bottom: 48px; left: 72px; display: flex; align-items: center; gap: 11px; z-index: 6; }
+  .brandmark span { font-family: var(--font-display); font-weight: 700; font-size: 15px; letter-spacing: 0.03em; color: var(--color-cal-poly-green); text-transform: uppercase; }
+
+  /* ---- layout ---- */
+  .pad { position: absolute; inset: 150px 90px 120px 90px; display: flex; flex-direction: column; justify-content: center; }
+  .pad.center { align-items: center; text-align: center; }
+  .cols { position: absolute; inset: 132px 92px 116px 92px; display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: center; }
+  .cols.lwide { grid-template-columns: 1.06fr 0.94fr; }
+  .colhead { position: absolute; top: 132px; left: 80px; right: 80px; z-index: 4; }
+
+  /* ---- reveal (smoother) ---- */
+  .reveal { opacity: 0; transform: translateY(26px); }
+  [data-deck-active] .reveal { animation: rise 0.72s cubic-bezier(0.16,1,0.3,1) forwards; }
+  [data-deck-active] .reveal-2 { animation-delay: 0.10s; }
+  [data-deck-active] .reveal-3 { animation-delay: 0.20s; }
+  [data-deck-active] .reveal-4 { animation-delay: 0.30s; }
+  [data-deck-active] .reveal-5 { animation-delay: 0.40s; }
+  @keyframes rise { to { opacity: 1; transform: none; } }
+  .reveal-fade { opacity: 0; }
+  [data-deck-active] .reveal-fade { animation: fadein 0.85s cubic-bezier(0.16,1,0.3,1) 0.15s forwards; }
+  @keyframes fadein { to { opacity: 1; } }
+  /* ink-line draw-in for diagrams */
+  .draw { stroke-dasharray: var(--len, 1600); stroke-dashoffset: var(--len, 1600); }
+  [data-deck-active] .draw { animation: drawin 1.1s cubic-bezier(0.16,1,0.3,1) 0.25s forwards; }
+  @keyframes drawin { to { stroke-dashoffset: 0; } }
+
+  /* ---- pill callout (thesis) ---- */
+  .callout { background: var(--color-spring-green); color: var(--color-cal-poly-green); border-radius: var(--radius-pill); padding: 44px 84px; font-family: var(--font-display); font-weight: 700; font-size: 58px; line-height: 1.08; letter-spacing: -0.015em; text-align: center; text-transform: uppercase; text-wrap: balance; max-width: 20ch; box-shadow: var(--elev-2); }
+
+  /* ---- badge disc + people row ---- */
+  .disc { width: 92px; height: 92px; border-radius: var(--radius-pill); background: var(--color-spring-green); display: flex; align-items: center; justify-content: center; flex: none; }
+  .disc svg { width: 44px; height: 44px; stroke: var(--color-cal-poly-green); stroke-width: 2; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  .peeps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px; margin-top: 60px; }
+  .peep { display: flex; flex-direction: column; gap: 18px; }
+  .peep .pt { font-family: var(--font-display); font-weight: 700; font-size: 27px; color: var(--color-cal-poly-green); text-transform: uppercase; letter-spacing: -0.01em; }
+  .peep .pd { font-family: var(--font-body); font-size: 19px; line-height: 1.4; color: #4a5840; }
+  .peep .bar { height: 3px; width: 46px; background: var(--color-steady-flame); border-radius: 2px; }
+
+  /* capability rows (slide 9) */
+  .caps { display: flex; flex-direction: column; gap: 22px; margin-top: 8px; }
+  .caps .cap { display: flex; align-items: center; gap: 22px; }
+  .caps .disc { width: 70px; height: 70px; } .caps .disc svg { width: 34px; height: 34px; }
+  .caps .ct { font-family: var(--font-display); font-weight: 700; font-size: 30px; color: var(--color-cal-poly-green); text-transform: uppercase; letter-spacing: -0.01em; }
+
+  /* ---- flow / stack (slide 5) ---- */
+  .flow { display: flex; flex-direction: column; gap: 14px; }
+  .flow .layer { border-radius: var(--radius-md); padding: 26px 32px; display: flex; align-items: baseline; justify-content: space-between; box-shadow: var(--elev-1); }
+  .flow .nm { font-family: var(--font-display); font-weight: 700; font-size: 30px; color: var(--color-cal-poly-green); text-transform: uppercase; letter-spacing: -0.01em; }
+  .flow .mt { font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(31,61,31,0.62); }
+  .flow .l1 { background: var(--color-creme); } .flow .l2 { background: var(--color-mint-green); } .flow .l3 { background: var(--color-alice-blue); }
+  .flow .arrow { align-self: center; color: var(--color-steady-flame); font-size: 22px; line-height: 0; margin: -3px 0; }
+
+  /* ---- media frames ---- */
+  .frame { border-radius: var(--radius-xl); overflow: hidden; border: 2px solid var(--color-cal-poly-green); background: #fff; box-shadow: var(--elev-2); }
+  .frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
+  .phones { display: flex; gap: 20px; align-items: center; justify-content: center; }
+  .phone { flex: 0 0 318px; min-width: 0; border-radius: 22px; overflow: hidden; border: 2px solid var(--color-cal-poly-green); box-shadow: var(--elev-2); background: #fff; }
+  .phone img { width: 100%; height: auto; display: block; }
+  .media-slot { position: relative; border-radius: var(--radius-xl); overflow: hidden; background-color: var(--color-forest-deep); border: 2px solid var(--color-cal-poly-green); display: flex; align-items: center; justify-content: center; }
+  .media-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .media-slot .ph { position: relative; display: flex; flex-direction: column; align-items: center; gap: 14px; text-align: center; padding: 24px; }
+  .media-slot .ph .cap { width: 30px; height: 50px; border: 3px solid rgba(194,255,26,0.75); border-radius: var(--radius-pill); transform: rotate(20deg); position: relative; }
+  .media-slot .ph .cap::after { content: ""; position: absolute; top: 6px; left: 50%; transform: translateX(-50%); width: 13px; height: 13px; border-radius: 50%; background: rgba(194,255,26,0.75); }
+  .media-slot .ph .t { font-family: var(--font-display); font-weight: 600; font-size: 18px; color: rgba(252,236,166,0.8); }
+  .photo-scrim { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,31,15,0.82), rgba(15,31,15,0) 46%); z-index: 2; }
+  .photo-cap { position: absolute; left: 28px; bottom: 24px; z-index: 3; }
+  .photo-cap .pt2 { font-family: var(--font-display); font-weight: 700; font-size: 24px; color: #fff; text-transform: uppercase; }
+  .photo-cap .ps2 { font-family: var(--font-body); font-size: 17px; color: rgba(255,255,255,0.85); margin-top: 3px; }
+  /* full-bleed photo slide */
+  .fullbg { position: absolute; inset: 0; }
+  .fullbg img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .scrim-b { position: absolute; inset: 0; background: linear-gradient(to top, rgba(15,31,15,0.92) 0%, rgba(15,31,15,0.12) 48%, rgba(15,31,15,0.42) 100%); }
+  .caption-bl { position: absolute; left: 80px; right: 80px; bottom: 116px; z-index: 5; }
+
+  /* slide 8 bridge */
+  .two { position: absolute; inset: 320px 90px 132px 90px; display: grid; grid-template-columns: 1fr 1fr; gap: 400px; }
+  .two .media-slot { height: 100%; }
+  .arc { position: absolute; inset: 320px 90px 132px 90px; pointer-events: none; }
+  .gg-badge { position: absolute; left: 50%; top: 632px; transform: translate(-50%,-50%); z-index: 5; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .bflow { animation: bflow 1.05s linear infinite; }
+  @keyframes bflow { to { stroke-dashoffset: -42; } }
+  .gg-badge .gg-pill { background: var(--color-spring-green); color: var(--color-cal-poly-green); font-family: var(--font-display); font-weight: 700; font-size: 28px; text-transform: uppercase; letter-spacing: 0.02em; padding: 16px 32px; border-radius: var(--radius-pill); box-shadow: var(--elev-2); white-space: nowrap; }
+  .gg-badge .gg-tag { font-family: var(--font-mono); font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(31,61,31,0.6); }
+
+  /* partner chips (slide 14) */
+  .partners { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .partner { display: flex; align-items: center; gap: 14px; border: 2px solid rgba(31,61,31,0.28); border-radius: var(--radius-lg); padding: 18px 22px; }
+  .partner .dot { width: 14px; height: 14px; border-radius: 50%; background: var(--color-steady-flame); flex: none; }
+  .partner .pn { font-family: var(--font-display); font-weight: 700; font-size: 21px; color: var(--color-cal-poly-green); text-transform: uppercase; letter-spacing: -0.01em; }
+  .ecochips { display: flex; flex-wrap: wrap; gap: 11px; margin-top: 16px; max-width: 40ch; }
+  .ecochips { gap: 15px; max-width: 48ch; }
+  .ecochips .c { font-family: var(--font-display); font-weight: 700; font-size: 25px; text-transform: uppercase; letter-spacing: 0.01em; color: var(--color-cal-poly-green); background: var(--color-spring-green); border: 2px solid var(--color-spring-green); border-radius: var(--radius-pill); padding: 16px 30px; box-shadow: var(--elev-1); }
+
+  /* close links */
+  .links { display: flex; gap: 30px; justify-content: center; margin-top: 34px; }
+  .links a, .links span { font-family: var(--font-mono); font-size: 24px; letter-spacing: 0.04em; color: var(--color-cal-poly-green); text-decoration: none; display: inline-flex; align-items: center; gap: 9px; }
+  .links .lk { gap: 11px; }
+  .links .lkic { width: 21px; height: 21px; flex: none; }
+  .links .lkic.globe { fill: none; stroke: var(--color-cal-poly-green); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .links .lkic.xic { fill: var(--color-cal-poly-green); }
+  .lfg { background: var(--color-spring-green); color: var(--color-cal-poly-green); font-family: "Clash Display", var(--font-display); font-weight: 700; font-size: 56px; text-transform: uppercase; letter-spacing: -0.01em; padding: 16px 44px; border-radius: var(--radius-pill); display: inline-block; margin-top: 24px; box-shadow: var(--elev-2); }
+
+  /* ---- reduced motion ---- */
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, [data-deck-active] .reveal, .reveal-fade, [data-deck-active] .reveal-fade { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .draw, [data-deck-active] .draw { animation: none !important; stroke-dashoffset: 0 !important; }
+    .confetti-pc { animation: none !important; opacity: 1 !important; transform: none !important; }
+    .bflow { animation: none !important; }
+  }
+  /* ---- print ---- */
+  @media print {
+    .reveal, [data-deck-active] .reveal, .reveal-fade, [data-deck-active] .reveal-fade { opacity: 1 !important; transform: none !important; animation: none !important; }
+    .draw { stroke-dashoffset: 0 !important; animation: none !important; }
+    .confetti-pc { opacity: 1 !important; transform: none !important; animation: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<deck-stage width="1920" height="1080">
+
+  <!-- 0 · COVER -->
+  <section data-label="Cover">
+    <div class="pad">
+      <h1 class="hcover reveal">Greenpill<br>Dev <span class="accent">Guild</span></h1>
+      <p class="sub reveal reveal-2" style="max-width:34ch;color:#2f3d26">Abstracting Ethereum through Trust, Relationships, Culture and Ownership.</p>
+      <p class="eyebrow reveal reveal-3" style="margin-top:38px;opacity:1">Octant Epoch 12 Demo Day</p>
+    </div>
+    <img src="assets/generated/octant-cover-tree.png" alt="Greenpill Dev Guild: a pill growing into a tree with garden roots" class="reveal-fade" style="position:absolute;top:50%;right:7%;transform:translateY(-50%);height:1000px;width:auto;mix-blend-mode:multiply" onerror="this.style.display='none'" />
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+  </section>
+
+  <!-- 1 · INFRASTRUCTURE -->
+  <section data-label="Infrastructure">
+    <p class="eyebrow tl">The Unseen Layer</p>
+    <div class="cols">
+      <div>
+        <h1 class="h1 reveal">Ethereum is infrastructure. Like the <span class="accent">Internet</span>.</h1>
+        <p class="sub reveal reveal-2">Protocols you never see, holding up everything you do.</p>
+      </div>
+      <div class="reveal-fade" style="text-align:center">
+        <img src="assets/sourced/dialup.gif" alt="Dialing progress" style="width:100%;max-width:680px;height:auto;border-radius:var(--radius-md);box-shadow:var(--elev-2)" onerror="this.style.display='none'" />
+        <p class="mono" style="font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(31,61,31,0.55);margin-top:18px">Nobody fell in love with the protocol</p>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">02 / 16</div>
+  </section>
+
+  <!-- 2 · PEOPLE -->
+  <section class="band" data-label="People, not protocol">
+    <p class="eyebrow tl">What Actually Grew</p>
+    <div class="pad">
+      <h1 class="h1 reveal" style="max-width:22ch">What grew the Internet wasn't the protocol. It was <span class="accent">people</span>.</h1>
+      <div class="peeps reveal reveal-2">
+        <div class="peep"><span class="disc"><svg viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h2.2l2.3 12.4a2 2 0 0 0 2 1.6h8.1a2 2 0 0 0 2-1.6L21 7H6"/></svg></span><span class="bar"></span><div class="pt">E-commerce</div><div class="pd">Buying and selling, together.</div></div>
+        <div class="peep"><span class="disc"><svg viewBox="0 0 24 24"><circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="7" r="2.4"/><circle cx="9" cy="18" r="2.4"/><circle cx="19" cy="18" r="2.4"/><path d="M8 7.2 16 7M7.6 16.4 9 9.5M11 18h6M17.6 9.2 18.4 15.6"/></svg></span><span class="bar"></span><div class="pt">Social networks</div><div class="pd">Finding each other.</div></div>
+        <div class="peep"><span class="disc"><svg viewBox="0 0 24 24"><path d="M4 4h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/></svg></span><span class="bar"></span><div class="pt">Forums</div><div class="pd">Gathering to talk.</div></div>
+        <div class="peep"><span class="disc"><svg viewBox="0 0 24 24"><path d="M21 11.5a8 8 0 0 1-11.6 7.1L3 20.5l1.9-6A8 8 0 1 1 21 11.5z"/></svg></span><span class="bar"></span><div class="pt">Messaging</div><div class="pd">Staying in touch.</div></div>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">03 / 16</div>
+  </section>
+
+  <!-- 3 · THESIS CALLOUT -->
+  <section data-label="Not the protocol">
+    <p class="eyebrow tl">The Fellowship</p>
+    <div class="pad center">
+      <div class="callout reveal-fade">Today, we're not here to focus on protocols.</div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">04 / 16</div>
+  </section>
+
+  <!-- 4 · SILOS -->
+  <section class="band" data-label="Silos & distant capital">
+    <p class="eyebrow tl">The Problem</p>
+    <div class="cols lwide">
+      <div>
+        <h1 class="h2 reveal" style="max-width:13ch">Impact lives in silos. Funding lives far away.</h1>
+        <p class="sub reveal reveal-2">Proof of real work sits in <b>someone else's database</b>, hard to see or trust.</p>
+        <p class="sub reveal reveal-3" style="margin-top:14px">Capital struggles to reach growing economies like Nigeria: <b>high fees, slow rails</b>.</p>
+        <p class="sub reveal reveal-4" style="margin-top:14px">And when it arrives it rarely flows transparently, which <b>raises risk and deters investment</b>.</p>
+      </div>
+      <img src="assets/generated/octant-funding-problem.png" alt="Impact locked in silos; capital far across an open field" class="reveal-fade" style="display:block;width:auto;height:auto;max-width:100%;max-height:600px;margin:0 auto;mix-blend-mode:multiply" onerror="this.style.display='none'" />
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">05 / 16</div>
+  </section>
+
+  <!-- 5 · PUBLIC GOODS STAKING -->
+  <section data-label="Public Goods Staking">
+    <p class="eyebrow tl">Layer 1 · The Ground · Roadmap</p>
+    <div class="colhead reveal">
+      <h1 class="h2">Public Goods Staking Protocol.</h1>
+      <p class="sub" style="max-width:52ch">Community-owned infrastructure. Squads run the hardware together with <b>Obol</b> and <b>Dappnode</b>. Staking rewards flow into a community endowment, built on <b>Octant vaults</b> and <b>Lido</b>.</p>
+    </div>
+    <div class="cols" style="inset:344px 80px 104px 80px;grid-template-columns:0.82fr 1.18fr">
+      <img src="assets/generated/octant-staking-flow.png" alt="Staking flow: hardware to staking rewards to community endowment" class="reveal reveal-2" style="display:block;width:auto;height:660px;max-width:100%;margin:0 auto;mix-blend-mode:multiply" onerror="this.style.display='none'" />
+      <div class="frame reveal-fade" style="height:660px;width:auto;max-width:600px;margin:0 auto;background:#0b140b">
+        <img src="assets/photos/obol-node.webp" alt="Obol SquadStaking node, powered by Dappnode" style="object-position:center" onerror="this.style.display='none'" />
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">06 / 16</div>
+  </section>
+
+  <!-- 6 · GREEN GOODS -->
+  <section class="band" data-label="Green Goods">
+    <p class="eyebrow tl">Layer 2 · The Front Door · Live</p>
+    <div class="cols lwide">
+      <div>
+        <h1 class="h2 reveal">Green Goods.</h1>
+        <p class="sub reveal reveal-2" style="max-width:32ch">Impact reporting anyone can use. Real regenerative work becomes verified, funder-ready proof, tied to a local endowment the community controls.</p>
+        <p class="sub reveal reveal-3" style="margin-top:24px;max-width:34ch">Four domains, agroforestry, waste, solar, and education. <b>14 gardens across five continents.</b></p>
+        <p class="flame reveal reveal-4">No wallet. Works offline. In your language.</p>
+      </div>
+      <div class="phones reveal-fade">
+        <div class="phone"><img src="assets/sourced/greengoods-home.webp" alt="Green Goods gardens" onerror="this.style.display='none'" /></div>
+        <div class="phone"><img src="assets/sourced/greengoods-action.webp" alt="Green Goods domains" onerror="this.style.display='none'" /></div>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">07 / 16</div>
+  </section>
+
+  <!-- (gardens map removed; domains + gardens folded into Green Goods) -->
+
+  <!-- 8 · THE BRIDGE (Green Goods is the bridge) -->
+  <section data-label="Where it becomes real">
+    <p class="eyebrow tl">The Bridge</p>
+    <div class="colhead reveal" style="text-align:center">
+      <h1 class="h2" style="font-size:56px">Where it becomes real.</h1>
+      <p class="sub" style="margin:16px auto 0;max-width:50ch;text-align:center;font-size:40px">Tech and Sun in Nigeria. Omo Yoruba in California. <b>Green Goods is the bridge.</b></p>
+    </div>
+    <div class="two">
+      <div class="media-slot reveal-fade">
+        <img src="assets/photos/awka-hub.jpg" alt="" onerror="this.style.display='none'" />
+        <div class="photo-scrim"></div>
+        <div class="ph"><div class="cap"></div><div class="t">Tech and Sun, Awka</div></div>
+        <div class="photo-cap"><div class="pt2">Tech and Sun</div><div class="ps2">Awka, Nigeria</div></div>
+      </div>
+      <div class="media-slot reveal-fade" style="animation-delay:.28s">
+        <img src="assets/photos/omo-yoruba-bridge.jpg" alt="" onerror="this.style.display='none'" />
+        <div class="photo-scrim"></div>
+        <div class="ph"><div class="cap"></div><div class="t">Omo Yoruba, California</div></div>
+        <div class="photo-cap"><div class="pt2">Omo Yoruba</div><div class="ps2">Southern California</div></div>
+      </div>
+    </div>
+    <svg class="bridge-link" viewBox="0 0 1920 1080" style="position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2" aria-hidden="true">
+      <line x1="762" y1="634" x2="832" y2="634" stroke="#7DC400" stroke-width="7" stroke-linecap="round" stroke-dasharray="9 12" class="bflow"/>
+      <line x1="1088" y1="634" x2="1158" y2="634" stroke="#7DC400" stroke-width="7" stroke-linecap="round" stroke-dasharray="9 12" class="bflow"/>
+    </svg>
+    <div class="gg-badge reveal-fade" style="animation-delay:.5s"><div class="gg-pill">Green Goods</div><div class="gg-tag">the bridge</div></div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">09 / 16</div>
+  </section>
+
+  <!-- 9 · TECH AND SUN -->
+  <section class="band" data-label="Tech and Sun">
+    <p class="eyebrow tl">In the Field · Nigeria</p>
+    <div class="cols lwide">
+      <div class="media-slot reveal-fade" style="height:730px">
+        <img src="assets/photos/tas-hub-build.jpg" alt="" onerror="this.style.display='none'" />
+        <div class="photo-scrim"></div>
+        <div class="ph"><div class="cap"></div><div class="t">TAS hub, Awka</div></div>
+        <div class="photo-cap"><div class="pt2">The hub at Awka</div><div class="ps2">Container, solar, Starlink, students</div></div>
+      </div>
+      <div>
+        <h1 class="h3 reveal" style="max-width:15ch">Tech and Sun: power, internet, and a place to build.</h1>
+        <div class="caps reveal reveal-2" style="margin-top:32px">
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg></span><span class="ct">Solar power</span></div>
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><path d="M4 13a9 9 0 0 1 7 7"/><path d="M4 17a5 5 0 0 1 3 3"/><circle cx="5" cy="19" r="1.3"/><path d="M14 6l4 4M16 4l4 4M15 5l4 4-3 3-4-4z"/></svg></span><span class="ct">Starlink internet</span></div>
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="6" rx="1.5"/><rect x="3" y="14" width="18" height="6" rx="1.5"/><path d="M7 7h.01M7 17h.01"/></svg></span><span class="ct">Ethereum staking infrastructure</span></div>
+        </div>
+        <p class="sub reveal reveal-3" style="margin-top:26px;max-width:32ch">A live hub in Awka, near UNIZIK, owned and run by the community. Enugu, Abuja and Lagos next.</p>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">10 / 16</div>
+  </section>
+
+  <!-- 10 · OMO YORUBA (two-column, bullets) -->
+  <section class="band" data-label="Omo Yoruba">
+    <p class="eyebrow tl">The Diaspora · California</p>
+    <div class="cols lwide">
+      <div>
+        <h1 class="h3 reveal" style="max-width:15ch">Omo Yoruba: keeping the culture alive.</h1>
+        <div class="caps reveal reveal-2" style="margin-top:30px">
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><path d="M12 7v13M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v12h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3z"/></svg></span><span class="ct">Yoruba heritage &amp; language</span></div>
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="17.5" cy="9" r="2.4"/><path d="M4 20a5 5 0 0 1 10 0M15 20a4.5 4.5 0 0 1 5.5-4"/></svg></span><span class="ct">Cultural programming</span></div>
+          <div class="cap"><span class="disc"><svg viewBox="0 0 24 24"><path d="M3 11l9-7 9 7M5 10v10h14V10M10 20v-6h4v6"/></svg></span><span class="ct">A diaspora bridge home</span></div>
+        </div>
+        <p class="sub reveal reveal-3" style="margin-top:28px;max-width:34ch">A Southern California community preserving Yoruba heritage, and a bridge for the diaspora to invest back home.</p>
+      </div>
+      <div class="media-slot reveal-fade" style="height:740px">
+        <img src="assets/photos/odunde-masquerade.jpg" alt="" onerror="this.style.display='none'" />
+        <div class="photo-scrim"></div>
+        <div class="ph"><div class="cap"></div><div class="t">Omo Yoruba, Southern California</div></div>
+        <div class="photo-cap"><div class="pt2">Omo Yoruba</div><div class="ps2">Egungun masquerade, procession, banners</div></div>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">11 / 16</div>
+  </section>
+
+  <!-- 11 · GRASSROOTS GROWTH (full circle) -->
+  <section class="band" data-label="Funding starts at home">
+    <p class="eyebrow tl">Grassroots Growth</p>
+    <div class="cols" style="grid-template-columns:0.8fr 1.2fr">
+      <div>
+        <h1 class="h2 reveal">Funding that starts at home.</h1>
+        <p class="sub reveal reveal-2" style="max-width:30ch">Ownership stays with the community. Support flows in from the diaspora, friends and family connected to the land, and then from global funders.</p>
+      </div>
+      <svg class="rings reveal-fade" viewBox="0 0 560 560" style="width:100%;height:auto;max-height:700px" aria-hidden="true"></svg>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">12 / 16</div>
+  </section>
+
+  <!-- 12 · FLYWHEEL -->
+  <section data-label="The diaspora flywheel">
+    <p class="eyebrow tl">How It Compounds</p>
+    <div class="cols">
+      <div>
+        <h1 class="h2 reveal">The diaspora flywheel.</h1>
+        <p class="sub reveal reveal-2" style="max-width:32ch">Sponsorship to hubs to proof to capital to reputation, and around again.</p>
+      </div>
+      <img src="assets/generated/octant-flywheel.png" alt="Diaspora flywheel: diaspora capital, local hubs, verified impact, more funding and trust" class="reveal-fade" style="display:block;width:auto;height:auto;max-width:100%;max-height:760px;margin:0 auto;mix-blend-mode:multiply" onerror="this.style.display='none'" />
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">13 / 16</div>
+  </section>
+
+  <!-- 13 · MARATHON -->
+  <section class="band" data-label="A marathon">
+    <p class="eyebrow tl">The Long Game</p>
+    <div class="cols" style="grid-template-columns:1.05fr 0.95fr;gap:56px">
+      <div>
+        <h1 class="h2 reveal" style="font-size:88px;line-height:0.98;max-width:13ch">We are running a marathon. This Epoch is a <span class="accent">water station</span>.</h1>
+        <p class="sub reveal reveal-2">Fuel for the road, not the finish line.</p>
+      </div>
+      <div class="media-slot reveal-fade" style="height:710px">
+        <img src="assets/sourced/marathon-water-station.gif" alt="" onerror="this.style.display='none'" />
+        <div class="ph"><div class="cap"></div><div class="t">Marathon, water-station handoff</div></div>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">14 / 16</div>
+  </section>
+
+  <!-- 14 · THE ASK -->
+  <section data-label="Run it together">
+    <p class="eyebrow tl">The Ask</p>
+    <div class="cols lwide">
+      <div>
+        <h1 class="h2 reveal">Let's run it together.</h1>
+        <p class="sub reveal reveal-2" style="max-width:40ch">We are looking for partners, communities, and funders to build the plumbing of trust with us. <b>Donors, your allocation this epoch funds the core team dedicating countless hours to this work.</b></p>
+        <p class="mono reveal reveal-3" style="font-size:18px;letter-spacing:0.12em;text-transform:uppercase;color:rgba(31,61,31,0.72);margin:30px 0 0;max-width:44ch">A few of the protocols we build upon, in this round with us</p>
+        <div class="ecochips reveal reveal-3">
+          <span class="c">Ethereum Attestation Service</span>
+          <span class="c">Hypercerts</span>
+          <span class="c">Solidity</span>
+          <span class="c">Dappnode</span>
+        </div>
+      </div>
+      <div class="media-slot reveal-fade" style="height:600px">
+        <img src="assets/sourced/run-together.gif" alt="" onerror="this.style.display='none'" />
+        <div class="photo-scrim"></div>
+        <div class="ph"><div class="cap"></div><div class="t">Run it together</div></div>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">15 / 16</div>
+  </section>
+
+  <!-- 15 · CLOSE -->
+  <section data-label="Thank you">
+    <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 90px;box-sizing:border-box">
+      <h1 class="h2 reveal" style="max-width:18ch;font-size:82px;line-height:1.0">Thank you, <span class="accent">Octant</span> and the <span class="accent">Ethereum</span> ecosystem.</h1>
+      <span class="lfg reveal reveal-2" style="font-size:84px">Let's Fucking Grow</span>
+      <div class="links reveal reveal-3">
+        <span class="lk"><svg class="lkic globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18"/><path d="M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>greengoods.app</span>
+        <span class="lk"><svg class="lkic globe" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3c2.6 2.7 2.6 15.3 0 18"/><path d="M12 3c-2.6 2.7-2.6 15.3 0 18"/></svg>@greenpilldevguild</span>
+        <span class="lk"><svg class="lkic xic" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>@greenpilldevs</span>
+      </div>
+    </div>
+    <div class="brandmark"><svg viewBox="0 0 44 64" width="19" height="28" aria-hidden="true"><g transform="rotate(20 22 32)"><rect x="7" y="5" width="30" height="54" rx="15" fill="none" stroke="#1F3D1F" stroke-width="4"/><circle cx="22" cy="20" r="8.5" fill="#1F3D1F"/><line x1="9" y1="35" x2="35" y2="35" stroke="#1F3D1F" stroke-width="4" stroke-linecap="round"/></g></svg><span>Greenpill Dev Guild</span></div>
+    <div class="pageno">16 / 16</div>
+  </section>
+
+</deck-stage>
+
+<script type="application/json" id="speaker-notes">[
+  "Open with energy. We are the Greenpill Dev Guild. 5 minutes. Set the frame: this is about people, not protocols.",
+  "Nobody fell in love with TCP/IP. Ethereum is infrastructure the same way the Internet was, the protocols hold everything up but stay invisible.",
+  "What grew the Internet wasn't the protocol, it was people building things they wanted: shops, social, forums, messaging.",
+  "So today we are not here to talk about protocols. The Guild abstracts Ethereum into trust, relationships, culture, and ownership.",
+  "The problem: proof of real work is locked in someone else's database, and capital cannot reach communities like Nigeria cheaply. When it does arrive it rarely flows transparently, which raises risk and deters investment.",
+  "Layer 1, roadmap: Public Goods Staking. Squads run hardware together; staking rewards flow into community vaults.",
+  "Layer 2, live today: Green Goods. Regenerative work becomes verified, funder-ready proof tied to a local endowment. No wallet, offline, in your language.",
+  "Four domains across 14 gardens on five continents. Point at the map, don't read the list.",
+  "Where it becomes real: two communities, and Green Goods is the bridge between them. Tech and Sun in Nigeria, Omo Yoruba in California.",
+  "Tech and Sun: a live hub in Awka near UNIZIK. Solar, Starlink, Ethereum staking infrastructure. The node helps fund the hub, and the same hardware can host private local AI so the community's tools and knowledge stay theirs. Enugu, Abuja and Lagos next.",
+  "Omo Yoruba: a Southern California community keeping Yoruba culture alive, and the diaspora's bridge to invest back home.",
+  "Grassroots growth. Funding starts at home: ownership stays with the community, support flows in from diaspora first, then global funders.",
+  "The flywheel: sponsorship to hubs to proof to capital to reputation, and around again. Omo Yoruba's fiscal sponsorship already let Tech and Sun apply for grants, results pending. The point is how powerful it gets once it spins.",
+  "We're running a marathon. This Epoch is a water station, fuel for the road, not the finish line.",
+  "The ask: partners, communities, funders to build the plumbing of trust with us. We build on EAS, Octant Vaults, Hypercerts, Solidity, Dappnode.",
+  "Thank you Octant and the Ethereum ecosystem. Let's Fucking Grow."
+]</script>
+
+<div class="presenter" id="presenter" aria-hidden="true">
+  <div class="presenter__head"><span class="presenter__timer" id="pTimer">00:00</span><span class="presenter__count" id="pCount">1 / 16</span></div>
+  <div class="presenter__note" id="pNote"></div>
+  <div class="presenter__next" id="pNext"></div>
+  <div class="presenter__hint">N hide notes · arrows / Space nav · F fullscreen · Cmd/Ctrl-P export PDF · R restart</div>
+</div>
+<style>
+  .presenter { display: none; position: fixed; left: 22px; bottom: 22px; z-index: 2147483600; width: 560px; max-width: 42vw; background: rgba(8,16,8,0.94); color: var(--color-parchment); border: 1px solid rgba(194,255,26,0.35); border-radius: 16px; padding: 18px 20px; font-family: var(--font-body); box-shadow: 0 12px 40px rgba(0,0,0,0.5); }
+  .presenter.show { display: block; }
+  .presenter__head { display: flex; align-items: center; gap: 14px; margin-bottom: 10px; }
+  .presenter__timer { font-family: var(--font-mono); font-size: 22px; font-weight: 700; color: var(--color-spring-green); letter-spacing: 0.04em; }
+  .presenter__timer.warn { color: var(--color-creme); } .presenter__timer.over { color: var(--color-cryola); }
+  .presenter__count { font-family: var(--font-mono); font-size: 13px; color: rgba(252,236,166,0.6); }
+  .presenter__note { font-size: 17px; line-height: 1.5; min-height: 48px; } .presenter__note.empty { color: rgba(252,236,166,0.45); font-style: italic; }
+  .presenter__next { margin-top: 10px; font-family: var(--font-mono); font-size: 13px; letter-spacing: 0.04em; color: var(--color-spring-green); }
+  .presenter__hint { margin-top: 12px; font-family: var(--font-mono); font-size: 11px; color: rgba(252,236,166,0.4); }
+  @media print { .presenter { display: none !important; } }
+</style>
+
+<script>
+(function () {
+  const SPRING="#C2FF1A", CREME="#FCECA6", FOREST="#1F3D1F", DEEP="#254D32", PARCH="#FFF8E1", MINT="#B1FDEB", ALICE="#DCEDFF", CRYOLA="#FF6978", FLAME="#7DC400", GOLD="#F0DCA0";
+  const rng = (s) => () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+
+  // Slide 1: ink-line roots beneath a surface line (forest on parchment)
+  (function roots(){
+    const svg=document.querySelector(".roots"); if(!svg) return;
+    const r=rng(11); let out="";
+    const branch=(x,y,ang,len,depth,w)=>{
+      if(depth===0||len<12) return;
+      const x2=x+Math.cos(ang)*len, y2=y+Math.sin(ang)*len, op=(0.35+depth*0.1).toFixed(2);
+      const col = depth>=4 ? FOREST : (depth===3 ? "#3a6b3a" : FLAME);
+      out+=`<line x1="${x.toFixed(0)}" y1="${y.toFixed(0)}" x2="${x2.toFixed(0)}" y2="${y2.toFixed(0)}" stroke="${col}" stroke-width="${w.toFixed(1)}" stroke-linecap="round" opacity="${op}"/>`;
+      if(depth<=3) out+=`<circle cx="${x2.toFixed(0)}" cy="${y2.toFixed(0)}" r="${(w*0.9).toFixed(1)}" fill="${col}" opacity="${op}"/>`;
+      const sp=0.34+r()*0.3;
+      branch(x2,y2,ang-sp,len*(0.7+r()*0.1),depth-1,w*0.74);
+      branch(x2,y2,ang+sp,len*(0.7+r()*0.1),depth-1,w*0.74);
+      if(r()>0.5) branch(x2,y2,ang+(r()-0.5)*0.4,len*0.62,depth-1,w*0.62);
+    };
+    out+=`<line x1="40" y1="120" x2="600" y2="120" stroke="${FOREST}" stroke-width="3" stroke-linecap="round"/>`;
+    for(let i=0;i<4;i++) branch(150+i*120+r()*40,120,Math.PI/2+(r()-0.5)*0.5,120+r()*40,5,4.5);
+    svg.innerHTML=out;
+  })();
+
+  // Slide 4: locked silos vs one open field
+  (function problem(){
+    const svg=document.querySelector(".prob"); if(!svg) return;
+    const silo=(x,y)=>`<g><rect x="${x}" y="${y}" width="118" height="118" rx="14" fill="${DEEP}" stroke="${FOREST}" stroke-width="2"/><rect x="${x+44}" y="${y+44}" width="30" height="34" rx="6" fill="none" stroke="${CREME}" stroke-width="2.5"/><path d="M${x+48} ${y+44} v-9 a11 11 0 0 1 22 0 v9" fill="none" stroke="${CREME}" stroke-width="2.5"/></g>`;
+    const silos=silo(0,20)+silo(150,90)+silo(40,200)+silo(190,270)+silo(10,360);
+    const blocked=`<path d="M330 250 H470" stroke="rgba(31,61,31,0.4)" stroke-width="2.5" stroke-dasharray="9 11" fill="none"/><g stroke="${CRYOLA}" stroke-width="4" stroke-linecap="round"><line x1="394" y1="228" x2="418" y2="272"/><line x1="418" y1="228" x2="394" y2="272"/></g>`;
+    const field=`<g><rect x="470" y="120" width="150" height="270" rx="22" fill="rgba(194,255,26,0.32)" stroke="${FOREST}" stroke-width="2.5"/><path d="M545 360 v-150" stroke="${FOREST}" stroke-width="2.5"/><path d="M545 250 q26 -10 42 -36M545 286 q-26 -10 -42 -36" stroke="${FOREST}" stroke-width="2.5" fill="none"/><text x="545" y="408" fill="${FOREST}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="19">ONE OPEN FIELD</text></g>`;
+    svg.innerHTML=silos+blocked+field;
+  })();
+
+  // Slide 7: world map with continents anchored to equirectangular boxes; accurate pins
+  (function worldmap(){
+    const svg=document.querySelector(".worldmap"); if(!svg) return;
+    const W=1440,H=720, proj=(la,lo)=>[((lo+180)/360)*W,((90-la)/180)*H];
+    const continents=[
+      "M70 120 Q90 80 180 88 Q290 80 350 130 Q470 140 460 200 Q480 240 410 252 Q400 300 340 306 Q322 340 296 312 Q250 350 235 306 Q150 322 158 246 Q70 240 86 176 Q60 140 70 120 Z",
+      "M430 320 Q510 305 540 366 Q566 430 520 510 Q486 580 446 560 Q414 540 418 468 Q386 408 414 360 Q418 332 430 320 Z",
+      "M700 100 Q760 82 842 100 Q882 122 850 152 Q882 182 822 198 Q742 212 700 186 Q680 152 692 122 Q690 106 700 100 Z",
+      "M700 240 Q800 218 884 252 Q922 292 896 362 Q886 442 822 482 Q776 506 752 470 Q720 410 730 340 Q700 300 700 262 Q698 248 700 240 Z",
+      "M852 100 Q1004 60 1182 92 Q1362 96 1422 152 Q1452 200 1382 232 Q1422 282 1332 302 Q1152 342 1002 322 Q882 320 852 252 Q822 172 852 100 Z",
+      "M1182 432 Q1262 414 1322 448 Q1352 482 1312 512 Q1242 532 1186 502 Q1162 466 1182 432 Z"
+    ];
+    let land=`<filter id="rgh"><feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="5" result="n"/><feDisplacementMap in="SourceGraphic" in2="n" scale="5"/></filter>`;
+    const fills=[MINT,CREME,ALICE,CREME,MINT,ALICE];
+    land+=`<g filter="url(#rgh)">`+continents.map((d,i)=>`<path d="${d}" fill="${fills[i]}" fill-opacity="0.8" stroke="${FOREST}" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>`).join("")+`</g>`;
+    const gardens=[[-23.55,-46.63],[5.21,-3.74],[9.06,7.49],[10.49,-66.79],[-1.29,36.82],[9.72,100.05],[41.39,2.16],[-21.86,-43.80],[-22.41,-47.56],[37.6,14.0],[-34.1,18.47],[23.7,121.0],[42.98,-81.24],[6.21,7.07]];
+    const pins=gardens.map(([la,lo])=>{const[x,y]=proj(la,lo);return `<g transform="translate(${x.toFixed(0)},${y.toFixed(0)})"><circle r="8.5" fill="${SPRING}" stroke="${FOREST}" stroke-width="2.5"/></g>`;}).join("");
+    svg.innerHTML=land+pins;
+    const legend=document.querySelector(".maplegend"); if(!legend) return;
+    const items=[["Agroforestry",'<path d="M12 22v-7"/><path d="M12 15c-4 0-7-3-7-7 4 0 7 3 7 7z"/><path d="M12 13c0-4 3-7 7-7 0 4-3 7-7 7z"/>'],["Waste",'<path d="M7 19l-3-6 5-3"/><path d="M12 4l3 6h-6z"/><path d="M17 9l3 6-5 1"/><path d="M9 20h6"/>'],["Solar",'<rect x="4" y="4" width="16" height="11" rx="1"/><path d="M4 8h16M9 4v11M12 19v3"/>'],["Education",'<path d="M3 8l9-4 9 4-9 4z"/><path d="M7 10v5c0 1 2 3 5 3s5-2 5-3v-5"/>']];
+    legend.innerHTML=items.map(([t,ic])=>`<div style="display:flex;align-items:center;gap:13px"><span style="width:52px;height:52px;border-radius:999px;background:${SPRING};display:flex;align-items:center;justify-content:center;flex:none"><svg viewBox="0 0 24 24" style="width:25px;height:25px;stroke:${FOREST};stroke-width:2;fill:none;stroke-linecap:round;stroke-linejoin:round">${ic}</svg></span><span style="font-family:var(--font-display);font-weight:700;font-size:19px;color:${FOREST};text-transform:uppercase;letter-spacing:-0.01em">${t}</span></div>`).join("");
+  })();
+
+  // Slide 11: full concentric circle (ownership core, diaspora, global funders) with inward arrows
+  (function rings(){
+    const svg=document.querySelector(".rings"); if(!svg) return;
+    const cx=280,cy=280;
+    const ring=(r,fill)=>`<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="${FOREST}" stroke-width="2.5"/>`;
+    const label=(y,t,sz)=>`<text x="${cx}" y="${y}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="${sz}" fill="${FOREST}" text-transform="uppercase">${t}</text>`;
+    let arrows="";
+    [45,135,225,315].forEach(a=>{const rad=a*Math.PI/180; const x1=cx+Math.cos(rad)*262,y1=cy+Math.sin(rad)*262,x2=cx+Math.cos(rad)*200,y2=cy+Math.sin(rad)*200; const ax=Math.cos(rad),ay=Math.sin(rad); const perp=12; arrows+=`<g stroke="${FLAME}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="${x1.toFixed(0)}" y1="${y1.toFixed(0)}" x2="${x2.toFixed(0)}" y2="${y2.toFixed(0)}"/><path d="M${(x2+ax*16-ay*-perp+ -ax*0).toFixed(0)} ${(y2).toFixed(0)}"/></g>`;});
+    // simpler clean inward arrows
+    arrows="";
+    [45,135,225,315].forEach(a=>{const rad=a*Math.PI/180; const x1=cx+Math.cos(rad)*264,y1=cy+Math.sin(rad)*264,x2=cx+Math.cos(rad)*198,y2=cy+Math.sin(rad)*198; const hx=cx+Math.cos(rad)*214,hy=cy+Math.sin(rad)*214; const oa=rad+2.5,ob=rad-2.5; arrows+=`<g stroke="${FLAME}" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"><line x1="${x1.toFixed(0)}" y1="${y1.toFixed(0)}" x2="${x2.toFixed(0)}" y2="${y2.toFixed(0)}"/><path d="M${(x2+Math.cos(oa)*16).toFixed(0)} ${(y2+Math.sin(oa)*16).toFixed(0)} L ${x2.toFixed(0)} ${y2.toFixed(0)} L ${(x2+Math.cos(ob)*16).toFixed(0)} ${(y2+Math.sin(ob)*16).toFixed(0)}"/></g>`;});
+    svg.innerHTML=
+      ring(258,CREME) + ring(178,MINT) + ring(98,SPRING) + arrows +
+      label(cy-206,"GLOBAL FUNDERS",23) + label(cy-128,"DIASPORA",23) + label(cy-4,"OWNERSHIP",28) + label(cy+26,"STAYS HERE",20);
+  })();
+
+  // Slide 12: flywheel without a Diaspora node (Omo Yoruba is the diaspora)
+  (function flywheel(){
+    const svg=document.querySelector(".flywheel"); if(!svg) return;
+    const cx=360,cy=360,R=236;
+    const nodes=[["Omo Yoruba","sponsorship",MINT],["Tech and Sun","hubs built",SPRING],["Green Goods","proof",SPRING],["Capital & grants","flow in",ALICE],["Reputation","grows",CREME]];
+    let out=`<defs><marker id="fa" markerWidth="9" markerHeight="9" refX="5" refY="3" orient="auto"><path d="M0 0 L6 3 L0 6" fill="none" stroke="${FOREST}" stroke-width="1.5"/></marker></defs>`;
+    out+=`<circle cx="${cx}" cy="${cy}" r="${R}" fill="none" stroke="rgba(31,61,31,0.18)" stroke-width="2"/>`;
+    const pos=nodes.map((_,i)=>{const a=(-90+i*72)*Math.PI/180;return[cx+Math.cos(a)*R,cy+Math.sin(a)*R];});
+    for(let i=0;i<5;i++){const a1=(-90+i*72+16)*Math.PI/180,a2=(-90+(i+1)*72-16)*Math.PI/180;const x1=cx+Math.cos(a1)*R,y1=cy+Math.sin(a1)*R,x2=cx+Math.cos(a2)*R,y2=cy+Math.sin(a2)*R;out+=`<path d="M${x1.toFixed(0)} ${y1.toFixed(0)} A ${R} ${R} 0 0 1 ${x2.toFixed(0)} ${y2.toFixed(0)}" fill="none" stroke="${FOREST}" stroke-width="2.5" opacity="0.7" marker-end="url(#fa)"/>`;}
+    out+=`<circle cx="${cx}" cy="${cy}" r="96" fill="rgba(194,255,26,0.3)" stroke="${FOREST}" stroke-width="2.5"/><text x="${cx}" y="${cy-6}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="${FOREST}">COMMUNITY</text><text x="${cx}" y="${cy+26}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="26" fill="${FOREST}">OWNERSHIP</text>`;
+    nodes.forEach((n,i)=>{const[x,y]=pos[i];const top=y<cy;const ny=top?y-46:y+54;const sy=top?y-68:y+76;out+=`<g><circle cx="${x.toFixed(0)}" cy="${y.toFixed(0)}" r="22" fill="${n[2]}" stroke="${FOREST}" stroke-width="2.5"/><text x="${x.toFixed(0)}" y="${(y+7).toFixed(0)}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="20" fill="${FOREST}">${i+1}</text><text x="${x.toFixed(0)}" y="${ny.toFixed(0)}" text-anchor="middle" font-family="Space Grotesk,sans-serif" font-weight="700" font-size="22" fill="${FOREST}">${n[0].toUpperCase()}</text><text x="${x.toFixed(0)}" y="${sy.toFixed(0)}" text-anchor="middle" font-family="Satoshi,sans-serif" font-size="17" fill="#5a6850">${n[1]}</text></g>`;});
+    svg.innerHTML=out;
+  })();
+
+  // hide media placeholders once a real photo loads
+  document.querySelectorAll(".media-slot img").forEach(img=>{
+    const slot=img.closest(".media-slot"); const ph=slot.querySelector(".ph"), scrim=slot.querySelector(".photo-scrim");
+    const ok=()=>{ if(ph) ph.style.display="none"; if(scrim) scrim.style.opacity="1"; };
+    if(img.complete && img.naturalWidth>0) ok();
+    img.addEventListener("load",()=>{ if(img.naturalWidth>0) ok(); });
+  });
+
+  // presenter overlay
+  const deck=document.querySelector("deck-stage");
+  let notes=[]; try{ notes=JSON.parse(document.getElementById("speaker-notes").textContent||"[]"); }catch(e){}
+  const sections=[...deck.children].filter(el=>el.tagName==="SECTION");
+  sections.forEach((s,i)=>{const p=s.querySelector(".pageno"); if(p) p.textContent=String(i+1).padStart(2,"0")+" / "+sections.length;});
+  const panel=document.getElementById("presenter"),pNote=document.getElementById("pNote"),pNext=document.getElementById("pNext"),pTimer=document.getElementById("pTimer"),pCount=document.getElementById("pCount");
+  let started=false,t0=0;
+  const fmt=ms=>{const s=Math.max(0,Math.floor(ms/1000));return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0");};
+  function tick(){const el=Date.now()-t0;pTimer.textContent=fmt(el);pTimer.classList.toggle("warn",el>=270000&&el<300000);pTimer.classList.toggle("over",el>=300000);}
+  deck.addEventListener("slidechange",e=>{const i=e.detail.index,total=e.detail.total,note=notes[i]||"";pNote.textContent=note||"(no note)";pNote.classList.toggle("empty",!note);pCount.textContent=(i+1)+" / "+total;const next=sections[i+1];pNext.textContent=next?"Next: "+(next.getAttribute("data-label")||""):"Next: (end)";if(e.detail.reason!=="init"&&!started){started=true;t0=Date.now();tick();setInterval(tick,1000);}});
+  window.addEventListener("keydown",e=>{if(e.metaKey||e.ctrlKey||e.altKey)return;const t=e.target;if(t&&(t.isContentEditable||/^(INPUT|TEXTAREA|SELECT)$/.test(t.tagName)))return;if(e.key==="n"||e.key==="N"){const on=panel.classList.toggle("show");panel.setAttribute("aria-hidden",String(!on));}else if(e.key==="f"||e.key==="F"){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen&&document.exitFullscreen();}});
+})();
+</script>
+</body>
+</html>

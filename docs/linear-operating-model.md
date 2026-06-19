@@ -53,6 +53,18 @@ Do not recreate retired GitHub-era label families in Linear. In particular, avoi
 
 Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
 
+Scope-review happens before Todo. Triage / Backlog issues that need a scoped brief or evaluator-panel sign-off are surfaced by `scope-review-pulse`; the routine can nudge the right panel, but it never accepts work or moves issues to Todo. Acceptance remains a human panel decision.
+
+## Agent delegation
+
+A Linear issue delegated to Codex or another coding agent must be self-contained enough that the issue is the prompt and the repo's `AGENTS.md` is the operating manual. Delegate only when the issue names the target repo/branch, behavior change, bounded surface, validation command, and acceptance criteria. If a task points to a `.plans` handoff or status file, link it explicitly and keep orchestration state in the plan/status file, not in the agent's private thread.
+
+`agent:codex` marks an issue as suitable for Codex-style execution; it is not a priority label and does not replace a human reviewer. Agent PRs should target the integration branch named in the issue, stay one concern per PR, include the relevant Linear close/reference, and never self-merge.
+
+## Acceptance and closure
+
+GitHub merge evidence is useful but not sufficient by itself to mark Linear work Done. Close only when the acceptance criteria have been verified on the intended surface. If a PR is merged but the result needs staging proof, human QA, deploy verification, or residual-scope review, keep the issue in QA / In Review and record the missing proof instead of moving it to Done.
+
 ## Funding lifecycle
 
 Funding lifecycle is represented by Linear labels and saved views, not by GitHub Issues or a standing roadmap project.

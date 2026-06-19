@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Role tags" subtitle="Steward · Lead · Contributor + status" viewport="700x180" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Role tags</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:32px;width:636px;background:var(--color-parchment);}
+  .row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;}
+  .row + .row{margin-top:18px;}
+  .tag{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;border-radius:999px;padding:6px 12px;display:inline-flex;align-items:center;gap:6px;color:#1F3D1F;}
+  .dot{width:6px;height:6px;border-radius:999px;background:#1F3D1F;}
+  .grouplabel{font-family:var(--font-mono);font-size:11px;color:rgba(31,61,31,0.5);text-transform:uppercase;letter-spacing:0.1em;width:120px;}
+</style>
+</head>
+<body>
+  <div class="row"><span class="grouplabel">Roles</span>
+    <span class="tag" style="background:#C2FF1A;"><span class="dot"></span>Steward</span>
+    <span class="tag" style="background:#FCECA6;"><span class="dot"></span>Lead</span>
+    <span class="tag" style="background:#DCEDFF;"><span class="dot"></span>Contributor</span>
+  </div>
+  <div class="row"><span class="grouplabel">Status</span>
+    <span class="tag" style="background:#C2FF1A;">Switched on</span>
+    <span class="tag" style="background:#B1FDEB;">Protocol</span>
+    <span class="tag" style="background:#FF6978;color:#fff;">Social</span>
+    <span class="tag" style="background:#FCECA6;">Public goods</span>
+  </div>
+</body>
+</html>

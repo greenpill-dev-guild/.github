@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Greenpill Dev Guild — Marketing</title>
+<link rel="stylesheet" href="../../colors_and_type.css">
+<style>
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;background:#1F3D1F;font-family:var(--font-body);color:var(--color-parchment);}
+  a{color:inherit;text-decoration:none;}
+
+  /* ---------- nav ---------- */
+  nav{position:sticky;top:0;z-index:50;background:rgba(31,61,31,0.92);backdrop-filter:blur(8px);padding:20px 56px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(194,255,26,0.1);}
+  nav .lockup{display:flex;align-items:center;gap:12px;}
+  nav .lockup img{height:40px;}
+  nav ul{list-style:none;margin:0;padding:0;display:flex;gap:36px;}
+  nav ul a{font-size:14px;font-weight:500;color:rgba(252,236,166,0.85);}
+  nav ul a:hover{color:var(--color-spring-green);}
+  nav .cta{font-family:var(--font-body);font-weight:600;font-size:14px;background:var(--color-spring-green);color:#1F3D1F;border:none;border-radius:999px;padding:12px 22px;cursor:pointer;}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;min-height:760px;background:linear-gradient(135deg,#1F3D1F 0%,#2d5a2d 60%,#5b8a1f 100%);padding:120px 80px 100px;overflow:hidden;}
+  .hero::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(194,255,26,0.06) 0 8px, transparent 9px),radial-gradient(rgba(194,255,26,0.06) 0 8px, transparent 9px);background-size:120px 80px,120px 80px;background-position:0 0,60px 40px;pointer-events:none;}
+  .hero-eyebrow{font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-spring-green);margin-bottom:24px;display:inline-flex;align-items:center;gap:10px;}
+  .hero-eyebrow::before{content:"";width:8px;height:8px;border-radius:999px;background:var(--color-spring-green);box-shadow:0 0 16px rgba(194,255,26,0.8);}
+  .hero h1{font-family:var(--font-display);font-weight:700;font-size:96px;line-height:0.98;letter-spacing:-0.03em;color:var(--color-parchment);max-width:1000px;margin:0 0 32px;text-wrap:balance;position:relative;}
+  .hero h1 em{font-style:normal;color:var(--color-spring-green);}
+  .hero p{font-size:22px;line-height:1.5;color:rgba(252,236,166,0.85);max-width:620px;margin:0 0 40px;position:relative;}
+  .hero .ctas{display:flex;gap:16px;position:relative;}
+  .btn{font-family:var(--font-body);font-weight:600;font-size:16px;border-radius:999px;padding:18px 30px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:10px;transition:all 220ms cubic-bezier(0.16,1,0.3,1);}
+  .btn-primary{background:var(--color-spring-green);color:#1F3D1F;box-shadow:0 0 0 6px rgba(194,255,26,0.16),0 0 32px rgba(194,255,26,0.4);}
+  .btn-primary:hover{background:#E5FF8A;transform:translateY(-1px);}
+  .btn-secondary{background:transparent;color:var(--color-spring-green);border:2px solid var(--color-spring-green);}
+  .btn-secondary:hover{background:rgba(194,255,26,0.12);}
+
+  .hero-pill{position:absolute;top:50%;right:6%;transform:translateY(-50%) rotate(20deg);width:380px;filter:drop-shadow(0 0 80px rgba(194,255,26,0.55));animation:pulse 4s ease-in-out infinite;}
+  @keyframes pulse{0%,100%{filter:drop-shadow(0 0 60px rgba(194,255,26,0.45));}50%{filter:drop-shadow(0 0 100px rgba(194,255,26,0.7));}}
+  @media (prefers-reduced-motion:reduce){.hero-pill{animation:none;}}
+
+  /* ---------- stats / partners strip ---------- */
+  .strip{background:#0F1F0F;padding:48px 80px;display:flex;justify-content:space-between;align-items:center;gap:48px;border-top:1px solid rgba(194,255,26,0.1);border-bottom:1px solid rgba(194,255,26,0.1);}
+  .stat{display:flex;flex-direction:column;}
+  .stat .num{font-family:var(--font-display);font-weight:700;font-size:48px;color:var(--color-spring-green);line-height:1;letter-spacing:-0.02em;}
+  .stat .lbl{font-size:13px;color:rgba(252,236,166,0.6);margin-top:6px;letter-spacing:0.05em;}
+
+  /* ---------- services ---------- */
+  section{padding:120px 80px;position:relative;}
+  .eyebrow{font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-spring-green);margin-bottom:20px;}
+  .services{background:#1F3D1F;}
+  .services h2{font-family:var(--font-display);font-weight:700;font-size:72px;line-height:1.05;letter-spacing:-0.025em;color:var(--color-parchment);margin:0 0 16px;text-wrap:balance;max-width:880px;}
+  .services .lede{font-size:20px;line-height:1.5;color:rgba(252,236,166,0.7);max-width:640px;margin:0 0 64px;}
+  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .service-card{background:#254D32;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:20px;min-height:280px;transition:transform 220ms cubic-bezier(0.16,1,0.3,1),box-shadow 220ms cubic-bezier(0.16,1,0.3,1);}
+  .service-card:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,0.3);}
+  .disc{width:64px;height:64px;border-radius:999px;background:var(--color-spring-green);display:flex;align-items:center;justify-content:center;box-shadow:0 0 0 6px rgba(194,255,26,0.16),0 0 28px rgba(194,255,26,0.35);}
+  .service-card h3{font-family:var(--font-display);font-weight:600;font-size:26px;line-height:1.18;color:var(--color-parchment);margin:0;}
+  .service-card p{font-size:16px;line-height:1.55;color:rgba(252,236,166,0.7);margin:0;}
+
+  /* ---------- stack ---------- */
+  .stack{background:var(--color-parchment);color:var(--color-cal-poly-green);}
+  .stack .eyebrow{color:#7DC400;}
+  .stack h2{font-family:var(--font-display);font-weight:700;font-size:72px;line-height:1.05;letter-spacing:-0.025em;color:#1F3D1F;margin:0 0 64px;max-width:900px;text-wrap:balance;}
+  .stack .grid{display:grid;grid-template-columns:1.1fr 1fr;gap:80px;align-items:center;}
+  .stack-stack{display:flex;flex-direction:column;gap:8px;}
+  .layer{border-radius:18px;padding:28px 36px;display:flex;justify-content:space-between;align-items:center;}
+  .layer .name{font-family:var(--font-display);font-weight:600;font-size:28px;letter-spacing:-0.01em;}
+  .layer .meta{font-family:var(--font-mono);font-size:12px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.7;}
+  .layer.app{background:#FCECA6;color:#1F3D1F;}
+  .layer.social{background:#FF6978;color:#fff;}
+  .layer.protocol{background:#B1FDEB;color:#1F3D1F;}
+  .layer.blockchain{background:#DCEDFF;color:#1F3D1F;}
+  .stack-notes .item{padding:20px 0;border-top:1.5px solid rgba(31,61,31,0.18);}
+  .stack-notes .item:first-child{border-top:none;}
+  .stack-notes .lbl{font-family:var(--font-display);font-weight:600;font-size:13px;letter-spacing:0.14em;text-transform:uppercase;color:#7DC400;margin-bottom:6px;}
+  .stack-notes .txt{font-size:17px;line-height:1.5;color:#1F3D1F;}
+
+  /* ---------- map / fellowship ---------- */
+  .map-section{background:#1F3D1F;}
+  .map-section .grid{display:grid;grid-template-columns:1fr 1.1fr;gap:80px;align-items:center;}
+  .map-section h2{font-family:var(--font-display);font-weight:700;font-size:64px;line-height:1.05;letter-spacing:-0.025em;color:var(--color-parchment);margin:0 0 24px;text-wrap:balance;}
+  .map-section p{font-size:18px;line-height:1.6;color:rgba(252,236,166,0.75);margin:0 0 16px;}
+  .map-section .roles{display:flex;gap:10px;margin-top:32px;flex-wrap:wrap;}
+  .role-tag{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;color:#1F3D1F;border-radius:999px;padding:8px 14px;display:inline-flex;align-items:center;gap:6px;}
+  .role-tag .dot{width:6px;height:6px;border-radius:999px;background:#1F3D1F;}
+  .role-tag.steward{background:#C2FF1A;}
+  .role-tag.lead{background:#FCECA6;}
+  .role-tag.contributor{background:#DCEDFF;}
+  .map-frame{background:var(--color-parchment);border-radius:28px;padding:24px;border:2px solid rgba(194,255,26,0.2);}
+  .map-frame img{width:100%;height:auto;display:block;border-radius:14px;}
+
+  /* ---------- partners ---------- */
+  .partners{background:var(--color-parchment);color:#1F3D1F;}
+  .partners .eyebrow{color:#7DC400;}
+  .partners h2{font-family:var(--font-display);font-weight:700;font-size:64px;letter-spacing:-0.025em;margin:0 0 48px;text-wrap:balance;max-width:780px;}
+  .partners-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;}
+  .partner{background:#fff;border-radius:18px;padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:140px;border:1px solid rgba(31,61,31,0.06);}
+  .partner .badge{width:36px;height:36px;border-radius:999px;background:#C2FF1A;}
+  .partner .name{font-family:var(--font-display);font-weight:600;font-size:20px;color:#1F3D1F;letter-spacing:-0.01em;}
+
+  /* ---------- CTA ---------- */
+  .closing{background:linear-gradient(135deg,#1F3D1F 0%,#5b8a1f 100%);text-align:center;padding:140px 80px;overflow:hidden;position:relative;}
+  .closing h2{font-family:var(--font-display);font-weight:700;font-size:120px;line-height:0.95;letter-spacing:-0.035em;color:var(--color-parchment);margin:0 0 24px;text-wrap:balance;}
+  .closing h2 em{font-style:normal;color:var(--color-spring-green);}
+  .closing p{font-size:22px;color:rgba(252,236,166,0.85);margin:0 auto 40px;max-width:540px;}
+  .closing .ctas{display:inline-flex;gap:16px;}
+
+  /* ---------- footer ---------- */
+  footer{background:#0F1F0F;padding:64px 80px 32px;border-top:1px solid rgba(194,255,26,0.1);}
+  .foot-grid{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:48px;margin-bottom:48px;}
+  footer h4{font-family:var(--font-display);font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-spring-green);margin:0 0 18px;}
+  footer ul{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:10px;}
+  footer ul a{font-size:14px;color:rgba(252,236,166,0.7);}
+  footer ul a:hover{color:var(--color-spring-green);}
+  footer .brand{display:flex;flex-direction:column;gap:16px;}
+  footer .brand img{height:48px;align-self:flex-start;}
+  footer .brand p{font-size:14px;color:rgba(252,236,166,0.6);line-height:1.6;max-width:280px;margin:0;}
+  .legal{padding-top:24px;border-top:1px solid rgba(194,255,26,0.08);display:flex;justify-content:space-between;font-family:var(--font-mono);font-size:12px;color:rgba(252,236,166,0.45);}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="lockup"><img src="../../assets/logo-horizontal-spring.png" alt="Greenpill Dev Guild"></div>
+  <ul>
+    <li><a href="#fellowship">Fellowship</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#stack">Stack</a></li>
+    <li><a href="#partners">Partners</a></li>
+  </ul>
+  <button class="cta">Take the Greenpill →</button>
+</nav>
+
+<header class="hero">
+  <div class="hero-eyebrow">A FELLOWSHIP FOR REGENERATION</div>
+  <h1>We forge the<br><em>regenerative</em> rails<br>of Web3.</h1>
+  <p>The Greenpill Dev Guild gathers builders, stewards and aligned partners to ship open-source ReFi tools — from grant rounds to staking ops to the social layer of public goods.</p>
+  <div class="ctas">
+    <button class="btn btn-primary">Join the fellowship →</button>
+    <button class="btn btn-secondary">Read the brief</button>
+  </div>
+  <img class="hero-pill" src="../../assets/pill-mark-spring.png" alt="">
+</header>
+
+<div class="strip">
+  <div class="stat"><div class="num">$3.4M</div><div class="lbl">ALLOCATED TO PUBLIC GOODS</div></div>
+  <div class="stat"><div class="num">42</div><div class="lbl">CHAPTERS &amp; PARTNERS</div></div>
+  <div class="stat"><div class="num">7</div><div class="lbl">CHAINS WALKED</div></div>
+  <div class="stat"><div class="num">120+</div><div class="lbl">FELLOWSHIP MEMBERS</div></div>
+</div>
+
+<section class="services" id="services">
+  <div class="eyebrow">FELLOWSHIP · SERVICES</div>
+  <h2>What the Guild forges.</h2>
+  <p class="lede">Where most dev shops sell hours, we offer fellowship — switched-on, mission-aligned stewards who help partners go from spark to systems.</p>
+  <div class="services-grid">
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M5 12V8a7 7 0 0 1 14 0v4M3 12h18M5 16h14M5 20h14"/></svg></div>
+      <h3>Grant Round Design &amp; Operations</h3>
+      <p>End-to-end design and ops for public-goods funding rounds, including Ethereum staking.</p>
+    </div>
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+      <h3>Web3 Tech Consultation</h3>
+      <p>Battle-tested guidance from people who run the rails — feedback, audits, integration.</p>
+    </div>
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="M12 7v5l3 2"/></svg></div>
+      <h3>Educational Workshops</h3>
+      <p>Impact reporting, capital allocation, coordination — taught by stewards in residence.</p>
+    </div>
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+      <h3>Regenerative Tooling</h3>
+      <p>We build, ship and maintain open-source apps and protocols for ReFi.</p>
+    </div>
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+      <h3>UI/UX &amp; Graphic Design</h3>
+      <p>Brand systems, product surfaces and on-chain interfaces that feel communal.</p>
+    </div>
+    <div class="service-card">
+      <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+      <h3>Ethereum Staking Operations</h3>
+      <p>Public-Good Staking — turning validator yield into round funding.</p>
+    </div>
+  </div>
+</section>
+
+<section class="stack" id="stack">
+  <div class="eyebrow">CHAPTER 03 · THE STACK</div>
+  <h2>Across the Ethereum stack — App to Blockchain.</h2>
+  <div class="grid">
+    <div class="stack-stack">
+      <div class="layer app"><span class="name">Green Goods</span><span class="meta">App</span></div>
+      <div class="layer social"><span class="name">GreenWill</span><span class="meta">Social</span></div>
+      <div class="layer protocol"><span class="name">Allo Alliance</span><span class="meta">Protocol</span></div>
+      <div class="layer blockchain"><span class="name">Public Good Staking</span><span class="meta">Blockchain</span></div>
+    </div>
+    <div class="stack-notes">
+      <div class="item"><div class="lbl">App</div><div class="txt">Marketplace and wallet for regenerative goods, built on the social and protocol layers below.</div></div>
+      <div class="item"><div class="lbl">Social</div><div class="txt">Coordination layer — wills, intents, signals among the fellowship.</div></div>
+      <div class="item"><div class="lbl">Protocol</div><div class="txt">Allo-powered grant rounds tied to hypercerts and impact attestations.</div></div>
+      <div class="item"><div class="lbl">Blockchain</div><div class="txt">Validator yield, redirected — tending the steady flame of governance.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="map-section" id="fellowship">
+  <div class="grid">
+    <div>
+      <div class="eyebrow">CHAPTER 02 · THE QUEST</div>
+      <h2>A quest across diverse lands.</h2>
+      <p>From the Shire of Ethereum to the realms of Celo, Optimism, Arbitrum, Octant, VeChain, Solana and Hedera — the fellowship walks where regeneration needs walking.</p>
+      <p>And beyond the chains, we forge symbiotic pathways into traditional markets: NGOs, non-profits and governments learning to fund public goods on-chain.</p>
+      <div class="roles">
+        <span class="role-tag steward"><span class="dot"></span>Steward</span>
+        <span class="role-tag lead"><span class="dot"></span>Lead</span>
+        <span class="role-tag contributor"><span class="dot"></span>Contributor</span>
+      </div>
+    </div>
+    <div class="map-frame"><img src="../../assets/capital-journey-map.png" alt="The Capital Journey fantasy map"></div>
+  </div>
+</section>
+
+<section class="partners" id="partners">
+  <div class="eyebrow">PARTNERS IN THE FELLOWSHIP</div>
+  <h2>The fellowship walks alongside.</h2>
+  <div class="partners-grid">
+    <div class="partner"><div class="badge"></div><div class="name">Gardens</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">Flowstate</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">DAO Masons</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">Hypercerts</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">Greenpill Network</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">CFCE</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">Cloudlines</div></div>
+    <div class="partner"><div class="badge"></div><div class="name">Greenpill Brasil</div></div>
+  </div>
+</section>
+
+<section class="closing">
+  <h2>Take the<br><em>Greenpill.</em></h2>
+  <p>Switch on for change. Walk the road with us.</p>
+  <div class="ctas">
+    <button class="btn btn-primary">Join the fellowship →</button>
+    <button class="btn btn-secondary">gpdevguild.eth</button>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-grid">
+    <div class="brand">
+      <img src="../../assets/logo-horizontal-spring.png" alt="">
+      <p>A fellowship of Web3 builders forging the symbiotic pathways regeneration needs.</p>
+    </div>
+    <div><h4>Fellowship</h4><ul><li><a href="#">Stewards</a></li><li><a href="#">Leads</a></li><li><a href="#">Contributors</a></li><li><a href="#">Apply</a></li></ul></div>
+    <div><h4>Stack</h4><ul><li><a href="#">Green Goods</a></li><li><a href="#">GreenWill</a></li><li><a href="#">Allo Alliance</a></li><li><a href="#">PG Staking</a></li></ul></div>
+    <div><h4>Reach us</h4><ul><li><a href="#">gpdevguild.eth</a></li><li><a href="#">@greenpilldevs</a></li><li><a href="#">Discord</a></li><li><a href="#">GitHub</a></li></ul></div>
+  </div>
+  <div class="legal"><div>© 2025 Greenpill Dev Guild · Public goods, public source.</div><div>Switched on.</div></div>
+</footer>
+
+</body>
+</html>
