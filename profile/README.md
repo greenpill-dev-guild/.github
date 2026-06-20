@@ -68,7 +68,7 @@ Full contributor flow: [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/
 
 Guild operations are stewarded by a **stewardship team** that handles Code of Conduct enforcement, governance, and treasury. See [GOVERNANCE.md](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md).
 
-Project management runs through Linear; GitHub remains the public surface for code, issues, pull requests, and RFCs. See the [Linear operating model](https://github.com/greenpill-dev-guild/.github/blob/main/docs/linear-operating-model.md).
+Project management and all accepted work run through Linear; GitHub is the public surface for code, pull requests, review, releases, and RFC/ADR markdown. See the [Linear operating model](https://github.com/greenpill-dev-guild/.github/blob/main/docs/linear-operating-model.md).
 
 | Channel | Email |
 | --- | --- |

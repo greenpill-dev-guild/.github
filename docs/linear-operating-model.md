@@ -10,8 +10,8 @@ For local development startup, use the [Linear-aware dev day launcher](./linear-
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
-| **Linear** | Roadmap, accepted work, customer and partner needs, funding lifecycle, research tasks, ownership, status | Code review, public bug reports, raw discussion |
-| **GitHub** | Public issues, PRs, RFCs, implementation references, repository defaults | Durable project-management backlog |
+| **Linear** | Roadmap, all accepted work (delivery, QA and bugs, features, research), customer and partner needs, funding lifecycle, ownership, status | Code review, raw external reports before they are triaged |
+| **GitHub** | PRs, code review, releases, RFC and ADR markdown, implementation references, repository defaults | The issue tracker or durable project-management backlog |
 | **Drive** | Memos, evidence bundles, grant drafts, partner docs, meeting notes | Work status or ownership |
 | **Discord / Telegram / calls** | Discussion, triage, community pulse, lightweight coordination | Canonical commitments |
 
@@ -79,8 +79,8 @@ Keep speculative ideas in Discord or Drive memos until they cross this bar.
 
 Use GitHub for:
 
-- Bugs, stories, design proposals, and implementation references in the relevant project repo.
-- RFCs that affect more than one guild project, shared standards, governance, vocabulary, or partner commitments.
 - Pull requests, review, release notes, and code history.
+- RFCs and ADRs that affect more than one guild project, shared standards, governance, vocabulary, or partner commitments, kept as in-repo markdown proposed via PR.
+- Implementation references in the relevant project repo.
 
-Do not use GitHub as the durable funding pipeline, research backlog, or partner-needs tracker.
+Accepted work (bugs, stories, features, research, funding) is tracked as Linear issues, not GitHub issues. External reports may still arrive as blank GitHub issues and are triaged into Linear. Do not use GitHub as the issue tracker, durable funding pipeline, research backlog, or partner-needs tracker.
