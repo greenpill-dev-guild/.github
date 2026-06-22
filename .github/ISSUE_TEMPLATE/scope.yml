@@ -1,0 +1,84 @@
+name: Scope brief
+description: A payable, sign-off-ready scope brief for any discipline (the Brief shape, see linear-templates.md).
+title: "[scope]: "
+type: Task
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## How to use this
+
+        A **scope brief** is the unit the guild accepts and pays for. It is the same shape across every discipline: one Output, checkable Acceptance criteria, an explicit Boundary, and a Decision/exit.
+
+        Linear is the source of truth — mirror this brief into a Linear Issue, set an **estimate** (Scout ~ 1 / Brief ~ 4 / Deep ~ 16) and an `activity:*` discipline label. Setting an estimate marks it as a scoped brief. The discipline **evaluator panel** signs off to move it Backlog -> Todo (3-day SLA); "Done" (accepted) is the payment event.
+
+        See the [scoped-work compensation playbook](https://github.com/greenpill-dev-guild/.github/blob/main/routines/scoped-work-compensation.md), the [operating model](https://github.com/greenpill-dev-guild/.github/blob/main/docs/linear-operating-model.md#scoped-work-sizing--accountability), and the panels in [GOVERNANCE.md](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#decision-making).
+
+  - type: dropdown
+    id: discipline
+    attributes:
+      label: Discipline
+      description: Which evaluator panel signs this off?
+      options:
+        - Engineering
+        - Product
+        - Research
+        - Marketing
+        - Community
+        - Growth / BD / Funding
+    validations:
+      required: true
+
+  - type: dropdown
+    id: size
+    attributes:
+      label: Estimate
+      description: Exponential sizing. Mirror this as the Linear estimate.
+      options:
+        - Scout (~1)
+        - Brief (~4)
+        - Deep (~16)
+        - Integration (32+)
+    validations:
+      required: true
+
+  - type: textarea
+    id: output
+    attributes:
+      label: Output
+      description: The one concrete artifact this brief produces.
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+      description: 3–6 checkable bullets defining "done + accepted".
+    validations:
+      required: true
+
+  - type: textarea
+    id: boundary
+    attributes:
+      label: Boundary
+      description: What is explicitly out of scope.
+    validations:
+      required: true
+
+  - type: textarea
+    id: decision
+    attributes:
+      label: Decision / exit
+      description: "Done when {condition}, reviewed by the discipline panel. Feeds: {the decision this unblocks}."
+    validations:
+      required: true
+
+  - type: input
+    id: linear_reference
+    attributes:
+      label: Linear reference
+      description: Link to the mirrored Linear issue (source of truth), if it exists yet.
+      placeholder: https://linear.app/greenpill-dev-guild/...
+    validations:
+      required: false

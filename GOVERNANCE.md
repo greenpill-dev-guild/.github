@@ -22,7 +22,7 @@ The guild operates with the following recognized roles (sourced from our Guild.x
 
 - **Stewards** · core governance, treasury, partnerships
 - **Admins** · org-level GitHub administration, security, infrastructure
-- **Engineering / Product / Community / Growth Leads** · domain leadership for active workstreams
+- **Engineering / Product / Research / Community / Marketing / Growth Leads** · domain leadership for active workstreams; each discipline lead anchors a scope-acceptance panel (see Decision-making)
 - **Contributors** · funded scoped workers, volunteer contributors, and ongoing project contributors (Brand, Social, Community, Engineering)
 - **Treasury Manager** and **Work Capital Manager** · financial operations
 - **Partners** · external organizations and individuals with formal collaboration agreements
@@ -38,6 +38,7 @@ Decisions are made at the lowest reasonable scope:
 | **Project-level technical** (e.g. green-goods architecture) | Project maintainers | PR review, repo CODEOWNERS |
 | **Cross-project standards** (e.g. shared CI, this `.github` repo) | Engineering Lead + Stewards | RFC + lazy consensus on the forum |
 | **Treasury and funded-work payouts** | Stewards | Multi-sig sign-off |
+| **Scope acceptance** (discipline brief sign-off) | Discipline evaluator panel (2–3 reviewers; afo standing on every panel) | Estimate set + panel ack moves Backlog → Todo; 3-day async SLA |
 | **Org membership and access** | Admins + Stewards | Steward sign-off required |
 | **Code of Conduct cases** | Stewardship team | Confidential, see CoC |
 | **Partnerships and external commitments** | Stewards | Public announcement after decision |

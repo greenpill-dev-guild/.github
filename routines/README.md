@@ -33,6 +33,8 @@ Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prom
 - [claude/coop-intent-pulse.md](./claude/coop-intent-pulse.md) - Wednesday 15:30 Coop product-loop intent pulse with one Linear initiative status update and no automatic work creation
 - [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Wednesday 19:00 grant scouting with Linear `funding:*` saved-view lifecycle, Discord funding summary, and Drive memo
 - [claude/research-synthesis.md](./claude/research-synthesis.md) - Friday 17:00 research synthesis with Discord digest, accepted Research team Issues, and Drive memo
+- [claude/research-accountability-pulse.md](./claude/research-accountability-pulse.md) - Mon & Thu 08:00 accountability sweep over dated/owned Research plus paid Product briefs, with a #research digest and per-issue nudge comments
+- [claude/scope-review-pulse.md](./claude/scope-review-pulse.md) - Daily 08:30 scope-acceptance gate: routes Triage/Backlog briefs to their discipline panel for sign-off and surfaces new unscoped issues, posting to #scope-review
 
 See [claude/README.md](./claude/README.md) for environment setup, schedule overview, and the manual-skill overlap policy.
 

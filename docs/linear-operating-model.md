@@ -51,7 +51,27 @@ Do not recreate retired GitHub-era label families in Linear. In particular, avoi
 
 ## Scoped work, sizing & accountability
 
-Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Use the [Scope brief issue template](https://github.com/greenpill-dev-guild/.github/issues/new?template=scope.yml) or the [Brief template](./linear-templates.md#brief). Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+
+**Scope before assign, sign off before start:**
+
+- **Async scoping.** Briefs are prepared in Linear *before* the call that commits them, not invented live. Raw ideas stay in Discord / Drive until they cross the brief bar.
+- **Estimate means scoped.** Setting a Linear **estimate** is the signal that an issue is a scoped brief (and, on Product, a paid one). No estimate means it is not yet scoped.
+- **Panel sign-off is the gate.** Anyone may scope a brief; the matching **discipline evaluator panel** (see [GOVERNANCE.md](../GOVERNANCE.md#decision-making)) signs it off to move it **Backlog → Todo** (and, if funded, payable). Async SLA: **3 days**; afo's ack counts on any panel.
+- **Mandatory peer review.** Every scoped brief gets at least one peer review before it is accepted as done. The `scope-review-pulse` routine routes waiting briefs to their panel daily; the `research-accountability-pulse` chases dated / owned work for slippage.
+
+## Cycle cadence and rollover
+
+- **Product** runs short (roughly weekly) cycles for polish, bugs, QA, and delivery. **Research** runs long, multi-week cycles and focuses on **one theme per cycle** rather than many parallel threads — research is not judged on Product's weekly rhythm.
+- **Cycle rollover.** At a cycle boundary, every unfinished issue is **explicitly** either rolled to the next cycle (with its dependents, as one unit) or moved to Backlog. Issues are never left to silently drop out of a closing cycle. Closing a cycle strong means each issue in it is closed-with-proof, rolled, or backlogged on purpose.
+
+## Cross-team placement
+
+Place an issue on the team that owns its acceptance, and keep dependent work together:
+
+- **Funding lifecycle** — awarded grants (`funding:active-award`) live on **Product** once there is delivery; all earlier states (prospect, drafting, submitted) live on **Research** in Grant Scouting.
+- **Research-led architecture briefs** (e.g. the Impact Framework v0.1 set) live on the team that signs them off. Moving a scoped brief across teams renumbers it but preserves its labels, project, estimate, and history, so move deliberately rather than reflexively.
+- **Keep a gate and its dependents in one cycle.** A QA gate and the issues it blocks, or a foundation brief and the briefs that depend on it, move together so a dependency chain is never split across cycles.
 
 Scope-review happens before Todo. Triage / Backlog issues that need a scoped brief or evaluator-panel sign-off are surfaced by `scope-review-pulse`; the routine can nudge the right panel, but it never accepts work or moves issues to Todo. Acceptance remains a human panel decision.
 
