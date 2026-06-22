@@ -10,8 +10,8 @@ For local development startup, use the [Linear-aware dev day launcher](./linear-
 
 | Surface | Owns | Does not own |
 | --- | --- | --- |
-| **Linear** | Roadmap, accepted work, customer and partner needs, funding lifecycle, research tasks, ownership, status | Code review, public bug reports, raw discussion |
-| **GitHub** | Public issues, PRs, RFCs, implementation references, repository defaults | Durable project-management backlog |
+| **Linear** | Roadmap, all accepted work (delivery, QA and bugs, features, research), customer and partner needs, funding lifecycle, ownership, status | Code review, raw external reports before they are triaged |
+| **GitHub** | PRs, code review, releases, RFC and ADR markdown, implementation references, repository defaults | The issue tracker or durable project-management backlog |
 | **Drive** | Memos, evidence bundles, grant drafts, partner docs, meeting notes | Work status or ownership |
 | **Discord / Telegram / calls** | Discussion, triage, community pulse, lightweight coordination | Canonical commitments |
 
@@ -51,7 +51,7 @@ Do not recreate retired GitHub-era label families in Linear. In particular, avoi
 
 ## Scoped work, sizing & accountability
 
-Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Use the [Scope brief issue template](https://github.com/greenpill-dev-guild/.github/issues/new?template=scope.yml) or the [scoped-brief body](./linear-templates.md#linear-scoped-brief---payable-deliverable). Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Use the [Scope brief issue template](https://github.com/greenpill-dev-guild/.github/issues/new?template=scope.yml) or the [Brief template](./linear-templates.md#brief). Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
 
 **Scope before assign, sign off before start:**
 
@@ -72,6 +72,18 @@ Place an issue on the team that owns its acceptance, and keep dependent work tog
 - **Funding lifecycle** — awarded grants (`funding:active-award`) live on **Product** once there is delivery; all earlier states (prospect, drafting, submitted) live on **Research** in Grant Scouting.
 - **Research-led architecture briefs** (e.g. the Impact Framework v0.1 set) live on the team that signs them off. Moving a scoped brief across teams renumbers it but preserves its labels, project, estimate, and history, so move deliberately rather than reflexively.
 - **Keep a gate and its dependents in one cycle.** A QA gate and the issues it blocks, or a foundation brief and the briefs that depend on it, move together so a dependency chain is never split across cycles.
+
+Scope-review happens before Todo. Triage / Backlog issues that need a scoped brief or evaluator-panel sign-off are surfaced by `scope-review-pulse`; the routine can nudge the right panel, but it never accepts work or moves issues to Todo. Acceptance remains a human panel decision.
+
+## Agent delegation
+
+A Linear issue delegated to Codex or another coding agent must be self-contained enough that the issue is the prompt and the repo's `AGENTS.md` is the operating manual. Delegate only when the issue names the target repo/branch, behavior change, bounded surface, validation command, and acceptance criteria. If a task points to a `.plans` handoff or status file, link it explicitly and keep orchestration state in the plan/status file, not in the agent's private thread.
+
+`agent:codex` marks an issue as suitable for Codex-style execution; it is not a priority label and does not replace a human reviewer. Agent PRs should target the integration branch named in the issue, stay one concern per PR, include the relevant Linear close/reference, and never self-merge.
+
+## Acceptance and closure
+
+GitHub merge evidence is useful but not sufficient by itself to mark Linear work Done. Close only when the acceptance criteria have been verified on the intended surface. If a PR is merged but the result needs staging proof, human QA, deploy verification, or residual-scope review, keep the issue in QA / In Review and record the missing proof instead of moving it to Done.
 
 ## Funding lifecycle
 
@@ -99,8 +111,8 @@ Keep speculative ideas in Discord or Drive memos until they cross this bar.
 
 Use GitHub for:
 
-- Bugs, stories, design proposals, and implementation references in the relevant project repo.
-- RFCs that affect more than one guild project, shared standards, governance, vocabulary, or partner commitments.
 - Pull requests, review, release notes, and code history.
+- RFCs and ADRs that affect more than one guild project, shared standards, governance, vocabulary, or partner commitments, kept as in-repo markdown proposed via PR.
+- Implementation references in the relevant project repo.
 
-Do not use GitHub as the durable funding pipeline, research backlog, or partner-needs tracker.
+Accepted work (bugs, stories, features, research, funding) is tracked as Linear issues, not GitHub issues. External reports may still arrive as blank GitHub issues and are triaged into Linear. Do not use GitHub as the issue tracker, durable funding pipeline, research backlog, or partner-needs tracker.

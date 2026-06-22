@@ -14,9 +14,10 @@ Distinct from `../*.md` markdown playbooks for manual guild processes like funde
 | `guild-grant-scout.md` | active | Wed 19:00 weekly | `#funding` + Drive memo | Linear Product (unprojected staging, `funding:*` lifecycle); accepted awards route into a dedicated `Grant Proposal / Award Stewardship` project |
 | `research-synthesis.md` | active | Fri 17:00 weekly | `#research` + Drive memo | Linear Research team (unprojected, `activity:research`) |
 | `research-accountability-pulse.md` | active | Mon & Thu 08:00 twice-weekly | `#research` + Linear comments | Flags Research team slippage (past-due / stalled / due-soon); comments + `@`-mentions the owner on each flagged issue (idempotent, ~weekly per issue) |
+| `scope-review-pulse.md` | active | Daily 08:30 | `#scope-review` + Linear comments | Flags Triage / Backlog issues that need scoping or evaluator-panel acceptance before Todo; comments on scoped briefs only |
 | `software-ecology-pulse.md` | active | Mon 19:30 weekly | Linear + Drive + private Discord | Initiative status update on `Software Ecology & Agentic Workflow Health`; computes its ecology snapshot in-run from the three cloned guild V1 repos; no Issues or Customer Needs |
 
-Six weekly runs plus a twice-weekly research-accountability pulse are active. Monday opens with the cross-project synthesis that primes the week; the ecology pulse follows at 19:30, computing its own ecology snapshot from its fresh clones (no local handoff). Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before build sync, then handles grants midweek. Friday closes the week with research synthesis. The read-only research-accountability pulse runs Mon & Thu mornings (08:00) to surface Research-team slippage. No daily-cadence routines.
+Six weekly runs, a twice-weekly research-accountability pulse, and one daily scope-review pulse are active. Monday opens with the cross-project synthesis that primes the week; the ecology pulse follows at 19:30, computing its own ecology snapshot from its fresh clones (no local handoff). Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before build sync, then handles grants midweek. Friday closes the week with research synthesis. The research-accountability pulse runs Mon & Thu mornings (08:00) to surface Research-team slippage. The daily scope-review pulse runs at 08:30 UTC to route pre-acceptance scoping/evaluation queues.
 
 Anything else previously in this folder has been removed — folded into the surviving routines or cut as noise.
 
@@ -49,6 +50,7 @@ Wed  15:30  coop-intent-pulse
 Wed  19:00  guild-grant-scout
 Thu  08:00  research-accountability-pulse
 Fri  17:00  research-synthesis
+Daily 08:30  scope-review-pulse
 ```
 
 ## Channel mapping
@@ -64,6 +66,7 @@ Fri  17:00  research-synthesis
 | `#funding` | guild-grant-scout | grant opportunities + proposals |
 | `#research` | research-synthesis | weekly research digest |
 | `#research` | research-accountability-pulse | twice-weekly accountability flags (read-only) |
+| `#scope-review` | scope-review-pulse | daily pre-acceptance scoping and evaluator-panel queue |
 
 ## Notification policy
 
@@ -73,6 +76,7 @@ Routines @mention Afo only when his action is required (via `DISCORD_USER_ID_AFO
 - `guild-grant-scout` — when a grant deadline is < 7 days out, a new high-fit opportunity scores ≥ 4 on Green Goods, or a stale-prospect decision is needed
 - `research-synthesis` — when an action concretely maps to Green Goods active work
 - `research-accountability-pulse` — Discord: tags afo on past-due (🔴) items; Linear: `@`-mentions each flagged issue's owner in the accountability comment (v2)
+- `scope-review-pulse` — Discord: tags afo on scoped briefs past the 3-day review SLA; Linear: `@`-mentions the discipline evaluator panel on scoped briefs awaiting sign-off
 
 The `#community` excerpt from `guild-weekly-synthesis` never mentions. Discord notifications stay signal-heavy.
 
@@ -86,6 +90,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_COMMUNITY_CHANNEL_ID`
 - `DISCORD_FUNDING_CHANNEL_ID`
 - `DISCORD_RESEARCH_CHANNEL_ID`
+- `DISCORD_SCOPE_CHANNEL_ID`
 - `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
 - `LINEAR_API_KEY` — used by `network-steward-intent-pulse` and `coop-intent-pulse` (initiative status updates), `guild-grant-scout` (`funding:*` lifecycle saved views), and `research-synthesis` (Research team); `software-ecology-pulse` rides the Linear OAuth connector instead
@@ -101,6 +106,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 | `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `funding:*` lifecycle saved views; accepted awards graduate to a bounded award/delivery project · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
 | `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal (Linear Research team, unprojected) · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
 | `research-accountability-pulse` | Linear | Linear = read Research team issues for slippage + post one accountability comment (`@`-mention owner) per flagged issue; Discord summary via the shared bot token; no Drive/Calendar/design/PostHog/Mermaid |
+| `scope-review-pulse` | Linear | Linear = read Product and Research Triage / Backlog issues for pre-acceptance scoping and evaluator-panel queues + post one panel comment per scoped brief; Discord summary via the shared bot token; no Drive/Calendar/design/PostHog/Mermaid |
 
 Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
 
@@ -147,6 +153,7 @@ Old label vocabularies (`area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `
 - `coop-intent-pulse` is a status-only routine. It writes to the `Coop Product Loop & Intent Clarity` initiative and does not create Issues, Customer Needs, projects, Discord posts, Drive docs, or GitHub artifacts.
 - `software-ecology-pulse` is a status-only routine. It writes to the `Software Ecology & Agentic Workflow Health` initiative, a Dev Guild shared Drive memo, and a private Discord summary. It does not create Issues, Customer Needs, projects, GitHub artifacts, repo edits, deploys, browser sessions, or `.plans` changes.
 - `research-accountability-pulse` posts one `#research` summary flagging overdue / stalled / due-soon owned Research issues (thresholds N=7 / X=3 / M=7, grant pipeline excluded), and (v2) adds one accountability comment `@`-mentioning the owner on each flagged issue — idempotent (~once/week per issue via a 6-day signed-comment skip), comments only. It never creates / edits / relabels / reassigns issues or changes any field. Canonical rule: the Research team's "Research Accountability — scope, due dates & escalation" Linear Document.
+- `scope-review-pulse` posts one `#scope-review` summary for Product and Research Triage / Backlog Issues that either need scoping or are scoped and awaiting evaluator-panel sign-off. It comments only on scoped briefs awaiting evaluation, never on raw unscoped ideas, and never moves an issue to Todo; acceptance remains a human panel decision.
 - Grant lifecycle Issues live in Linear's Product team and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus `activity:research`, the relevant `protocol:*`, and `agent:routine`. On award, an Issue receives `funding:active-award` and moves into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management.
 - `guild-weekly-synthesis` creates no GitHub or Linear issues. It produces a Drive memo + two Discord posts.
 

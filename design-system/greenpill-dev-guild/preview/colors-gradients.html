@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Colors" name="Gradients" subtitle="Daybreak, Forest Pulse, Coral Tide, Sky Shore" viewport="700x340" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Gradients</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:24px;width:652px;background:var(--color-parchment);font-family:var(--font-body);}
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  .g{height:130px;border-radius:20px;padding:16px;display:flex;flex-direction:column;justify-content:flex-end;color:#1F3D1F;}
+  .name{font-family:var(--font-display);font-weight:700;font-size:18px;letter-spacing:-0.01em;}
+  .stops{font-family:var(--font-mono);font-size:11px;opacity:.85;margin-top:4px;}
+  .dark{color:#FCECA6;}
+  .light{color:#1F3D1F;}
+</style>
+</head>
+<body>
+  <div class="grid">
+    <div class="g light" style="background:var(--gradient-daybreak);"><div class="name">Daybreak</div><div class="stops">Creme → Spring Green</div></div>
+    <div class="g dark" style="background:var(--gradient-forest-pulse);"><div class="name">Forest Pulse</div><div class="stops">Cal Poly → Spring</div></div>
+    <div class="g dark" style="background:var(--gradient-coral-tide);"><div class="name">Coral Tide</div><div class="stops">Cryola → Mint</div></div>
+    <div class="g light" style="background:var(--gradient-sky-shore);"><div class="name">Sky Shore</div><div class="stops">Alice Blue → Mint</div></div>
+  </div>
+</body>
+</html>

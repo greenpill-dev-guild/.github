@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Slides" name="Pitch deck — title" subtitle="7-slide sample deck (use ←/→ to navigate)" viewport="1280x720" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Greenpill Dev Guild — Sample Slides</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<script src="deck-stage.js"></script>
+<style>
+  html,body{margin:0;background:#000;}
+  deck-stage{background:#000;}
+  section{background:var(--color-cal-poly-green);color:var(--color-parchment);font-family:var(--font-body);position:relative;overflow:hidden;}
+  .chrome-eyebrow{position:absolute;top:48px;left:64px;font-family:var(--font-display);font-weight:600;font-size:16px;letter-spacing:0.18em;text-transform:uppercase;color:var(--color-spring-green);z-index:5;}
+  .chrome-pill{position:absolute;top:40px;right:56px;width:36px;height:60px;background:transparent;border:3px solid var(--color-spring-green);border-radius:999px;transform:rotate(20deg);z-index:5;}
+  .chrome-pill::after{content:"";position:absolute;top:8px;left:50%;transform:translateX(-50%);width:18px;height:18px;border-radius:999px;background:var(--color-spring-green);}
+  .chrome-page{position:absolute;bottom:48px;right:64px;font-family:var(--font-body);font-size:18px;color:rgba(252,236,166,0.65);letter-spacing:0.05em;z-index:5;}
+  .chrome-logo{position:absolute;bottom:48px;left:64px;display:flex;align-items:center;gap:12px;z-index:5;}
+  .chrome-logo img{height:40px;}
+
+  /* Slide 1 — Title */
+  .s-title{background:linear-gradient(135deg,#1F3D1F 0%,#2d5a2d 60%,#5b8a1f 100%);}
+  .s-title .pillart{position:absolute;top:50%;right:9%;transform:translateY(-50%) rotate(20deg);width:340px;height:auto;filter:drop-shadow(0 0 60px rgba(194,255,26,0.5));}
+  .s-title .body{position:absolute;left:120px;top:42%;transform:translateY(-50%);max-width:920px;}
+  .s-title h1{font-family:var(--font-display);font-weight:700;font-size:120px;line-height:0.96;letter-spacing:-0.03em;color:var(--color-parchment);margin:0 0 28px;text-wrap:balance;}
+  .s-title h1 em{font-style:normal;color:var(--color-spring-green);}
+  .s-title p{font-family:var(--font-body);font-size:22px;line-height:1.5;color:rgba(252,236,166,0.85);max-width:640px;margin:0;}
+
+  /* Slide 2 — Section divider */
+  .s-section{background:var(--color-cal-poly-green);}
+  .s-section .num{position:absolute;left:120px;top:38%;font-family:var(--font-display);font-weight:700;font-size:240px;line-height:1;color:var(--color-spring-green);letter-spacing:-0.04em;}
+  .s-section .label{position:absolute;left:120px;top:calc(38% + 220px);font-family:var(--font-display);font-weight:700;font-size:96px;color:var(--color-creme);letter-spacing:-0.02em;}
+
+  /* Slide 3 — Two column */
+  .s-twocol{background:var(--color-parchment);color:var(--color-cal-poly-green);}
+  .s-twocol .chrome-eyebrow{color:var(--color-cal-poly-green);}
+  .s-twocol .chrome-pill{border-color:var(--color-cal-poly-green);}
+  .s-twocol .chrome-pill::after{background:var(--color-cal-poly-green);}
+  .s-twocol .chrome-page{color:rgba(31,61,31,0.55);}
+  .s-twocol .grid{position:absolute;inset:140px 80px 100px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;}
+  .s-twocol h1{font-family:var(--font-display);font-weight:700;font-size:88px;line-height:1.02;letter-spacing:-0.025em;color:var(--color-cal-poly-green);margin:0 0 24px;}
+  .s-twocol h1 em{font-style:normal;color:var(--color-steady-flame);}
+  .s-twocol p{font-family:var(--font-body);font-size:22px;line-height:1.55;color:#1F3D1F;max-width:560px;margin:0 0 32px;}
+  .s-twocol .cta{display:inline-flex;align-items:center;gap:10px;background:#C2FF1A;color:#1F3D1F;border-radius:999px;padding:18px 28px;font-family:var(--font-body);font-weight:600;font-size:18px;border:none;}
+  .s-twocol .map{border-radius:28px;overflow:hidden;background:#FFF8E1;border:2px solid #1F3D1F;height:640px;display:flex;align-items:center;justify-content:center;}
+  .s-twocol .map img{height:100%;width:100%;object-fit:cover;}
+
+  /* Slide 4 — Services grid */
+  .s-services{background:#1F3D1F;background-image:radial-gradient(rgba(194,255,26,0.06) 0 8px, transparent 9px),radial-gradient(rgba(194,255,26,0.06) 0 8px, transparent 9px);background-size:120px 80px,120px 80px;background-position:0 0,60px 40px;}
+  .s-services .head{position:absolute;left:120px;top:120px;}
+  .s-services .head h1{font-family:var(--font-display);font-weight:700;font-size:88px;line-height:1;color:var(--color-parchment);margin:8px 0 0;letter-spacing:-0.025em;}
+  .s-services .grid{position:absolute;left:120px;right:120px;top:340px;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;}
+  .s-services .card{background:#254D32;border-radius:24px;padding:36px;display:flex;flex-direction:column;gap:20px;min-height:280px;}
+  .s-services .disc{width:64px;height:64px;border-radius:999px;background:var(--color-spring-green);box-shadow:0 0 0 6px rgba(194,255,26,0.18), 0 0 28px rgba(194,255,26,0.4);display:flex;align-items:center;justify-content:center;}
+  .s-services .card h3{font-family:var(--font-display);font-weight:600;font-size:28px;line-height:1.15;color:var(--color-parchment);margin:0;}
+  .s-services .card p{font-family:var(--font-body);font-size:16px;line-height:1.55;color:rgba(252,236,166,0.7);margin:0;}
+
+  /* Slide 5 — Stack */
+  .s-stack{background:var(--color-parchment);color:var(--color-cal-poly-green);}
+  .s-stack .chrome-eyebrow{color:#1F3D1F;}
+  .s-stack .chrome-pill{border-color:#1F3D1F;}
+  .s-stack .chrome-pill::after{background:#1F3D1F;}
+  .s-stack .chrome-page{color:rgba(31,61,31,0.55);}
+  .s-stack h1{position:absolute;left:120px;top:140px;font-family:var(--font-display);font-weight:700;font-size:80px;letter-spacing:-0.025em;color:#1F3D1F;margin:0;}
+  .s-stack .stack{position:absolute;left:120px;top:340px;width:780px;display:flex;flex-direction:column;gap:8px;}
+  .s-stack .layer{border-radius:18px;padding:32px 40px;display:flex;justify-content:space-between;align-items:center;}
+  .s-stack .layer .name{font-family:var(--font-display);font-weight:600;font-size:34px;letter-spacing:-0.01em;}
+  .s-stack .layer .meta{font-family:var(--font-mono);font-size:14px;letter-spacing:0.1em;text-transform:uppercase;opacity:0.65;}
+  .s-stack .app{background:#FCECA6;color:#1F3D1F;}
+  .s-stack .social{background:#FF6978;color:#fff;}
+  .s-stack .protocol{background:#B1FDEB;color:#1F3D1F;}
+  .s-stack .blockchain{background:#DCEDFF;color:#1F3D1F;}
+  .s-stack .notes{position:absolute;right:120px;top:340px;width:540px;font-family:var(--font-body);}
+  .s-stack .notes .item{padding:18px 0;border-top:1.5px solid rgba(31,61,31,0.18);}
+  .s-stack .notes .item:first-child{border-top:none;}
+  .s-stack .notes .lbl{font-family:var(--font-display);font-weight:600;font-size:14px;letter-spacing:0.14em;text-transform:uppercase;color:#7DC400;margin-bottom:4px;}
+  .s-stack .notes .txt{font-size:18px;line-height:1.5;color:#1F3D1F;}
+
+  /* Slide 6 — Quote / pill callout */
+  .s-quote{background:#1F3D1F;display:flex;align-items:center;justify-content:center;padding:0 200px;}
+  .s-quote .pill{background:var(--color-spring-green);color:#1F3D1F;border-radius:999px;padding:48px 80px;font-family:var(--font-display);font-weight:600;font-size:54px;line-height:1.15;letter-spacing:-0.015em;text-align:center;max-width:1200px;box-shadow:0 0 0 12px rgba(194,255,26,0.16), 0 0 80px rgba(194,255,26,0.45);text-wrap:balance;}
+  .s-quote .attr{position:absolute;bottom:140px;left:50%;transform:translateX(-50%);font-family:var(--font-body);font-size:16px;color:rgba(252,236,166,0.6);letter-spacing:0.05em;}
+
+  /* Slide 7 — Closing CTA */
+  .s-close{background:linear-gradient(135deg,#1F3D1F 0%,#5b8a1f 100%);}
+  .s-close .pillart{position:absolute;top:50%;right:8%;transform:translateY(-50%) rotate(15deg);width:380px;filter:drop-shadow(0 0 80px rgba(194,255,26,0.65));}
+  .s-close .body{position:absolute;left:120px;top:50%;transform:translateY(-50%);}
+  .s-close h1{font-family:var(--font-display);font-weight:700;font-size:140px;line-height:0.96;color:var(--color-parchment);margin:0 0 32px;letter-spacing:-0.035em;}
+  .s-close h1 em{font-style:normal;color:var(--color-spring-green);}
+  .s-close p{font-family:var(--font-body);font-size:24px;color:rgba(252,236,166,0.85);max-width:680px;margin:0 0 40px;line-height:1.45;}
+  .s-close .ctas{display:flex;gap:16px;}
+  .s-close .btn{font-family:var(--font-body);font-weight:600;font-size:18px;border-radius:999px;padding:20px 32px;border:none;cursor:pointer;}
+  .s-close .btn.p{background:#C2FF1A;color:#1F3D1F;}
+  .s-close .btn.s{background:transparent;color:#C2FF1A;border:2px solid #C2FF1A;}
+</style>
+</head>
+<body>
+<deck-stage>
+
+  <!-- 1: Title -->
+  <section class="s-title" data-screen-label="01 Title">
+    <div class="chrome-logo">
+      <img src="../assets/logo-horizontal-spring.png" alt="Greenpill Dev Guild">
+    </div>
+    <div class="chrome-page">01 / 07</div>
+    <div class="body">
+      <h1>A Fellowship<br>for <em>Regeneration.</em></h1>
+      <p>The Greenpill Dev Guild gathers builders, stewards and aligned partners to forge the symbiotic pathways regeneration needs.</p>
+    </div>
+    <img class="pillart" src="../assets/pill-mark-spring.png" alt="">
+  </section>
+
+  <!-- 2: Section divider -->
+  <section class="s-section" data-screen-label="02 Our Guild">
+    <div class="chrome-eyebrow">Brand Guidelines · 2025</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">02 / 07</div>
+    <div class="num">01</div>
+    <div class="label">Our Guild</div>
+  </section>
+
+  <!-- 3: Two column -->
+  <section class="s-twocol" data-screen-label="03 Capital Journey">
+    <div class="chrome-eyebrow">Chapter 02 · The Quest</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">03 / 07</div>
+    <div class="grid">
+      <div>
+        <h1>A quest across <em>diverse lands.</em></h1>
+        <p>From the Shire of Ethereum to the realms of Celo, Optimism, Arbitrum and beyond — the fellowship walks where regeneration needs walking.</p>
+        <button class="cta">Read the brief →</button>
+      </div>
+      <div class="map"><img src="../assets/capital-journey-map.png" alt="Capital Journey fantasy map"></div>
+    </div>
+  </section>
+
+  <!-- 4: Services grid -->
+  <section class="s-services" data-screen-label="04 Services">
+    <div class="chrome-eyebrow">Fellowship · Services</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">04 / 07</div>
+    <div class="head">
+      <h1>What the Guild forges.</h1>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12M5 12V8a7 7 0 0 1 14 0v4M3 12h18M5 16h14M5 20h14"/></svg></div>
+        <h3>Grant Round Design &amp; Operations</h3>
+        <p>End-to-end design and ops for public-goods funding rounds, including Ethereum staking.</p>
+      </div>
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></div>
+        <h3>Web3 Tech Consultation</h3>
+        <p>Battle-tested guidance from people who run the rails — feedback, audits, integration.</p>
+      </div>
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 18 0 9 9 0 0 0-18 0Z"/><path d="M12 7v5l3 2"/></svg></div>
+        <h3>Educational Workshops</h3>
+        <p>Impact reporting, capital allocation, coordination — taught by stewards in residence.</p>
+      </div>
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg></div>
+        <h3>Regenerative Tooling</h3>
+        <p>We build, ship and maintain open-source apps and protocols for ReFi.</p>
+      </div>
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+        <h3>UI/UX &amp; Graphic Design</h3>
+        <p>Brand systems, product surfaces and on-chain interfaces that feel communal.</p>
+      </div>
+      <div class="card">
+        <div class="disc"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#1F3D1F" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></div>
+        <h3>Ethereum Staking Operations</h3>
+        <p>Public-Good Staking — turning validator yield into round funding.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5: Stack -->
+  <section class="s-stack" data-screen-label="05 Stack">
+    <div class="chrome-eyebrow">Chapter 03 · The Stack</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">05 / 07</div>
+    <h1>Across the Ethereum stack.</h1>
+    <div class="stack">
+      <div class="layer app"><span class="name">Green Goods</span><span class="meta">App</span></div>
+      <div class="layer social"><span class="name">GreenWill</span><span class="meta">Social</span></div>
+      <div class="layer protocol"><span class="name">Allo Alliance</span><span class="meta">Protocol</span></div>
+      <div class="layer blockchain"><span class="name">Public Good Staking</span><span class="meta">Blockchain</span></div>
+    </div>
+    <div class="notes">
+      <div class="item"><div class="lbl">App</div><div class="txt">Marketplace and wallet for regenerative goods, built on the social and protocol layers below.</div></div>
+      <div class="item"><div class="lbl">Social</div><div class="txt">Coordination layer — wills, intents, and signals among the fellowship.</div></div>
+      <div class="item"><div class="lbl">Protocol</div><div class="txt">Allo-powered grant round infrastructure tied to hypercerts and impact attestations.</div></div>
+      <div class="item"><div class="lbl">Blockchain</div><div class="txt">Validator yield, redirected: tending the steady flame of governance.</div></div>
+    </div>
+  </section>
+
+  <!-- 6: Quote -->
+  <section class="s-quote" data-screen-label="06 Quote">
+    <div class="chrome-eyebrow">Manifesto</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">06 / 07</div>
+    <div class="pill">We tend the steady flame of governance, so the round runs true.</div>
+    <div class="attr">— Greenpill Dev Guild · 2025</div>
+  </section>
+
+  <!-- 7: Close -->
+  <section class="s-close" data-screen-label="07 Take the Greenpill">
+    <div class="chrome-eyebrow">Closing</div>
+    <div class="chrome-pill"></div>
+    <div class="chrome-page">07 / 07</div>
+    <div class="body">
+      <h1>Take the<br><em>Greenpill.</em></h1>
+      <p>Switch on for change. Walk the road with us.</p>
+      <div class="ctas">
+        <button class="btn p">Join the fellowship →</button>
+        <button class="btn s">gpdevguild.eth</button>
+      </div>
+    </div>
+    <img class="pillart" src="../assets/pill-mark-spring.png" alt="">
+  </section>
+
+</deck-stage>
+</body>
+</html>

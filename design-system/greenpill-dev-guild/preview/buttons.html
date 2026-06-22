@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<!-- @dsCard group="Components" name="Buttons" subtitle="Primary pill, secondary outline, ghost" viewport="700x220" -->
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Buttons</title>
+<link rel="stylesheet" href="../colors_and_type.css">
+<style>
+  html,body{margin:0;padding:32px;width:636px;background:var(--color-cal-poly-green);}
+  .row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .row + .row{margin-top:14px;}
+  .btn{font-family:var(--font-body);font-size:14px;font-weight:500;letter-spacing:0.01em;border-radius:999px;padding:14px 24px;height:48px;display:inline-flex;align-items:center;gap:8px;cursor:pointer;border:none;}
+  .btn-primary{background:#C2FF1A;color:#1F3D1F;}
+  .btn-secondary{background:transparent;color:#C2FF1A;border:1.5px solid #C2FF1A;padding:13px 23px;}
+  .btn-ghost{background:transparent;color:#FCECA6;}
+  .btn-primary-glow{background:#C2FF1A;color:#1F3D1F;box-shadow:0 0 0 6px rgba(194,255,26,0.18), 0 0 32px rgba(194,255,26,0.45);}
+  .label{font-family:var(--font-mono);font-size:10px;color:rgba(252,236,166,0.5);text-transform:uppercase;letter-spacing:0.1em;}
+</style>
+</head>
+<body>
+  <div class="row">
+    <button class="btn btn-primary">Take the Greenpill</button>
+    <button class="btn btn-secondary">Read the brief</button>
+    <button class="btn btn-ghost">Learn more →</button>
+  </div>
+  <div class="row">
+    <button class="btn btn-primary-glow">Switched on</button>
+    <span class="label">Glow on dark</span>
+  </div>
+</body>
+</html>

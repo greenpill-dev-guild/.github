@@ -1,0 +1,156 @@
+/* ============================================================
+   Greenpill Dev Guild — Colors & Typography
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap");
+@import url("https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700,900&f[]=clash-display@500,600,700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&display=swap");
+
+:root {
+  /* ---- Brand core ---- */
+  --color-spring-green: #C2FF1A;
+  --color-spring-green-bright: #A8FF00;   /* the figma's punchier variant */
+  --color-cal-poly-green: #1F3D1F;
+  --color-forest-deep: #254D32;           /* figma's most-used green */
+  --color-creme: #FCECA6;
+  --color-mint-green: #B1FDEB;
+  --color-alice-blue: #DCEDFF;
+  --color-cryola: #FF6978;
+
+  /* ---- Neutrals ---- */
+  --color-parchment: #FFF8E1;
+  --color-ink: #0F1F0F;
+  --color-fog: #E8EFE3;
+  --color-steady-flame: #7DC400;
+  --color-white: #FFFFFF;
+  --color-black: #000000;
+
+  /* ---- Semantic ---- */
+  --color-primary: var(--color-spring-green);
+  --color-on-primary: var(--color-cal-poly-green);
+  --color-primary-container: #E5FF8A;
+  --color-secondary: var(--color-creme);
+  --color-on-secondary: var(--color-cal-poly-green);
+  --color-tertiary: var(--color-mint-green);
+  --color-on-tertiary: var(--color-cal-poly-green);
+  --color-accent: var(--color-cryola);
+  --color-on-accent: #FFFFFF;
+  --color-background: var(--color-cal-poly-green);
+  --color-on-background: var(--color-parchment);
+  --color-surface: var(--color-parchment);
+  --color-on-surface: var(--color-ink);
+  --color-surface-variant: var(--color-creme);
+  --color-on-surface-variant: var(--color-cal-poly-green);
+  --color-outline: var(--color-cal-poly-green);
+  --color-outline-variant: var(--color-fog);
+  --color-success: var(--color-steady-flame);
+  --color-warning: #F4B400;
+  --color-error: var(--color-cryola);
+  --color-info: var(--color-alice-blue);
+
+  /* ---- Roles ---- */
+  --color-role-steward: var(--color-spring-green);
+  --color-role-lead: var(--color-creme);
+  --color-role-contributor: var(--color-alice-blue);
+
+  /* ---- Gradients ---- */
+  --gradient-daybreak: linear-gradient(135deg, #FCECA6 0%, #C2FF1A 100%);
+  --gradient-forest-pulse: linear-gradient(135deg, #1F3D1F 0%, #C2FF1A 100%);
+  --gradient-coral-tide: linear-gradient(135deg, #FF6978 0%, #B1FDEB 100%);
+  --gradient-sky-shore: linear-gradient(135deg, #DCEDFF 0%, #B1FDEB 100%);
+
+  /* ---- Type families ---- */
+  --font-display: "Space Grotesk", "Clash Display", system-ui, sans-serif;
+  --font-body: "Satoshi", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, Menlo, Consolas, monospace;
+
+  /* ---- Type scale ---- */
+  --fs-display-xl: 96px; --lh-display-xl: 1.02; --ls-display-xl: -0.03em;
+  --fs-display-lg: 72px; --lh-display-lg: 1.04; --ls-display-lg: -0.025em;
+  --fs-display-md: 60px; --lh-display-md: 1.06; --ls-display-md: -0.02em;
+  --fs-h1: 56px;        --lh-h1: 1.08;          --ls-h1: -0.02em;
+  --fs-h2: 40px;        --lh-h2: 1.12;          --ls-h2: -0.015em;
+  --fs-h3: 32px;        --lh-h3: 1.18;          --ls-h3: -0.01em;
+  --fs-h4: 28px;        --lh-h4: 1.22;          --ls-h4: -0.005em;
+  --fs-eyebrow: 12px;   --lh-eyebrow: 1.2;      --ls-eyebrow: 0.18em;
+  --fs-body-lg: 18px;   --lh-body-lg: 1.55;
+  --fs-body-md: 16px;   --lh-body-md: 1.55;
+  --fs-ui-md: 14px;     --lh-ui-md: 1.4;        --ls-ui-md: 0.01em;
+  --fs-caption: 12px;   --lh-caption: 1.35;     --ls-caption: 0.02em;
+  --fs-tag: 12px;       --lh-tag: 1;            --ls-tag: 0.08em;
+
+  /* ---- Radius ---- */
+  --radius-none: 0px;
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-pill: 999px;
+
+  /* ---- Spacing (8px base) ---- */
+  --space-0: 0px;
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 48px;
+  --space-8: 64px;
+  --space-9: 96px;
+  --space-10: 128px;
+
+  /* ---- Elevation ---- */
+  --elev-0: none;
+  --elev-1: 0 1px 2px rgba(31,61,31,0.06), 0 2px 8px rgba(31,61,31,0.06);
+  --elev-2: 0 4px 12px rgba(31,61,31,0.10), 0 12px 32px rgba(31,61,31,0.08);
+  --elev-3: 0 12px 32px rgba(15,31,15,0.18);
+
+  /* ---- Glow ---- */
+  --glow-spring-sm: 0 0 0 4px rgba(194,255,26,0.18), 0 0 24px rgba(194,255,26,0.35);
+  --glow-spring-md: 0 0 0 8px rgba(194,255,26,0.16), 0 0 48px rgba(194,255,26,0.45);
+  --glow-spring-lg: 0 0 64px 8px rgba(194,255,26,0.55);
+
+  /* ---- Easing & motion ---- */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 120ms;
+  --dur-base: 220ms;
+  --dur-slow: 480ms;
+}
+
+/* ---- Semantic type classes ---- */
+.t-display-xl { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-xl); line-height: var(--lh-display-xl); letter-spacing: var(--ls-display-xl); text-wrap: balance; }
+.t-display-lg { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-lg); line-height: var(--lh-display-lg); letter-spacing: var(--ls-display-lg); text-wrap: balance; }
+.t-display-md { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-display-md); line-height: var(--lh-display-md); letter-spacing: var(--ls-display-md); text-wrap: balance; }
+.t-h1 { font-family: var(--font-display); font-weight: 700; font-size: var(--fs-h1); line-height: var(--lh-h1); letter-spacing: var(--ls-h1); text-wrap: balance; }
+.t-h2 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h2); line-height: var(--lh-h2); letter-spacing: var(--ls-h2); text-wrap: balance; }
+.t-h3 { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-h3); line-height: var(--lh-h3); letter-spacing: var(--ls-h3); }
+.t-h4 { font-family: var(--font-display); font-weight: 500; font-size: var(--fs-h4); line-height: var(--lh-h4); letter-spacing: var(--ls-h4); }
+.t-eyebrow { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-eyebrow); line-height: var(--lh-eyebrow); letter-spacing: var(--ls-eyebrow); text-transform: uppercase; }
+.t-body-lg { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-lg); line-height: var(--lh-body-lg); }
+.t-body-md { font-family: var(--font-body); font-weight: 400; font-size: var(--fs-body-md); line-height: var(--lh-body-md); }
+.t-body-strong { font-family: var(--font-body); font-weight: 700; font-size: var(--fs-body-md); line-height: var(--lh-body-md); }
+.t-ui-md { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-ui-md); line-height: var(--lh-ui-md); letter-spacing: var(--ls-ui-md); }
+.t-caption { font-family: var(--font-body); font-weight: 500; font-size: var(--fs-caption); line-height: var(--lh-caption); letter-spacing: var(--ls-caption); }
+.t-tag { font-family: var(--font-display); font-weight: 600; font-size: var(--fs-tag); line-height: var(--lh-tag); letter-spacing: var(--ls-tag); text-transform: uppercase; }
+.t-mono { font-family: var(--font-mono); }
+
+/* ---- Pill watermark backgrounds ---- */
+.bg-pill-watermark {
+  background-color: var(--color-cal-poly-green);
+  background-image:
+    radial-gradient(rgba(194,255,26,0.07) 0 8px, transparent 9px),
+    radial-gradient(rgba(194,255,26,0.07) 0 8px, transparent 9px);
+  background-size: 96px 64px, 96px 64px;
+  background-position: 0 0, 48px 32px;
+}
+
+/* ---- Body defaults ---- */
+.gpdg-body {
+  font-family: var(--font-body);
+  color: var(--color-on-surface);
+  background: var(--color-parchment);
+  -webkit-font-smoothing: antialiased;
+}
