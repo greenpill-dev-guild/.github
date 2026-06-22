@@ -53,7 +53,7 @@ The live scheduled automations are only the prompts under [`claude/`](./claude/)
 
 If your project has a routine that other guild projects could benefit from:
 
-1. Open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) describing the routine and why it generalizes.
+1. Open an [RFC](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process) describing the routine and why it generalizes.
 2. Discuss in the weekly call.
 3. On acceptance, open a PR adding it here.
 

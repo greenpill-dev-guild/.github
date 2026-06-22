@@ -22,7 +22,7 @@ What does **not** go here:
 
 ## Process
 
-1. **Open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml)** describing the proposed decision.
+1. **Open an [RFC](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process)** describing the proposed decision.
 2. **Discuss** in the weekly call and on the forum (7+ day comment window).
 3. **Decide** — stewards close the RFC with a decision.
 4. **Record** — open a PR adding an ADR file here using the [template](./ADR-template.md).

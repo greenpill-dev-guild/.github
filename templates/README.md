@@ -27,4 +27,4 @@ These templates are written **bun-forward** — they assume Bun as the JS runtim
 
 ## Contributing back
 
-If you customize a template in a way that other projects could benefit from, open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) to discuss promoting your changes back into the template here.
+If you customize a template in a way that other projects could benefit from, open an [RFC](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process) to discuss promoting your changes back into the template here.

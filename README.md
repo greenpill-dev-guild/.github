@@ -71,7 +71,7 @@ These directories are shared references for guild contributors, but they must be
 
 ## Contributing here
 
-For guild-wide changes, open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) when the change affects more than one project, shared standards, governance, vocabulary, or partner commitments.
+For guild-wide changes, open an [RFC](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process) when the change affects more than one project, shared standards, governance, vocabulary, or partner commitments.
 
 Small clarifications and corrections can go through a normal PR, but keep cross-references aligned in the same change:
 
