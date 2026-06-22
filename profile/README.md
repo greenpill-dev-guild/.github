@@ -32,7 +32,9 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
+- **Green Goods**: restored Cookie Jar wallet sign-in on the public `/cookies` route so wallet auth persists after connecting ([#572](https://github.com/greenpill-dev-guild/green-goods/pull/572)).
+- **coop**: hardened local-first sync to reject invalid remote updates instead of persisting corrupted state, plus a more resilient invite handoff ([#19](https://github.com/greenpill-dev-guild/coop/pull/19)).
+- **network-website**: prepared the public home map for live chapter, steward, and member activity ahead of a production launch ([#10](https://github.com/greenpill-dev-guild/network-website/pull/10)).
 <!-- recently-shipped:end -->
 
 ## Past work
