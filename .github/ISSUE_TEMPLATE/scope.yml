@@ -1,5 +1,5 @@
 name: Scope brief
-description: A payable, sign-off-ready scope brief for any discipline (the RESR-4 shape).
+description: A payable, sign-off-ready scope brief for any discipline (the Brief shape, see linear-templates.md).
 title: "[scope]: "
 type: Task
 body:
