@@ -21,6 +21,20 @@ Active guild-owned projects we build and maintain:
 
 This profile focuses on guild-owned GitHub projects and earlier guild artifacts. Upstream forks we use for ecosystem contribution or integration are not treated as active project inventory here.
 
+## Now building
+
+<!-- now-building:start -->
+- **Green Goods**: closing out the June protocol-hardening and public-polish push on the flagship PWA.
+- **PGSP (Public Goods Staking)**: relaunching the Genesis validator squad and building the first operator cohort toward testnet.
+- **NYC Vault Crowdfunding**: crowdfunding decentralized park vaults through the Green Goods UI.
+<!-- now-building:end -->
+
+## Recently shipped
+
+<!-- recently-shipped:start -->
+See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
+<!-- recently-shipped:end -->
+
 ## Past work
 
 Notable earlier artifacts — public, open-source, and worth referencing:

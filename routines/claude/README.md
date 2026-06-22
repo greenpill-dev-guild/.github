@@ -16,8 +16,9 @@ Distinct from `../*.md` markdown playbooks for manual guild processes like funde
 | `research-accountability-pulse.md` | active | Mon & Thu 08:00 twice-weekly | `#research` + Linear comments | Flags Research team slippage (past-due / stalled / due-soon); comments + `@`-mentions the owner on each flagged issue (idempotent, ~weekly per issue) |
 | `scope-review-pulse.md` | active | Daily 08:30 | `#scope-review` + Linear comments | Flags Triage / Backlog issues that need scoping or evaluator-panel acceptance before Todo; comments on scoped briefs only |
 | `software-ecology-pulse.md` | active | Mon 19:30 weekly | Linear + Drive + private Discord | Initiative status update on `Software Ecology & Agentic Workflow Health`; computes its ecology snapshot in-run from the three cloned guild V1 repos; no Issues or Customer Needs |
+| `profile-refresh.md` | active | Mon 20:00 weekly (after synthesis) | GitHub PR on `.github` | Opens a PR refreshing the two auto-managed sections of the public `profile/README.md` (Now building, Recently shipped); PR only, never pushes `main`; no Issues |
 
-Six weekly runs, a twice-weekly research-accountability pulse, and one daily scope-review pulse are active. Monday opens with the cross-project synthesis that primes the week; the ecology pulse follows at 19:30, computing its own ecology snapshot from its fresh clones (no local handoff). Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before build sync, then handles grants midweek. Friday closes the week with research synthesis. The research-accountability pulse runs Mon & Thu mornings (08:00) to surface Research-team slippage. The daily scope-review pulse runs at 08:30 UTC to route pre-acceptance scoping/evaluation queues.
+Seven weekly runs, a twice-weekly research-accountability pulse, and one daily scope-review pulse are active. Monday opens with the cross-project synthesis that primes the week; the ecology pulse follows at 19:30, computing its own ecology snapshot from its fresh clones (no local handoff); profile-refresh closes Monday at 20:00 by opening a PR to refresh the public profile. Tuesday checks Network steward-hub intent. Wednesday starts with the Coop intent pulse before build sync, then handles grants midweek. Friday closes the week with research synthesis. The research-accountability pulse runs Mon & Thu mornings (08:00) to surface Research-team slippage. The daily scope-review pulse runs at 08:30 UTC to route pre-acceptance scoping/evaluation queues.
 
 Anything else previously in this folder has been removed — folded into the surviving routines or cut as noise.
 
@@ -45,6 +46,7 @@ Other guild repos (gardens, impact-reef, gg24-round-explorer, octant-v2(-core), 
 Mon  08:00  research-accountability-pulse
 Mon  18:00  guild-weekly-synthesis
 Mon  19:30  software-ecology-pulse
+Mon  20:00  profile-refresh
 Tue  16:00  network-steward-intent-pulse
 Wed  15:30  coop-intent-pulse
 Wed  19:00  guild-grant-scout
@@ -107,6 +109,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 | `research-synthesis` | Google Drive, Linear, Miro, Google Calendar, Canva, PostHog, Mermaid Chart | Drive + Linear = primary signal (Linear Research team, unprojected) · Miro/Calendar/Canva/PostHog = color enrichment (active week only, never on quiet/silent weeks) · Mermaid = generative for diagrams embedded in Linear Issue bodies |
 | `research-accountability-pulse` | Linear | Linear = read Research team issues for slippage + post one accountability comment (`@`-mention owner) per flagged issue; Discord summary via the shared bot token; no Drive/Calendar/design/PostHog/Mermaid |
 | `scope-review-pulse` | Linear | Linear = read Product and Research Triage / Backlog issues for pre-acceptance scoping and evaluator-panel queues + post one panel comment per scoped brief; Discord summary via the shared bot token; no Drive/Calendar/design/PostHog/Mermaid |
+| `profile-refresh` | Linear, GitHub | Linear = the Now-building list from active initiatives/projects; GitHub = the Recently-shipped list from releases/merged PRs, plus the PR it opens to update `profile/README.md`. PR only, never pushes `main`; touches only the marker blocks. |
 
 Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
 
@@ -122,7 +125,7 @@ The lean portfolio is anchored on three surfaces:
 - **Drive memos** are memory substrate, not output destination. Each synthesis routine writes a memo at run end so the next run's Phase 0 prior-recall can pick up open threads. The user is not expected to read Drive regularly; the routines do.
 - **Discord** is the human-readable pulse channel — a single weekly read per channel, scoped to that channel's audience.
 
-GitHub is not a durable backlog — it stays in scope only for PRs and code review. Routines never file GitHub Issues.
+GitHub is not a durable backlog — it stays in scope only for PRs and code review. Routines never file GitHub Issues. One routine, `profile-refresh`, opens a PR (never a direct push to `main`) to refresh the public profile's two auto-managed sections; it is the only routine that writes to a repo, and it still files no issues.
 
 ## Linear taxonomy
 
