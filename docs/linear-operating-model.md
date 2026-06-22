@@ -51,7 +51,7 @@ Do not recreate retired GitHub-era label families in Linear. In particular, avoi
 
 ## Scoped work, sizing & accountability
 
-Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Use the [Scope brief issue template](https://github.com/greenpill-dev-guild/.github/issues/new?template=scope.yml) or the [Brief template](./linear-templates.md#brief). Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+Paid work is scoped, sized, and paid per the [How the Dev Guild Pays for Scoped Work](../routines/scoped-work-compensation.md) playbook: a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is the payment event. Use the [Brief template](./linear-templates.md#brief). Dated, owned briefs are chased by the `research-accountability-pulse` routine under the **Research Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document in the Research Operations project. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
 
 **Scope before assign, sign off before start:**
 
