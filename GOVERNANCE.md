@@ -45,12 +45,12 @@ Decisions are made at the lowest reasonable scope:
 
 ## RFC process
 
-For changes that affect more than one project — shared CI, vocabulary conventions, treasury policy, partnership commitments — open an RFC:
+For changes that affect more than one project (shared CI, vocabulary conventions, treasury policy, partnership commitments), open an RFC:
 
-1. Draft an RFC issue using the [RFC template](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) on this `.github` repo.
-2. Announce in the weekly call and on the forum.
+1. Start a thread on the forum describing the proposed change and why it generalizes.
+2. Open a PR to this `.github` repo with the concrete change (docs, config, or template).
 3. Allow **7 days** for written feedback (longer for high-impact changes).
-4. Stewards close the RFC with a decision and a short rationale.
+4. Stewards close the RFC with a decision and a short rationale; record lasting outcomes as an ADR in [adr/](./adr/).
 
 ADRs (architectural decision records) capture the outcomes that durably shape how the guild builds. See [adr/](./adr/).
 

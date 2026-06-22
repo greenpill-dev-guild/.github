@@ -12,7 +12,7 @@
 | To report a security vulnerability | **Do not open a public issue** · email `security@greenpill.builders` (see [SECURITY.md](./SECURITY.md)) |
 | To discuss funded scoped work | Confirm scope and funding with a maintainer or steward; accepted funded work is tracked in Linear |
 | To discuss a partnership | Read [PARTNERS.md](./PARTNERS.md), then email `contact@greenpill.builders` |
-| To propose a guild-wide change (CI, vocabulary, governance) | Open an [RFC](https://github.com/greenpill-dev-guild/.github/issues/new?template=rfc.yml) on this `.github` repo |
+| To propose a guild-wide change (CI, vocabulary, governance) | Open an [RFC](https://github.com/greenpill-dev-guild/.github/blob/main/GOVERNANCE.md#rfc-process) on this `.github` repo |
 | To reach a steward | Email `steward@greenpill.builders` |
 | General questions | Email `contact@greenpill.builders` |
 
