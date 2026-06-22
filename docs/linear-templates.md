@@ -1,251 +1,292 @@
 # Linear Templates
 
-> Canonical body templates for Greenpill Dev Guild Linear records.
+> Canonical body templates for Greenpill Dev Guild Linear records. Written to read like a teammate wrote them, not a form.
 
-Linear UI templates may exist, but Codex and other connector-based agents cannot reliably list or apply them. Treat this document as the durable source for template names, routing rules, and body shapes. If a matching Linear UI template exists, use it; otherwise copy the relevant body below.
+Linear is the single home for accepted work. GitHub holds code, PRs, review, and RFC/ADR markdown. Pick a template by **what you are making**, not by discipline. The `activity:*` label still rides along on the issue (it is how compensation reads the discipline), but it does not pick the template.
 
-## Routing Rules
+Linear UI templates may exist, but connector-based agents cannot reliably list or apply them. Treat this document as the durable source for template names and body shapes. If a matching Linear UI template exists, use it; otherwise copy the relevant body below.
 
-- Customer Needs are raw customer, partner, funder, garden, cohort, or internal-ops signal. They are not commitments to build.
-- Linear Issues are accepted units of work with a clear next action. Product issues track accepted delivery, QA, maintenance, funding, and protocol work. Research issues track accepted research tasks.
-- Grouped child labels are exclusive in Linear. Choose the primary child label for each family, such as one `activity:*`, one `protocol:*`, and one `package:*` where applicable. Set an **estimate** on payable scoped briefs (replaces `band:*`).
-- Projects are bounded containers made from multiple related stories, issues, or research tasks. Do not create a project for a single loose idea unless it is a deliberate scoping project.
-- Initiatives are outcome arcs. They group projects around a durable strategic outcome, not around a repo, inbox, or imported board.
-- Do not route new work into completed, canceled, staging, or retired projects such as `Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, or `Story Board`.
+## Two shapes, and when to use each
 
-## Linear Initiative - Outcome Arc
+- **Most work is one issue.** A single deliverable, a bug, a grant: one issue, done.
+- **Use a parent plus children only when the work fans into two or more separate outputs that share context** (a media set, a feature with several lanes, a Deep research piece that bundles a few artifacts). The parent is the Brief; the children are the pieces. Never force this on single-output work.
 
-Use for durable outcome-level arcs that may contain multiple projects.
+## Headers are friendly, the fields underneath are not
 
-```markdown
-## Lean Outcome Card
+The friendly headers map to the payable-brief fields so the compensation flow can still find them:
 
-Steward: {owner name or open}
-Cadence: {weekly light review | biweekly review | monthly review}
-Target: {YYYY-MM-DD or none}
+- **"What are we making?"** is the Output.
+- **"Out of scope"** is the Boundary.
+- **"Done when"** is the Acceptance criteria plus the Decision/exit.
 
-Outcome: {one sentence describing the desired real-world or product outcome}
+Acceptance is agreed up front and is the payment event. On anything payable, set an **estimate** (Scout ~ 1 / Brief ~ 4 / Deep ~ 16), a `protocol:*`, an `activity:*`, a due date, and an assignee. A Brief with no estimate is accepted work still being scoped; add the estimate when it becomes payable.
 
-Success signals:
+## Routing, in one line
 
-* {signal 1}
-* {signal 2}
-* {signal 3}
+Raw signal becomes a **Customer Need**. Accepted work becomes an **issue**. A visible-but-unscoped project gets a **Scope** issue. A cluster of issues becomes a **Project**. An outcome arc over projects is an **Initiative**. Ongoing coverage (support, maintenance) lives as a **Document**, not an issue. Do not route new work into completed, canceled, or retired projects.
 
-Current project routing:
+---
 
-* {project name}: {why it belongs here}
+## Brief
 
-Customer / partner signal:
+The default for a scoped piece of work. Stands alone, or becomes the parent when the work splits into pieces.
 
-* {customer or cohort}: {need summary}
-
-Scope guard:
-
-{what should not be attached to this initiative unless it is explicitly accepted}
-```
-
-## Linear Project - Lean Outcome
-
-Use for a bounded project that owns a cluster of related issues or stories.
+Title: the deliverable in a few words. Labels: one `activity:*`, one `protocol:*`, estimate (when payable), due, assignee.
 
 ```markdown
-## Lean Project Card
+## What are we making?
+One or two plain sentences: the thing this produces and why it matters now.
 
-Owner: {owner name or open}
-Initiative: {initiative name}
-Target: {YYYY-MM-DD or none}
+## Why this matters
+Audience:
+Purpose:
 
-Outcome: {one sentence describing the bounded project outcome}
-
-Why now:
-
-{short reason this project is worth active roadmap attention}
-
-Scope:
-
-* {in-scope item 1}
-* {in-scope item 2}
-* {in-scope item 3}
-
+## Scope
+In scope:
+-
 Out of scope:
+-
 
-* {out-of-scope item 1}
-* {out-of-scope item 2}
+## Shared context
+Links that apply to the whole piece: docs, product surface, protocol source, prior work.
 
-Issue model:
+## Done when
+- 3 to 6 checkable signs it is finished and accepted (agreed up front).
+- Reviewed by {steward or evaluator}.
+- Feeds: {the decision or work this unblocks}.
 
-Multiple accepted stories, research tasks, QA tasks, or delivery tasks make up this project. Raw signal should stay in Customer Needs until accepted as work.
-
-Done means:
-
-* {acceptance signal 1}
-* {acceptance signal 2}
-* {validation or handoff signal}
+## Child issues (only if it fans out)
+One child per separate output. Leave this out for single-output work.
+-
 ```
 
-## Linear Project Scoping Issue
+## Artifact
 
-Use when a project is real enough to keep visible but does not yet have scoped issues.
+One concrete output under a Brief: a graphic, a short video, a page, a component, a research sub-memo. Use only as a child of a Brief.
 
-Title: `scope: {Project Name}`
-
-Labels: primary relevant `protocol:*` and `activity:*`. Add `funding:*` only for funding lifecycle work.
+Title: the single output. Labels: inherit the parent's `protocol:*`; an `activity:*` for the work mode.
 
 ```markdown
-## Project Scoping Issue
+## What are we making?
+One artifact, in a sentence.
 
-Project: {project name}
-Initiative: {initiative name or none yet}
+## Purpose
+Audience:
+Core message:
 
-## Why this project exists
+## Where it will be used
+Docs / community / social / deck / other:
 
-{one paragraph explaining the customer, partner, funding, product, or research reason this project should stay visible}
+## Key references
+Only what this artifact needs.
+Parent brief:
+Docs / source:
+Product surface:
+Design tool / Figma:
+Screenshots / recordings:
 
-## Decision needed
+## Direction
+What it should show.
+- For a visual: main sections, key labels, things to avoid.
+- For a video: start state, key steps, end state, things to avoid.
 
-{what the team needs to decide before this becomes executable work}
+## Deliverables
+Editable source:
+Final export:
+Alt text / captions:
+Storage link:
 
-## Candidate stories / issues
-
-* {candidate story or issue 1}
-* {candidate story or issue 2}
-* {candidate story or issue 3}
-
-## Customer / signal source
-
-{Customer Need, Drive doc, GitHub issue, partner note, grant scope, or `.plans` source}
-
-## Next action
-
-{one concrete next step, owner, and expected output}
-
-## Scope guard
-
-If no accepted stories, issues, or customer signals are identified after this scoping pass, close or archive the project instead of leaving it as a placeholder.
+## Done when
+- It clearly lands the core message.
+- It matches the parent scope and the source material.
+- The placement is clear and any product, docs, or technical notes are handled.
+- Final files are attached or linked, and linked back on the parent.
 ```
 
-## Linear Customer Need - Signal Intake
+## Feature / Polish
 
-Use for customer, partner, funder, garden, cohort, squad, or internal-ops signal before it becomes accepted work.
+Product feature development or a polish push. Small ones stand alone; larger ones are a parent with task or lane children. Replaces the old `.plans` hub stub.
+
+Title: the feature or polish in a few words. Labels: `activity:build` (or `activity:maintenance` for polish), `package:*`, `protocol:*`, estimate.
 
 ```markdown
-Source: {Discord, Telegram, Drive, partner call, funder conversation, garden check-in, GitHub, PostHog, or .plans}
-Customer type: {garden | cohort | funder | protocol partner | data partner | squad | internal ops}
-User-task categories: {Evidence, Evaluator/review, Funding pathway, Local onboarding/education, Access/participation, Data input, Reputation/identity}
-Need statement: {one sentence from the customer's perspective}
-Evidence/context: {brief context, with links only when safe}
-Routing recommendation: {Customer Need -> project/issue, or keep unprojected until accepted}
-Privacy note: {what must not be exposed in public issue text}
-Disposition: {canonical active signal | superseded duplicate retained for history | parked until more evidence}
+## What are we building?
+One or two sentences: the change and the user or system value.
+
+## Why now
+Short reason this is worth active attention.
+
+## Scope
+In scope:
+-
+Out of scope:
+-
+
+## Source
+Plan or context: .plans/<path>/ (if any), the doc, the customer need, or the bug it came from.
+
+## Done when
+- The checkable signs it is shipped and accepted.
+- Reviewed by {steward or evaluator}.
+
+## Tasks / lanes (only if it fans out)
+Add these when implementation starts; keep this issue as the hub until then.
+-
 ```
 
-## Linear Research Issue - Accepted Task
+## Bug
 
-Use only after the research acceptance bar is met.
+A defect from QA, telemetry, or a report.
 
-Title: `Research: {short action title}`
-
-Labels: `activity:research` and primary relevant `protocol:*`. Add `agent:routine` for routine-authored issues.
+Title: the symptom in a few words. Labels: `activity:qa`, `package:*`, `protocol:*`.
 
 ```markdown
-## Accepted Research Task
+## What happened
+Plain terms: who saw it, where, and when. Steps to reproduce if known.
 
-Research source: {#research week of YYYY-MM-DD, partner conversation, Drive memo, or steward request}
+## Where
+The surface and package it touches.
 
-## Theme
+## Likely cause or first check
+Best current guess at the fix, or what to look at first.
 
-{theme name}
+## Severity
+P0 to P3 (blocker / major / minor / cosmetic), and a one-line why.
 
-## Original sources
+## Source and evidence
+Where it came from (sync, Sentry, a report) and any telemetry. Say if it is unverified.
 
-* {source link or safe source description}
-* {source link or safe source description}
-
-## Accepted action
-
-{specific research action with a knowable output}
-
-## Project / scope
-
-{protocol, project, or guild-wide scope}
-
-## Owner
-
-{name, role, or open}
-
-## Confidence
-
-{high | medium | low} - {brief rationale}
-
-## Status
-
-Accepted - research time is committed to investigating this. Graduates into a bounded delivery project only if the investigation produces work the team commits to ship.
+## Done when
+- The fix is shipped and the original report is confirmed resolved, or it is reclassified with a reason.
 ```
 
-## Linear Scoped Brief - Payable Deliverable
+## Grant
 
-Use when a piece of work is scoped for **payment** (any discipline). This is the deliverable shape behind the [compensation playbook](../routines/scoped-work-compensation.md). The *Accepted Research Task* above is the lighter acceptance-bar intake; a paid **Stage-0 scoping** pass turns an accepted task into this payable brief.
+A funding opportunity, tracked through `funding:*` labels and saved views.
 
-Title: `{short deliverable title}`
-
-Labels: one `activity:*` (discipline) and primary relevant `protocol:*`. Set an **estimate** (exponential — Scout ~ 1 / Brief ~ 4 / Deep ~ 16), a due date, and an assignee.
-
-```markdown
-## Output
-
-{the one concrete artifact this brief produces}
-
-## Acceptance criteria
-
-* {3–6 checkable bullets — what "done + accepted" means}
-
-## Boundary
-
-{what is explicitly out of scope}
-
-## Decision / exit
-
-Done when {condition}, reviewed by {steward / designated evaluator}. Feeds: {the decision this unblocks}.
-```
-
-## Linear Funding Issue - Grant Lifecycle
-
-Use for funding opportunities tracked through saved views over `funding:*` labels.
-
-Title: `Grant: {Program Name}`
-
-Project: leave unprojected unless a bounded award or delivery project already exists and the issue is `funding:active-award`.
-
-Labels: one current `funding:*` label, `activity:research`, primary relevant `protocol:*`, and `agent:routine` when routine-authored.
+Title: `Grant: {Program}`. Labels: one `funding:*`, `activity:research`, `protocol:*`, and `agent:routine` when routine-authored. Leave unprojected unless it is `funding:active-award` with a delivery project.
 
 ```markdown
 ## Opportunity
-
-* **Program**: {name}
-* **URL**: {url}
-* **Deadline**: {date or rolling}
-* **Amount**: {range}
-* **Source**: {Discord message, Drive doc, Calendar event, Miro board, or web research query}
+Program:
+URL:
+Deadline:
+Amount:
+Source:
 
 ## Fit
-
-* **Primary project(s)**: {project list}
-* **Secondary project(s)**: {project list or none}
-* **Alignment summary**: {short rationale}
-* **Distinct angle**: {the pitch}
+Primary project(s):
+Secondary:
+Why it is a match:
 
 ## Evidence
+Proof points we have:
+Gaps a human must confirm:
 
-* **Existing proof points**: {links or bullets}
-* **Evidence gaps**: {items a human needs to confirm}
+## Status
+Lifecycle: prospect / drafting / submitted / active-award (mirror it with the funding:* label).
+Drive draft: URL or not started.
 
-## Draft status
+## Decision needed
+Submit / draft / monitor / dismiss, and what to confirm before we put real time in.
+```
 
-* **Drive draft**: {URL or "not started"}
-* **Current lifecycle**: {prospect | drafting | submitted | active-award}
+## Customer Need
 
-## Human decision needed
+Raw signal from a customer, partner, funder, garden, cohort, or internal ops, before it is accepted as work.
 
-{submit / draft / monitor / dismiss recommendation}
+```markdown
+Source: {Discord, Telegram, Drive, call, garden check-in, GitHub, PostHog, or .plans}
+Who: {garden | cohort | funder | partner | squad | internal ops}
+Need: one sentence from their point of view.
+Context: brief, with safe links only.
+Routing: keep as a need, or which issue or project it becomes when accepted.
+Privacy: anything that must not appear in public issue text.
+Disposition: active signal | superseded duplicate | parked for more evidence.
+```
+
+## Scope (project-scoping issue)
+
+Keep a project visible before it has scoped issues.
+
+Title: `scope: {Project}`. Labels: primary `protocol:*` and `activity:*`.
+
+```markdown
+## Why this project exists
+The customer, partner, funding, product, or research reason it should stay visible.
+
+## Decision needed
+What the team must decide before this becomes executable work.
+
+## Candidate issues
+-
+
+## Signal source
+Customer Need, Drive doc, GitHub, partner note, grant scope, or .plans.
+
+## Next action
+One concrete step, an owner, and the expected output.
+
+## Scope guard
+If no accepted issues or signals come out of this pass, close or archive the project rather than leave a placeholder.
+```
+
+## Project (container card)
+
+A bounded project that owns a cluster of issues.
+
+```markdown
+Owner:
+Initiative:
+Target: {YYYY-MM-DD or none}
+
+## Outcome
+One sentence: the bounded outcome.
+
+## Why now
+Short reason it is worth active roadmap attention.
+
+## Scope
+In scope:
+-
+Out of scope:
+-
+
+## Done means
+- Acceptance and validation or handoff signals.
+```
+
+## Initiative (outcome arc)
+
+A durable outcome that groups several projects.
+
+```markdown
+Steward:
+Cadence: {weekly | biweekly | monthly} review
+Target: {YYYY-MM-DD or none}
+
+## Outcome
+One sentence: the real-world or product outcome.
+
+## Success signals
+-
+
+## Project routing
+- {project}: why it belongs here.
+
+## Scope guard
+What should not be attached unless explicitly accepted.
+```
+
+## Continuous role (a Document, not an issue)
+
+Ongoing coverage that is not a single deliverable: community support, ongoing maintenance, funding tracking. Track it as a Linear Document, paid as a monthly role with per-hour extras, per the [compensation playbook](../routines/scoped-work-compensation.md). Do not open per-cycle issues for it.
+
+```markdown
+Role:
+Owner:
+Cadence / coverage: what is covered each cycle.
+Baseline: the monthly arrangement.
+Extras: what counts as a per-hour extra (e.g. a dedicated onboarding session) and how it is logged.
+Review: how the role is reviewed and renewed.
 ```
