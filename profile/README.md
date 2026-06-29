@@ -24,15 +24,16 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: closing out the June protocol-hardening and public-polish push on the flagship PWA.
-- **PGSP (Public Goods Staking)**: relaunching the Genesis validator squad and building the first operator cohort toward testnet.
-- **NYC Vault Crowdfunding**: crowdfunding decentralized park vaults through the Green Goods UI.
+- **Green Goods**: finishing the protocol-hardening and public-polish push on the flagship PWA — QA and release hardening plus editorial and docs polish — as the project moves to a monthly release cadence.
+- **PGSP (Public Goods Staking)**: re-paced operator-first — getting the guild's own nodes and squad solid now, with the Genesis squad relaunch and first operator cohort onboarding next.
+- **Greenpill Network website**: polishing the public site and onboarding stewards so the community map and content stay accurate after the June launch.
+- **Impact Framework**: refreshing the Greenpill impact methodology into current Green Goods evidence, evaluator, and funder language.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
+- **[green-goods](https://github.com/greenpill-dev-guild/green-goods/pulls?q=is%3Apr+is%3Amerged)**: merged a week of release-hardening on the flagship PWA — a USD/wETH toggle on the `/fund` funding flow, a full-screen admin Submit Work flow, hardened vault crowdfunding, and time-boxed media uploads so weak-signal photo uploads fail retryably instead of hanging.
 <!-- recently-shipped:end -->
 
 ## Past work
