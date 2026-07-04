@@ -51,10 +51,7 @@ Color sources NEVER promote a non-substantive `#research` week to active mode. T
 - **Linear is the canonical surface for accepted research.** Issues land in the Linear **Research** team, **unprojected by default**, scoped by canonical labels (`activity:research`, relevant `protocol:*`, `agent:routine` for routine provenance). Graduate into a bounded active project only when one already exists for this research thread; do not create new projects from this routine, and never route into staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`). Resolve team/label IDs by name at run start.
 - Active guild projects (referenced for context, scoping insight protocol labels):
   - `greenpill-dev-guild/green-goods` — regenerative work platform (`protocol:green-goods`)
-  - `greenpill-dev-guild/coop` — browser extension + PWA (`protocol:coop`)
   - `greenpill-dev-guild/network-website` — Greenpill Network site (`protocol:network`)
-  - `greenpill-dev-guild/cookie-jar` — funding allowance
-  - `Greenpill9ja/TAS-Hub` — TAS hub
   - PGSP — Public Goods Staking Protocol (`protocol:pgsp`)
   - GreenWill — reputation/identity work (`protocol:greenwill`)
 
@@ -163,7 +160,7 @@ Validate every Mermaid diagram via the Mermaid MCP connector (`mermaid-chart` va
 
 For each actionable theme, propose 1–2 concrete actions. Each action carries:
 
-- **Project / scope** — `green-goods`, `coop`, `pgsp`, `greenwill`, `network-website`, `cookie-jar`, `tas-hub`, `guild-wide`, or `dev guild ops`
+- **Project / scope** — `green-goods`, `pgsp`, `greenwill`, `network-website`, `guild-wide`, or `dev guild ops`
 - **Owner** — a named person if obvious (`Afo`, council member by name), `council` for collective decisions, `open` if unassigned. Avoid vague 'dev guild lead' — prefer `open` if no real owner exists.
 
 Actions are **proposals**, not commitments.
