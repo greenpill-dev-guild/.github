@@ -5,10 +5,7 @@ trigger:
 max-duration: 90m
 repos:
   - greenpill-dev-guild/network-website
-  - greenpill-dev-guild/coop
   - greenpill-dev-guild/green-goods
-  - greenpill-dev-guild/cookie-jar
-  - Greenpill9ja/TAS-Hub
 environment: guild-routines
 network-access: full  # Discord API + Drive + Calendar + Miro + Figma + Canva + Linear + PostHog
 env-vars:
@@ -50,13 +47,10 @@ This routine reads ONLY from:
 
 **Repos** (allow-list — every other repo is rejected; check via the routine's `repos:` frontmatter):
 - `greenpill-dev-guild/network-website`
-- `greenpill-dev-guild/coop`
 - `greenpill-dev-guild/green-goods`
-- `greenpill-dev-guild/cookie-jar`
-- `Greenpill9ja/TAS-Hub`
 - `greenpill-dev-guild/.github`
 
-**Active shipping branch (mandatory):** Resolve each repo's active branch before counting commits — it is NOT always the GitHub default. `green-goods` ships on `main` (default branch is `develop`); `cookie-jar` ships on `main` (default branch is `dev`); `coop` / `network-website` / `TAS-Hub` ship on `main`. A default-branch-only commit query reported this week's 15 `green-goods` and 4 `cookie-jar` commits as `0`. Always cross-check commit counts against Vercel deploy SHAs / branch refs (which reveal real shipping activity) so a repo that shipped to a non-default branch is never reported `quiet`.
+**Active shipping branch (mandatory):** Resolve each repo's active branch before counting commits — it is NOT always the GitHub default. `green-goods` ships on `main` (default branch is `develop`); `network-website` ships on `main`. A default-branch-only commit query once reported this week's 15 `green-goods` commits as `0`. Always cross-check commit counts against Vercel deploy SHAs / branch refs (which reveal real shipping activity) so a repo that shipped to a non-default branch is never reported `quiet`.
 
 **Linear** (the source of truth for active project work — issues, customer signal, roadmap projects, accepted research):
 - Teams: `Product` and `Research` only
@@ -78,7 +72,7 @@ This routine reads ONLY from:
 Drive query (entry point):
 
 ```
-modifiedTime > '<7d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill') and (fullText contains 'Green Goods' or fullText contains 'Coop' or fullText contains 'Cookie Jar' or fullText contains 'TAS-Hub' or fullText contains 'PGSP' or fullText contains 'Public Goods Staking' or fullText contains 'Dev Guild' or fullText contains 'Greenpill Network' or fullText contains 'gardener' or fullText contains 'operator' or fullText contains 'guild lead' or fullText contains 'lead council')
+modifiedTime > '<7d-ago RFC3339>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill') and (fullText contains 'Green Goods' or fullText contains 'PGSP' or fullText contains 'Public Goods Staking' or fullText contains 'Dev Guild' or fullText contains 'Greenpill Network' or fullText contains 'gardener' or fullText contains 'operator' or fullText contains 'guild lead' or fullText contains 'lead council')
 ```
 
 **Run this as STAGED queries, not one compound call** — the connector returns `Internal error encountered` on the full title×fullText boolean above. Issue the parts separately and union the results: (a) `modifiedTime > '<7d-ago>' and title contains 'Notes by Gemini'`; (b) `modifiedTime > '<7d-ago>' and (title contains 'Dev Guild' or title contains 'Greenpill' or title contains 'Lead Sync' or title contains 'Steward' or title contains 'Octant')`. Apply the reject step to the union.
@@ -98,7 +92,7 @@ A doc that mentions WEFA in passing while discussing a guild project is fine. A 
 **Calendar** (the dev-guild shared calendar plus Afo's calendar — but Afo's calendar contains personal projects and WEFA work that must NOT leak):
 
 Include an event ONLY when its title or description matches one of:
-- a guild project name (`Green Goods`, `Coop`, `Cookie Jar`, `TAS-Hub`, `PGSP`, `Public Goods Staking`, `GreenWill`)
+- a guild project name (`Green Goods`, `Network Website`, `PGSP`, `Public Goods Staking`, `GreenWill`)
 - a known guild call (`Dev Guild Sync`, `Lead Council`, `Working Capital`, `Treasury`, the literal word `guild`)
 - a Greenpill Network ecosystem moment (governance call, retro, public workshop, ecosystem AMA)
 - a tracked grant program deadline, demo day, pitch event, or submission reminder
@@ -111,7 +105,7 @@ Drop personal calendar events, WEFA-tagged events, sales/client meetings, and ot
 
 Include only boards that match ONE of:
 - linked from `#community` or `#lead-council` messages in the 7-day window (resolve URL to board ID, read directly)
-- modified in the last 7 days AND title/description contains a guild project name (`Green Goods`, `Coop`, `PGSP`, `Cookie Jar`, `TAS-Hub`, `GreenWill`) OR a guild call type (`workshop`, `retro`, `roadmap`, `planning`, `dev guild`)
+- modified in the last 7 days AND title/description contains a guild project name (`Green Goods`, `Network Website`, `PGSP`, `GreenWill`) OR a guild call type (`workshop`, `retro`, `roadmap`, `planning`, `dev guild`)
 
 **Miro reject step**: drop boards whose title or first 1KB of body contains `'WEFA'`, `'wefa.world'`, personal client tags, or unrelated-product references. Same WEFA discipline as Drive.
 
@@ -123,7 +117,7 @@ Treat Miro as planning context, not as a source of decisions unless the board or
 
 Include only files that match ONE of:
 - linked from `#community`, `#lead-council`, Drive notes, or Linear Issues in the 7-day window
-- modified in the last 7 days AND located in a Figma team/project tied to a guild project (`Green Goods`, `Coop`, `Network Website`)
+- modified in the last 7 days AND located in a Figma team/project tied to a guild project (`Green Goods`, `Network Website`)
 - contain new comments / handoff status / prototype updates in the last 7 days
 
 **Figma reject step**: drop files whose title contains `'WEFA'`, `'wefa.world'`, or personal-client tags. Skip files that are pure scratch / explore branches with no guild-project linkage.
@@ -141,7 +135,7 @@ For each guild project deployed on Vercel (`client`, `admin`, `network-website`,
 - Notable rollbacks (an aborted prod deploy followed by a redeploy of an earlier SHA, or a manual promotion of an older deploy)
 - Author distribution if more than one person shipped this week
 
-**Vercel reject step**: drop projects outside the active 6 (`green-goods`, `coop`, `pgsp`, `network-website`, `cookie-jar`, `TAS-Hub`). If Vercel returns deploys for personal/WEFA projects, ignore them — same WEFA discipline as Drive.
+**Vercel reject step**: drop projects outside the active set (`green-goods`, `pgsp`, `network-website`). If Vercel returns deploys for personal/WEFA projects, ignore them — same WEFA discipline as Drive.
 
 Use case: surface "green-goods: 5 deploys to develop, 1 prod release, 0 rollbacks" or "network-website: 1 prod deploy with a rollback midweek" in the council digest's per-project bullets. NOT for runtime errors — that's `health-watch` territory.
 
@@ -178,26 +172,35 @@ Every rejection is logged. The Phase 5 umbrella check confirms the rejection cou
 - Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere.
 - If you fall back to direct PostHog reads, note `⚠ growth-pulse status update unavailable — fell back to direct PostHog read` in the failure block.
 
-When other guild projects (Coop, PGSP, etc.) get their own growth-pulse-equivalents, this routine surfaces those numbers the same way: link to the relevant status update (or whatever durable Linear artifact that routine posts); do not re-compute.
+When other guild projects (PGSP, etc.) get their own growth-pulse-equivalents, this routine surfaces those numbers the same way: link to the relevant status update (or whatever durable Linear artifact that routine posts); do not re-compute.
 
 ## Output schema (fixed)
+
+One **house style** governs both posts, tuned for a fast human read:
+
+- **Bold section headers** are the anchors; leave a **blank line between every block**.
+- Bullets carry a **bold label** (`**Decide** · …`, `**Green Goods** —  …`); no walls of prose.
+- **Omit any section that is empty this week** — never emit a header with "none" under it.
+- **A project appears only if it actually moved this week.** Never post a "quiet" bullet.
+- **Lead with what needs a human.** Decisions and red risks go at the top, not the bottom.
 
 ### `#community` excerpt (public-safe, posted first)
 
 ```
-**Guild Pulse — Week of {YYYY-MM-DD}**
+**🌍 Guild Pulse — Week of {YYYY-MM-DD}**
 
-🌍 **What's moving across the guild**
-{at most 4 bullets, one per active repo or cross-project theme; each bullet ≤ 1 sentence; pull from GitHub + Linear together so commit-only weeks still surface meaningful work}
+**What's moving**
+{at most 4 bullets, one per project or cross-project theme that actually moved; combine GitHub + Linear so a commit-only week still surfaces work; each ≤ 1 sentence. Omit a quiet project — never write "quiet" here.}
 
-📅 **This week's calendar highlights**
-{at most 3 bullets — public meetings, demos, deadlines that the community can attend or care about; append each event's join/RSVP link (Luma > Google Meet > event page). End the section with a standing line: `RSVP to upcoming guild events on Luma → https://luma.com/greenpilldevguild`}
+**📅 Come along**
+{at most 3 bullets — public meetings, demos, deadlines the community can attend; append each event's RSVP/join link (Luma > Google Meet > event page). Omit the whole section if nothing public is happening.}
+_RSVP to guild events → https://luma.com/greenpilldevguild_
 
-🎨 **Design + community assets**
-{at most 2 bullets — guild-relevant Miro / Figma / Canva movement that's safe to share publicly: shipped designs, finalized workshop materials, public pitch decks released. Omit this section entirely if nothing is shareable.}
+**🎨 Shipped & shared**
+{at most 2 bullets — publicly shareable Miro / Figma / Canva movement. Omit entirely if nothing is shareable.}
 
-📚 **From the council**
-{at most 2 bullets — a sentence each on what `#lead-council` discussed that's safe to share publicly. Omit this section entirely if nothing is shareable.}
+**📚 From the council**
+{at most 2 bullets — publicly shareable notes from `#lead-council`. Omit entirely if nothing is shareable.}
 
 {if any_failure: "⚠ Scope failures this run: {short list}"}
 ```
@@ -207,36 +210,29 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 ### `#lead-council` digest (private, posted second)
 
 ```
-{if any_action_required: "<@${DISCORD_USER_ID_AFO}> "}**Guild Pulse — Week of {YYYY-MM-DD}** (private)
+{if any_action_required: "<@${DISCORD_USER_ID_AFO}> "}**🌍 Guild Pulse — Week of {YYYY-MM-DD}**  ·  _private_
 
-⚙ **Per-project activity (last 7d)**
-• green-goods: {1-sentence summary combining GitHub + Linear + Vercel movement; e.g., "3 PRs merged on develop, 5 Linear Issues moved to Done, 4 prod deploys (0 rollbacks), project status update on Green Goods Seasons & Campaigns flagged X"}
-• coop: {same shape}
-• pgsp: {same shape — Linear `protocol:pgsp` plus GitHub if any; PGSP doesn't currently have a Vercel deploy}
-• network-website: {same shape}
-• cookie-jar: {same shape}
-• TAS-Hub: {same shape}
+**🔴 Needs you**
+{This block LEADS the post. At most 3 bullets, each an overdue decision (open > 1 week) or a red risk/signal — explicit, not vague — citing the Linear status update or Discord thread. Omit this whole block, and the @mention, when nothing needs a human this week.}
+- **Decide** · {the decision owed} → <URL>
+- **Risk** · {the red signal} → <URL>
 
-📊 **Metrics context**
-• Green Goods: {1-line headline pulled from latest growth-pulse status update} — <status-update URL>
-{additional bullets for other projects when their growth-pulse-equivalents exist; otherwise omit}
+**⚙️ Moved this week**
+{one bullet per active project that actually moved (green-goods, pgsp, network-website), combining GitHub + Linear + Vercel; bold the project name; fold the growth-pulse metrics headline onto an indented second line when one exists. Omit a quiet project entirely.}
+- **Green Goods** — {e.g. "3 PRs merged · 5 Issues to Done · 4 prod deploys (0 rollbacks)"}
+  {growth-pulse headline, e.g. "Onboarding funnel **+12% WoW**"} → <status-update URL>
+- **{Project}** — {1-line combined summary} → <URL>
 
-🎨 **Design + asset movement**
-{at most 4 bullets — Figma handoffs, Miro retro/workshop outputs, Canva pitch deck updates that affect this week's leadership decisions; cite source URL}
+**🎨 Design & assets**
+{at most 3 bullets — Figma handoffs, Miro/Canva outputs that bear on a leadership decision; cite URL. Omit if none.}
 
-🗓 **This week ahead**
-{at most 5 bullets — leadership-relevant: hires, partnerships, grant deadlines, demos, council decisions}
+**🗓️ Ahead**
+{at most 4 bullets — leadership-relevant: hires, partnerships, grant deadlines, demos, council decisions. Omit if none.}
 
-⚠ **Risks / signals**
-{at most 3 bullets — surfaced from `#lead-council` private discussions, Linear status updates, or stalled Issues; explicit rather than vague}
-
-📋 **Decisions still owed**
-{at most 3 bullets — items the council has been turning over for > 1 week without resolution; cite Linear status updates or Discord threads}
-
-📄 **Full memo**: {drive_doc_url}
+**📄 Full memo** → {drive_doc_url}
 ```
 
-`<@${DISCORD_USER_ID_AFO}>` mention only when at least one risk/signal is red OR a decision is overdue.
+`<@${DISCORD_USER_ID_AFO}>` mention fires only when the `🔴 Needs you` block is present (at least one red risk/signal or an overdue decision).
 
 ### Drive memo (archive)
 
@@ -264,14 +260,14 @@ For every input, immediately check the source against the allow-list. Reject + l
 
 ### Phase 2: Synthesize per-project activity
 
-For each of the 6 active projects (`green-goods`, `coop`, `pgsp`, `network-website`, `cookie-jar`, `TAS-Hub`):
+For each active project (`green-goods`, `pgsp`, `network-website`):
 
 1. **GitHub side**: pull commit messages, PR titles, issue updates, release notes from the last 7 days for the matching repo on its **active shipping branch** (see the Repos note — not always the GitHub default; cross-check against Vercel deploy SHAs so a non-default-branch repo is never miscounted as quiet), where one exists — PGSP doesn't have its own repo yet; rely on Linear.
 2. **Linear side**: pull Issues with `protocol:<project>` label moved this week, project status updates authored on bounded delivery projects, milestone changes.
 3. **Combine** into a 1-sentence summary aimed at the leadership audience. Mention specific commit/PR titles + Linear status update authors only when decision-grade. Otherwise stay at the "track of work" level.
 4. **Note any signals** that warrant escalation (a security commit, a breaking-change PR, a multi-day stalled Linear Issue in `In Review`, a release without a PR, a project status update flagging a risk).
 
-If a project had zero activity (GitHub silent + zero Linear movement), the summary is `quiet — no commits/PRs/Linear movement this week`. Don't pad with adjacent-project content.
+If a project had zero activity (GitHub silent + zero Linear movement), record it as `quiet` in the Drive memo only — omit it from both Discord posts per the output schema (never post a "quiet" bullet). Don't pad with adjacent-project content.
 
 ### Phase 3: Synthesize community + council + design
 
@@ -347,6 +343,6 @@ The failure block must surface, never hide:
 - Linear API failure (continue with GitHub-only per-project bullets; flag explicitly).
 - PostHog growth-pulse status update missing/stale (fell back to direct PostHog query — flag).
 - Discord channel ID unset for either output channel.
-- Repo activity query failure for any of the 5 active repos (continue with what was retrievable but flag missing repos).
+- Repo activity query failure for any active repo (continue with what was retrievable but flag missing repos).
 - Privacy grep hit (a body had to be redacted in-flight).
 - Routine timeout.
