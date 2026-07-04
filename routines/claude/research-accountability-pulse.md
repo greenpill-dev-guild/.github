@@ -10,7 +10,6 @@ env-vars:
   - DISCORD_BOT_TOKEN
   - DISCORD_RESEARCH_CHANNEL_ID
   - DISCORD_USER_ID_AFO
-  - LINEAR_API_KEY
 connectors:
   - linear
 model: claude-opus-4-8[1m]
