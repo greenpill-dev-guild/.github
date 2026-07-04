@@ -21,7 +21,7 @@ connectors:
   - linear
   - posthog
   - mermaid-chart
-model: claude-opus-4-7[1m]
+model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
 status: active
 ---
