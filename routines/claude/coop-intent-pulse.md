@@ -11,9 +11,9 @@ env-vars:
   - LINEAR_API_KEY
 connectors:
   - linear
-model: claude-opus-4-7[1m]
+model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # Linear initiative status update only, no Git writes
-status: active
+status: retired  # sunset 2026-07-04 — Coop dropped from routine scope; trigger disabled (spec kept for history)
 ---
 
 # Prompt
