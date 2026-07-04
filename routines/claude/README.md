@@ -89,7 +89,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_SCOPE_CHANNEL_ID`
 - `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
-- `LINEAR_API_KEY` — used by `network-steward-intent-pulse` (initiative status updates), `guild-grant-scout` (`funding:*` lifecycle saved views), and `research-synthesis` (Research team). NOTE (2026-07-04): reconcile against the "Linear stays on the OAuth connector, no stored key" rule — some routines may already use the connector; confirm per-routine before treating this as authoritative.
+- **Linear: OAuth connector only — no `LINEAR_API_KEY` is stored in the guild-routines env** (standing rule as of 2026-07-04). Every Linear-writing routine (`guild-weekly-synthesis`, `network-steward-intent-pulse`, `guild-grant-scout`, `research-synthesis`, `research-accountability-pulse`, `scope-review-pulse`) reaches Linear through the wired OAuth connector; re-authorize the connector when it lapses rather than adding a key.
 
 **Connector matrix:**
 
