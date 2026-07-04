@@ -11,7 +11,7 @@ environment: guild-routines
 network-access: full  # Linear + GitHub API
 connectors:
   - linear
-model: claude-opus-4-7[1m]
+model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # PR only: pushes a profile-refresh/* branch and opens a PR on .github; never pushes main. Requires GitHub write granted to this routine.
 status: active
 ---
