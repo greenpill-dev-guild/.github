@@ -11,11 +11,9 @@ Security updates are provided for the latest version of each actively maintained
 | Project | Status | Notes |
 | --- | --- | --- |
 | [green-goods](https://github.com/greenpill-dev-guild/green-goods) | Active · supported | Latest version; critical-only patches for older releases |
-| [coop](https://github.com/greenpill-dev-guild/coop) | Active · supported | Latest version |
-| [cookie-jar](https://github.com/greenpill-dev-guild/cookie-jar) | Active · supported | Latest version |
 | [network-website](https://github.com/greenpill-dev-guild/network-website) | Active · supported | Latest version |
 
-For other guild repositories — including forks (`charmverse`, `gardens`, `octant-v2-core`, `opencred`, `greenpill-hypercerts`) and dormant projects (`greenwill`, `allo-yeeter`, `impact-reef`, `greenpill-commons`, `regen-rabbit-race`) — we do not actively patch. Critical issues affecting upstream may be reported to upstream maintainers; reports affecting guild forks specifically can still be sent to us via the channel below.
+For other guild repositories — including forks (`charmverse`, `gardens`, `octant-v2-core`, `opencred`, `greenpill-hypercerts`) and dormant projects (`greenwill`, `allo-yeeter`, `impact-reef`, `greenpill-commons`, `regen-rabbit-race`, `cookie-jar`) — we do not actively patch. Critical issues affecting upstream may be reported to upstream maintainers; reports affecting guild forks specifically can still be sent to us via the channel below.
 
 ## Reporting a vulnerability
 

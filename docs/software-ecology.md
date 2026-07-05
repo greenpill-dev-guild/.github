@@ -17,12 +17,11 @@ This is not a backlog. It is an operating map for seeing whether AI-assisted dev
 
 ## V1 repo set
 
-The ecology index covers the three guild-org repos:
+The ecology index covers the two guild-org repos:
 
 | Repo | Tier | Role | Source-truth globs |
 | --- | --- | --- | --- |
 | Green Goods | Tier 1 heavy agentic product | Reference implementation for heavy `.plans`, shared contracts, design/docs drift checks, browser proof, and release complexity | `.plans/active/*/status.json`, `.plans/backlog/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
-| Coop | Tier 1 heavy agentic product | Reference implementation for human attention, agent policy, local-first review, and validation selection | `.plans/features/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
 | Greenpill Network | Tier 1 heavy agentic product | Reference implementation for public/private route contracts and workspace/auth decision discipline | `.plans/active/*/status.json`, `.plans/backlog/*/status.json`, `AGENTS.md`, `CLAUDE.md`, `package.json` |
 
 Portfolio, WEFA, and TAS-Hub left the guild V1 set in 2026-W24 (personal or guild-adjacent repos owned outside the guild org); they remain in the local dev-surfaces registry for local workflows only. Impact Reef and other dormant repos stay out of V1 until they become active work again.
@@ -36,12 +35,6 @@ Curated judgment fields consumed by the weekly pulse. A local twin lives in the 
 - API/privacy boundaries: Shared hooks, domain types, and public contracts live in `packages/shared`. Agent and webhook behavior lives in `packages/agent`. Contract deployment artifacts remain the address source of truth.
 - Release/rollback: Use repo-specific build, docs, design, package, browser-proof, and deploy scripts. Onchain or deploy rollback must be treated as a human-reviewed operation.
 - Likely bottleneck: Source-structure debt, dirty-tree coordination, and choosing the right validation depth before adding more concurrent agent work.
-
-**Coop**
-
-- API/privacy boundaries: Durable domain logic lives behind `@coop/shared` and `@coop/shared/app`. Review and publish remain explicit human decisions. Local-first extension state, sync, session, policy, and signing surfaces are high-risk.
-- Release/rollback: Use `validate:production-readiness` for mock-first readiness and `validate:production-live-readiness` only when live rails are intentionally in scope.
-- Likely bottleneck: Selecting the smallest sufficient validation suite across many agent, sync, policy, archive, and UI surfaces.
 
 **Greenpill Network**
 

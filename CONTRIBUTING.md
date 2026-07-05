@@ -19,7 +19,7 @@ Welcome! We're glad you're here. This guide covers how to get involved, take on 
 ## Getting started
 
 1. **Join our community.** Engage with us on [Telegram](https://t.me/+n7g-u8wYtwQ2YjVi) and [Discord](https://discord.gg/ZJjft2EKz7) to stay updated and ask questions.
-2. **Familiarize yourself with our projects.** Browse the active repositories pinned on [our org page](https://github.com/greenpill-dev-guild) — `green-goods`, `coop`, `cookie-jar`, `network-website` are the flagship surfaces.
+2. **Familiarize yourself with our projects.** Browse the active repositories pinned on [our org page](https://github.com/greenpill-dev-guild) — `green-goods` and `network-website` are the flagship surfaces.
 3. **Read the [Code of Conduct](./CODE_OF_CONDUCT.md).** Required for all contributors.
 4. **Skim the [routines/](./routines/)** directory if you're new to the guild — short markdown playbooks for our recurring flows, weekly check-ins, onboarding, retros, and grants.
 5. **Know the operating model.** Linear owns project management; GitHub owns public execution, issues, PRs, and RFCs. See [docs/linear-operating-model.md](./docs/linear-operating-model.md).

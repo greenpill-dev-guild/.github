@@ -32,7 +32,7 @@ In rough priority order:
 - **Show up to the weekly call.** Listening is enough; you don't need to speak.
 - **Introduce yourself in Discord.** Background, what brought you here, what you're curious about. One paragraph.
 - **Browse active project issues and recent guild updates.** Don't assume work is funded; get a feel for the kinds of contribution opportunities available.
-- **Set up one project locally.** Pick something — green-goods, coop, cookie-jar — and follow its setup instructions. If something breaks, that's a contribution opportunity (open an issue).
+- **Set up one project locally.** Pick something — green-goods or network-website — and follow its setup instructions. If something breaks, that's a contribution opportunity (open an issue).
 - **Find one steward to talk to.** A 20-minute intro call helps you understand context that's not written down anywhere. Email `steward@greenpill.builders` or DM in Discord.
 
 ## First month

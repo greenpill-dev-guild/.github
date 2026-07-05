@@ -15,8 +15,6 @@ Active guild-owned projects we build and maintain:
 | Project | What it does | Stack |
 | --- | --- | --- |
 | [**green-goods**](https://github.com/greenpill-dev-guild/green-goods) | Offline-first PWA documenting regenerative work on-chain (attestations, hypercerts, impact). Flagship. | TypeScript · Solidity · Bun |
-| [**coop**](https://github.com/greenpill-dev-guild/coop) | Local-first browser extension + companion PWA for shared knowledge in regen and civic groups. | TypeScript · Bun |
-| [**cookie-jar**](https://github.com/greenpill-dev-guild/cookie-jar) | Smart-contract-governed funding pools with allowlist, NFT, POAP, Hypercert, and Hats gating. | TypeScript · Solidity · Bun |
 | [**network-website**](https://github.com/greenpill-dev-guild/network-website) | Frontend for greenpill.network. | TypeScript |
 
 This profile focuses on guild-owned GitHub projects and earlier guild artifacts. Upstream forks we use for ecosystem contribution or integration are not treated as active project inventory here.
@@ -44,6 +42,7 @@ Notable earlier artifacts — public, open-source, and worth referencing:
 - [**impact-reef**](https://github.com/greenpill-dev-guild/impact-reef) · Qualitative impact evaluation
 - [**regen-rabbit-race**](https://github.com/greenpill-dev-guild/regen-rabbit-race) · Farcaster betting frame
 - [**greenpill-commons**](https://github.com/greenpill-dev-guild/greenpill-commons) · Community proposals PWA
+- [**cookie-jar**](https://github.com/greenpill-dev-guild/cookie-jar) · Smart-contract-governed funding pools (allowlist, NFT, POAP, Hypercert, and Hats gating)
 
 ---
 
@@ -63,7 +62,7 @@ Full contributor flow: [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/
 
 ## How we're funded — and how we fund
 
-**Funded by**: [GitHub Sponsors](https://github.com/sponsors/greenpill-dev-guild) · [Gitcoin](https://explorer.gitcoin.co/) · [Giveth](https://giveth.io/project/greenpill-dev-guild) · [Octant](https://octant.app/) (Epoch 5 grantee).
+**Funded by**: [GitHub Sponsors](https://github.com/sponsors/greenpill-dev-guild) · [Gitcoin](https://explorer.gitcoin.co/) · [Giveth](https://giveth.io/project/greenpill-dev-guild) · [Octant](https://octant.app/).
 
 **We fund**: regenerative projects across gaming and public goods through Grant Ships rounds, Gitcoin community rounds (including the GreenPill x Octant round), and clearly scoped grant-dependent work.
 

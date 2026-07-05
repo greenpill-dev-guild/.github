@@ -52,8 +52,6 @@ Default v1 intent:
 - `protocol:green-goods` and `protocol:greenwill` map to the safe Green Goods
   local core: Anvil Arbitrum fork, local indexer, docs, admin, client, agent,
   and Storybook.
-- `protocol:coop` maps to Coop app, docs, and API/signaling.
-- `package:extension` additionally maps to the Coop extension target.
 - `protocol:network` maps to the local Network stack.
 - `protocol:tas` and `protocol:pgsp` are context-only in v1.
 
