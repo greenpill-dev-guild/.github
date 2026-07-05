@@ -6,14 +6,12 @@ max-duration: 20m
 repos:
   - greenpill-dev-guild/.github
   - greenpill-dev-guild/green-goods
-  - greenpill-dev-guild/coop
-  - greenpill-dev-guild/cookie-jar
   - greenpill-dev-guild/network-website
 environment: guild-routines
 network-access: full  # Linear + GitHub API
 connectors:
   - linear
-model: claude-opus-4-7[1m]
+model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # PR only: pushes a profile-refresh/* branch and opens a PR on .github; never pushes main. Requires GitHub write granted to this routine.
 status: active
 ---
@@ -45,7 +43,7 @@ Source: Linear initiatives and active projects on the Product and Research teams
 
 Source: releases and merged PRs across the guild repos over the last 7 days.
 
-- Prefer tagged releases. Fall back to notable merged PRs on each repo's active shipping branch (green-goods and cookie-jar ship on `main`; the GitHub default branch differs, so cross-check before counting).
+- Prefer tagged releases. Fall back to notable merged PRs on each repo's active shipping branch (green-goods ships on `main`; the GitHub default branch differs, so cross-check before counting).
 - Write up to 4 bullets, one per repo that shipped, each linking the release or summarizing the merged work in a sentence. Skip repos with nothing this week.
 - State nothing you cannot see in a release or a merged PR.
 

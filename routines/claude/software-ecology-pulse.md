@@ -18,7 +18,7 @@ connectors:
   - linear
 model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # Status-only pulse, no Git writes
-status: active
+status: retired  # sunset 2026-07-04 — low-signal meta-introspection; trigger disabled (spec kept for history)
 ---
 
 # Prompt

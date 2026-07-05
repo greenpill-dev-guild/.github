@@ -8,10 +8,9 @@ repos:
 environment: guild-routines
 network-access: full  # Linear API + read-only Network repo checkout
 env-vars:
-  - LINEAR_API_KEY
 connectors:
   - linear
-model: claude-opus-4-7[1m]
+model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # Linear initiative status update only, no Git writes
 status: active
 ---
