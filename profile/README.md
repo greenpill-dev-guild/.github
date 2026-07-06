@@ -22,15 +22,20 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: closing out the June protocol-hardening and public-polish push on the flagship PWA.
-- **PGSP (Public Goods Staking)**: relaunching the Genesis validator squad and building the first operator cohort toward testnet.
-- **NYC Vault Crowdfunding**: crowdfunding decentralized park vaults through the Green Goods UI.
+- **Green Goods**: hardening and polishing the flagship offline-first PWA — QA and release hardening across admin, client, and wallet flows, plus a public website and docs refresh.
+- **Greenpill Network website**: polishing the public site and community map after the June launch and onboarding stewards so chapter and steward content stays accurate.
+- **PGSP (Public Goods Staking)**: an operator-first relaunch — standing up the Genesis validator squad and node setup to prepare operators for testnet onboarding.
+- **Commitment pooling**: designing durable per-garden commitment pools so promises can be seeded, fulfilled through the work flow, and rewarded.
+- **Impact methodology**: refreshing the Greenpill impact framework and evaluator workflows to keep garden evidence legible for funders and communities.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
+- [**green-goods**](https://github.com/greenpill-dev-guild/green-goods): kept the shared component library's Storybook interaction tests running offline in CI so the component test gate stays reliable ([#629](https://github.com/greenpill-dev-guild/green-goods/pull/629)).
+- [**.github**](https://github.com/greenpill-dev-guild/.github): streamlined the guild's automation routines — narrowed their scope to the active repos and gave the weekly Discord updates a consistent, readable format ([#39](https://github.com/greenpill-dev-guild/.github/pull/39)).
+
+See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for the full changelog.
 <!-- recently-shipped:end -->
 
 ## Past work
