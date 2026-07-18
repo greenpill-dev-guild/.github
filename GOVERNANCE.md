@@ -38,7 +38,7 @@ Decisions are made at the lowest reasonable scope:
 | **Project-level technical** (e.g. green-goods architecture) | Project maintainers | PR review, repo CODEOWNERS |
 | **Cross-project standards** (e.g. shared CI, this `.github` repo) | Engineering Lead + Stewards | RFC + lazy consensus on the forum |
 | **Treasury and funded-work payouts** | Stewards | Multi-sig sign-off |
-| **Scope acceptance** (discipline brief sign-off) | Discipline evaluator panel (2–3 reviewers; afo standing on every panel) | Estimate set + panel ack moves Backlog → Todo; 3-day async SLA |
+| **Scope acceptance** (scoped-brief sign-off) | Team evaluator panel (2–3 reviewers per Linear team; afo standing on every panel; rosters in the [team charters](./docs/teams/README.md) and the Evaluator Panels Linear Document) | Estimate set + panel ack moves Backlog → Todo; 3-day async SLA |
 | **Org membership and access** | Admins + Stewards | Steward sign-off required |
 | **Code of Conduct cases** | Stewardship team | Confidential, see CoC |
 | **Partnerships and external commitments** | Stewards | Public announcement after decision |

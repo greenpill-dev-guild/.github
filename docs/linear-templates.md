@@ -19,7 +19,7 @@ The friendly headers map to the payable-brief fields so the compensation flow ca
 - **"Out of scope"** is the Boundary.
 - **"Done when"** is the Acceptance criteria plus the Decision/exit.
 
-Acceptance is agreed up front and is the payment event. On anything payable, set an **estimate** (Scout ~ 1 / Brief ~ 4 / Deep ~ 16), a `protocol:*`, an `activity:*`, a due date, and an assignee. A Brief with no estimate is accepted work still being scoped; add the estimate when it becomes payable.
+Acceptance is agreed up front and is what makes work claimable. On anything payable, set an **estimate** (exponential scale; 1/2/4/8 in live use, 16+ for a major integration), a `protocol:*`, an `activity:*`, a due date, and an assignee. A Brief with no estimate is accepted work still being scoped; add the estimate when it becomes payable. Pick the **team** by who owns acceptance: delivery on Product, investigation on Research, community work on Community, funding on Growth, campaigns and creative on Marketing (see the [team charters](./teams/README.md)).
 
 ## Routing, in one line
 
@@ -31,7 +31,7 @@ Raw signal becomes a **Customer Need**. Accepted work becomes an **issue**. A vi
 
 The default for a scoped piece of work. Stands alone, or becomes the parent when the work splits into pieces.
 
-Title: the deliverable in a few words. Labels: one `activity:*`, one `protocol:*`, estimate (when payable), due, assignee.
+Title: the deliverable in a few words. Team: whichever team owns acceptance. Labels: one `activity:*`, one `protocol:*`, estimate (when payable), due, assignee.
 
 ```markdown
 ## What are we making?
@@ -107,7 +107,7 @@ Storage link:
 
 Product feature development or a polish push. Small ones stand alone; larger ones are a parent with task or lane children. Replaces the old `.plans` hub stub.
 
-Title: the feature or polish in a few words. Labels: `activity:build` (or `activity:maintenance` for polish), `package:*`, `protocol:*`, estimate.
+Title: the feature or polish in a few words. Team: Product. Labels: `activity:build` (or `activity:maintenance` for polish), `package:*`, `protocol:*`, estimate.
 
 ```markdown
 ## What are we building?
@@ -138,7 +138,7 @@ Add these when implementation starts; keep this issue as the hub until then.
 
 A defect from QA, telemetry, or a report.
 
-Title: the symptom in a few words. Labels: `activity:qa`, `package:*`, `protocol:*`.
+Title: the symptom in a few words. Team: Product. Labels: `activity:qa`, `package:*`, `protocol:*`.
 
 ```markdown
 ## What happened
@@ -164,7 +164,7 @@ Where it came from (sync, Sentry, a report) and any telemetry. Say if it is unve
 
 A funding opportunity, tracked through `funding:*` labels and saved views.
 
-Title: `Grant: {Program}`. Labels: one `funding:*`, `activity:research`, `protocol:*`, and `agent:routine` when routine-authored. Leave unprojected unless it is `funding:active-award` with a delivery project.
+Title: `Grant: {Program}`. Team: Growth (every `funding:*` state lives there). Labels: one `funding:*`, `protocol:*`, and `agent:routine` when routine-authored. When awarded, the issue stays on Growth for reporting and follow-through; file the funded delivery on Product and link it.
 
 ```markdown
 ## Opportunity

@@ -24,15 +24,18 @@ runtime.
 Use this prompt in a general agent chat:
 
 ```text
-Start my dev day from Linear. Read the current Product and Research cycle work,
-include my assigned or active issues, pass a normalized snapshot to dev focus,
+Start my dev day from Linear. Read the current cycle work for the cycled teams
+(Product, Community, Research), include my assigned or active issues on all five
+teams, pass a normalized snapshot to dev focus,
 show me the inferred launch/health/smoke plan, and wait for confirmation before
 launching. Do not kill unknown processes.
 ```
 
 The active agent should:
 
-1. List Linear teams and current cycles for Product and Research.
+1. List Linear teams and current cycles. All five teams (Product, Research,
+   Community, Growth, Marketing) are read; only Product, Community, and
+   Research have cycles.
 2. Read current-cycle issues and active assigned work with the smallest
    supported Linear queries.
 3. Normalize issues into JSON with `id`, `title`, `url`, `team`, `status`,
