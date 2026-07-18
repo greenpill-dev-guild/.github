@@ -6,9 +6,9 @@
 
 ## Purpose
 
-Use this text verbatim as the Linear team description (new team, no description set yet):
+Linear team description (paste verbatim — the settings field caps at ~255 characters, and this version fits):
 
-> Accepted marketing and creative briefs: campaigns, content, announcements, and brand or visual assets. Every brief names its audience, deliverable, and where it ships. Product and UX design stay on Product; community relationships stay on Community.
+> Accepted marketing and creative briefs: campaigns, content, announcements, and brand assets. Every brief names its audience, deliverable, and where it ships. Product/UX design stays on Product; community relationships stay on Community.
 
 ## What belongs here
 

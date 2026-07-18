@@ -6,9 +6,11 @@
 
 ## Purpose
 
-Use this text verbatim as the Linear team description (new team, no description set yet):
+Linear team description (paste verbatim — the settings field caps at ~255 characters, and this version fits):
 
-> Accepted community work: cohorts, onboarding, support coverage, gatherings, and member coordination. The output is people ready to participate: onboarded operators, supported members, sessions that happened. Product changes graduate to Product; campaigns and creative go to Marketing.
+> Accepted community work: cohorts, onboarding, support coverage, gatherings, and member coordination. Output is people ready to participate. Product changes graduate to Product; campaigns and creative go to Marketing.
+
+The fuller statement: the output of this team is people ready to participate — onboarded operators, supported members, sessions that happened.
 
 ## What belongs here
 

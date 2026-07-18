@@ -6,7 +6,7 @@
 
 ## Purpose
 
-Use this text verbatim as the Linear team description (unchanged from the live configuration):
+Linear team description (unchanged from the live configuration; it already fits the ~255-character field):
 
 > Accepted investigations: research tasks and partner or data inquiries answered before we build. The output is a decision-ready artifact, a memo, taxonomy, readiness plan, or a clear no-go, not code. Implementation graduates to Product.
 

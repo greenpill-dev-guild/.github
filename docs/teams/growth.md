@@ -6,9 +6,9 @@
 
 ## Purpose
 
-Use this text verbatim as the Linear team description (new team, no description set yet):
+Linear team description (paste verbatim — the settings field caps at ~255 characters, and this version fits):
 
-> The guild's funding and partnership pipeline: grant prospects, drafts, submissions, active awards, reporting, and BD follow-through. Lifecycle is carried by funding labels, and every issue names its next action and deadline. Delivery unlocked by an award is filed on Product and linked.
+> The guild's funding and partnership pipeline: prospects, drafts, submissions, active awards, reporting, and BD. Lifecycle lives on funding labels; every issue has a next action and deadline. Award-funded delivery is filed on Product and linked.
 
 ## What belongs here
 
