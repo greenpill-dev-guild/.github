@@ -72,7 +72,8 @@ Distribution runs through **one Cookie Jar for contributors** — the guild's ow
 
 | Setting | Value |
 | --- | --- |
-| Jar | Guild cookie-jar deployment on Arbitrum (jar instance/address: steward fills in) |
+| Jar | Guild cookie-jar deployment on Arbitrum (jar instance/address: steward fills in after deploy) |
+| Jar admin | Working Capital multi-sig `0xe09315A86ED0A39862158f5631b928145987fE05` (an EOA may hold deploy-time admin only if the multi-sig can be set as admin after) |
 | Chain | Arbitrum One |
 | Token | USDC |
 | Gating | **Green Goods Hats tree (Arbitrum): the team hat is the membership credential** — wearing it puts you on the jar; minting/toggling it is how the roster is managed. Plain allowlist is the fallback if hat minting lags. (The guild-level Hats tree lives on Optimism and is NOT used here; it would force a second jar deployment and cross-chain funding for no gain.) |
