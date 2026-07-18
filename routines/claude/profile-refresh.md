@@ -28,12 +28,13 @@ You may edit ONLY the content between these markers in `profile/README.md`. A di
 
 - `<!-- now-building:start -->` ... `<!-- now-building:end -->`
 - `<!-- recently-shipped:start -->` ... `<!-- recently-shipped:end -->`
+- `<!-- team-shipping:start -->` ... `<!-- team-shipping:end -->`
 
-If either marker pair is missing, STOP and open no PR (report the missing marker). Do not guess placement.
+If any marker pair is missing, STOP and open no PR (report the missing marker). Do not guess placement.
 
 ## Now building (from Linear)
 
-Source: Linear initiatives and active projects on the Product and Research teams, via the Linear connector.
+Source: Linear initiatives and active projects, workspace-wide across all five teams (Product, Research, Community, Growth, Marketing), via the Linear connector.
 
 - Pull initiatives and projects that are In Progress or actively moving (a status update or issue movement in the last 14 days).
 - Write 3 to 5 short bullets, one per active thread, each a single plain sentence (what it is plus the current focus). Lead with the flagship, Green Goods.
@@ -47,10 +48,18 @@ Source: releases and merged PRs across the guild repos over the last 7 days.
 - Write up to 4 bullets, one per repo that shipped, each linking the release or summarizing the merged work in a sentence. Skip repos with nothing this week.
 - State nothing you cannot see in a release or a merged PR.
 
+## What each team is shipping (from Linear)
+
+Source: the five Linear teams ([charters](../../docs/teams/README.md)), via the Linear connector.
+
+- One bullet per team that moved in the last 14 days: `**{Team}** — {one plain sentence: the current focus plus a notable recent completion}`. Sourced from the team's active cycle (Product, Community, Research) or in-flight issues (Growth, Marketing) plus recently completed work.
+- Skip a team with no movement entirely; never write a placeholder or "quiet" line.
+- Public-safe only: no issue IDs, no private funder or partner names, no amounts. Growth's line names public programs only (an Octant epoch is public; an unannounced prospect is not).
+
 ## Phases
 
-1. Read the current `profile/README.md`; locate both marker pairs. Missing marker means stop, no PR, report.
-2. Build the Now-building list from Linear and the Recently-shipped list from GitHub, applying the scope and privacy rules above.
+1. Read the current `profile/README.md`; locate all three marker pairs. Missing marker means stop, no PR, report.
+2. Build the Now-building and Team-shipping lists from Linear and the Recently-shipped list from GitHub, applying the scope and privacy rules above.
 3. Replace only the content inside each marker block; leave the rest of the file byte-identical.
 4. If the new content equals the current content, exit without a PR.
 5. Otherwise open a PR from a branch `profile-refresh/<YYYY-Www>` titled `chore: weekly profile refresh`, body summarizing what changed and the sources plus time window. Never push to `main`; a human merges.

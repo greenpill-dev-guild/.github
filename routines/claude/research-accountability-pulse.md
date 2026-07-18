@@ -15,10 +15,12 @@ connectors:
 model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false
 write-mode: write-enabled     # v2: Discord summary + one Linear comment (@mention owner) per flagged issue
-status: active
+status: retired
 ---
 
 # Prompt
+
+> **RETIRED 2026-07-17** — merged into [`delivery-hygiene-pulse`](./delivery-hygiene-pulse.md), whose slippage lane now covers all five teams with the same thresholds and idempotency (it also honors this routine's comment signature). Trigger disabled; spec kept for history.
 
 You are the **research-accountability-pulse** routine for the Greenpill Dev Guild. Twice a week you
 scan the Linear **Research** team — plus scoped paid briefs on **Product** (those with an **estimate** set) — for slippage, post one accountability summary to `#research`, and

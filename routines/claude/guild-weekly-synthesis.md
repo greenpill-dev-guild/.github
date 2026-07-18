@@ -1,7 +1,7 @@
 ---
 routine-name: guild-weekly-synthesis
 trigger:
-  schedule: "0 18 * * 1"  # Monday 18:00 — once-weekly cross-project synthesis, primes the week
+  schedule: "0 1 * * 2"  # Tue 01:00 UTC = Mon 18:00 PT — once-weekly cross-project synthesis, primes the week
 max-duration: 90m
 repos:
   - greenpill-dev-guild/network-website
@@ -52,9 +52,9 @@ This routine reads ONLY from:
 **Active shipping branch (mandatory):** Resolve each repo's active branch before counting commits — it is NOT always the GitHub default. `green-goods` ships on `main` (default branch is `develop`); `network-website` ships on `main`. A default-branch-only commit query once reported this week's 15 `green-goods` commits as `0`. Always cross-check commit counts against Vercel deploy SHAs / branch refs (which reveal real shipping activity) so a repo that shipped to a non-default branch is never reported `quiet`.
 
 **Linear** (the source of truth for active project work — issues, customer signal, roadmap projects, accepted research):
-- Teams: `Product` and `Research` only
+- Teams: all five — `Product` (PRD), `Research` (RESR), `Community` (COM), `Growth` (GROW), `Marketing` (MAR). See the [team charters](../../docs/teams/README.md).
 - Initiatives — read every initiative for status, scope, and momentum context (Linear initiatives are the planning truth)
-- Active projects — read open projects in both teams; this informs the council digest's project-level commentary
+- Active projects — read open projects across the teams (projects can span several teams; count each once); this informs the council digest's project-level commentary
 - Project status updates from the past 7 days
 - Issues with `updatedAt > 7d ago` (state changes, status moves, assignments)
 - Customer Needs filed in the past 7 days
@@ -149,8 +149,7 @@ Include only designs that match ONE of:
 Use case: surface "funder pitch deck for {grant program} updated this week" or "{event name} slides finalized" in the council digest. Do NOT critique design — just signal that the asset moved.
 
 **It does NOT read from**:
-- **Public Staking Protocol** as a primary subject (any repo, channel, doc, or calendar tied to it). PSP is not in the active guild scope. If PSP content surfaces in `#community` or any allow-listed channel, reference it only as community discussion — never as a project the synthesis covers.
-- **Other Greenpill ecosystem projects** (Octant, Gardens, Impact Reef, Regen Stack, etc.) outside the active-repo allow-list. Same rule.
+- **Other Greenpill ecosystem projects** (Octant, Gardens, Impact Reef, Regen Stack, etc.) outside the active-repo allow-list. (PGSP is in scope as an active guild project — it has no repo of its own, so its signal comes from Linear `protocol:pgsp` and allow-listed channels.)
 - **Project-specific channels** owned by other routines.
 
 **Rejection log line format** (emitted to the run trace, not to Discord):
@@ -217,10 +216,14 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 - **Risk** · {the red signal} → <URL>
 
 **⚙️ Moved this week**
-{one bullet per active project that actually moved (green-goods, pgsp, network-website), combining GitHub + Linear + Vercel; bold the project name; fold the growth-pulse metrics headline onto an indented second line when one exists. Omit a quiet project entirely.}
+{one bullet per active project that actually moved (green-goods, pgsp, network-website), combining GitHub + Linear + Vercel; bold the project name; fold the growth-pulse metrics headline onto an indented second line when one exists. Omit a quiet project entirely. Close the block with one **Teams** line folding per-team movement counts — only teams that moved, never a zero (e.g. `**Teams** — COM cycle 1: 3→Done · GROW: 1 submitted · MAR: 2 briefs shipped`).}
 - **Green Goods** — {e.g. "3 PRs merged · 5 Issues to Done · 4 prod deploys (0 rollbacks)"}
   {growth-pulse headline, e.g. "Onboarding funnel **+12% WoW**"} → <status-update URL>
 - **{Project}** — {1-line combined summary} → <URL>
+- **Teams** — {per-team fold line, moved teams only}
+
+**🔬 Research**
+{at most 2 bullets, only when RESR actually moved: the active theme's progress (cycle name + issues advanced) and any decision-ready artifact accepted this week. Sourced from Linear RESR movement, not from reading `#research` (this routine's channel allow-list is unchanged). Omit the whole block on a quiet research week. This block replaces the retired Friday `research-synthesis` digest; research acceptance itself is human, via the brief flow.}
 
 **🎨 Design & assets**
 {at most 3 bullets — Figma handoffs, Miro/Canva outputs that bear on a leadership decision; cite URL. Omit if none.}
@@ -243,7 +246,7 @@ A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shar
 
 For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query and apply the reject step to every candidate doc. For Calendar, query the next 7 days of events and apply the calendar reject heuristics.
 
-For Linear: query Product + Research teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `agent:routine` provenance; ignore staging/completed projects unless they had updates this week).
+For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `agent:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts for the council digest's **Teams** fold line, and RESR movement for the **🔬 Research** block.
 
 For Miro: list boards updated in last 7d filtered by title containing guild project / call type names; resolve any board URLs linked from `#community` or `#lead-council`. Apply Miro reject step.
 
@@ -323,7 +326,7 @@ Before posting:
 
 - **Cap: 4 community bullets, 5 council 'this week ahead' bullets, 3 risks, 3 decisions, 4 design-asset bullets**. Hard ceilings.
 - **Cap: 90 minutes runtime**. Timeout → write partial output with `⚠ Failures this run: timed out at phase X`.
-- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. Actionable research insights belong in `research-synthesis` (Friday) which writes to the Linear Research team.
+- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. The **🔬 Research** block is digest-only: `research-synthesis` (retired 2026-07) no longer files accepted-research Issues, and this routine does not inherit that write — research acceptance is human, via the brief flow and panel sign-off.
 - **Strict scope contract**. Out-of-allow-list content is dropped at Phase 1.
 - **Public-safe by default**. The `#community` post is public; assume the audience includes contributors who are not under any NDA.
 - **Channel guards** at every post. Fail loud if env var unset.

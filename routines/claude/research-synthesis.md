@@ -22,10 +22,12 @@ connectors:
   - mermaid-chart
 model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
-status: active
+status: retired
 ---
 
 # Prompt
+
+> **RETIRED 2026-07-17** — the Friday trigger is disabled. The weekly research digest now lives as the **🔬 Research** block inside [`guild-weekly-synthesis`](./guild-weekly-synthesis.md) (Linear RESR movement, at most two bullets, omitted when quiet). The automated `#research`→accepted-Issue compression path retires with it: research acceptance is human, via the brief flow and panel sign-off in the [operating model](../../docs/linear-operating-model.md). Spec kept for history.
 
 You are the research-synthesis routine for the Greenpill Dev Guild. Once a week (Friday end-of-day), you read the last 7 days of `#research`, synthesize themes and insights, and distill them into **accepted research tasks** mapped to the dev guild's projects. Output: one Discord post back to `#research` (pleasant Friday-evening read), Linear Issues in the **Research** team — unprojected by default, using the Accepted Research Task template — for actions concrete enough that the team is ready to commit research time to them (with embedded Mermaid diagrams when the insight has structural shape), and a Drive memo that feeds future runs' continuity.
 

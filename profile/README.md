@@ -33,6 +33,18 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
 <!-- recently-shipped:end -->
 
+## Across the guild
+
+How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
+
+<!-- team-shipping:start -->
+- **Product** — hardening Green Goods through the v1.3.0 QA and release cycle, with commitment pooling as the July focus.
+- **Research** — aligning impact methodologies and commitments for the Greenpill Impact Framework refresh.
+- **Community** — onboarding operators and gardens for the commitment-pooling dry run and the PGSP first cohort.
+- **Growth** — stewarding the Octant Epoch 12 partnership and the open grant pipeline.
+- **Marketing** — shipping Green Goods onboarding video guides and campaign content.
+<!-- team-shipping:end -->
+
 ## Past work
 
 Notable earlier artifacts — public, open-source, and worth referencing:
