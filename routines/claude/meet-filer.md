@@ -154,7 +154,7 @@ This is the only nudge mechanism. No Discord.
     { "order": 8,  "regex": "^Community Chat",                        "targetFolderId": "1PZPXZF8SIlLiL_XZSKb_Aez1acGyRKdj",   "label": "DevGuild SD / Community / Chat" },
     { "order": 9,  "regex": "^Community Sync",                        "targetFolderId": "1iisBzbIRYqQcSEsZBq1N8iZboCgRUXee",   "label": "DevGuild SD / Community / Sync (retired)" },
     { "order": 10, "regex": "^Builder Space",                         "targetFolderId": "1DRhht8txHt2Biu5F4Jb1Rl3oTV5pd80e",   "label": "DevGuild SD / Community (Builder Spaces)" },
-    { "order": 11, "regex": "^Stewards Sync",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync" },
+    { "order": 11, "regex": "^(Copy of )?(Stewards Sync|ste-ward-s sync)", "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL", "label": "Network SD / Stewards / Sync (incl. Gemini's ste-ward-s spelling + Copy-of dupes)" },
     { "order": 12, "regex": "^Greenpill Monthly Community Call",      "targetFolderId": "1BC9cPzV9MFzo51-rbRXqQAv_D0nQz7Dl",   "label": "Workspace / Network / Community (Monthly Call)" },
     { "order": 13, "regex": "^Greenpill Network Website",             "targetFolderId": "0ADPqiYLt4dW0Uk9PVA",                "label": "Network SD root" },
     { "order": 14, "regex": "^Tech\\s*[&]\\s*Sun",                    "targetFolderId": "1B_Yo1N5WPxIk46CeSyehDTa-0Y6P4jzM",   "label": "Tech & Sun SD / Meetings" },
@@ -165,6 +165,8 @@ This is the only nudge mechanism. No Discord.
     { "order": 19, "regex": "^(YCC|Yoruba)\\b",                       "targetFolderId": "1nInuwH2zkQJv6lbFaR9qaA5NnEslTG6W",   "label": "YCC My Drive (root)" },
     { "order": 20, "regex": "^Coffee Meet",                           "targetFolderId": "1BBxzsHYvKX_hnPN4cc27pssUs6pyCJ2Y",   "label": "Afo / Coffees" },
     { "order": 21, "regex": "^Odunde\\b",                             "targetFolderId": "1qzaRzNWhbVgZOSwMCDVDLaUZYvWwbGBc",   "label": "Odunde 2026 / Weekly Village Planning" },
+    { "order": 22, "regex": "^Regen Commons",                       "targetFolderId": "0AHKbTaY-pk03Uk9PVA",                "label": "Regen Coordination SD (Regen Commons: Council Call / Steward Jam)" },
+    { "order": 23, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
     { "order": 90, "regex": "^Meeting started \\d{4}[/ ]\\d{2}[/ ]\\d{2}", "targetFolderId": null,                            "label": "→ Calendar fallback for 'Meeting started' titles (accepts slash or space dates)" },
     { "order": 91, "regex": "^[a-z]{3}-[a-z]{4}-[a-z]{3} \\(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} GMT[+\\-]\\d+\\)", "targetFolderId": null, "label": "→ Calendar fallback for raw Meet codename titles" },
     { "order": 99, "regex": ".*",                                     "targetFolderId": null,                                 "label": "Meet Recordings — Review (auto-created)" }

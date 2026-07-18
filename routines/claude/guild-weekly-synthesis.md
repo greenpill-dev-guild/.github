@@ -223,7 +223,7 @@ The `#community` post never @mentions Afo. Hard caps on bullet counts — drop o
 - **Teams** — {per-team fold line, moved teams only}
 
 **🔬 Research**
-{at most 2 bullets, only when RESR actually moved: the active theme's progress (cycle name + issues advanced) and any decision-ready artifact accepted this week. Sourced from Linear RESR movement, not from reading `#research` (this routine's channel allow-list is unchanged). Omit the whole block on a quiet research week. This block replaces the retired Friday `research-synthesis` digest; research acceptance itself is human, via the brief flow.}
+{at most 2 bullets, only when RESR actually moved: the active theme's progress (cycle name + issues advanced) and any decision-ready artifact accepted this week. Sourced from Linear RESR movement, not from reading `#research` (this routine's channel allow-list is unchanged). Omit the whole block on a quiet research week. This leads-facing fold complements the researcher-facing Friday `research-synthesis` digest in `#research`; it does not replace it.}
 
 **🎨 Design & assets**
 {at most 3 bullets — Figma handoffs, Miro/Canva outputs that bear on a leadership decision; cite URL. Omit if none.}
@@ -326,7 +326,7 @@ Before posting:
 
 - **Cap: 4 community bullets, 5 council 'this week ahead' bullets, 3 risks, 3 decisions, 4 design-asset bullets**. Hard ceilings.
 - **Cap: 90 minutes runtime**. Timeout → write partial output with `⚠ Failures this run: timed out at phase X`.
-- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. The **🔬 Research** block is digest-only: `research-synthesis` (retired 2026-07) no longer files accepted-research Issues, and this routine does not inherit that write — research acceptance is human, via the brief flow and panel sign-off.
+- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. The **🔬 Research** block is digest-only; the researcher-facing digest and any corpus-gated research Issue creation belong to `research-synthesis` (Fri), never to this routine.
 - **Strict scope contract**. Out-of-allow-list content is dropped at Phase 1.
 - **Public-safe by default**. The `#community` post is public; assume the audience includes contributors who are not under any NDA.
 - **Channel guards** at every post. Fail loud if env var unset.

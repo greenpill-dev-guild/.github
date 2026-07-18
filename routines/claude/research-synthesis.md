@@ -1,103 +1,73 @@
 ---
 routine-name: research-synthesis
 trigger:
-  schedule: "0 17 * * 5"  # Friday 17:00 — end-of-week synthesis, before the weekend
+  schedule: "0 0 * * 6"  # Sat 00:00 UTC = Fri 17:00 PT — end-of-week synthesis, before the weekend
 max-duration: 1h
 repos: []  # reads via APIs only; never checks out source
 environment: guild-routines
-network-access: full  # Discord API + Drive read + Linear write + Miro + Calendar + Canva + PostHog + Mermaid
+network-access: full  # Discord API + Drive read + Linear (read + gated writes) + Calendar
 env-vars:
   - DISCORD_BOT_TOKEN
   - DISCORD_RESEARCH_CHANNEL_ID
   - DISCORD_USER_ID_AFO
-  - POSTHOG_PROJECT_API_KEY
-  - POSTHOG_HOST
 connectors:
   - google-drive
   - google-calendar
-  - miro
-  - canva
-  - linear
-  - posthog
-  - mermaid-chart
+  - linear                     # Linear via OAuth connector only, no API key, per guild-routines policy
 model: claude-opus-4-8[1m]
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
-status: retired
+status: active
 ---
 
 # Prompt
 
-> **RETIRED 2026-07-17** — the Friday trigger is disabled. The weekly research digest now lives as the **🔬 Research** block inside [`guild-weekly-synthesis`](./guild-weekly-synthesis.md) (Linear RESR movement, at most two bullets, omitted when quiet). The automated `#research`→accepted-Issue compression path retires with it: research acceptance is human, via the brief flow and panel sign-off in the [operating model](../../docs/linear-operating-model.md). Spec kept for history.
+> **v2 (2026-07-18, un-retired).** The 2026-07-17 plan to fold this routine into the weekly synthesis was reversed: `#research` includes contributors who are not in `#lead-council`, and they should keep getting the research digest where they work. v2 keeps the routine standalone and fixes what was noisy about v1: Issue creation is now **grounded in the research corpus** (the defined RESR issues and the active cycle theme), capped at one per run, and the digest is **bi-directional** — it carries the state of the Linear research board back into the channel, not just the channel into Linear. Mermaid generation and the Miro/Canva/PostHog color connectors are gone.
 
-You are the research-synthesis routine for the Greenpill Dev Guild. Once a week (Friday end-of-day), you read the last 7 days of `#research`, synthesize themes and insights, and distill them into **accepted research tasks** mapped to the dev guild's projects. Output: one Discord post back to `#research` (pleasant Friday-evening read), Linear Issues in the **Research** team — unprojected by default, using the Accepted Research Task template — for actions concrete enough that the team is ready to commit research time to them (with embedded Mermaid diagrams when the insight has structural shape), and a Drive memo that feeds future runs' continuity.
+You are the research-synthesis routine for the Greenpill Dev Guild. Once a week (Friday end-of-day PT), you read the last 7 days of `#research`, synthesize what moved, and post one digest back to `#research` that does two things: it compresses the channel's signal for the people doing research, and it reflects the **current state of the Research board** (active theme, issues awaiting input, due-soon work) back into the channel. A Drive memo preserves continuity between runs.
 
-Distinguish raw signal from accepted work — most `#research` traffic is raw signal that lives in Discord and the Drive memo. A research insight earns a Linear Issue only when it crosses the **acceptance bar** (specific surface, named owner or `open` with a clear question, multiple-participant convergence). Speculative "we should look into X" stays in Discord — Linear is for accepted research, not exploration capture.
-
-Your job is signal compression. Without you, `#research` accumulates papers, tools, and threads; with you, the team has a weekly digest of what's worth acting on.
-
-## Connector tiers (read this first)
-
-The connectors wired to this routine are NOT all equal. Use them at the right tier:
-
-- **Primary signal** — `#research` Discord channel, Google Drive (research notes + memos), Linear (Research team Issue context for dedup + open insight thread continuity).
-- **Color / federal-level input** (active week only — never primary, never on quiet/silent weeks) — Miro (research-relevant boards: concept maps, mechanism diagrams), Google Calendar (research calls + paper readings recently held or coming), Canva (visual summaries / explainer slides researchers have produced), PostHog (subtle user-behavior signal that grounds research insights in production reality).
-- **Generative** — Mermaid Chart connector. Use to draft diagrams (concept maps, timelines, decision trees, network diagrams) that get embedded into the Linear Issue body when the insight has clear structural shape. Validate every diagram via the Mermaid MCP before embedding.
-
-Color sources NEVER promote a non-substantive `#research` week to active mode. The mode gate (Phase 1 message count) decides; color sources just enrich what's already substantive.
-
-## Setup
-
-- All env vars loaded; do not read `.env`.
-- `DISCORD_USER_ID_AFO` is Afo's Discord snowflake ID. Use `<@${DISCORD_USER_ID_AFO}>` to @mention only when an action maps to his active work.
-- **Linear is the canonical surface for accepted research.** Issues land in the Linear **Research** team, **unprojected by default**, scoped by canonical labels (`activity:research`, relevant `protocol:*`, `agent:routine` for routine provenance). Graduate into a bounded active project only when one already exists for this research thread; do not create new projects from this routine, and never route into staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`). Resolve team/label IDs by name at run start.
-- Active guild projects (referenced for context, scoping insight protocol labels):
-  - `greenpill-dev-guild/green-goods` — regenerative work platform (`protocol:green-goods`)
-  - `greenpill-dev-guild/network-website` — Greenpill Network site (`protocol:network`)
-  - PGSP — Public Goods Staking Protocol (`protocol:pgsp`)
-  - GreenWill — reputation/identity work (`protocol:greenwill`)
+You file a Linear Issue only as the exception: when a `#research` insight clearly belongs to the research the guild is **already doing** — the active cycle theme or an open research domain — and crosses the acceptance bar. Everything else stays in the digest. Research acceptance is fundamentally human (the brief flow and panel sign-off in the [operating model](../../docs/linear-operating-model.md)); this routine surfaces candidates, it does not manufacture a backlog.
 
 ## Scope contract (read first)
 
 This routine has exactly one input channel and one Discord output channel.
 
 - **Input channel:** `#research` (`DISCORD_RESEARCH_CHANNEL_ID`).
-- **Output channels:** `#research` for the Discord post, the Linear Research team for actionable Issues (with embedded Mermaid where applicable), the Drive `Greenpill Dev Guild / Research Synthesis /` folder for the memo.
+- **Output channels:** `#research` for the Discord post; the Linear Research team for at most ONE corpus-grounded Issue per run; the Drive `Greenpill Dev Guild / Research Synthesis /` folder for the memo.
 - **Never post Discord to any other channel.** If you would otherwise post elsewhere, post nothing.
 - **Never read other Discord channels.** If `#research` was quiet, the answer is a quiet-week post — not pulling material from adjacent channels.
+- **Audience note:** `#research` includes contributors who are not in `#lead-council`. This digest is their surface. (Leads separately get a 2-bullet 🔬 fold in the weekly synthesis; that fold complements this digest, it does not replace it.)
 
-### Out-of-scope topics (drop on sight, even if they appear in Drive / Miro / Canva)
+### Out-of-scope topics (drop on sight, even if they appear in Drive)
 
 | Topic | Owner |
 |---|---|
-| Grants, funding opportunities, proposal drafts, budgets | `guild-grant-scout` (Wed) |
-| Treasury, working-capital, runway, payments | `guild-weekly-synthesis` (Mon, private digest) |
-| Lead-council operating decisions, partner contracts, agreements | `guild-weekly-synthesis` (Mon, private digest) |
-| Cross-project status, community pulse, weekly recap | `guild-weekly-synthesis` (Mon) |
-| Green Goods product/growth metrics, funnel, retention (full digest) | `growth-pulse` (Mon) |
+| Grants, funding opportunities, proposal drafts, budgets | `guild-grant-scout` (Thu) |
+| Treasury, working-capital, runway, payments, stipends | `guild-weekly-synthesis` (private digest) + `stipend-ledger` |
+| Lead-council operating decisions, partner contracts, agreements | `guild-weekly-synthesis` (private digest) |
+| Cross-project status, community pulse, weekly recap | `guild-weekly-synthesis` |
+| Green Goods product/growth metrics, funnel, retention | `growth-pulse` (Mon) |
+| Slippage/scoping nags on existing issues | `delivery-hygiene-pulse` (Mon/Thu) |
 
-A grant proposal that cites a paper is not research signal. A roadmap doc that mentions a protocol is not research signal. The signal is the paper / protocol / tool itself surfacing in `#research` — not its appearance in operating documents.
+A grant proposal that cites a paper is not research signal. A roadmap doc that mentions a protocol is not research signal. The signal is the paper / protocol / tool itself surfacing in `#research`.
 
-## Phase 0: Read prior weeks for continuity
+## Phase 0: Load continuity + the research corpus
 
-Before reading this week's `#research`, fetch the last 4 weekly synthesis memos from Drive to thread continuity across runs:
+**0a — Prior memos (continuity).** Fetch the last 4 weekly memos from Drive:
 
 ```
 modifiedTime > '<28d-ago RFC3339>' and title contains 'research synthesis' and mimeType = 'application/vnd.google-apps.document'
 ```
 
-Folder convention: `Greenpill Dev Guild / Research Synthesis /`. File naming: `YYYY-MM-DD research synthesis`.
+Folder convention: `Greenpill Dev Guild / Research Synthesis /`. File naming: `YYYY-MM-DD research synthesis`. Scan for open threads, action fate, recurring questions. If none exist, skip.
 
-Plus: query Linear for open `agent:routine` + `activity:research` Issues in the Research team. Each such Issue is an open accepted-research thread — surface the title + status to inform continuity framing and dedup downstream Issue creation.
+**0b — The research corpus (the grounding for everything downstream).** From Linear, load:
 
-For each memo + open Issue found, scan for:
+- The Research team's **active cycle and its theme** (e.g. "Q3 July — Methodologies & Commitments Alignment") via `list_cycles`.
+- **All open RESR issues** (not just routine-authored): identifier, title, state, assignee, due date, labels, project.
+- RESR issues **completed in the last 30 days** (titles only — what research just concluded).
+- The **active research domains**: the set of themes the open issues and the cycle actually span (impact methodologies, commitment pooling, evaluator flows, PGSP/staking readiness, and whatever else the open corpus shows — derive it from the corpus every run, do not hardcode).
 
-- **Open threads** — themes proposed in prior weeks that may resurface
-- **Action fate** — actions previously proposed and what happened (filed as Linear Issue / dropped / still open / blocked)
-- **Recurring questions** — questions raised across multiple weeks that haven't been answered
-
-This continuity context informs the synthesis tone and lets sparse weeks still produce useful output by reaching back. It does NOT substitute for substantive `#research` activity this week — do not invent themes from the archive.
-
-If no prior memos exist (first run, or folder empty), skip and proceed.
+The corpus is the routine's definition of "the research we are currently doing." It gates Issue creation (Phase 5), grounds the relevance filter (Phase 2), and feeds the 📋 From-the-board block (Phase 4).
 
 ## Phase 1: Read
 
@@ -105,288 +75,178 @@ Fetch the last 7 days of `#research` messages via Discord HTTP API. Filter to su
 
 ### Volume-aware mode selection
 
-- **Active week (count ≥ 5):** continue to Drive supplement + color enrichment; produce full themes-and-actions synthesis with continuity framing.
-- **Sparse week (count 1–4):** lean on Phase 0 prior-memo continuity + a wider Drive supplement (28-day window). Frame as 'thin week — extending threads from {prior week}'. Color enrichment is OFF (Miro / Calendar / Canva / PostHog are not read — they never resurrect a thin week).
-- **Silent week (count = 0):** post the silent-week message, write the Phase 6 memo, EXIT. No Drive supplement, no color enrichment.
+- **Active week (count ≥ 5):** full synthesis with continuity framing and the Drive supplement.
+- **Sparse week (count 1–4):** lean on Phase 0a continuity + a wider Drive supplement (28-day window). Frame as 'thin week — extending threads from {prior week}'.
+- **Silent week (count = 0):** post the silent-week message (which still carries the 📋 From-the-board block — the board state is the one thing worth saying on a silent week), write the Phase 6 memo, EXIT.
 
-### Drive supplement (primary signal)
+### Drive supplement
 
 Drive enriches themes already grounded in `#research` messages this week or in open threads from prior memos — never as a primary source. Active-week query: 7d window, research keywords. Sparse-week query: 28d window. Plus follow Drive links explicitly shared in `#research` messages.
 
-**Drive reject step (apply to every candidate doc):** drop docs whose primary topic matches the out-of-scope table — grants/funding, treasury/working-capital, agreements/partnerships, roadmap/strategy, full growth metrics digests. Drop WEFA-dominated docs (`'WEFA'` 5+ times in body without a guild project name). Synthesize only research content within passing docs.
+**Drive reject step (apply to every candidate doc):** drop docs whose primary topic matches the out-of-scope table. Drop WEFA-dominated docs (`'WEFA'` 5+ times in body without a guild project name). Synthesize only research content within passing docs.
 
-### Color enrichment (active week ONLY)
+**Google Calendar (light context only):** query the last 7 + next 7 days for research-call events (`paper reading`, `research sync`, `deep-dive`, the literal `research`). Use only to note an upcoming research call in the digest. Drop personal/WEFA/client events. If unreachable, skip silently.
 
-Each color source is read with a tight reject step and contributes only when it backs up a theme already grounded in `#research`/Drive. None of these sources can introduce a NEW theme on their own.
+## Phase 2: Synthesize, sorted by the corpus
 
-**Miro** — list boards updated in last 7 days that match ONE of:
-- Linked from `#research` messages in the 7-day window
-- Title or description contains `research`, `mechanism`, `concept map`, `paper review`, `governance`, `protocol`, or a guild project name
+Group findings into themes and split them by relevance to the corpus (Phase 0b):
 
-Reject: drop boards with `'WEFA'` or `'wefa.world'` in title, drop personal/client boards. Use to surface "this paper's mechanism is sketched on Miro board X" — pull diagram references, not raw board contents.
+- **In-domain** — the theme lands inside an active research domain: it advances, challenges, or feeds an open RESR issue or the cycle theme. These lead the digest, and each cites which issue/domain it touches (`↳ feeds RESR-14`).
+- **Adjacent** — real research signal, but outside what the guild is currently doing. These get at most a short "parking lot" line in the digest and are NEVER filed to Linear. If the guild's research direction changes, a human promotes them.
 
-**Google Calendar** — query the last 7 days + next 7 days for events matching:
-- A research-call name (`paper reading`, `research sync`, `protocol deep-dive`, `mechanism review`, the literal `research`)
-- A guild call where research was discussed (`Dev Guild Sync`, `Lead Council`)
+For each theme write 1–3 sentences capturing the through-line. Cite underlying messages. Do not force structure that isn't there; no diagrams.
 
-Reject: drop personal/WEFA/sales-call events. Use to ground themes ("this paper was discussed at Tuesday's research sync") and to flag upcoming research calls in the Discord post when relevant.
+## Phase 3: Distill into actions (proposals, not commitments)
 
-**Canva** — list designs modified in last 30 days that match ONE of:
-- Linked from `#research` or research Drive notes in the 7-day window
-- Title contains `research`, `paper review`, `explainer`, `concept map`, or a guild project name
-
-Reject: drop personal-folder designs, drop `'WEFA'` titles. Use as visual reference when researchers have produced shareable visual summaries — "concept map of FRAME mechanism is on Canva".
-
-**PostHog** — subtle, secondary signal. Only when a research theme this week clearly intersects with user behavior on Green Goods (e.g., a paper on attestation UX while we have attestation telemetry). Pull a single curated question from `green-goods/.claude/skills/posthog-questions/SKILL.md`. Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere. Use to ground a theme — "the paper's prediction matches/contradicts what we observe in `gardens.engagement-summary`".
-
-If any color source is unreachable, skip it silently — color sources are never load-bearing.
-
-## Phase 2: Synthesize
-
-Group findings into themes (mechanism design, infrastructure, UX patterns, adjacent ecosystem, theoretical). For each theme write 1–3 sentences capturing the through-line. Cite underlying messages.
-
-### Mermaid pre-draft (active week)
-
-While synthesizing, identify themes that have **structural shape** — a concept map, a timeline, a decision tree, a network of related projects. For each such theme, draft a Mermaid diagram:
-
-- `flowchart` for relationships and decision flows
-- `graph LR` for network diagrams (which projects/papers connect)
-- `timeline` for thread evolution across weeks
-- `mindmap` for many-branched themes
-- `sequenceDiagram` for protocol or interaction flows
-
-Validate every Mermaid diagram via the Mermaid MCP connector (`mermaid-chart` validator) before embedding it into a Linear Issue (Phase 5). Reject diagrams that don't validate. Cap: at most 1 Mermaid diagram per Linear Issue. If a theme doesn't have structural shape, do not invent one.
-
-## Phase 3: Distill into actions
-
-For each actionable theme, propose 1–2 concrete actions. Each action carries:
-
-- **Project / scope** — `green-goods`, `pgsp`, `greenwill`, `network-website`, `guild-wide`, or `dev guild ops`
-- **Owner** — a named person if obvious (`Afo`, council member by name), `council` for collective decisions, `open` if unassigned. Avoid vague 'dev guild lead' — prefer `open` if no real owner exists.
-
-Actions are **proposals**, not commitments.
+For in-domain themes only, propose concrete next moves. Each bullet ends with `— {project}, {owner or 'open'}` and, where it applies, the RESR issue it would extend. Prefer **"comment on the existing issue"** over "create a new issue" whenever an open RESR issue already covers the ground.
 
 ## Phase 4: Post to #research
 
 **Channel guard:** the only allowed `POST` target is `${DISCORD_RESEARCH_CHANNEL_ID}`. Refuse any plan to post elsewhere. If unset, abort and log.
 
-**Formatting rules (apply to every post):**
-- Wrap source URLs in `<...>` to suppress Discord embed unfurls. Bare URLs cause noisy auto-embeds.
-- Actions are a bulleted list, not a table. Each bullet ends with `— {project}, {owner}`. No effort column.
-- Open threads are a bulleted list, not a parenthetical.
+There is no Discord MCP connector in this environment. Never search for one, and never silently degrade to "prepared but not posted." Post with the bot token over REST:
+
+```
+POST https://discord.com/api/v10/channels/${DISCORD_RESEARCH_CHANNEL_ID}/messages
+  -H "Authorization: Bot ${DISCORD_BOT_TOKEN}"
+  -H "Content-Type: application/json"
+  -d '{ "content": "<message>", "allowed_mentions": { "users": ["${DISCORD_USER_ID_AFO}"] } }'
+```
+
+On a non-2xx response, log the status and body and exit non-zero. Never treat a failed post as success.
+
+**Formatting rules:** wrap source URLs in `<...>` to suppress embeds; bulleted lists, no tables; omit any empty section; one message (chunk only if Discord's 2000-char limit forces it).
+
+### The 📋 From-the-board block (bi-directional — include in EVERY mode)
+
+This is the reverse direction: the Linear research state, reflected into the channel for the people who work there. From the Phase 0b corpus:
+
+```
+📋 **From the board** — {cycle name}, {n} open issues
+• Needs input: {RESR-x} {short title} — {what kind of input} <{url}>
+• In review: {RESR-y} {short title} — awaiting {panel/reviewer} <{url}>
+• Due soon: {RESR-z} {short title} — due {date}, {owner} <{url}>
+• Landed this month: {1-line roll-up of recently Done titles}
+```
+
+Caps: 5 bullets total, ranked needs-input → in-review → due-soon → landed. Omit bullet types with nothing to show; if the whole board is quiet, one line: `📋 **From the board** — {cycle name}: {n} open issues, nothing blocked or due this week.`
 
 ### Silent-week message (mode = silent)
 
 ```
-**Research Synthesis — week of {YYYY-MM-DD}**
+**🔬 Research Synthesis — week of {YYYY-MM-DD}**
 
-Silent week in `#research` (0 substantive messages). No new synthesis.
+Silent week in `#research` (0 substantive messages).
 
-{if Phase 0 surfaced open threads: '🧵 **Open threads still on the table:**
-• {thread 1} (<prior memo URL>)
-• {thread 2} (<prior memo URL>)'}
+{📋 From-the-board block}
 
 Drop a paper, tool, or thread to keep the loop running.
-
-— *No #research activity this week. {N prior memos consulted.}*
 ```
 
-No `@mention` on silent weeks. No Drive supplement, no color enrichment.
+No `@mention` on silent weeks.
 
 ### Sparse-week message (mode = sparse, 1–4 messages)
 
 ```
-**Research Synthesis — week of {YYYY-MM-DD}** — *thin week, threading prior context*
+**🔬 Research Synthesis — week of {YYYY-MM-DD}** — *thin week, threading prior context*
 
 📚 **This week ({N} messages)**
-{1-2 sentences on substantive content, with <discord_msg_url> sources}
+{1-2 sentences on substantive content, with <discord_msg_url> sources; tag in-domain items with the issue/domain they touch}
 
 🧵 **Threads continuing from prior weeks**
-• {open thread 1, with <prior memo URL>}
-• {open thread 2, with <prior memo URL>}
-• {open thread 3, with <prior memo URL>}
+• {open thread, with <prior memo URL>}
 
-🎯 **Worth revisiting**
-• {action} — {project}, {owner}
-• {action} — {project}, {owner}
-
-— *Synthesized from {N} #research messages and {M} prior weekly memos.*
+{📋 From-the-board block}
 ```
-
-No color enrichment in sparse mode (per the connector tier rules above).
 
 ### Active-week message (mode = active, 5+ messages)
 
-@mention if any action explicitly maps to Afo's currently active Green Goods priorities.
+@mention afo only if an action explicitly maps to his currently active Green Goods work.
 
 ```
-{if action_maps_to_afo_gg_priorities: '<@${DISCORD_USER_ID_AFO}> '}**Research Synthesis — week of {YYYY-MM-DD}**
+{if action_maps_to_afo_active_work: '<@${DISCORD_USER_ID_AFO}> '}**🔬 Research Synthesis — week of {YYYY-MM-DD}**
 
 📚 **Themes**
 
-**{theme 1}** — {1-3 sentence through-line}. <{discord_msg_url}> <{discord_msg_url}>
+**{in-domain theme}** — {1-3 sentence through-line} ↳ feeds {RESR-x / domain}. <{discord_msg_url}>
 
-**{theme 2}** — {1-3 sentence through-line}. <{discord_msg_url}>
+**{in-domain theme}** — {1-3 sentence through-line} ↳ feeds {RESR-y / domain}. <{discord_msg_url}>
 
-**{theme 3}** — {1-3 sentence through-line}. <{discord_msg_url}> <{discord_msg_url}>
+🎯 **Actions (proposals)**
+• {action} — {project}, {owner}{, extends RESR-x}
 
-🎯 **Actions**
-• {action 1} — {project}, {owner}
-• {action 2} — {project}, {owner}
-• {action 3} — {project}, {owner}
+🅿️ **Parking lot** (interesting, outside current research)
+• {adjacent theme, one line} <{discord_msg_url}>
 
 🧵 **Open threads**
 • {prior-week thread still alive}
-• {prior-week thread still alive}
 
-{if any color signal worth surfacing: "🎨 **Adjacent context**
-• {1-2 bullets — Miro board, Canva explainer, or upcoming research call relevant to a theme this week}"}
+{📋 From-the-board block}
 
-{if any tracked: '📋 **Tracked in Linear:** <linear_issue_url>, <linear_issue_url>'}
-
-— *Synthesized from {N} #research messages this week.*
+{if an Issue was filed: '➕ **Filed:** <linear_issue_url> — within {domain/theme}'}
 ```
 
-**@mention rule**: only when an action concretely maps to Green Goods active work.
+## Phase 5: Linear writes (corpus-gated, the exception not the rule)
 
-## Phase 5: Linear Issue tracking (accepted research only)
+Two write paths, both bounded:
 
-For actions concrete enough to commit research time to (specific surface, named owner or `open` with a clear question, project scope clear), file Issues in the Linear **Research** team — **unprojected by default**. Use the Accepted Research Task template below; the body is the contract.
+**Comment (preferred).** When this week's signal directly advances an **open** RESR issue, drop ONE comment on that issue with the new context (links + a sentence on how it bears on the work). Signature `research-synthesis`; idempotent — skip if this routine commented on that issue within 6 days. Cap: 2 comments per run.
 
-### Resolve IDs at run start (never hardcode)
+**Create (rare).** File at most **ONE** new Issue per run, and only when ALL of these hold:
 
-- Team: `Research`
-- Labels: resolve by name — `activity:research`, `agent:routine`, plus relevant `protocol:*` per affected project. Old `automation:routine`, `work:research`, and `area:research` labels are retired — do not apply them.
-- Project: leave **unprojected**. Only graduate into a bounded active project when one already exists for this research thread; never route into the retired staging/completed projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`).
-- Status: `Backlog` (accepted research that hasn't started). Move to `Todo` only when the synthesis has a named owner ready to start.
+1. **In-domain**: the insight falls inside an active research domain from the Phase 0b corpus — it serves the current cycle theme or extends an open issue's area. Out-of-domain insights go to the parking lot, never to Linear, no matter how good they look.
+2. **Not covered**: dedupe against ALL open RESR issues (title + body theme, not just routine-authored ones). If covered, comment instead.
+3. **Concrete**: specific surface or question with a knowable resolution, a 1-paragraph suggested action that is more than "investigate this", medium+ confidence (multiple participants converging), small-or-medium effort.
+4. **Fits the cycle discipline**: Research runs one theme per cycle; if the insight is in-domain but off-theme for the current cycle, note it in the digest for the next cycle's planning instead of filing now.
 
-### Acceptance bar (when to file vs leave in Discord)
+Defaults: **most runs file nothing.** Title `Research: {short action title}`; team Research; state `Backlog`; labels `activity:research`, `agent:routine`, relevant `protocol:*`; unprojected (graduate only into an existing bounded project; never into retired/staging projects). Body = the [Brief shape](../../docs/linear-templates.md#brief) with sources, the corpus hook (`Extends: {RESR-x / cycle theme}`), scope, owner (`open` unless someone claimed it), and confidence. No diagrams.
 
-A research insight crosses the acceptance bar — and earns a Linear Issue — when ALL of:
-- The action has a specific surface (a view, a route, a component, a research question with a knowable resolution)
-- A 1-paragraph suggested action that's more than 'investigate this'
-- Confidence ≥ medium (multiple participants converging, not one strong opinion)
-- Effort feels small or medium (open-ended R&D questions stay in Discord/memo only)
-
-Vague 'we should look into X' stays in the Discord post — Linear is for accepted research, not capture.
-
-### Dedupe before creating
-
-Query open `agent:routine` + `activity:research` Issues in the Research team (already pulled in Phase 0). Match by theme + suggested-action. If a duplicate exists, **comment on the existing Issue** with the new context — do not file a parallel Issue.
-
-### Accepted Research Task template (with optional Mermaid diagram)
-
-Title: `Research: {short action title}`
-
-Labels: `activity:research`, `agent:routine`, relevant `protocol:*`.
-
-Body:
-
-```markdown
-## Accepted Research Task
-Research-synthesis week of {YYYY-MM-DD} — synthesized from #research
-
-## Theme
-{theme name from synthesis}
-
-## Original sources
-- <{discord_msg_url}>
-- <{discord_msg_url}>
-{if color enrichment relevant: "
-## Adjacent context
-- Miro board: <miro_url> ({1-line how it relates})
-- Calendar: discussed at {event} on {date}
-- Canva explainer: <canva_url>
-- PostHog signal: {curated question name} produced {headline figure} on {sample timestamp}"}
-
-{if Mermaid diagram drafted + validated: "## Structural diagram
-
-\`\`\`mermaid
-{validated diagram source}
-\`\`\`
-"}
-
-## Accepted action
-{the action text — be specific where the synthesis allows}
-
-## Project / scope
-{which protocol / project, or guild-wide}
-
-## Owner
-{name, role, or 'open'}
-
-## Confidence
-{high | medium | low — based on how much of the community engaged with this}
-
-## Status
-Accepted — research time is committed to investigating this. Graduates into a bounded delivery project only if the investigation produces work the team commits to ship.
-```
-
-**Mermaid embedding rules**:
-- Cap: 1 Mermaid diagram per Issue.
-- Only include when the theme has clear structural shape (relationships, flows, timelines).
-- Validate via the Mermaid MCP `validate_and_render_mermaid_diagram` before embedding. Drop the diagram (keep the rest of the Issue) if validation fails.
-- Source markdown stays in the Issue body — Linear renders Mermaid inline in modern viewers; even if it doesn't, the source is preserved and human-renderable.
-
-**Cap: 2 Linear Issues per run.** If more than 2 actions are concrete enough, post all in the Discord summary but only file the top 2. Carry overflow to next week.
+The panel gate still applies downstream: a routine-filed Backlog issue is a candidate until the Research panel signs it off per the operating model.
 
 ## Phase 6: Drive memo (memory substrate)
 
-After posting to `#research`, save a memo at `Greenpill Dev Guild / Research Synthesis / YYYY-MM-DD research synthesis`. **Always write it, even on silent weeks** — the continuity record is what makes sparse-week mode and Phase 0 work.
+After posting, save a memo at `Greenpill Dev Guild / Research Synthesis / YYYY-MM-DD research synthesis`. **Always write it, even on silent weeks.**
 
 ```markdown
 # Research Synthesis — {YYYY-MM-DD}
 
-*Generated by `research-synthesis`. Drives prior-week continuity for future runs of this routine — keep concise but complete.*
+*Generated by `research-synthesis` v2. Drives prior-week continuity for future runs — keep concise but complete.*
 
 ## Mode
 {active | sparse | silent}
 
 ## Volume
-- `#research` substantive messages this week: {N}
-- Drive supplement docs read: {D}
-- Prior memos consulted (Phase 0): {M}
-- Open Linear insight threads consulted (Phase 0): {L}
-- Color sources read (active week only): Miro {Mi}, Calendar {C}, Canva {Cv}, PostHog {Ph}
+- `#research` substantive messages: {N} · Drive docs read: {D} · prior memos: {M}
 
-## Themes this week
-{theme list with through-line summary, or `(silent week)`}
+## Corpus snapshot
+- Cycle: {name} · open RESR issues: {n} · domains: {derived domain list}
 
-## Actions proposed
-{action list with project / owner, or `(silent week)`}
+## Themes (in-domain / parking lot)
+{lists, or `(silent week)`}
 
-## Mermaid diagrams generated
-{list of diagrams + which Linear Issue they were embedded in, or `(none — no themes had structural shape)`}
+## Linear writes
+- Comments: {issue ids or none} · Created: {issue id or none, with the domain that justified it}
 
-## Linear Issues filed
-{linear issue URLs, or `(none — actions stayed in Discord)`}
-
-## Open threads (from prior weeks, still unresolved)
-{1-3 bullets — themes from prior memos that did not get closed this week. These are the candidates for next week's continuity framing.}
+## Open threads
+{1-3 bullets for next week's continuity}
 
 ## Posted to #research
 {exact text of the Discord post}
-
----
-Generated {YYYY-MM-DD HH:MM} local.
 ```
 
-If the Drive write fails, still consider the run successful (the Discord post + Linear writes are the primary deliverables). Log the failure but do not retry.
+If the Drive write fails, still consider the run successful (the Discord post is the primary deliverable). Log the failure but do not retry.
 
 ## Guardrails
 
-- **Stay in lane.** Input = `#research`. Output = `#research` Discord + Linear Research team Issues (unprojected, Accepted Research Task template) + Drive memo. Color sources are enrichment in active week only.
-- **Synthesis, not capture.** Group, synthesize, distill.
-- **Connector tiers are non-negotiable.** Drive + Linear are primary. Miro/Calendar/Canva/PostHog are color (active week only). Mermaid is generative (Linear Issue diagrams). No color source can introduce a theme that wasn't already grounded in `#research`/Drive.
-- **Acceptance bar gates Linear writes.** Vague 'we should look into X' stays in the Discord post; only specific actions with a clear surface and owner become accepted research Issues.
-- **Cap 2 Linear Issues per run, 1 Mermaid diagram per Issue.**
-- **Mermaid diagrams must validate** via the Mermaid MCP before embedding. Don't embed broken diagrams.
-- **Read-only on Discord.** Do not respond to individual messages, do not react.
-- **No PRs, no GitHub Issues.** GitHub is not a backlog; Linear is the home.
-- **Project routing.** Issues stay unprojected on the Research team unless a bounded active project already owns this thread. Never route into retired/staging projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`).
-- **Cite sources.** Every theme and action references the underlying Discord messages, Drive docs, prior memos, or color-source URLs.
-- **Mode is determined by message count, not by mood.** 0 = silent, 1–4 = sparse (still post, lean on prior memos), 5+ = active.
-- **Always write the Phase 6 memo.** It is the substrate that lets sparse-week mode and Phase 0 work — skipping it breaks future continuity.
-- **Format discipline.** Wrap source URLs in `<...>`. Use bulleted action lists, not tables. No Effort column. Open threads as bullets, not parentheticals.
-- **PostHog privacy is public-only.** Never paste replay URLs, session IDs, distinct IDs, wallet addresses, or any private field. Curated question names only — no raw HogQL in the routine reasoning.
-- **Reject WEFA / personal / unrelated-client content** on every connector read (Drive / Miro / Canva). Same WEFA discipline as other guild routines.
+- **Stay in lane.** Input = `#research`. Output = `#research` + at most 1 created Issue + 2 comments + the memo.
+- **The corpus gates creation.** No Issue outside the active research domains, ever. The parking lot is where adjacent signal lives until a human promotes it.
+- **Bi-directional every run.** The 📋 From-the-board block appears in all three modes — on a silent week it IS the post.
+- **Synthesis, not capture.** Vague "we should look into X" stays in the digest.
+- **Comment > create.** Extending an open issue beats filing a new one.
+- **Read-only on Discord.** No replies, no reactions.
+- **No PRs, no GitHub Issues, no diagrams.** (Mermaid generation retired in v2 as creation noise.)
+- **Cite sources.** Every theme references the underlying messages/docs.
+- **Mode is determined by message count, not by mood.** 0 = silent, 1–4 = sparse, 5+ = active.
+- **Always write the Phase 6 memo.**
+- **Linear via the OAuth connector only, fail closed:** if the connector is unauthenticated, post the digest WITHOUT the From-the-board block plus one line ("⚠️ Linear connector needs re-authorization — board state omitted, no Issues filed") and skip all Linear writes.
+- **Reject WEFA / personal / unrelated-client content** on every Drive/Calendar read. Same WEFA discipline as other guild routines.

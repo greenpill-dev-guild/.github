@@ -38,7 +38,9 @@ All cadences UTC.
 - [claude/profile-refresh.md](./claude/profile-refresh.md) - Mon 20:00 public-profile refresh PR (Now building / Recently shipped / team-shipping marker sections; PR only, never pushes main)
 - [claude/meet-filer.md](./claude/meet-filer.md) - Tue-Sat 00:00 files Gemini meeting notes and recordings into per-meeting Drive folders
 
-Retired (specs kept for history): research-synthesis, research-accountability-pulse, and scope-review-pulse (2026-07-17, merged into delivery-hygiene-pulse / the weekly synthesis); coop-intent-pulse and software-ecology-pulse (2026-07-04).
+- [claude/research-synthesis.md](./claude/research-synthesis.md) - Sat 00:00 (Fri evening PT) researcher-facing #research digest: corpus-grounded synthesis, bi-directional From-the-board block, at most one gated Issue per run
+
+Retired (specs kept for history): research-accountability-pulse and scope-review-pulse (2026-07-17, merged into delivery-hygiene-pulse); coop-intent-pulse and software-ecology-pulse (2026-07-04).
 
 See [claude/README.md](./claude/README.md) for environment setup, schedule overview, and the manual-skill overlap policy.
 
