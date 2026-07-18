@@ -22,8 +22,9 @@ Read in this order:
 2. [CONTRIBUTING.md](../CONTRIBUTING.md) (10 min) — how work flows
 3. [CODE_OF_CONDUCT.md](../CODE_OF_CONDUCT.md) (5 min) — how we behave
 4. [funded-work-intake.md](./funded-work-intake.md) (15 min) — how paid scoped work is confirmed and tracked
-5. Skim the [routines/](./README.md) index (5 min) — know what playbooks exist
-6. Pick **one project** that interests you and skim its README (15 min)
+5. Skim the [team charters](../docs/teams/README.md) (5 min) — how work is organized across the five Linear teams
+6. Skim the [routines/](./README.md) index (5 min) — know what playbooks exist
+7. Pick **one project** that interests you and skim its README (15 min)
 
 ## First week
 
@@ -46,7 +47,7 @@ In rough priority order:
 There's no track. But over time, contributors who demonstrate consistent quality and reliability often grow into:
 
 - **Project contributor** — you have ongoing involvement with one project
-- **Engineering / Product / Community / Growth Lead** — you take responsibility for a workstream
+- **Engineering / Product / Research / Community / Marketing / Growth Lead** — you take responsibility for a workstream and anchor its evaluator panel (see the [team charters](../docs/teams/README.md))
 - **Steward** — you participate in governance, treasury, partnerships
 
 These are not titles you apply for. They emerge from sustained contribution.
