@@ -32,7 +32,7 @@ Follow the 302 redirect. Parse the JSON response `{ok: true, folderId, count, fi
 
 Client-side filter:
 1. Drop files whose `name` starts with `meet-filer-` (this routine's own output docs).
-2. Keep only files with `modifiedTime > <now-12h RFC3339>`.
+2. Keep only files with `modifiedTime > <now-30d RFC3339>`. The lookback is deliberately much wider than the run cadence: the cron runs Tue-Sat 00:00 UTC, so a 12h window (the old value) left a 72-hour weekend hole — Friday-evening through Monday-morning meetings (e.g. the Sunday WEFA Studio Sessions) were never candidates and stranded in Meet Recordings forever. A wide window is safe: moved files leave the folder, the `meet-filer-` prefix filter skips this routine's own docs, and the Phase 4 no-op filter drops anything already in place — so anything still sitting in Meet Recordings is by definition unprocessed and should be retried every run.
 
 The returned candidates include ALL file types — Notes by Gemini docs, Recording mp4s, Chat transcripts. They each go through Phase 3 independently. The legacy "Phase 4 sibling search" approach is gone: every sibling is already in the candidate set, so classifying each by title rule handles them uniformly.
 
@@ -102,7 +102,7 @@ Always run regardless of whether any moves happened this cycle. Goal: surface ac
 
 1. Call the webhook list endpoint for the Review folder: `GET $MEET_FILER_WEBHOOK_URL?action=list&folderId=<reviewFolderId>` (use `reviewFolderId` from the GET health response in Phase 5).
 2. For each file, check `modifiedTime`. Count those older than 7 days.
-3. If the count is ≥ 5 AND a doc titled `meet-filer-review-backlog-YYYY-MM-DD.md` for today does NOT already exist in Meet Recordings:
+3. If the count is ≥ 5 AND no `meet-filer-review-backlog-*.md` doc dated within the last **7 days** exists in Meet Recordings (a weekly nudge — an uncleared backlog must not produce a new doc every night):
    - Create the backlog doc via Drive `create_file` (`contentMimeType: "text/markdown"`, `disableConversionToGoogleType: false`).
    - Body: markdown table `| file title | days in Review | drive link |`, sorted descending by age, with a one-line action prompt at top: *"Re-classify these manually, OR add a regex rule to the mapping JSON to catch them next cycle."*
 4. If count < 5 OR a backlog doc already exists for today: skip (no spam).
@@ -121,7 +121,7 @@ This is the only nudge mechanism. No Discord.
 | Skip GET health check | Catches missing Drive API setup |
 | Retry failed moves in-run | Next scheduled run picks them up |
 | Create the Review folder via Drive `create_file` | Apps Script `ensureReviewFolder` (via GET) is the single owner |
-| Spam-create backlog docs daily | Phase 8 must check for existing same-day doc before creating |
+| Spam-create backlog docs daily | Phase 8 creates at most one backlog doc per 7 days; an uncleared Review backlog is nudged weekly, not nightly |
 | Send a manifest > 25 moves in one POST | Apps Script chunk limit; split into ≤25-move batches |
 | POST a move where `originalParents` already includes `targetFolderId` | No-op move; source-lock rejects and pollutes audit log |
 | Post to Discord | User opted out |
