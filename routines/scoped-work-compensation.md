@@ -17,6 +17,8 @@
 | Contributor | up to **$400** | per month |
 | Steward (currently afo) | up to **$2,400** | per month |
 
+The steward cap is $400 across each of the six disciplines the steward covers (engineering, product, marketing, community, research, growth/BD), matching the per-discipline baseline set at the 2026-07-13 capital sync.
+
 The cap is a ceiling, not a salary:
 
 - A full month of accepted work: claim up to the cap.
@@ -75,10 +77,12 @@ Distribution runs through a Cookie Jar: a smart-contract funding pool with an al
 | Token | TBD |
 | Claim period | Monthly |
 | Per-claim cap | $400 contributor · $2,400 steward |
-| Allowlist | afo, matt, nansel, gferreira525, coi (wallets TBD) |
-| Funding source | Grant envelopes (e.g. Octant, Arbitrum milestones) |
+| Allowlist | afo, gui (gferreira525), nansel, matt, kit, coi, tarun (wallets TBD) |
+| Funding source | Grant envelopes (Artizen seasons, Octant, Arbitrum milestones) |
 
 The steward fills this table when the jar is configured. Until then, claims follow the same rules and are settled manually from the treasury multi-sig.
+
+**Q3 2026 schedule note** (per the 2026-07-13 capital sync): July and August stipends are covered by current liquidity; **September's stipend settles in October**, when Artizen Season 7 funds land. September work is still tracked and accepted normally in September; only the payout timing shifts.
 
 ## The exception path: grant-funded briefs
 
