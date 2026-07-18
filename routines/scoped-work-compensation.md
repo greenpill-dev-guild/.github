@@ -17,7 +17,7 @@
 | Contributor | up to **$400** | per month |
 | Steward (currently afo) | up to **$2,400** | per month |
 
-The steward cap is $400 across each of the six disciplines the steward covers (engineering, product, marketing, community, research, growth/BD), matching the per-discipline baseline set at the 2026-07-13 capital sync.
+The steward cap is $400 across each of the six disciplines the steward covers (engineering, product, marketing, community, research, growth/BD), matching the per-discipline baseline set at the 2026-07-13 capital sync. **Contributors claim through the Cookie Jar; the steward settles directly from the treasury multi-sig** (not through the jar), reviewed against the same monthly ledger.
 
 The cap is a ceiling, not a salary:
 
@@ -40,7 +40,7 @@ Estimates (1/2/4/8) and any stated allocation are reference points for judging h
 ## Claiming: claim, then review
 
 1. **Claim from the Cookie Jar** as the month closes, for the amount that fairly reflects your accepted, tracked work, up to your cap.
-2. **Link your work in the claim note.** Every claim note must carry the Linear issue links that back it (or a link to the month's stipend ledger document). A claim without Linear links is invalid by convention and will be flagged.
+2. **Link your work in the claim note.** Every claim note must carry a Linear reference that backs it: the issue links themselves, the month's **Stipend Ledger** document, or the shared **"Stipend Claims — This Month"** saved view filtered to you (all teams · Done · completed this month · grouped by assignee). A claim without a Linear reference is invalid by convention and will be flagged.
 3. **Steward review.** The steward reviews every claim against the Linear record, using the monthly stipend ledger as the reference pack. The review checks responsible usage; it does not re-litigate acceptance that already happened on the issue.
 4. **Over-claims** are flagged by the steward and either offset against the next month or returned. Repeated over-claiming is grounds for removal from the jar allowlist, a steward decision under [GOVERNANCE.md](../GOVERNANCE.md).
 
@@ -68,21 +68,21 @@ Ongoing coverage that is not a single deliverable (community support, ongoing ma
 
 ## The Cookie Jar
 
-Distribution runs through a Cookie Jar: a smart-contract funding pool with an allowlist and a periodic claim allowance per member. (The guild built one as an earlier product: [cookie-jar](https://github.com/greenpill-dev-guild/cookie-jar), with allowlist, NFT, POAP, Hypercert, and Hats gating.)
+Distribution runs through **one Cookie Jar for contributors** — the guild's own [cookie-jar](https://github.com/greenpill-dev-guild/cookie-jar) product (allowlist, NFT, POAP, Hypercert, and Hats gating), already deployed on Arbitrum. The steward does not claim from the jar: steward compensation settles directly from the treasury multi-sig, reviewed against the same ledger.
 
 | Setting | Value |
 | --- | --- |
-| Jar address | TBD |
-| Chain | TBD |
-| Token | TBD |
-| Claim period | Monthly |
-| Per-claim cap | $400 contributor · $2,400 steward |
-| Allowlist | afo, gui (gferreira525), nansel, matt, kit, coi, tarun (wallets TBD) |
-| Funding source | Grant envelopes (Artizen seasons, Octant, Arbitrum milestones) |
+| Jar | Guild cookie-jar deployment on Arbitrum (jar instance/address: steward fills in) |
+| Chain | Arbitrum One |
+| Token | USDC |
+| Gating | **Green Goods Hats tree (Arbitrum): the team hat is the membership credential** — wearing it puts you on the jar; minting/toggling it is how the roster is managed. Plain allowlist is the fallback if hat minting lags. (The guild-level Hats tree lives on Optimism and is NOT used here; it would force a second jar deployment and cross-chain funding for no gain.) |
+| Members | gui (gferreira525), nansel, matt, kit, coi, tarun — 6 contributors; steward excluded by design |
+| Claim allowance | $400 per member per monthly window |
+| Launch window | The first window opens once Artizen Season 6 funds land and covers **July + August combined ($800/member)**; monthly from then on |
+| September | No September refill — September is funded by Artizen Season 7 and lands with the **October** refill ($400 for September + $400 for October). September work is still tracked and accepted normally; only payout timing shifts |
+| Funding path | Artizen Season 6 → nonprofit fiscal routing (tax) → working-capital multi-sig → jar top-up in USDC |
 
-The steward fills this table when the jar is configured. Until then, claims follow the same rules and are settled manually from the treasury multi-sig.
-
-**Q3 2026 schedule note** (per the 2026-07-13 capital sync): July and August stipends are covered by current liquidity; **September's stipend settles in October**, when Artizen Season 7 funds land. September work is still tracked and accepted normally in September; only the payout timing shifts.
+Until the jar instance is live, claims follow the same rules and are settled manually from the treasury multi-sig.
 
 ## The exception path: grant-funded briefs
 
