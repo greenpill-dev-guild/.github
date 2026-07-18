@@ -9,7 +9,7 @@ The guild is one of several skill-specific Guilds under the [Greenpill Network](
 A small, accountable group responsible for:
 
 - **Code of Conduct enforcement** — investigating reports, deciding consequences (see [CODE_OF_CONDUCT.md](./CODE_OF_CONDUCT.md))
-- **Treasury and funded-work approval** — sign-off on scoped budgets, payment terms, and completion
+- **Treasury and funded-work approval** — sign-off on scoped budgets, stipend claim review, and completion
 - **Org access** — granting and revoking GitHub org membership, repo access, and elevated roles
 - **Strategic direction** — quarterly overview decisions, partnership commitments, grant applications
 - **Conflict resolution** — mediating disputes between contributors or maintainers
@@ -37,7 +37,7 @@ Decisions are made at the lowest reasonable scope:
 | --- | --- | --- |
 | **Project-level technical** (e.g. green-goods architecture) | Project maintainers | PR review, repo CODEOWNERS |
 | **Cross-project standards** (e.g. shared CI, this `.github` repo) | Engineering Lead + Stewards | RFC + lazy consensus on the forum |
-| **Treasury and funded-work payouts** | Stewards | Multi-sig sign-off |
+| **Stipend claims & treasury** | Stewards | Cookie Jar claims reviewed against the monthly stipend ledger (see the [compensation playbook](./routines/scoped-work-compensation.md)); multi-sig sign-off for payouts outside the jar |
 | **Scope acceptance** (scoped-brief sign-off) | Team evaluator panel (2–3 reviewers per Linear team; afo standing on every panel; rosters in the [team charters](./docs/teams/README.md) and the Evaluator Panels Linear Document) | Estimate set + panel ack moves Backlog → Todo; 3-day async SLA |
 | **Org membership and access** | Admins + Stewards | Steward sign-off required |
 | **Code of Conduct cases** | Stewardship team | Confidential, see CoC |

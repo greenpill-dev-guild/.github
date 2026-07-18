@@ -36,7 +36,7 @@ Before implementation starts, confirm:
 - Project, package, or design surface affected.
 - Review path and required validation.
 - Timeline, milestones, and check-in cadence.
-- Funding source, payment amount, payment method, and payment timing.
+- Payment classification: most member work is **stipend-claimable** by default (brief shape + estimate + acceptance makes it claimable within your monthly cap); an **exception-path grant-funded brief** needs a named envelope and a fixed price agreed up front. See the [compensation playbook](./scoped-work-compensation.md).
 - Any privacy, partner, or grant-reporting constraints.
 
 Keep the agreement concrete. A short scope with crisp acceptance criteria is better than a broad promise.
@@ -88,15 +88,16 @@ Completion is based on the accepted scope:
 2. Required tests, review, or design handoff are complete.
 3. PRs, Drive docs, or deliverables are linked from Linear.
 4. Deviations from scope are documented.
-5. Stewards or maintainers confirm completion and payment handling.
+5. Stewards or maintainers confirm completion.
 
-Payment terms vary by grant, sponsor, or budget. Confirm them in writing before work starts.
+Acceptance on Linear is what makes the work claimable in the current month's stipend period; claim it from the Cookie Jar with the issue links in your claim note. Exception-path grant-funded briefs confirm their fixed terms in writing before work starts. See the [compensation playbook](./scoped-work-compensation.md).
 
 ## Steward / maintainer checks
 
 Before accepting funded scoped work:
 
 - Is the scope bounded and aligned with an active funding source?
+- Is the payment classification clear: stipend-claimable by default, or an exception-path brief with a named envelope and fixed price?
 - Is the contributor or team a good fit for the work?
 - Is the review path clear?
 - Are private partner, budget, or grant details kept out of public GitHub issues?

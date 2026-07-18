@@ -52,7 +52,7 @@ Contribution flows through scoped project work. Some work is volunteer open-sour
 
 1. **Start** with a project issue, proposal, or maintainer-scoped work item.
 2. **Confirm** deliverables, acceptance criteria, and review path before implementation.
-3. **Confirm funding** separately when compensation is part of the work.
+3. **Know how it pays**: guild members claim a monthly stipend against work tracked and accepted on Linear — see the [compensation playbook](https://github.com/greenpill-dev-guild/.github/blob/main/routines/scoped-work-compensation.md).
 4. **Submit** a PR or design artifact linked to the agreed scope.
 5. **Review** for quality, scope, tests, and project fit.
 
@@ -64,7 +64,7 @@ Full contributor flow: [CONTRIBUTING.md](https://github.com/greenpill-dev-guild/
 
 **Funded by**: [GitHub Sponsors](https://github.com/sponsors/greenpill-dev-guild) · [Gitcoin](https://explorer.gitcoin.co/) · [Giveth](https://giveth.io/project/greenpill-dev-guild) · [Octant](https://octant.app/).
 
-**We fund**: regenerative projects across gaming and public goods through Grant Ships rounds, Gitcoin community rounds (including the GreenPill x Octant round), and clearly scoped grant-dependent work.
+**We fund**: regenerative projects across gaming and public goods through Grant Ships rounds, Gitcoin community rounds (including the GreenPill x Octant round), and clearly scoped grant-dependent work. Contributor compensation runs through a monthly [Cookie Jar stipend](https://github.com/greenpill-dev-guild/.github/blob/main/routines/scoped-work-compensation.md) backed by Linear-tracked work.
 
 ---
 

@@ -2,7 +2,7 @@
 
 > Canonical body templates for Greenpill Dev Guild Linear records. Written to read like a teammate wrote them, not a form.
 
-Linear is the single home for accepted work. GitHub holds code, PRs, review, and RFC/ADR markdown. Pick a template by **what you are making**, not by discipline. The `activity:*` label still rides along on the issue (it is how compensation reads the discipline), but it does not pick the template.
+Linear is the single home for accepted work. GitHub holds code, PRs, review, and RFC/ADR markdown. Pick a template by **what you are making**, not by discipline. The `activity:*` label still rides along on the issue (it is how panels and the stipend ledger read the discipline), but it does not pick the template.
 
 Linear UI templates may exist, but connector-based agents cannot reliably list or apply them. Treat this document as the durable source for template names and body shapes. If a matching Linear UI template exists, use it; otherwise copy the relevant body below.
 
@@ -58,7 +58,15 @@ Links that apply to the whole piece: docs, product surface, protocol source, pri
 ## Child issues (only if it fans out)
 One child per separate output. Leave this out for single-output work.
 -
+
+## Payment classification (payable briefs, when the terms need to be explicit)
+Classification: stipend-claimable | volunteer | grant-deliverable
+Allocation: optional reference amount or points note
+Envelope: the funding source this draws from
+Guardrails: caps, splits across contributors, exclusions
 ```
+
+The payment-classification section is optional: an accepted, assigned, estimated brief is stipend-claimable by default (see the [compensation playbook](../routines/scoped-work-compensation.md)). Add the block when the split, envelope, or expectation should be explicit up front — the shape standardizes what briefs like COM-10, MAR-1, and MAR-15 already do.
 
 ## Artifact
 
@@ -280,13 +288,12 @@ What should not be attached unless explicitly accepted.
 
 ## Continuous role (a Document, not an issue)
 
-Ongoing coverage that is not a single deliverable: community support, ongoing maintenance, funding tracking. Track it as a Linear Document, paid as a monthly role with per-hour extras, per the [compensation playbook](../routines/scoped-work-compensation.md). Do not open per-cycle issues for it.
+Ongoing coverage that is not a single deliverable: community support, ongoing maintenance, funding tracking. The Document defines the arrangement; the claimable record is **one coverage issue per month** (what was covered, moved to Done and accepted), claimed within the monthly stipend cap per the [compensation playbook](../routines/scoped-work-compensation.md). Do not open per-task issues beyond the monthly coverage issue.
 
 ```markdown
 Role:
 Owner:
-Cadence / coverage: what is covered each cycle.
-Baseline: the monthly arrangement.
-Extras: what counts as a per-hour extra (e.g. a dedicated onboarding session) and how it is logged.
+Cadence / coverage: what is covered each month.
+Coverage issue: link each month's accepted coverage issue here.
 Review: how the role is reviewed and renewed.
 ```
