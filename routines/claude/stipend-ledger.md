@@ -96,7 +96,7 @@ If no issues were completed in the month at all, post a single quiet line ("💰
 
 ## Phase 4 — Write the Linear Document (idempotent)
 
-Create a Linear Document titled `Stipend Ledger — {YYYY-MM}` attached to the **Dev Guild Strategy & Scorecard** initiative (the guild's durable strategy & operating surface, documented by the steward 2026-07-18 — it holds Delivery Accountability, the Team Migration Audit, and the strategy docs; earlier drafts targeted Linear Migration & Operating System, which is a closed migration record).
+Create a Linear Document titled `Stipend Ledger — {YYYY-MM}` attached to the **Linear Migration & Operating System** initiative (the guild-ops docs shelf; the strategy canon lives in `.github` `docs/strategy/`).
 
 **Idempotency:** search documents for an existing `Stipend Ledger — {YYYY-MM}` first. If it exists, append a dated re-run note to its content instead of creating a duplicate.
 
