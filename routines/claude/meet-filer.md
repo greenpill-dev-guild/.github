@@ -36,6 +36,8 @@ Client-side filter:
 
 The returned candidates include ALL file types — Notes by Gemini docs, Recording mp4s, Chat transcripts. They each go through Phase 3 independently. The legacy "Phase 4 sibling search" approach is gone: every sibling is already in the candidate set, so classifying each by title rule handles them uniformly.
 
+**Phase 2b — Review-folder self-healing (added 2026-07-18):** also call the list endpoint for the **Review** folder (`reviewFolderId` from the Phase 5 health check) and take up to **15 residents per run, oldest `modifiedTime` first** (bounded so the nightly run stays cheap; the backlog drains over a few nights). Re-run Phase 3 classification on each: a rule added since the file was parked now moves it to its proper home, and the calendar fallback's One-Offs path catches identified-but-homeless meetings. Residents that still classify to Review simply stay (no churn, no re-move). This is what makes mapping-rule additions retroactive instead of forward-only.
+
 ### Phase 3: Classify
 
 Walk the rules top-to-bottom (`order` ascending). First rule whose `regex` matches the title (case-insensitive, anchored as written) wins.
@@ -46,7 +48,7 @@ Notes docs, Recordings, and Chat transcripts share the same title prefix (`<Meet
 
 1. Parse `Meeting started YYYY/MM/DD HH:MM (TZ)` OR `Meeting started YYYY MM DD HH:MM (TZ)` (date may use slashes OR spaces). TZ has been observed as both `PDT` and `PST` within a single month; resolve to UTC via offset (`PDT = UTC-7`, `PST = UTC-8`). On parse fail → Review.
 2. **Multi-calendar lookup**: read `fallbackCalendars` from the mapping JSON below. Query Calendar `list_events` with `startTime = ts-10min`, `endTime = ts+10min` on each calendar in priority order, starting with `userCalendarId` (your primary). Stop at the first calendar that returns ≥1 event.
-3. Pick the event closest to `ts` from the matched calendar. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If still no match → Review.
+3. Pick the event closest to `ts` from the matched calendar. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If an event matched but its summary hits NO rule → the meeting is **identified but homeless**: move it to **Meetings — One-Offs** (`oneOffsFolderId`) and record the event summary in the run log. Only when NO calendar event matched (or the timestamp parse failed) → Review.
 
 **Calendar fallback for raw Meet codename titles** (rule order 91):
 
@@ -54,7 +56,7 @@ Meet sometimes drops Recordings/Chat transcripts with a raw codename instead of 
 
 1. Parse the regex `^([a-z]{3}-[a-z]{4}-[a-z]{3}) \((\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}) GMT([+\-]\d+)\)` to extract codename, date, time, offset. Resolve `(date, time, offset)` to UTC.
 2. Run the same multi-calendar `list_events` lookup at `ts ± 10min` as the rule-90 fallback, in the same priority order.
-3. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If no calendar event matches OR matched summary doesn't hit a rule → Review.
+3. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If an event matched but its summary hits no rule → **Meetings — One-Offs** (`oneOffsFolderId`), logging the summary. If no calendar event matches → Review.
 
 If a rule matches but its `targetFolderId` is `null`: route to Review AND surface the rule's `order + label` in the run log as a warning.
 
@@ -132,6 +134,7 @@ This is the only nudge mechanism. No Discord.
 {
   "version": 4,
   "meetRecordingsFolderId": "15rffge0LlFlD_sa7hH5vv2SFag7SEDfa",
+  "oneOffsFolderId": "1oAx3SFXriR3eE301ZWJwGIGbqgj6Fa9-",
   "userCalendarId": "afo@greenpill.builders",
   "reviewFolderName": "Meet Recordings — Review",
   "fallbackCalendars": [
@@ -167,6 +170,7 @@ This is the only nudge mechanism. No Discord.
     { "order": 21, "regex": "^Odunde\\b",                             "targetFolderId": "1qzaRzNWhbVgZOSwMCDVDLaUZYvWwbGBc",   "label": "Odunde 2026 / Weekly Village Planning" },
     { "order": 22, "regex": "^Regen Commons",                       "targetFolderId": "0AHKbTaY-pk03Uk9PVA",                "label": "Regen Coordination SD (Regen Commons: Council Call / Steward Jam)" },
     { "order": 23, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
+    { "order": 24, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
     { "order": 90, "regex": "^Meeting started \\d{4}[/ ]\\d{2}[/ ]\\d{2}", "targetFolderId": null,                            "label": "→ Calendar fallback for 'Meeting started' titles (accepts slash or space dates)" },
     { "order": 91, "regex": "^[a-z]{3}-[a-z]{4}-[a-z]{3} \\(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} GMT[+\\-]\\d+\\)", "targetFolderId": null, "label": "→ Calendar fallback for raw Meet codename titles" },
     { "order": 99, "regex": ".*",                                     "targetFolderId": null,                                 "label": "Meet Recordings — Review (auto-created)" }
