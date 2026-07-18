@@ -81,7 +81,7 @@ Routines @mention Afo only when his action is required (via `DISCORD_USER_ID_AFO
 
 - `guild-weekly-synthesis` — only on the `#lead-council` post when at least one risk/decision is overdue
 - `guild-grant-scout` — when a grant deadline is < 7 days out, a new high-fit opportunity scores ≥ 4 on Green Goods, or a stale-prospect decision is needed
-- `delivery-hygiene-pulse` — Discord: only in the 🔴 Needs-you block (past-due or SLA-breached items); Linear: `@`-mentions the owner on slippage and the team panel on briefs awaiting sign-off
+- `delivery-hygiene-pulse` — Discord: afo in the 🔴 Needs-you block, plus the **owner** tagged on past-due and ⚠️③ struck-out items (three pulse nudges in 30 days = a steward decision per the Delivery Accountability rule); Linear: `@`-mentions the owner on slippage and the team panel on briefs awaiting sign-off
 - `stipend-ledger` — on the 🔴 Needs-you block (reopened / unassigned / unscoped completions, cap-relevant volume)
 
 The `#community` excerpt from `guild-weekly-synthesis` never mentions. Discord notifications stay signal-heavy.
@@ -99,6 +99,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_LEAD_COUNCIL_CHANNEL_ID`
 - `DISCORD_RESEARCH_CHANNEL_ID` (kept for history; no active routine posts to `#research`)
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
+- `DISCORD_USER_ID_GUI` / `_NANSEL` / `_MATT` / `_KIT` / `_COI` / `_TARUN` — optional per-contributor snowflakes; `delivery-hygiene-pulse` uses them to tag owners on overdue work (2026-07-13 decision: automated tags replace manual notifications). An unset var degrades to name-only, never a broken mention
 - **Linear: OAuth connector only — no `LINEAR_API_KEY` is stored in the guild-routines env** (standing rule as of 2026-07-04). Every Linear-touching routine (`guild-weekly-synthesis`, `network-steward-intent-pulse`, `guild-grant-scout`, `delivery-hygiene-pulse`, `stipend-ledger`, `profile-refresh`) reaches Linear through the wired OAuth connector and fails closed when it lapses; re-authorize the connector rather than adding a key.
 
 **Connector matrix:**

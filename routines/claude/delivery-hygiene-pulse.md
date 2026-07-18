@@ -10,6 +10,14 @@ env-vars:
   - DISCORD_BOT_TOKEN
   - DISCORD_SCOPE_CHANNEL_ID
   - DISCORD_USER_ID_AFO
+  # Optional per-contributor snowflakes for owner tagging (2026-07-13 capital-sync decision:
+  # tag assignees in Discord on overdue work instead of manual notifications). Missing var = name-only.
+  - DISCORD_USER_ID_GUI
+  - DISCORD_USER_ID_NANSEL
+  - DISCORD_USER_ID_MATT
+  - DISCORD_USER_ID_KIT
+  - DISCORD_USER_ID_COI
+  - DISCORD_USER_ID_TARUN
 connectors:
   - linear                     # Linear via OAuth connector only, no API key, per guild-routines policy
 model: claude-opus-4-8[1m]
@@ -47,7 +55,7 @@ Panels are per **team** ([docs/teams/](../../docs/teams/README.md)). Tag panels 
 | Research | `@afo` `@coi` `@matt` |
 | Community | `@afo` `@nansel` `@matt` |
 | Growth | `@afo` `@matt` |
-| Marketing | `@afo` `@nansel` |
+| Marketing | `@afo` `@nansel` `@kit` (kit pending his re-granted Linear seat, per the 2026-07-13 capital sync; tag him only once his display name resolves) |
 
 - `activity:design` is ambiguous only when an issue sits on the wrong team: UX / product design belongs on Product, brand / creative on Marketing. Route by the issue's team; if the content plainly contradicts the team (a brand brief on Product), note "team/lane mismatch, confirm" in the comment rather than guessing a different panel.
 - afo is on every panel, so a misroute still reaches a steward.
@@ -83,6 +91,8 @@ Evaluate in this order; the first match takes the issue:
 - 🟠 **Stalled** — `statusType = started` AND `updatedAt < today − 7d` (N).
 - 🟡 **Due soon, not started** — `statusType ∈ {backlog, unstarted}` AND `today ≤ dueDate ≤ today + 3d` (X).
 
+**Three-strike detection** (the escalation protocol agreed 2026-07-13): while checking comment idempotency (Phase 4) you already fetch each flagged issue's comments — count the pulse-signed comments (any of the three signatures) from the last **30 days**. An issue with **3 or more** prior nudges is struck out: mark it **⚠️③** and list it in the digest's 🔴 Needs-you block as a steward decision (re-scope, re-date, reassign, or cancel per the Delivery Accountability rule). Never cancel or change the issue yourself.
+
 **Scope lane** (issues that didn't match above):
 
 - 🆕 **Needs scoping** — the issue is **unscoped** AND is EITHER in an active state (`statusType ∈ {unstarted, started}`: committed work that slipped in without a brief) OR in Backlog / Triage with a `dueDate ≤ dueSoonHorizon`. Backlog / Triage items with no due date or a far-off one are dropped: a backlog full of unscoped someday-ideas is healthy, and surfacing it is noise. **Digest-only: never commented on** (an unscoped item should not ping a panel).
@@ -98,10 +108,12 @@ There is no Discord MCP connector in this environment. Never search for one, and
 POST https://discord.com/api/v10/channels/${DISCORD_SCOPE_CHANNEL_ID}/messages
   -H "Authorization: Bot ${DISCORD_BOT_TOKEN}"
   -H "Content-Type: application/json"
-  -d '{ "content": "<message>", "allowed_mentions": { "users": ["${DISCORD_USER_ID_AFO}"] } }'
+  -d '{ "content": "<message>", "allowed_mentions": { "users": [<afo id + the mapped owner ids actually mentioned>] } }'
 ```
 
 On a non-2xx response, log the status and body and exit non-zero. Never treat a failed post as success.
+
+**Owner tagging (2026-07-13 decision — the digest tags assignees, replacing manual notifications):** resolve each flagged issue's assignee display name to a Discord snowflake via the `DISCORD_USER_ID_*` env vars (afo→AFO, gferreira525→GUI, nansel→NANSEL, matt→MATT, kit→KIT, coi→COI, tarun→TARUN). On 🔴 past-due and ⚠️③ struck-out items, render the owner as `<@snowflake>`; when a var is unset, fall back to the plain display name. `allowed_mentions.users` lists exactly the ids you actually rendered (afo plus tagged owners) — never `parse: ["users"]`, never roles or everyone. 🟠/🟡/🆕/🔍 items stay name-only; only overdue work pings.
 
 One message, house style: bold headers, blank lines between blocks, lead with what needs a human, per-team sections only for teams that have items, omit every empty section, wrap issue URLs in `<...>`. Cap 🆕 needs-scoping at the **10** most recent overall (add "plus {n} more unscoped" if over). `@`-afo only in the 🔴 lead block, and only when it is non-empty.
 
@@ -109,7 +121,8 @@ One message, house style: bold headers, blank lines between blocks, lead with wh
 **🧭 Delivery Hygiene — {YYYY-MM-DD}**
 
 🔴 **Needs you** <@${DISCORD_USER_ID_AFO}>
-- {past-due and ⏰ SLA-breached items only, ranked: past-due first; ID · title · owner or panel · due date · <url>}
+- {past-due and ⏰ SLA-breached items, ranked: ⚠️③ struck-out first, then past-due; ID · title · <@owner> (tagged) · due date · <url>}
+- ⚠️③ {ID} {title} — 3+ nudges in 30d, steward decision: re-scope / re-date / reassign / cancel · <@owner> <{url}>
 
 **{Team}**
 🟠 {ID} {title} — stalled, last update {date}, {owner} <{url}>

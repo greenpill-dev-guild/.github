@@ -2,7 +2,7 @@
 
 > Tell the guild's story: campaigns, content, and brand.
 
-**Key:** `MAR` · **Cycles:** none (brief-driven) · **Panel:** afo, nansel
+**Key:** `MAR` · **Cycles:** none (brief-driven) · **Panel:** afo, nansel, kit
 
 ## Purpose
 
@@ -36,7 +36,7 @@ None. Marketing runs on briefs and campaign windows (epochs, seasons, launches),
 
 ## Evaluator panel
 
-afo, nansel. This panel is thin; add a third member as the marketing roster grows. Roster is confirmed in the Evaluator Panels Linear Document.
+afo, nansel, kit (kit rejoins with the Linear seat re-granted at the 2026-07-13 capital sync; his Q3 stipend lane is Green Goods marketing presentations). Roster is confirmed in the Evaluator Panels Linear Document.
 
 ## Templates
 

@@ -41,7 +41,7 @@ Use [Linear templates](./linear-templates.md) as the canonical body reference fo
 | Research | `#research` (discussion) | delivery-hygiene-pulse, weekly synthesis (research block) | afo · coi · matt | `activity:research`, `activity:architecture` |
 | Community | `#community` | delivery-hygiene-pulse, weekly synthesis | afo · nansel · matt | `activity:community` |
 | Growth | `#funding` | guild-grant-scout, delivery-hygiene-pulse (non-funding issues), weekly synthesis | afo · matt | `funding:*`, `activity:capital` |
-| Marketing | `#design` (creative review) | delivery-hygiene-pulse, weekly synthesis | afo · nansel | `activity:marketing`, `activity:design` |
+| Marketing | `#design` (creative review) | delivery-hygiene-pulse, weekly synthesis | afo · nansel · kit | `activity:marketing`, `activity:design` |
 
 Panel rosters are confirmed in the Evaluator Panels Linear Document; the table above is the reference copy.
 
