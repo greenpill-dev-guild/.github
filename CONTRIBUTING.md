@@ -31,8 +31,8 @@ Some guild work is volunteer open-source contribution. Paid work is grant-depend
 For funded scoped work:
 
 1. **Confirm the scope** with a maintainer or steward, including deliverables, acceptance criteria, review path, and expected timeline.
-2. **Confirm the funding source** before starting. Funding may come from an active grant, sponsor commitment, or maintainer-approved budget.
-3. **Track the scope in Linear** when asked, so ownership, status, funding context, and acceptance criteria are visible to maintainers.
+2. **Know how it pays.** Guild members are paid a monthly stipend claimed against Linear-tracked, accepted work (up to a monthly cap, via a Cookie Jar); large grant-contracted briefs can be priced individually as a documented exception. See the [compensation playbook](./routines/scoped-work-compensation.md). No Linear record, no claim.
+3. **Track the scope in Linear** — this is what makes the work claimable, not just visible. Ownership, status, funding context, estimate, and acceptance criteria live on the issue.
 4. **Open a GitHub execution issue** only when public implementation or review work needs a repo-local reference.
 5. **Check in regularly** while work is active, especially if timing, risk, or scope changes.
 6. **Submit your work** through the relevant project repo and include the agreed validation.
@@ -64,8 +64,8 @@ These apply across all guild projects. Project-specific `AGENTS.md` / `CLAUDE.md
 
 ## Funded work completion
 
-- **Approval** — completion is based on the scoped acceptance criteria and maintainer review.
-- **Payment terms** — funded work terms vary by grant, sponsor, or budget. Confirm payment amount, timing, and method in writing before starting.
+- **Approval** — completion is based on the scoped acceptance criteria and maintainer review. Acceptance is what makes the work claimable.
+- **Payment** — claim your month's accepted work from the Cookie Jar, up to your stipend cap, with the Linear issue links in the claim note; the steward reviews claims against the monthly stipend ledger. Exception-path grant-funded briefs confirm fixed terms in writing before work starts. See the [compensation playbook](./routines/scoped-work-compensation.md).
 - **No standing paid-work promise** — open issues, roadmap items, and community requests are not automatically funded work.
 
 ## Agentic development

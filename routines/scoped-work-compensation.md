@@ -1,89 +1,113 @@
-# How the Dev Guild Pays for Scoped Work
+# How the Dev Guild Pays: the Stipend Model
 
-> How the guild values and pays for work across every discipline — engineering, product, marketing, community, research, and growth / BD / funding. Companion to [Funded Work Intake](./funded-work-intake.md), which covers how work is identified and scoped.
+> From Q3 2026, guild contributors are paid a monthly stipend claimed through a Cookie Jar and backed entirely by work tracked and accepted on Linear. Companion to [Funded Work Intake](./funded-work-intake.md), which covers how work is identified and scoped.
 
-**When to use this**: You are a steward, maintainer, or contributor agreeing payment for guild work. Volunteer contributions use the normal issue / PR flow.
+**When to use this**: you contribute to the guild and want to be paid, or you steward the treasury and review claims. Volunteer contributions use the normal issue and PR flow, and are always welcome outside this model.
 
 ## Principle
 
-We pay for **accepted outputs, not for time.** A scoped piece of work is the unit, and **"Done" (acceptance criteria met + accepted) is the payment event.** The bar is the acceptance criteria agreed *up front*, not a judgment call at review.
+**No Linear record, no claim.** The stipend pays for work that is tracked on Linear and accepted there. Work that happens off-platform is invisible to this model on purpose: if it matters enough to pay for, it matters enough to scope as an issue first.
 
-## Two ways we pay
+"Done" still means what it always has: acceptance criteria met, accepted by the team's evaluator panel or steward. Acceptance is what makes work claimable.
 
-- **Deliverable work → scoped brief + estimate (fixed price).** Most work: a feature, a campaign, a logo, a spec, a research memo, a grant application, an impact report. Scope it, size it, pay on acceptance.
-- **Continuous work → a role / retainer per cycle.** Ongoing coverage that isn't a single artifact — community support, ongoing engineering maintenance, funding tracking. Paid as a **monthly role stipend**, with **extra scoped sessions tracked per hour** (e.g. a dedicated onboarding or support session beyond the baseline).
+## The stipend
 
-The per-discipline table says which mode each discipline uses. The stages, sizing, and acceptance flow below describe **deliverable** work.
+| Role | Cap | Period |
+| --- | --- | --- |
+| Contributor | up to **$400** | per month |
+| Steward (currently afo) | up to **$2,400** | per month |
 
-## The unit (deliverable work)
+The steward cap is $400 across each of the six disciplines the steward covers (engineering, product, marketing, community, research, growth/BD), matching the per-discipline baseline set at the 2026-07-13 capital sync. **Contributors claim through the Cookie Jar; the steward settles directly from the treasury multi-sig** (not through the jar), reviewed against the same monthly ledger.
 
-A payable brief carries one named **Output** · 3–6 **Acceptance criteria** · a **Boundary** · a **Decision/exit** (done-when + the decision it feeds) · an **estimate** (its sizing tier). No clear artifact + criteria ⇒ not payable yet — it's still in scoping, which is itself paid (Stage 0). Research uses the RESR-4 issue template; the same shape works for any discipline.
+The cap is a ceiling, not a salary:
 
-## Two stages (deliverable work)
+- A full month of accepted work: claim up to the cap.
+- Less than that: claim proportionally less.
+- Nothing tracked and accepted: claim nothing. The jar goes untouched.
 
-- **Stage 0 — Paid scoping (Scout tier, up front).** The deliverable *is the brief*: output + acceptance criteria + boundary + decision/exit + a proposed execution estimate. How a contributor gets "paid to explore" — but the money buys a reviewable output. If Stage 0 yields only vagueness, execution isn't funded: a small, bounded spend and a clean exit.
-- **Stage 1 — Execution (sized + tranched).** Fund the accepted brief at its estimate tier, across 2–3 tranches on its milestones; the final tranche releases on decision/exit acceptance.
+Unearned and unclaimed amounts do not roll over; each month starts fresh.
 
-## Sizing — how much
+## What backs a claim
 
-Price **bounded effort at a guild rate set per brief by impact, sized at scope time by the scoper — not the contributor.** The rate is an internal sizing tool; **work is billed fixed-price per brief, never open hourly** (the exception is continuous-work hourly extras).
+An issue backs your claim for a given month when all of these hold:
 
-- **Guild rate: $30–60/hr, set per brief by impact.** Low end for routine work; top end for a high-impact sprint that materially moves the guild forward. An explicit early-stage discount below market; rises as grants grow.
-- **Relativity ladder:** engineering / integration is the heaviest implementation lift → it anchors the top (a major integration is ~80–200h of senior work). Product, marketing, research, and growth size *at or below* comparable engineering effort.
-- **Sizing tiers** — recorded as each issue's Linear **estimate** on the **exponential scale** (1, 2, 4, 8, 16; price = estimated hours × the impact rate, fixed for the brief):
+- It is **assigned to you**, on any of the five teams (see the [team charters](../docs/teams/README.md)).
+- It reached **Done in that month** and was accepted per the [operating model](../docs/linear-operating-model.md) (panel sign-off gated it into work; review accepted the result).
+- It was **scoped**: the [Brief shape](../docs/linear-templates.md#brief) with an estimate set.
 
-  | Tier | Estimate | Effort | Typical fixed price |
-  |---|---|---|---|
-  | **Scout** | 1 | 3–10 hrs | $100–500 |
-  | **Brief** | 4 | 12–30 hrs | $500–1,800 |
-  | **Deep** | 16 | 40–80 hrs | $1,500–3,000 |
+Estimates (1/2/4/8) and any stated allocation are reference points for judging how much of the cap a month's work fairly represents. There is deliberately no mechanical dollars-per-point formula; the judgment stays human, on both sides.
 
-  Most product / marketing / research briefs are **Scout–Brief** (clear scope, ~1–2 weeks). **Deep** is reserved for cross-cutting, load-bearing work and stays below a major integration. **Scout / Brief / Deep** stay as the shared concept names for sizing conversations; the tracked field is the exponential estimate they map to (**1 / 4 / 16**), with a major integration above at 32+.
+## Claiming: claim, then review
 
-## By discipline
+1. **Claim from the Cookie Jar** as the month closes, for the amount that fairly reflects your accepted, tracked work, up to your cap.
+2. **Link your work in the claim note.** Every claim note must carry a Linear reference that backs it: the issue links themselves, the month's **Stipend Ledger** document, or the shared **"Stipend Claims — This Month"** saved view filtered to you (all teams · Done · completed this month · grouped by assignee). A claim without a Linear reference is invalid by convention and will be flagged.
+3. **Steward review.** The steward reviews every claim against the Linear record, using the monthly stipend ledger as the reference pack. The review checks responsible usage; it does not re-litigate acceptance that already happened on the issue.
+4. **Over-claims** are flagged by the steward and either offset against the next month or returned. Repeated over-claiming is grounds for removal from the jar allowlist, a steward decision under [GOVERNANCE.md](../GOVERNANCE.md).
 
-| Discipline | Unit / output | "Accepted" means | How it's paid |
-|---|---|---|---|
-| **Engineering** | a shippable change — feature, fix, integration (PR-backed) | merged + meets AC + verified working | deliverable tiers; heaviest lift, anchors the top. Ongoing maintenance → continuous role. |
-| **Product** | a scoped product artifact — spec, flow, UX design, brief | approved vs the brief + build-ready | deliverable tiers; clear scopes, ~1–2 weeks |
-| **Marketing** | a campaign / content / brand asset (incl. logo, creative) | shipped + meets the brief | deliverable tiers; clear scopes, ~1–2 weeks |
-| **Community** | supporting users + members — onboarding, support, engagement | coverage held / session delivered | **monthly support-role stipend** + **per-hour** for extra onboarding or dedicated support sessions |
-| **Research** | a decision-ready artifact — memo, taxonomy, readiness plan | AC met + decision usable (incl. a rigorous "no-go") | deliverable tiers (Scout / Brief / Deep), sized below engineering |
-| **Growth / BD / Funding** | grant application, impact report, partnership, funding tracking | submitted / delivered / partnership advanced | funding-pegged tiers (a fraction of the funding unblocked); grant **sourcing + tracking** are pipeline / continuous |
+## The stipend ledger
 
-**Design is not a separate lane** — product / UX design is a Product artifact; brand / creative (logos, assets) is a Marketing artifact.
+The `stipend-ledger` routine ([routines/claude/stipend-ledger.md](./claude/stipend-ledger.md)) compiles the review pack on the 1st of each month: every issue completed in the closed month across all five teams, grouped by contributor, with links, estimates, and payment-classification fields where present. It posts one digest for steward review and writes one Linear document, "Stipend Ledger — {month}". It computes no dollar amounts; it exists so the claim review takes minutes, not an evening.
 
-## Controlling total spend
+## Payment classification, in the issue
 
-The rate sizes a brief; it does not bound the budget. What keeps spend affordable:
+Payable briefs may carry an explicit classification block (a pattern already in use on COM-10, MAR-1, and MAR-15, standardized in the [Brief template](../docs/linear-templates.md#brief)):
 
-- **Grant-tied envelope — the actual spend bound.** Paid work is funded as a capped line-item inside the grant or initiative it supports (a set amount / % per cycle), not an open pool — and we prefer work that helps unblock the funding it draws from.
-- **WIP cap for focus.** Keep a small number of paid deliverable briefs active per lane (≤ 2–3) so work finishes; the envelope, not headcount, is what caps total spend.
-- **Most exploration stays unpaid signal.** Discussion channels and the weekly synthesis capture raw exploration for free; a *paid* brief is the exception, reserved for scoped, decision- or ship-critical work.
+```markdown
+## Payment classification
+Classification: stipend-claimable | volunteer | grant-deliverable
+Allocation: optional reference amount or points note
+Envelope: the funding source this draws from
+Guardrails: caps, splits across contributors, exclusions
+```
 
-## Accept, revise, escalate
+Use it whenever the split, the envelope, or the expectation needs to be explicit up front. Absent the block, an accepted, assigned, estimated brief is stipend-claimable by default.
 
-- **Accepted = acceptance criteria met**, reviewed by the scoping steward or a **designated / external evaluator** — acceptance should not be one person's solo subjective call.
-- Short of criteria → **one revision round** (request-changes + a short re-due).
-- Still short → escalate: **re-scope / split** (partial credit for the accepted portion) **or reassign.** **Budget follows the output:** if someone else finishes it, the unearned tranche moves with it. The guild pays once, to whoever clears the bar.
+## Continuous roles
 
-## Trust over time
+Ongoing coverage that is not a single deliverable (community support, ongoing maintenance, funding tracking) claims within the same monthly cap. Evidence it with **one coverage issue per month**: what was covered, moved to Done and accepted like any other issue. The [Continuous role Document](../docs/linear-templates.md#continuous-role-a-document-not-an-issue) defines the arrangement; the monthly coverage issue is the claimable record. This replaces the old "monthly role stipend plus hourly extras" arrangement.
 
-First engagement: more up front, more support. Future front-loading is **earned by delivery**; repeated misses mean quiet non-renewal, not confrontation. Cash isn't the whole package: recognition (GreenWill), credited overflow pickups (the unearned tranche follows the work to whoever finishes it), and a rising track record all count. As budgets grow the **$30–60 range itself rises toward market** on a stated trigger (e.g. per major grant won), and proven delivery moves a contributor toward the top of the current range.
+## The Cookie Jar
 
-## In Linear
+Distribution runs through **one Cookie Jar for contributors** — the guild's own [cookie-jar](https://github.com/greenpill-dev-guild/cookie-jar) product (allowlist, NFT, POAP, Hypercert, and Hats gating), already deployed on Arbitrum. The steward does not claim from the jar: steward compensation settles directly from the treasury multi-sig, reviewed against the same ledger.
 
-- A paid **deliverable brief** lives as an issue on its team (Product or Research), carrying the **scoped-brief shape** (the RESR-4 template), an **`activity:*` label** for its discipline (`build` / `design` / `research` / `architecture` / …), and its **estimate** set on the issue (Scout ~ 1 / Brief ~ 4 / Deep ~ 16).
-- **Growth / BD / Funding** runs through the `funding:*` lifecycle labels + the Grant Scouting project (sourced by the `guild-grant-scout` routine).
-- **Continuous roles** (community support, maintenance) are a recurring arrangement, tracked separately from per-brief issues.
-- The **research-accountability pulse + rule** govern dated, owned deliverable issues — Research today, extendable to Product.
+| Setting | Value |
+| --- | --- |
+| Jar | Guild cookie-jar deployment on Arbitrum (jar instance/address: steward fills in after deploy) |
+| Jar admin | Working Capital multi-sig `0xe09315A86ED0A39862158f5631b928145987fE05` (an EOA may hold deploy-time admin only if the multi-sig can be set as admin after) |
+| Chain | Arbitrum One |
+| Token | USDC |
+| Gating | **Green Goods Hats tree (Arbitrum): the team hat is the membership credential** — wearing it puts you on the jar; minting/toggling it is how the roster is managed. Plain allowlist is the fallback if hat minting lags. (The guild-level Hats tree lives on Optimism and is NOT used here; it would force a second jar deployment and cross-chain funding for no gain.) |
+| Members | gui (gferreira525), nansel, matt, kit, coi, tarun — 6 contributors; steward excluded by design |
+| Claim allowance | $400 per member per monthly window |
+| Launch window | The first window opens once Artizen Season 6 funds land and covers **July + August combined ($800/member)**; monthly from then on |
+| September | No September refill — September is funded by Artizen Season 7 and lands with the **October** refill ($400 for September + $400 for October). September work is still tracked and accepted normally; only payout timing shifts |
+| Funding path | Artizen Season 6 → nonprofit fiscal routing (tax) → working-capital multi-sig → jar top-up in USDC |
+
+Until the jar instance is live, claims follow the same rules and are settled manually from the treasury multi-sig.
+
+## The exception path: grant-funded briefs
+
+Some work is too large for a monthly cap: a major integration, or a deliverable a grant explicitly contracts. That work can be priced as a fixed-price brief outside the stipend when **all** of these hold:
+
+- The steward signs off, and the team's evaluator panel accepts the brief.
+- A named grant envelope funds it (the capped line-item inside the grant it supports).
+- The price is fixed at scope time, recorded in the issue's payment-classification block (`Classification: grant-deliverable`), and paid on acceptance.
+
+This is an exception, not a parallel track. Work that was not explicitly priced and enveloped up front is stipend work.
+
+## What changed (2026-07)
+
+The previous playbook priced every brief individually: Scout ($100–500), Brief ($500–1,800), and Deep ($1,500–3,000) tiers derived from a $30–60/hr impact-set rate, paid in 2–3 tranches. That model is retired for guild members, replaced by the stipend and the Cookie Jar.
+
+What survives unchanged: the scoped-brief shape, estimates as the sizing signal (1/2/4/8, with 16+ marking integration-scale work), panel acceptance as the gate, grant-tied envelopes as the money that fills the jar, and the principle that the guild pays for accepted outputs, not time. Scout / Brief / Deep live on only as informal sizing vocabulary.
 
 ## Related
 
-- [Funded Work Intake](./funded-work-intake.md) — how scoped paid work is identified and scoped; this playbook is its pricing / payment layer.
-- [Grant Application](./grant-application.md) — funding-source-side process for the Growth / BD / Funding lane.
-- **Research Accountability** rule (Linear Document, Research team) — scope → due date → pulse → escalation; this playbook prices and pays the same flow.
+- [Funded Work Intake](./funded-work-intake.md) — how scoped work is identified and confirmed; this playbook is its payment layer.
+- [Linear operating model](../docs/linear-operating-model.md) and [team charters](../docs/teams/README.md) — teams, acceptance, estimates.
+- [Grant Application](./grant-application.md) — the funding-source side that fills the envelopes.
+- **Delivery Accountability** rule (Linear Document) — scope → due date → pulse → escalation; the `delivery-hygiene-pulse` routine chases the same flow this playbook pays.
 
 ---
 
-*Status: draft for steward review. Disciplines: engineering · product · marketing · community · research · growth/BD/funding. Deliverable work = scoped brief + $30–60/hr impact-set tiers (research sized below integration); community = monthly support role + hourly extras; product/marketing = artifact briefs, ~1–2 weeks. Spend bound = the per-grant envelope.*
+*Status: active from Q3 2026 (July). Caps: $400/month contributor, $2,400/month steward. Claims via Cookie Jar, backed by Linear-tracked accepted work, steward-reviewed monthly against the stipend ledger.*
