@@ -46,7 +46,7 @@ afo, coi, matt. Roster is confirmed in the Evaluator Panels Linear Document.
 
 ## Templates
 
-From [linear-templates.md](../linear-templates.md), create native Linear team templates for:
+Templates live **globally at the workspace level** (steward decision 2026-07-18), not per team — create and apply them from [linear-templates.md](../linear-templates.md). This team's everyday shapes:
 
 - **Brief** — the default research shape (Output · Scope · Done when), with **Artifact** children only when a piece fans into several outputs.
 

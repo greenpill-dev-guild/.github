@@ -54,7 +54,7 @@ afo, nansel. This panel is thin; add a third member as the marketing roster grow
 
 ## Templates
 
-From [linear-templates.md](../linear-templates.md), create native Linear team templates for:
+Templates live **globally at the workspace level** (steward decision 2026-07-18), not per team — create and apply them from [linear-templates.md](../linear-templates.md). This team's everyday shapes:
 
 - **Brief** — the campaign or content piece (audience, purpose, scope, done-when). Use **Artifact** children for media sets (one child per graphic, video, or page).
 

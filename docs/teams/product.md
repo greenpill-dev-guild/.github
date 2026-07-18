@@ -50,7 +50,7 @@ afo, gferreira525, coi. Panel sign-off moves a scoped brief Backlog → Todo (3-
 
 ## Templates
 
-From [linear-templates.md](../linear-templates.md), create native Linear team templates for:
+Templates live **globally at the workspace level** (steward decision 2026-07-18), not per team — create and apply them from [linear-templates.md](../linear-templates.md). This team's everyday shapes:
 
 - **Feature / Polish** — default for build work (`activity:build` or `activity:maintenance`, `package:*`, `protocol:*`, estimate).
 - **Bug** — defects from QA, telemetry, or reports (`activity:qa`, `package:*`, `protocol:*`).
