@@ -22,15 +22,18 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: closing out the June protocol-hardening and public-polish push on the flagship PWA.
-- **PGSP (Public Goods Staking)**: relaunching the Genesis validator squad and building the first operator cohort toward testnet.
-- **NYC Vault Crowdfunding**: crowdfunding decentralized park vaults through the Green Goods UI.
+- **Green Goods**: the flagship regen-documentation PWA is now on a monthly release cadence — v1.2.0 shipped in July, with the August v1.3.0 cut and rolling QA the current focus.
+- **Public Goods Staking (PGSP)**: an operator-first relaunch — standing up the Genesis validator squad and first operator cohort on the path to testnet.
+- **Greenpill Network website**: polishing the public site and community map after June's launch, and onboarding stewards so the map and content stay accurate.
+- **Commitment Pooling**: building durable per-garden commitment pools that link community requests, offers, accepted work, and evidence into one confirmable on-chain thread.
+- **Community Needs & Signals**: an independent community app for naming requests, offers, and initiatives and following a legible need-to-proof thread.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-See [Green Goods releases](https://github.com/greenpill-dev-guild/green-goods/releases) for what shipped recently.
+- **Green Goods**: shipped [v1.2.0](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.0) in July — a monthly release hardening the PWA and passkey recovery, overhauling the admin dialog system, polishing the funding flows, and migrating signup to Resend.
+- **Greenpill Network website**: merged public-map improvements this week — steward profiles now project from the CMS, moderators are alerted to pending map submissions, and map location handling was hardened. See [merged work](https://github.com/greenpill-dev-guild/network-website/pulls?q=is%3Apr+is%3Amerged).
 <!-- recently-shipped:end -->
 
 ## Across the guild
