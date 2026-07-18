@@ -2,6 +2,15 @@
 
 > Tell the guild's story: campaigns, content, and brand.
 
+<<<<<<< HEAD
+**Key:** `MAR` · **Cycles:** none (brief-driven) · **Panel:** afo, nansel, kit
+
+## Purpose
+
+Linear team description (paste verbatim — the settings field caps at ~255 characters, and this version fits):
+
+> Accepted marketing and creative briefs: campaigns, content, announcements, and brand assets. Every brief names its audience, deliverable, and where it ships. Product/UX design stays on Product; community relationships stay on Community.
+=======
 **Key:** `MAR` · **Cycles:** none (brief-driven) · **Panel:** afo, nansel
 
 ## Purpose
@@ -9,6 +18,7 @@
 Use this text verbatim as the Linear team description (new team, no description set yet):
 
 > Accepted marketing and creative briefs: campaigns, content, announcements, and brand or visual assets. Every brief names its audience, deliverable, and where it ships. Product and UX design stay on Product; community relationships stay on Community.
+>>>>>>> origin/main
 
 ## What belongs here
 
@@ -36,7 +46,11 @@ None. Marketing runs on briefs and campaign windows (epochs, seasons, launches),
 
 ## Evaluator panel
 
+<<<<<<< HEAD
+afo, nansel, kit (kit rejoins with the Linear seat re-granted at the 2026-07-13 capital sync; his Q3 stipend lane is Green Goods marketing presentations). Roster is confirmed in the Evaluator Panels Linear Document.
+=======
 afo, nansel. This panel is thin; add a third member as the marketing roster grows. Roster is confirmed in the Evaluator Panels Linear Document.
+>>>>>>> origin/main
 
 ## Templates
 

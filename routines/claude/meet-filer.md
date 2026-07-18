@@ -32,9 +32,11 @@ Follow the 302 redirect. Parse the JSON response `{ok: true, folderId, count, fi
 
 Client-side filter:
 1. Drop files whose `name` starts with `meet-filer-` (this routine's own output docs).
-2. Keep only files with `modifiedTime > <now-12h RFC3339>`.
+2. Keep only files with `modifiedTime > <now-30d RFC3339>`. The lookback is deliberately much wider than the run cadence: the cron runs Tue-Sat 00:00 UTC, so a 12h window (the old value) left a 72-hour weekend hole — Friday-evening through Monday-morning meetings (e.g. the Sunday WEFA Studio Sessions) were never candidates and stranded in Meet Recordings forever. A wide window is safe: moved files leave the folder, the `meet-filer-` prefix filter skips this routine's own docs, and the Phase 4 no-op filter drops anything already in place — so anything still sitting in Meet Recordings is by definition unprocessed and should be retried every run.
 
 The returned candidates include ALL file types — Notes by Gemini docs, Recording mp4s, Chat transcripts. They each go through Phase 3 independently. The legacy "Phase 4 sibling search" approach is gone: every sibling is already in the candidate set, so classifying each by title rule handles them uniformly.
+
+**Phase 2b — Review-folder self-healing (added 2026-07-18):** also call the list endpoint for the **Review** folder (`reviewFolderId` from the Phase 5 health check) and take up to **15 residents per run, oldest `modifiedTime` first** (bounded so the nightly run stays cheap; the backlog drains over a few nights). Re-run Phase 3 classification on each: a rule added since the file was parked now moves it to its proper home, and the calendar fallback's One-Offs path catches identified-but-homeless meetings. Residents that still classify to Review simply stay (no churn, no re-move). This is what makes mapping-rule additions retroactive instead of forward-only.
 
 ### Phase 3: Classify
 
@@ -46,7 +48,7 @@ Notes docs, Recordings, and Chat transcripts share the same title prefix (`<Meet
 
 1. Parse `Meeting started YYYY/MM/DD HH:MM (TZ)` OR `Meeting started YYYY MM DD HH:MM (TZ)` (date may use slashes OR spaces). TZ has been observed as both `PDT` and `PST` within a single month; resolve to UTC via offset (`PDT = UTC-7`, `PST = UTC-8`). On parse fail → Review.
 2. **Multi-calendar lookup**: read `fallbackCalendars` from the mapping JSON below. Query Calendar `list_events` with `startTime = ts-10min`, `endTime = ts+10min` on each calendar in priority order, starting with `userCalendarId` (your primary). Stop at the first calendar that returns ≥1 event.
-3. Pick the event closest to `ts` from the matched calendar. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If still no match → Review.
+3. Pick the event closest to `ts` from the matched calendar. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If an event matched but its summary hits NO rule → the meeting is **identified but homeless**: move it to **Meetings — One-Offs** (`oneOffsFolderId`) and record the event summary in the run log. Only when NO calendar event matched (or the timestamp parse failed) → Review.
 
 **Calendar fallback for raw Meet codename titles** (rule order 91):
 
@@ -54,7 +56,7 @@ Meet sometimes drops Recordings/Chat transcripts with a raw codename instead of 
 
 1. Parse the regex `^([a-z]{3}-[a-z]{4}-[a-z]{3}) \((\d{4}-\d{2}-\d{2}) (\d{2}:\d{2}) GMT([+\-]\d+)\)` to extract codename, date, time, offset. Resolve `(date, time, offset)` to UTC.
 2. Run the same multi-calendar `list_events` lookup at `ts ± 10min` as the rule-90 fallback, in the same priority order.
-3. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If no calendar event matches OR matched summary doesn't hit a rule → Review.
+3. Re-run the rules table against the matched event's `summary`. If a rule matches → use that destination. If an event matched but its summary hits no rule → **Meetings — One-Offs** (`oneOffsFolderId`), logging the summary. If no calendar event matches → Review.
 
 If a rule matches but its `targetFolderId` is `null`: route to Review AND surface the rule's `order + label` in the run log as a warning.
 
@@ -102,7 +104,7 @@ Always run regardless of whether any moves happened this cycle. Goal: surface ac
 
 1. Call the webhook list endpoint for the Review folder: `GET $MEET_FILER_WEBHOOK_URL?action=list&folderId=<reviewFolderId>` (use `reviewFolderId` from the GET health response in Phase 5).
 2. For each file, check `modifiedTime`. Count those older than 7 days.
-3. If the count is ≥ 5 AND a doc titled `meet-filer-review-backlog-YYYY-MM-DD.md` for today does NOT already exist in Meet Recordings:
+3. If the count is ≥ 5 AND no `meet-filer-review-backlog-*.md` doc dated within the last **7 days** exists in Meet Recordings (a weekly nudge — an uncleared backlog must not produce a new doc every night):
    - Create the backlog doc via Drive `create_file` (`contentMimeType: "text/markdown"`, `disableConversionToGoogleType: false`).
    - Body: markdown table `| file title | days in Review | drive link |`, sorted descending by age, with a one-line action prompt at top: *"Re-classify these manually, OR add a regex rule to the mapping JSON to catch them next cycle."*
 4. If count < 5 OR a backlog doc already exists for today: skip (no spam).
@@ -121,7 +123,7 @@ This is the only nudge mechanism. No Discord.
 | Skip GET health check | Catches missing Drive API setup |
 | Retry failed moves in-run | Next scheduled run picks them up |
 | Create the Review folder via Drive `create_file` | Apps Script `ensureReviewFolder` (via GET) is the single owner |
-| Spam-create backlog docs daily | Phase 8 must check for existing same-day doc before creating |
+| Spam-create backlog docs daily | Phase 8 creates at most one backlog doc per 7 days; an uncleared Review backlog is nudged weekly, not nightly |
 | Send a manifest > 25 moves in one POST | Apps Script chunk limit; split into ≤25-move batches |
 | POST a move where `originalParents` already includes `targetFolderId` | No-op move; source-lock rejects and pollutes audit log |
 | Post to Discord | User opted out |
@@ -132,6 +134,7 @@ This is the only nudge mechanism. No Discord.
 {
   "version": 4,
   "meetRecordingsFolderId": "15rffge0LlFlD_sa7hH5vv2SFag7SEDfa",
+  "oneOffsFolderId": "1oAx3SFXriR3eE301ZWJwGIGbqgj6Fa9-",
   "userCalendarId": "afo@greenpill.builders",
   "reviewFolderName": "Meet Recordings — Review",
   "fallbackCalendars": [
@@ -154,7 +157,7 @@ This is the only nudge mechanism. No Discord.
     { "order": 8,  "regex": "^Community Chat",                        "targetFolderId": "1PZPXZF8SIlLiL_XZSKb_Aez1acGyRKdj",   "label": "DevGuild SD / Community / Chat" },
     { "order": 9,  "regex": "^Community Sync",                        "targetFolderId": "1iisBzbIRYqQcSEsZBq1N8iZboCgRUXee",   "label": "DevGuild SD / Community / Sync (retired)" },
     { "order": 10, "regex": "^Builder Space",                         "targetFolderId": "1DRhht8txHt2Biu5F4Jb1Rl3oTV5pd80e",   "label": "DevGuild SD / Community (Builder Spaces)" },
-    { "order": 11, "regex": "^Stewards Sync",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync" },
+    { "order": 11, "regex": "^(Copy of )?(Stewards Sync|ste-ward-s sync)", "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL", "label": "Network SD / Stewards / Sync (incl. Gemini's ste-ward-s spelling + Copy-of dupes)" },
     { "order": 12, "regex": "^Greenpill Monthly Community Call",      "targetFolderId": "1BC9cPzV9MFzo51-rbRXqQAv_D0nQz7Dl",   "label": "Workspace / Network / Community (Monthly Call)" },
     { "order": 13, "regex": "^Greenpill Network Website",             "targetFolderId": "0ADPqiYLt4dW0Uk9PVA",                "label": "Network SD root" },
     { "order": 14, "regex": "^Tech\\s*[&]\\s*Sun",                    "targetFolderId": "1B_Yo1N5WPxIk46CeSyehDTa-0Y6P4jzM",   "label": "Tech & Sun SD / Meetings" },
@@ -165,6 +168,9 @@ This is the only nudge mechanism. No Discord.
     { "order": 19, "regex": "^(YCC|Yoruba)\\b",                       "targetFolderId": "1nInuwH2zkQJv6lbFaR9qaA5NnEslTG6W",   "label": "YCC My Drive (root)" },
     { "order": 20, "regex": "^Coffee Meet",                           "targetFolderId": "1BBxzsHYvKX_hnPN4cc27pssUs6pyCJ2Y",   "label": "Afo / Coffees" },
     { "order": 21, "regex": "^Odunde\\b",                             "targetFolderId": "1qzaRzNWhbVgZOSwMCDVDLaUZYvWwbGBc",   "label": "Odunde 2026 / Weekly Village Planning" },
+    { "order": 22, "regex": "^Regen Commons",                       "targetFolderId": "0AHKbTaY-pk03Uk9PVA",                "label": "Regen Coordination SD (Regen Commons: Council Call / Steward Jam)" },
+    { "order": 23, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
+    { "order": 24, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
     { "order": 90, "regex": "^Meeting started \\d{4}[/ ]\\d{2}[/ ]\\d{2}", "targetFolderId": null,                            "label": "→ Calendar fallback for 'Meeting started' titles (accepts slash or space dates)" },
     { "order": 91, "regex": "^[a-z]{3}-[a-z]{4}-[a-z]{3} \\(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} GMT[+\\-]\\d+\\)", "targetFolderId": null, "label": "→ Calendar fallback for raw Meet codename titles" },
     { "order": 99, "regex": ".*",                                     "targetFolderId": null,                                 "label": "Meet Recordings — Review (auto-created)" }

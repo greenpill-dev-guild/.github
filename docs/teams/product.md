@@ -6,9 +6,15 @@
 
 ## Purpose
 
+<<<<<<< HEAD
+Linear team description (paste verbatim — the settings field caps at ~255 characters, and this version fits):
+
+> Accepted, shippable work: features, delivery, QA, and maintenance on live products. Every issue has a clear next action and an owner, human or agent. Research starts on Research, funding on Growth, raw signal as a Customer Need.
+=======
 Use this text verbatim as the Linear team description:
 
 > Accepted, shippable work: product and protocol features, delivery, QA, and maintenance on live products. Every issue has a clear next action and an owner, human or agent. Research starts on Research, funding lives on Growth, and raw signal starts as a Customer Need.
+>>>>>>> origin/main
 
 (The pre-2026-07 description also claimed "funding on live products"; that clause moved to Growth with the funding pipeline.)
 

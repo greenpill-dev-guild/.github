@@ -1,7 +1,7 @@
 ---
 routine-name: guild-grant-scout
 trigger:
-  schedule: "0 19 * * 3"  # 19:00 local, Wednesday
+  schedule: "0 2 * * 4"  # Thu 02:00 UTC = Wed 19:00 PT
 max-duration: 2h
 repos:
   - greenpill-dev-guild/.github
@@ -36,7 +36,7 @@ This routine is **centered on two primary funding targets — Green Goods and PG
 
 - `DISCORD_BOT_TOKEN`, `DISCORD_FUNDING_CHANNEL_ID`, `DISCORD_USER_ID_AFO`, `POSTHOG_PROJECT_API_KEY`, and `POSTHOG_HOST` are in the environment.
 - Connectors available: Google Drive, Google Calendar, Miro, **Canva**, Linear, **PostHog**. (Gmail is intentionally NOT wired — personal-inbox pollution risk.)
-- **Linear is the canonical surface for grant lifecycle.** Non-awarded grants (prospect / drafting / submitted) live as Issues in the **Research team's `Grant Scouting` project**, tracked with the canonical `funding:*` lifecycle labels. **Awarded grants graduate** to the **Product team** into a bounded award/delivery project when delivery, reporting, compliance, or funder follow-through needs project-level management. Because awards live in Product and everything else in Research, **always read `funding:*` workspace-wide — never scope a read to a single team** (a team-scoped read silently misses half the pipeline and causes already-tracked programs to re-surface as "NEW"). Resolve team/project/label IDs by name at the start of every run.
+- **Linear is the canonical surface for grant lifecycle, and its home is the `Growth` team (`GROW`).** Every lifecycle state — `funding:prospect`, `funding:drafting`, `funding:submitted`, AND `funding:active-award` — lives as a GROW Issue carrying the matching `funding:*` label (live examples: GROW-13 Octant Epoch 12 active-award; GROW-1/3/4 prospects). There is no pipeline project: issues sit unprojected on GROW and saved views over `funding:*` are the pipeline (the old Research-team `Grant Scouting` project is retired — never resurrect it or route into it). Awards stay on GROW for reporting, compliance, and funder follow-through; **the delivery work an award unlocks is filed on the Product team and linked back to the award issue** — you link, you never create the delivery issues. As a dedup safety net, **still read `funding:*` workspace-wide at run start** (history and strays may sit on other teams; a scoped read that misses them re-surfaces known programs as "NEW"), but **write only to GROW**. Resolve team and label IDs by name at the start of every run — never hardcode ids.
 - **Reach Linear through the Linear connector** — the default and only Linear path; **no Linear API key is stored for this routine.** Use the connector to read and write the `funding:*` lifecycle. It is an OAuth integration that can lapse between runs; if it is unauthed or unreachable you have lost the canonical dedup + write surface, so **do not scout** — follow the **fail-closed rule in Phase 0** (post one status line flagging that the connector needs re-authorization, then exit). Never scout without Linear, and never fall back to scouting blind.
 - **Canva** is read-only enrichment. Use to find existing pitch decks / slides that can inform new proposals or be referenced for visual narrative continuity. Reject step: drop personal-folder Canva content, drop designs whose title contains `'WEFA'` or `'wefa.world'`.
 - **PostHog** is a subtle, secondary evidence signal — never the primary discovery surface. Use for grant evidence enrichment in Phase 2 (fit assessment) and Phase 3 (proposal drafting) only. Privacy mode: public. Never paste replay URLs, session IDs, distinct IDs, or wallet addresses anywhere. **When using the PostHog connector, call `switch-project` to the App project (`163591`) before any query** — the connector defaults to the wrong project and silently returns zero, which would make evidence enrichment quietly empty without flagging it.
@@ -68,8 +68,8 @@ At run start, verify each surface you depend on and record a one-line health sta
 
 Before scouting this week, read the last 4 weekly grant-scout Drive memos to know:
 
-- **What's already in the pipeline** — open `funding:prospect`, `funding:drafting`, `funding:submitted` Issues. **Query Linear at run start by `funding:*` label across the whole workspace — do NOT scope to one team.** Non-awarded grants live in the Research team's `Grant Scouting` project and awards live in Product, so a team-scoped query silently misses half the pipeline — this is exactly what re-surfaces already-tracked programs as "NEW".
-- **What's already in stewardship** — open `funding:active-award` Issues and any bounded award/delivery projects. Refresh stewardship status; never re-surface a won grant as a new prospect.
+- **What's already in the pipeline** — open `funding:prospect`, `funding:drafting`, `funding:submitted` Issues. **Query Linear at run start by `funding:*` label across the whole workspace — do NOT scope to one team.** The pipeline lives on GROW, but history and strays can sit elsewhere; a team-scoped query that misses them is exactly what re-surfaces already-tracked programs as "NEW".
+- **What's already in stewardship** — open `funding:active-award` Issues (on GROW) and their linked Product delivery issues. Refresh stewardship status; never re-surface a won grant as a new prospect.
 - **What was already evaluated and dismissed** — programs prior memos marked `dismiss` with rationale. Do not re-surface unless there's clear new context.
 - **Stale prospects** — any `funding:prospect` open >30 days without movement. Surface in Phase 5 for triage or auto-dismissal.
 
@@ -258,25 +258,25 @@ Never submit proposals. Human review owns final submission.
 
 ## Phase 4: Linear funding-lifecycle Issues
 
-For any high-fit opportunity **that passed the Phase 2 existence gate** (Confirmed, or Couldn't-auto-verify — flag the latter `⚠️ unverified` in "Human decision needed"), create or update one Linear Issue using the canonical `funding:*` lifecycle. New prospects / drafts / submissions are created in the **Research team's `Grant Scouting` project**. Awarded grants graduate to the **Product team** into a bounded award/delivery project when there is delivery, reporting, compliance, or funder follow-through to manage.
+For any high-fit opportunity **that passed the Phase 2 existence gate** (Confirmed, or Couldn't-auto-verify — flag the latter `⚠️ unverified` in "Human decision needed"), create or update one Linear Issue using the canonical `funding:*` lifecycle. Every lifecycle Issue is created on the **Growth team (`GROW`)**, unprojected; saved views over `funding:*` are the pipeline.
 
 ### Resolve IDs at run start (never hardcode)
 
-- Team / project: create non-awarded grant Issues in the **Research** team, **`Grant Scouting`** project (awards graduate to **Product**). Resolve team / project / label IDs by name via the Linear connector (e.g. `list_teams` / `list_projects` / `list_issue_labels`) — never hardcode. Create and comment via the connector's issue / comment tools.
-- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `agent:routine`, `activity:research`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:coop`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:tas`) by name. Cookie Jar work routes to `protocol:green-goods` (Cookie Jar project is completed; new vault/crowdfunding/funding-pool work lives under Green Goods seasons). Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
-- Award/delivery projects: when transitioning a submission to `funding:active-award`, resolve the bounded award/delivery project (in Product) by name. Do **not** route new prospects into umbrella, staging, or completed projects — non-awarded grants belong in the Research `Grant Scouting` project.
+- Team: create all grant Issues on the **Growth** team. Resolve team / label IDs by name via the Linear connector (e.g. `list_teams` / `list_issue_labels`) — never hardcode. Create and comment via the connector's issue / comment tools.
+- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `agent:routine`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:coop`) by name. Do not apply `activity:research` to grant Issues (Growth is the team; the lifecycle label carries the state). Cookie Jar work routes to `protocol:green-goods`. Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
+- No pipeline project exists: never route a grant Issue into any project (the old Research `Grant Scouting` project is retired; umbrella/staging/completed projects are off-limits). When an award needs delivery work, the delivery issues are filed on **Product** by humans and linked — you comment the link on the award issue if you find it missing, you do not create delivery issues.
 
 ### Dedupe first
 
-Query open Issues **across the workspace** filtered by `funding:*` labels (not one team — awards live in Product, everything else in the Research `Grant Scouting` project), and check against `KNOWN_PROGRAMS` from Phase 0. Match primarily on the **funder URL (host + program path)**, secondarily on program name — a re-worded title (e.g. one that adds a topic like "passkey-support") is the **same** program if the funder URL matches. If a duplicate exists, **comment on the existing Issue** with new context (refreshed deadline, new evidence, updated fit score) — never create a parallel Issue.
+Query open Issues **across the workspace** filtered by `funding:*` labels (the pipeline lives on GROW, but history and strays can sit on other teams), and check against `KNOWN_PROGRAMS` from Phase 0. Match primarily on the **funder URL (host + program path)**, secondarily on program name — a re-worded title (e.g. one that adds a topic like "passkey-support") is the **same** program if the funder URL matches. If a duplicate exists, **comment on the existing Issue** with new context (refreshed deadline, new evidence, updated fit score) — never create a parallel Issue.
 
 ### Create new prospect
 
 Title: `Grant: {Program Name}`
 
-Project: **`Grant Scouting`** (Research team). Only `funding:active-award` Issues move to a bounded award/delivery project in Product.
+Team: **Growth (`GROW`)**, unprojected.
 
-Labels: `funding:prospect`, `activity:research`, `agent:routine`, plus the relevant `protocol:*` for primary fit.
+Labels: `funding:prospect`, `agent:routine`, plus the relevant `protocol:*` for primary fit.
 
 Body:
 
@@ -317,7 +317,7 @@ Body:
 
 - **When a draft is saved**: remove `funding:prospect`, add `funding:drafting`. Comment with `Draft saved: {Drive URL}`. Move Linear status from `Backlog` to `In Progress`.
 - **When a human confirms submission** (detected via #funding signal or Drive memo update): remove `funding:drafting`, add `funding:submitted`. Comment with `Submitted {date}. Awaiting response.`
-- **When awarded**: replace `funding:submitted` with `funding:active-award`, then graduate the Issue into a bounded award/delivery project if delivery, reporting, compliance, or funder follow-through needs project-level management. Delivery work links back to the originating Issue.
+- **When awarded**: replace `funding:submitted` with `funding:active-award`. The Issue **stays on GROW** for reporting, compliance, and funder follow-through; delivery work is filed on Product by humans and linked back to the award issue (comment the pointer if you find delivery happening unlinked). A funded campaign push (e.g. an Octant/Artizen round) is a **Marketing** brief — link it from the award issue, never create or duplicate it.
 - **When rejected**: comment with rejection reason and date, set Linear status to `Cancelled`. Do not remove the `funding:submitted` label — historical record matters.
 - **When stale** (`funding:prospect` open > 30 days with no Drive draft and no #funding signal): in Phase 5, list under "Stale prospects" for human triage. Auto-dismiss only after Afo signs off on the recommendation.
 
@@ -452,7 +452,7 @@ If the Drive write fails, still consider the run successful (Discord post + Line
 
 - **This is a non-interactive scheduled routine — never ask the user anything.** No human reads your output at runtime. Never call `AskUserQuestion`, present options, pause for confirmation, or end a run on a question. Every branch must terminate in a concrete action (a Drive write, a Discord post, a Linear create/update) or a clean logged exit. In any ambiguous or undefined state, take the **lowest-blast-radius** action — almost always "touch no shared surface, log the reasoning to the Phase 6 memo, and exit" — never defer to a human who is not there. The only human touchpoints are asynchronous and written: the "Human decision needed" field in a Linear Issue and the `<@${DISCORD_USER_ID_AFO}>` mention in the weekly heartbeat. Those are artifacts a human reads later, not interactive prompts that block the run. **If a *required* surface (Linear) is unavailable, this same principle is mandatory — do not scout: post the one-line status to `#funding`, write the memo, and exit (Phase 0 fail-closed). A silent skip is the correct lowest-blast-radius action; a degraded run that emits opportunities is not.**
 - **Active discovery is the job — but the target is breadth of scanning, not an opportunity quota.** Work 6–8 funders/clusters thoroughly each run and rotate them so a month covers the whole funder universe (web3, climate, Africa/dev, OSS-infra). Surface only what passes the Phase 2 existence gate; 1–2 verified opportunities — or zero on a genuinely dry week — is a success. **Never pad, invent, re-frame, or re-surface a known/closed program to hit a number.** Discord/Drive/Calendar reads are signal-feeds, not the discovery surface.
-- **Linear `funding:*` lifecycle is the canonical surface, reached via the Linear connector.** Non-awarded grants live in the Research `Grant Scouting` project; awards graduate to Product. **Read `funding:*` workspace-wide, never one team.** Do not write grant lifecycle Issues anywhere else — not `.github` (no GitHub Issues, ever), not project repos, and not umbrella, staging, or completed Linear projects.
+- **Linear `funding:*` lifecycle is the canonical surface, reached via the Linear connector, and it lives on the Growth team.** Every state including `funding:active-award` stays on GROW; delivery work is filed on Product by humans and linked. **Read `funding:*` workspace-wide for dedup, write only to GROW.** Do not write grant lifecycle Issues anywhere else — not `.github` (no GitHub Issues, ever), not project repos, and not any Linear project (the pipeline is unprojected + saved views; the old `Grant Scouting` project is retired).
 - **Post the weekly heartbeat exactly once per cycle** to `#funding`. The first run of the cycle must post (silent first-runs are not allowed); a subsequent same-cycle manual re-trigger must suppress the duplicate (see the Phase 0 same-cycle guard).
 - **Always write the Phase 6 memo.** It is the substrate that lets Phase 0 work — skipping it breaks future continuity.
 - **Populate the cycle calendar every run.** `PROGRAM_CYCLES` / `REOPEN_WATCH` (Phase 0) must capture recurring funders even when currently closed (e.g. UNICEF Venture Fund ~annual, Gitcoin GG rounds, GSMA / EEP / AECF cohorts, Shuttleworth's Nov/Mar intakes). A closed window recorded with its reopen date is a future win; an unrecorded one is the routine rediscovering a program a cycle too late — the single most common way this routine loses value.
