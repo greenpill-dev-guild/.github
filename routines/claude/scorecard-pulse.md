@@ -34,7 +34,8 @@ The outcome layer froze once before: in June 2026 the indicator registers were b
 
 - All initiatives: status, health, targetDate, updatedAt, full description.
 - Each Active or Planned **outcome** initiative's `Indicator Register` document. Skip status-only surfaces (Software Ecology & Agentic Workflow Health, Coop Product Loop & Intent Clarity) and Completed initiatives — their registers are closed pointers.
-- The rules from `docs/strategy/scorecard-and-branch-map.md` in the .github clone, and strategy recency via `git log -1 --format=%cI docs/strategy/strategy.md` (and the same for `theory-of-change.md`).
+- The rules from `docs/strategy/scorecard-and-branch-map.md` in the .github clone.
+- Whether a Linear document titled `Strategy — {current quarter}` (e.g. `Strategy — Q3 2026`) exists on the `Guild Operating System` shelf. Strategy is written as a new Linear edition each quarter; a missing edition means the quarterly review has not happened.
 
 ## Phase 2 — Compute (auto-derivable only)
 
@@ -61,7 +62,7 @@ For each **Active** outcome initiative (Planned ones only when they carry a drif
   - `Current roadmap projects` naming a completed, canceled, or nonexistent project.
   - Register rows with As-of older than 30 days.
   - Register document updatedAt older than the initiative description's updatedAt (register left behind).
-  - `docs/strategy/strategy.md` untouched for more than 100 days (quarterly review overdue), or `theory-of-change.md` untouched for more than 380 days. These flags go in the Discord digest's Needs-you block, not on any initiative.
+  - No `Strategy — {current quarter}` document exists on the Guild Operating System shelf (the quarterly review has not happened), or `theory-of-change.md` in the .github clone is untouched for more than 380 days via `git log -1`. These flags go in the Discord digest's Needs-you block, not on any initiative.
 - Health: carry the initiative's current health forward (default `onTrack` if unset); if flags warrant a change, SAY SO in the text — the steward changes health, not the pulse.
 - End with the signature line: `— scorecard-pulse {YYYY-MM}` (the idempotency key).
 
