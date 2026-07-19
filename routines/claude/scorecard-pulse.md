@@ -33,7 +33,7 @@ The outcome layer froze once before: in June 2026 the indicator registers were b
 ## Phase 1 — Read
 
 - All initiatives: status, health, targetDate, updatedAt, full description.
-- Each Active or Planned **outcome** initiative's `Indicator Register` document. Skip status-only surfaces (Software Ecology & Agentic Workflow Health, Coop Product Loop & Intent Clarity) and Completed initiatives — their registers are closed pointers.
+- Each Active or Planned **outcome** initiative's `Indicator Register` document. Skip status-only surfaces (any initiative whose card says status-only) and Completed/Canceled initiatives — their registers are closed pointers.
 - The rules from `docs/strategy/scorecard-and-branch-map.md` in the .github clone.
 - Whether a Linear document titled `Strategy — {current quarter}` (e.g. `Strategy — Q3 2026`) exists on the `Guild Operating System` shelf. Strategy is written as a new Linear edition each quarter; a missing edition means the quarterly review has not happened.
 
