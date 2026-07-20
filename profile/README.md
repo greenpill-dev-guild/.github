@@ -43,7 +43,7 @@ How work is organized: five teams — Product, Research, Community, Growth, and 
 <!-- team-shipping:start -->
 - **Product** — driving Green Goods to the August v1.3.0 release after shipping v1.2.0 in July, and building per-garden commitment pooling.
 - **Research** — refreshing the Greenpill Impact Framework to v0.1 and reconciling the impact-domain and assessment taxonomy.
-- **Community** — activating the Season Two pilot cohort and onboarding the first PGSP operator cohort, kicked off at Builder Space #23.
+- **Community** — bringing on the next cohort of pilot gardens and onboarding the first PGSP operator cohort, kicked off at Builder Space #23.
 - **Growth** — running the funding pipeline: the active Octant Epoch 12 partnership, the opening Artizen Season 7 raise, and a live grant queue.
 - **Marketing** — producing the Green Goods PWA onboarding how-to videos and the docs demo-video batch.
 <!-- team-shipping:end -->
