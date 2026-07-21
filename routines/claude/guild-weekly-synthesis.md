@@ -90,15 +90,22 @@ A doc that mentions WEFA in passing while discussing a guild project is fine. A 
 
 **Calendar** (the dev-guild shared calendar plus Afo's calendar — but Afo's calendar contains personal projects and WEFA work that must NOT leak):
 
-Include an event ONLY when its title or description matches one of:
+Read an event as context ONLY when its **title** matches one of (match on the title, never the description — a stray body mention must not pull an event in):
 - a guild project name (`Green Goods`, `Network Website`, `PGSP`, `Public Goods Staking`, `GreenWill`)
-- a known guild call (`Dev Guild Sync`, `Lead Council`, `Working Capital`, `Treasury`, the literal word `guild`)
+- a known guild call (`Dev Guild Sync`, `Build Sync`, `Lead Council`, `Working Capital`, `Treasury`, the literal word `guild`)
 - a Greenpill Network ecosystem moment (governance call, retro, public workshop, ecosystem AMA)
 - a tracked grant program deadline, demo day, pitch event, or submission reminder
 
 Drop personal calendar events, WEFA-tagged events, sales/client meetings, and other non-guild meetings even when they fall in the 7-day window.
 
-**Join / RSVP links (include for every surfaced event):** capture an actionable link per event — prefer a **Luma RSVP link** if the event's description/location contains a `lu.ma`/`luma.com` URL, else the **Google Meet** link (`conferenceUrl`), else the **event page** (`htmlLink`). The guild's public Luma calendar is `https://luma.com/greenpilldevguild` — surface it as a standing RSVP pointer. Only attach join/RSVP links for **public/attendable** events in the public `#community` post — never for private calls (Capital/Treasury/Council syncs).
+**Public vs internal — the split that decides where an event may appear.** Reading an event does NOT make it public. The public `#community` post draws from a **closed allow-list of exactly two event types**; everything else is internal, and the default is to surface nothing publicly:
+
+- **Public-shareable** (the ONLY events eligible for the `#community` "Come along" section): the **Community Sync** (the public community call — title starts `Community Sync`) and **Builder Spaces** (public community workshops — title starts `Builder Space`). These are the guild's only public-facing events this quarter.
+- **Internal-only** (may inform the private `#lead-council` digest, but NEVER `#community`): every other calendar match — the **Build Sync** (private guild build/product call), the **Steward Sync** (a Greenpill *Network* stewards call, not a guild event), plus `Dev Guild Sync`, `Lead Council`, `Working Capital`, `Treasury`, ecosystem moments, and grant / demo / pitch / submission deadlines.
+
+Anything not explicitly named on the public-shareable list is internal by default — a call, AMA, or event added to the calendar later stays out of `#community` until this list is updated to name it. **If neither a Community Sync nor a Builder Space falls in the 7-day window, no events are shared publicly** — the `#community` "Come along" section is omitted entirely.
+
+**Join / RSVP links (public-shareable events only):** for a surfaced Community Sync or Builder Space, capture an actionable link — prefer a **Luma RSVP link** if the event's description/location contains a `lu.ma`/`luma.com` URL, else the **Google Meet** link (`conferenceUrl`), else the **event page** (`htmlLink`). Never attach a join/RSVP link to an internal call (Build Sync, Steward Sync, Capital / Treasury / Council syncs) — those do not appear in the public post at all.
 
 **Miro** (boards as planning context):
 
@@ -191,7 +198,7 @@ One **house style** governs both posts, tuned for a fast human read:
 {at most 4 bullets, one per project or cross-project theme that actually moved; combine GitHub + Linear so a commit-only week still surfaces work; each ≤ 1 sentence. Omit a quiet project — never write "quiet" here.}
 
 **📅 Come along**
-{at most 3 bullets — public meetings, demos, deadlines the community can attend; append each event's RSVP/join link (Luma > Google Meet > event page). Omit the whole section if nothing public is happening.}
+{ONLY the Community Sync and Builder Spaces (per the Calendar scope contract's public-shareable list) — at most 3 bullets, each with its RSVP/join link (Luma > Google Meet > event page). Nothing else appears here: no Build Sync, no Steward Sync, no other guild call, no grant / demo deadline. **Omit this entire block — the heading AND the Luma line below it — whenever no Community Sync or Builder Space falls in the window.** The guild has no standing public events this quarter, so expect this block to be absent most weeks.}
 _RSVP to guild events → https://luma.com/greenpilldevguild_
 
 **🎨 Shipped & shared**
@@ -244,7 +251,7 @@ A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shar
 
 ### Phase 1: Read the allow-list
 
-For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query and apply the reject step to every candidate doc. For Calendar, query the next 7 days of events and apply the calendar reject heuristics.
+For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query and apply the reject step to every candidate doc. For Calendar, query the next 7 days of events, apply the calendar reject heuristics, and classify each surviving event as public-shareable or internal-only per the Calendar scope contract (only the two named public event types may reach `#community`).
 
 For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `agent:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts for the council digest's **Teams** fold line, and RESR movement for the **🔬 Research** block.
 
