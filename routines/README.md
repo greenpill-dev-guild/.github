@@ -42,7 +42,7 @@ All cadences UTC.
 
 Retired (specs kept for history): research-accountability-pulse and scope-review-pulse (2026-07-17, merged into delivery-hygiene-pulse); coop-intent-pulse and software-ecology-pulse (2026-07-04).
 
-See [claude/README.md](./claude/README.md) for environment setup, schedule overview, and the manual-skill overlap policy.
+See [claude/README.md](./claude/README.md) for environment setup, schedule overview, model tiering, and the manual-skill overlap policy.
 
 ## Manual Playbooks Vs Scheduled Routines
 

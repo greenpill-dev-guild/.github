@@ -11,7 +11,7 @@ environment: guild-routines
 network-access: full  # Linear + GitHub API + Discord REST (PR announcement)
 connectors:
   - linear
-model: claude-opus-4-8[1m]
+model: claude-opus-4-8[1m]  # pending flip to claude-opus-5 — trigger still on 4.8 (see README)
 allow-unrestricted-branch-pushes: false  # PR only: pushes a profile-refresh/* branch and opens a PR on .github; never pushes main. Requires GitHub write granted to this routine.
 status: active
 ---
@@ -31,6 +31,8 @@ You may edit ONLY the content between these markers in `profile/README.md`. A di
 - `<!-- team-shipping:start -->` ... `<!-- team-shipping:end -->`
 
 If any marker pair is missing, STOP and open no PR (report the missing marker). Do not guess placement.
+
+**Deliver this scope, not an adjacent one.** The source checkout carries a broad git-push capability; this contract, not the capability, defines what you may write. Always a PR, never a direct push to `main`. Do not touch other files, other branches, other repos, or anything in `profile/README.md` outside the three marker pairs, however obviously improvable it looks. Make routine judgment calls inside the markers yourself; if you conclude something outside them needs changing, say so in one line in the PR body and change nothing.
 
 ## Now building (from Linear)
 

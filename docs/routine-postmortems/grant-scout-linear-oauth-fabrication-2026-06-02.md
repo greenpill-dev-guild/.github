@@ -32,3 +32,9 @@ See:
 - `routines/claude/guild-grant-scout.md`
 - `docs/linear-operating-model.md`
 - `routines/grant-application.md`
+
+## Model change (2026-07-26)
+
+`guild-grant-scout` moved to `claude-fable-5`, chosen partly because of this incident: the failure mode here was fabrication under ambiguity, and that is the axis Fable is strongest on. The move does **not** retire any guardrail above. The existence gate and the verify-against-primary-source rule stay exactly as written, because they check third-party facts rather than the model's own reasoning, and no model tier makes them unnecessary.
+
+It does introduce one new failure mode to watch on this routine specifically. Fable's safety classifiers can decline a request on an HTTP 200 with `stop_reason: "refusal"`, and the routines platform exposes no fallback parameter, so a declined run is a **silent no-op**: no post, no Linear write, no error. Grant scouting reads government, security-adjacent, and climate funding portals, which is where a false-positive decline is most plausible. If a Thursday passes with no `#funding` post and no failure line, check the run transcript before assuming a quiet week. Fable also requires 30-day data retention and returns a 400 on every request under zero-data-retention.

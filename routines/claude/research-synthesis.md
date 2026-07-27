@@ -14,7 +14,7 @@ connectors:
   - google-drive
   - google-calendar
   - linear                     # Linear via OAuth connector only, no API key, per guild-routines policy
-model: claude-opus-4-8[1m]
+model: claude-opus-5
 allow-unrestricted-branch-pushes: false  # synthesis routine, no PRs
 status: active
 ---
@@ -36,6 +36,8 @@ This routine has exactly one input channel and one Discord output channel.
 - **Never post Discord to any other channel.** If you would otherwise post elsewhere, post nothing.
 - **Never read other Discord channels.** If `#research` was quiet, the answer is a quiet-week post — not pulling material from adjacent channels.
 - **Audience note:** `#research` includes contributors who are not in `#lead-council`. This digest is their surface. (Leads separately get a 2-bullet 🔬 fold in the weekly synthesis; that fold complements this digest, it does not replace it.)
+- **Per-run caps are ceilings, not targets.** At most ONE Issue and TWO comments per run, and a run that warrants zero of each is a correct run. Never manufacture an Issue to fill the allowance.
+- **Deliver this scope, not an adjacent one.** Make routine judgment calls yourself, but do not widen the job: no extra records, no field edits, no tidying of adjacent issues, no surfaces this contract does not name. If you conclude the spec is wrong or a better approach exists, say so in one line in the memo and run it as written anyway. Finish the whole run rather than the easy part of it; if something genuinely cannot be completed, do the rest and state plainly what is missing and why.
 
 ### Out-of-scope topics (drop on sight, even if they appear in Drive)
 

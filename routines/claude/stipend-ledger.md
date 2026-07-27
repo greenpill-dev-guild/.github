@@ -12,7 +12,7 @@ env-vars:
   - DISCORD_USER_ID_AFO
 connectors:
   - linear                     # Linear via OAuth connector only, no API key, per guild-routines policy
-model: claude-opus-4-8[1m]
+model: claude-opus-5
 allow-unrestricted-branch-pushes: false
 write-mode: write-enabled      # one Discord digest + one Linear Document per month
 status: active

@@ -38,6 +38,7 @@ One style governs every Discord post a guild routine makes:
 - **Fold metrics into the line they describe**; no telemetry or coverage blocks in Discord (run stats go in the memo).
 - **One message** per channel per run (chunk only when Discord's 2000-char limit forces it).
 - Rank action items when there are several: P0 (past-due / decision owed) before P1 (stalled / SLA-breached) before P2 (watch).
+- **Get short by cutting content, not by compressing prose.** Drop anything that would not change what a reader does next, then write what remains in complete sentences. Never pad a post to look thorough, and never compress it into fragments, arrow chains, or invented abbreviations.
 
 ## Active repo scope
 
@@ -65,6 +66,23 @@ Thu      08:00  delivery-hygiene-pulse
 Sat      00:00  research-synthesis       (= Fri 17:00 PT)
 1st/mo   09:00  stipend-ledger
 ```
+
+## Model tier
+
+Each spec names its own model in frontmatter; this is the portfolio view. Every guild routine except `profile-refresh` moved off `claude-opus-4-8[1m]` on 2026-07-26; that one exception is explained below and is tracked as outstanding.
+
+| Model | Routines | Why |
+|---|---|---|
+| `claude-fable-5` | guild-grant-scout, scorecard-pulse | The two low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine) and the monthly indicator refresh under a never-invent-a-value contract. Weekly and monthly cadence, so the higher token price is a few dollars a month. |
+| `claude-opus-5` | delivery-hygiene-pulse, guild-weekly-synthesis, meet-filer, network-steward-intent-pulse, research-synthesis, stipend-ledger | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
+| `claude-opus-4-8[1m]` | profile-refresh | **Outstanding, not a decision.** Blocked on a tooling limitation, see below. |
+
+Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error.
+
+Rollout watchlist for the two Fable routines, since a declined run looks identical to a quiet one:
+
+- **`guild-grant-scout`** (Thu 02:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Thursday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
+- **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
 
 ## Channel mapping
 
@@ -171,7 +189,7 @@ Old label vocabularies (`area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `
 1. Log in to [claude.ai/code/routines](https://claude.ai/code/routines) under Afo's Pro account.
 2. Click **New routine**.
 3. Paste the prompt from the relevant `.md` file (everything after the `# Prompt` heading) — or, for thin-wrapper triggers, a pointer prompt that reads the spec from this repo's `main` at run start (the current pattern for every active guild routine).
-4. Configure repos, environment, connectors, and triggers as specified in the file's frontmatter.
+4. Configure repos, environment, connectors, triggers, **and the model** as specified in the file's frontmatter. A rebuilt routine left on the platform default silently runs the wrong tier; see [Model tier](#model-tier).
 5. Save.
 
 ## Scope discipline
