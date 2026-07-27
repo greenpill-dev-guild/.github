@@ -70,10 +70,12 @@ Use these label families for Linear Issues:
 - `activity:*` — work mode: `activity:build`, `activity:research`, `activity:design`, `activity:architecture`, `activity:qa`, `activity:maintenance`, `activity:marketing`, `activity:community`, `activity:ops`, or `activity:capital`. **`activity:growth` is retired**: Growth is a team (`GROW`), not a work mode; do not recreate the label.
 - `funding:*` — grant/funding lifecycle: `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`. Lives on the Growth team.
 - `source:*` — originating signal, such as `source:github`, `source:discord`, `source:telegram`, `source:drive`, or `source:plans`.
-- `agent:*` — authored or maintained by a routine or agent, such as `agent:claude`, `agent:codex`, or `agent:copilot`.
+- `ai:*` — authored or maintained by a routine or agent. Exactly three children exist: `ai:claude` (interactive Claude Code), `ai:codex` (Codex), and `ai:routine` (cron'd routine writes). They are not synonymous. The group was `agent:*` in earlier docs; the live group has always been `ai`, and `agent` exists only as a **`package:agent`** child, which is a different thing.
 - **Estimate (Linear field)** — sizing signal for a scoped brief on the exponential scale (1/2/4/8 in live use; 16+ for a major integration); replaces the retired `band:*` labels. An estimate is a size, not a price; see the [compensation playbook](../routines/scoped-work-compensation.md).
 
 Linear enforces exclusive child labels within grouped families. Pick the primary child label for each family rather than applying several `activity:*`, `protocol:*`, or `package:*` labels to the same issue.
+
+**Writing labels through the API: the `group:child` notation above is display shorthand, not an accepted input.** `save_issue` resolves labels by **bare child name or by label ID**, so `["protocol:green-goods", "activity:qa"]` fails where `["green-goods", "qa"]` or the IDs succeed. It also rejects the **entire** label array when any single entry fails to resolve rather than applying the rest, so one stale label name means the issue is not filed at all, with no partial write to notice. Read `group:child` throughout this repo as "the `child` label in the `group` family" and pass the child.
 
 Do not recreate retired GitHub-era label families in Linear. In particular, avoid `area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `automation:*`, `health:*`, `grant:*`, and `source:linear`.
 
@@ -108,7 +110,7 @@ Scope-review happens before Todo. Backlog and Triage issues that need a scoped b
 
 A Linear issue delegated to Codex or another coding agent must be self-contained enough that the issue is the prompt and the repo's `AGENTS.md` is the operating manual. Delegate only when the issue names the target repo/branch, behavior change, bounded surface, validation command, and acceptance criteria. If a task points to a `.plans` handoff or status file, link it explicitly and keep orchestration state in the plan/status file, not in the agent's private thread.
 
-`agent:codex` marks an issue as suitable for Codex-style execution; it is not a priority label and does not replace a human reviewer. Agent PRs should target the integration branch named in the issue, stay one concern per PR, include the relevant Linear close/reference, and never self-merge.
+`ai:codex` marks an issue as suitable for Codex-style execution; it is not a priority label and does not replace a human reviewer. Agent PRs should target the integration branch named in the issue, stay one concern per PR, include the relevant Linear close/reference, and never self-merge.
 
 ## Acceptance and closure
 

@@ -172,7 +172,7 @@ Where it came from (sync, Sentry, a report) and any telemetry. Say if it is unve
 
 A funding opportunity, tracked through `funding:*` labels and saved views.
 
-Title: `Grant: {Program}`. Team: Growth (every `funding:*` state lives there). Labels: one `funding:*`, `protocol:*`, and `agent:routine` when routine-authored. When awarded, the issue stays on Growth for reporting and follow-through; file the funded delivery on Product and link it.
+Title: `Grant: {Program}`. Team: Growth (every `funding:*` state lives there). Labels: one `funding:*`, `protocol:*`, and `ai:routine` when routine-authored. When awarded, the issue stays on Growth for reporting and follow-through; file the funded delivery on Product and link it.
 
 ```markdown
 ## Opportunity

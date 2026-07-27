@@ -48,7 +48,7 @@ afo, matt. This is the thinnest panel; add a third member when one re-engages. R
 
 Templates live **globally at the workspace level** (steward decision 2026-07-18), not per team — create and apply them from [linear-templates.md](../linear-templates.md). This team's everyday shapes:
 
-- **Grant** — Opportunity · Fit · Evidence · Status · Decision needed. Title `Grant: {Program}`, one `funding:*` label, `agent:routine` when routine-authored.
+- **Grant** — Opportunity · Fit · Evidence · Status · Decision needed. Title `Grant: {Program}`, one `funding:*` label, `ai:routine` when routine-authored.
 
 ## Surfaces
 
