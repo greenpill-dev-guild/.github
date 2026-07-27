@@ -276,7 +276,7 @@ Title: `Grant: {Program Name}`
 
 Team: **Growth (`GROW`)**, unprojected.
 
-Labels: `funding:prospect`, `ai:routine`, plus the relevant `protocol:*` for primary fit.
+Labels: `funding:prospect`, `ai:routine`, plus the relevant `protocol:*` for primary fit. Pass them to `save_issue` as bare child names (`["prospect", "routine", "green-goods"]`): `group:child` is display shorthand the API does not accept, and one unresolvable entry rejects the whole array and files nothing.
 
 Body:
 
