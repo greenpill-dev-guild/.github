@@ -20,7 +20,7 @@ env-vars:
   - DISCORD_USER_ID_TARUN
 connectors:
   - linear                     # Linear via OAuth connector only, no API key, per guild-routines policy
-model: claude-opus-4-8[1m]
+model: claude-opus-5
 allow-unrestricted-branch-pushes: false
 write-mode: write-enabled      # one Discord digest + idempotent Linear comments
 status: active

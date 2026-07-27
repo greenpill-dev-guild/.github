@@ -3,7 +3,7 @@ name: scorecard-pulse
 description: Monthly outcome scorecard — refreshes indicator registers, posts per-initiative readouts, flags drift between cards, fields, registers, and strategy docs.
 schedule: "0 10 1 * *"  # 1st of month 10:00 UTC, one hour after stipend-ledger
 environment: guild-routines
-model: claude-opus-4-8[1m]
+model: claude-fable-5
 connectors:
   - linear  # OAuth connector only — NO stored API key (guild rule)
 env:

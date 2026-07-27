@@ -10,7 +10,7 @@ network-access: full  # Linear API + read-only Network repo checkout
 env-vars:
 connectors:
   - linear
-model: claude-opus-4-8[1m]
+model: claude-opus-5
 allow-unrestricted-branch-pushes: false  # Linear initiative status update only, no Git writes
 status: active
 ---

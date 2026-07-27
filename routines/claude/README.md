@@ -38,6 +38,7 @@ One style governs every Discord post a guild routine makes:
 - **Fold metrics into the line they describe**; no telemetry or coverage blocks in Discord (run stats go in the memo).
 - **One message** per channel per run (chunk only when Discord's 2000-char limit forces it).
 - Rank action items when there are several: P0 (past-due / decision owed) before P1 (stalled / SLA-breached) before P2 (watch).
+- **Get short by cutting content, not by compressing prose.** Drop anything that would not change what a reader does next, then write what remains in complete sentences. Never pad a post to look thorough, and never compress it into fragments, arrow chains, or invented abbreviations.
 
 ## Active repo scope
 
@@ -65,6 +66,17 @@ Thu      08:00  delivery-hygiene-pulse
 Sat      00:00  research-synthesis       (= Fri 17:00 PT)
 1st/mo   09:00  stipend-ledger
 ```
+
+## Model tier
+
+Each spec names its own model in frontmatter; this is the portfolio view. All guild routines moved off `claude-opus-4-8[1m]` on 2026-07-26.
+
+| Model | Routines | Why |
+|---|---|---|
+| `claude-fable-5` | guild-grant-scout, scorecard-pulse | The two low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine) and the monthly indicator refresh under a never-invent-a-value contract. Weekly and monthly cadence, so the higher token price is a few dollars a month. |
+| `claude-opus-5` | every other guild routine | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
+
+Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error. Watch the first two grant-scout fires.
 
 ## Channel mapping
 

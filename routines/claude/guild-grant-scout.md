@@ -22,7 +22,7 @@ connectors:
   - canva
   - linear
   - posthog
-model: claude-opus-4-8[1m]
+model: claude-fable-5
 allow-unrestricted-branch-pushes: false  # Drive + Linear + Discord, no PRs
 ---
 
