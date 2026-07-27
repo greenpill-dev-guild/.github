@@ -183,7 +183,7 @@ Old label vocabularies (`area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `
 1. Log in to [claude.ai/code/routines](https://claude.ai/code/routines) under Afo's Pro account.
 2. Click **New routine**.
 3. Paste the prompt from the relevant `.md` file (everything after the `# Prompt` heading) — or, for thin-wrapper triggers, a pointer prompt that reads the spec from this repo's `main` at run start (the current pattern for every active guild routine).
-4. Configure repos, environment, connectors, and triggers as specified in the file's frontmatter.
+4. Configure repos, environment, connectors, triggers, **and the model** as specified in the file's frontmatter. A rebuilt routine left on the platform default silently runs the wrong tier; see [Model tier](#model-tier).
 5. Save.
 
 ## Scope discipline
