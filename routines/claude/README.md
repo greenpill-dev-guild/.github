@@ -69,14 +69,20 @@ Sat      00:00  research-synthesis       (= Fri 17:00 PT)
 
 ## Model tier
 
-Each spec names its own model in frontmatter; this is the portfolio view. All guild routines moved off `claude-opus-4-8[1m]` on 2026-07-26.
+Each spec names its own model in frontmatter; this is the portfolio view. Every guild routine except `profile-refresh` moved off `claude-opus-4-8[1m]` on 2026-07-26; that one exception is explained below and is tracked as outstanding.
 
 | Model | Routines | Why |
 |---|---|---|
 | `claude-fable-5` | guild-grant-scout, scorecard-pulse | The two low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine) and the monthly indicator refresh under a never-invent-a-value contract. Weekly and monthly cadence, so the higher token price is a few dollars a month. |
-| `claude-opus-5` | every other guild routine | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
+| `claude-opus-5` | delivery-hygiene-pulse, guild-weekly-synthesis, meet-filer, network-steward-intent-pulse, research-synthesis, stipend-ledger | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
+| `claude-opus-4-8[1m]` | profile-refresh | **Outstanding, not a decision.** Blocked on a tooling limitation, see below. |
 
-Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error. Watch the first two grant-scout fires.
+Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error.
+
+Rollout watchlist for the two Fable routines, since a declined run looks identical to a quiet one:
+
+- **`guild-grant-scout`** (Thu 02:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Thursday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
+- **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
 
 ## Channel mapping
 
