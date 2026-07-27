@@ -22,18 +22,19 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is now on a monthly release cadence — v1.2.0 shipped in July, with the August v1.3.0 cut and rolling QA the current focus.
-- **Public Goods Staking (PGSP)**: an operator-first relaunch — standing up the Genesis validator squad and first operator cohort on the path to testnet.
+- **Green Goods**: the flagship regen-documentation PWA runs on a monthly release cadence — the August v1.3.0 cut and its rolling QA are the current focus.
+- **Commitment Pooling**: durable per-garden pools that link community requests, offers, accepted work, and evidence into one confirmable on-chain thread; scope and design are settled and operator onboarding for the first dry run is under way.
 - **Greenpill Network website**: polishing the public site and community map after June's launch, and onboarding stewards so the map and content stay accurate.
-- **Commitment Pooling**: building durable per-garden commitment pools that link community requests, offers, accepted work, and evidence into one confirmable on-chain thread.
+- **Public Goods Staking (PGSP)**: an operator-first relaunch — standing up the Genesis validator squad and first operator cohort on the path to testnet practice.
 - **Community Needs & Signals**: an independent community app for naming requests, offers, and initiatives and following a legible need-to-proof thread.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-- **Green Goods**: shipped [v1.2.0](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.0) in July — a monthly release hardening the PWA and passkey recovery, overhauling the admin dialog system, polishing the funding flows, and migrating signup to Resend.
-- **Greenpill Network website**: merged public-map improvements this week — steward profiles now project from the CMS, moderators are alerted to pending map submissions, and map location handling was hardened. See [merged work](https://github.com/greenpill-dev-guild/network-website/pulls?q=is%3Apr+is%3Amerged).
+- **Guild org defaults**: tightened which guild events get shared publicly, and brought the contributor-facing automation playbooks back in line with what actually runs. See [merged work](https://github.com/greenpill-dev-guild/.github/pulls?q=is%3Apr+is%3Amerged).
+
+No product releases this week. Green Goods' latest release is [v1.2.0](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.0); the August v1.3.0 cut is in progress.
 <!-- recently-shipped:end -->
 
 ## Across the guild
@@ -41,11 +42,11 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
 
 <!-- team-shipping:start -->
-- **Product** — hardening Green Goods through the v1.3.0 QA and release cycle, with commitment pooling as the July focus.
-- **Research** — aligning impact methodologies and commitments for the Greenpill Impact Framework refresh.
-- **Community** — onboarding operators and gardens for the commitment-pooling dry run and the PGSP first cohort.
-- **Growth** — stewarding the Octant Epoch 12 partnership and the open grant pipeline.
-- **Marketing** — shipping Green Goods onboarding video guides and campaign content.
+- **Product** — driving Green Goods through the v1.3.0 QA and release cycle; recently closed the maturation push that turned a solo build workflow into one a team can join.
+- **Research** — grounding the Greenpill Impact Framework refresh in real methodologies; recently completed the commitment pooling scenario pack and its external brief.
+- **Community** — onboarding operators and gardens for the commitment-pooling dry run and the PGSP first cohort; recently completed the garden survey on needs, commitments, and existing measurement practice.
+- **Growth** — stewarding the Octant Epoch 12 partnership, the Artizen Season 7 raise, and the open grant pipeline.
+- **Marketing** — recently shipped the Green Goods onboarding video batch and an end-to-end capture, submit, and approve walkthrough; now producing the docs demo-video set.
 <!-- team-shipping:end -->
 
 ## Past work
