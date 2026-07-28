@@ -263,7 +263,7 @@ For any high-fit opportunity **that passed the Phase 2 existence gate** (Confirm
 ### Resolve IDs at run start (never hardcode)
 
 - Team: create all grant Issues on the **Growth** team. Resolve team / label IDs by name via the Linear connector (e.g. `list_teams` / `list_issue_labels`) — never hardcode. Create and comment via the connector's issue / comment tools.
-- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `agent:routine`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:coop`) by name. Do not apply `activity:research` to grant Issues (Growth is the team; the lifecycle label carries the state). Cookie Jar work routes to `protocol:green-goods`. Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
+- Labels: resolve all of `funding:prospect`, `funding:drafting`, `funding:submitted`, `funding:active-award`, `ai:routine`, plus the relevant `protocol:*` (`protocol:green-goods`, `protocol:pgsp`, `protocol:greenwill`, `protocol:network`, `protocol:coop`) by name. Do not apply `activity:research` to grant Issues (Growth is the team; the lifecycle label carries the state). Cookie Jar work routes to `protocol:green-goods`. Old `area:research` / `work:research` / `automation:routine` labels are retired — do not apply them.
 - No pipeline project exists: never route a grant Issue into any project (the old Research `Grant Scouting` project is retired; umbrella/staging/completed projects are off-limits). When an award needs delivery work, the delivery issues are filed on **Product** by humans and linked — you comment the link on the award issue if you find it missing, you do not create delivery issues.
 
 ### Dedupe first
@@ -276,7 +276,7 @@ Title: `Grant: {Program Name}`
 
 Team: **Growth (`GROW`)**, unprojected.
 
-Labels: `funding:prospect`, `agent:routine`, plus the relevant `protocol:*` for primary fit.
+Labels: `funding:prospect`, `ai:routine`, plus the relevant `protocol:*` for primary fit. Pass them to `save_issue` as bare child names (`["prospect", "routine", "green-goods"]`): `group:child` is display shorthand the API does not accept, and one unresolvable entry rejects the whole array and files nothing.
 
 Body:
 

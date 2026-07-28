@@ -61,7 +61,7 @@ This routine reads ONLY from:
 - Projects newly created or completed in the past 7 days
 
 **Linear filters (mandatory)**:
-- DROP Issues whose updates this week are exclusively routine-authored (no human comments, status moves, or reassignments). The `agent:routine` label marks authored provenance, not human priority — surface a routine-created Issue only when a human has touched it this week.
+- DROP Issues whose updates this week are exclusively routine-authored (no human comments, status moves, or reassignments). The `ai:routine` label marks authored provenance, not human priority — surface a routine-created Issue only when a human has touched it this week.
 - DROP Issues whose only `protocol:*` label is for a non-active project (e.g., a legacy `protocol:greenwill`-only Issue with no other guild signal).
 - IGNORE Issues parked inside retired/staging projects (`Green Goods`, `Coop`, `Network Website`, `Cookie Jar`, `Story Board`) unless they have updates this week. Those projects are historical containers — they are not active roadmap.
 - Group output by `protocol:*` label so the council digest's per-repo bullets pick up Linear context alongside GitHub.
@@ -253,7 +253,7 @@ A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shar
 
 For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query and apply the reject step to every candidate doc. For Calendar, query the next 7 days of events, apply the calendar reject heuristics, and classify each surviving event as public-shareable or internal-only per the Calendar scope contract (only the two named public event types may reach `#community`).
 
-For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `agent:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts for the council digest's **Teams** fold line, and RESR movement for the **🔬 Research** block.
+For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `ai:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts for the council digest's **Teams** fold line, and RESR movement for the **🔬 Research** block.
 
 For Miro: list boards updated in last 7d filtered by title containing guild project / call type names; resolve any board URLs linked from `#community` or `#lead-council`. Apply Miro reject step.
 
