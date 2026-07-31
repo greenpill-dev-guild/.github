@@ -115,32 +115,32 @@ On a non-2xx response, log the status and body and exit non-zero. Never treat a 
 
 **Owner tagging (2026-07-13 decision — the digest tags assignees, replacing manual notifications):** resolve each flagged issue's assignee display name to a Discord snowflake via the `DISCORD_USER_ID_*` env vars (afo→AFO, gferreira525→GUI, nansel→NANSEL, matt→MATT, kit→KIT, coi→COI, tarun→TARUN). On 🔴 past-due and ⚠️③ struck-out items, render the owner as `<@snowflake>`; when a var is unset, fall back to the plain display name. `allowed_mentions.users` lists exactly the ids you actually rendered (afo plus tagged owners) — never `parse: ["users"]`, never roles or everyone. 🟠/🟡/🆕/🔍 items stay name-only; only overdue work pings.
 
-One message, house style: bold headers, blank lines between blocks, lead with what needs a human, per-team sections only for teams that have items, omit every empty section, wrap issue URLs in `<...>`. Cap 🆕 needs-scoping at the **10** most recent overall (add "plus {n} more unscoped" if over). `@`-afo only in the 🔴 lead block, and only when it is non-empty.
+One message, **house style v2** ([README](README.md#house-style-v2-applies-to-every-posting-routine)): open with a 1-sentence lede (what needs attention, in plain words), bold headers, blank lines between blocks, lead with what needs a human, per-team sections only for teams that have items, omit every empty section, wrap issue URLs in `<...>`, `·` over em dashes. **Cap the whole digest at the 8 highest-ranked items across all buckets** (🔴/⏰ first, then 🟠, 🟡, 🔍, 🆕) and close with "plus {n} more · full sweep in Linear" when over — the Linear comments already reached every owner, so the digest is a summary, not the full list. `@`-afo only in the 🔴 lead block, and only when it is non-empty.
 
 ```
-**🧭 Delivery Hygiene — {YYYY-MM-DD}**
+**🧭 Delivery Hygiene · {YYYY-MM-DD}**
+
+{Lede: 1 sentence, e.g. "Two briefs are past due and GROW has one item waiting on its panel."}
 
 🔴 **Needs you** <@${DISCORD_USER_ID_AFO}>
 - {past-due and ⏰ SLA-breached items, ranked: ⚠️③ struck-out first, then past-due; ID · title · <@owner> (tagged) · due date · <url>}
-- ⚠️③ {ID} {title} — 3+ nudges in 30d, steward decision: re-scope / re-date / reassign / cancel · <@owner> <{url}>
+- ⚠️③ {ID} {title} · 3+ nudges in 30d, steward decision: re-scope / re-date / reassign / cancel · <@owner> <{url}>
 
 **{Team}**
-🟠 {ID} {title} — stalled, last update {date}, {owner} <{url}>
-🟡 {ID} {title} — due {date}, not started, {owner} <{url}>
-🆕 {ID} {title} — {state or "due {date}"}, unscoped, {owner or unassigned} <{url}>
-🔍 {ID} {title} — scoped, awaiting {Team} panel, due {date} <{url}>
+🟠 {ID} {title} · stalled, last update {date}, {owner} <{url}>
+🟡 {ID} {title} · due {date}, not started, {owner} <{url}>
+🆕 {ID} {title} · {state or "due {date}"}, unscoped, {owner or unassigned} <{url}>
+🔍 {ID} {title} · scoped, awaiting {Team} panel, due {date} <{url}>
 
-… (repeat only for teams with items) …
+… (repeat only for teams with items, 8 items max across everything) …
 
-— *delivery-hygiene-pulse · {a} slipping · {b} need scoping · {c} awaiting panel · commented on {k} · thresholds N=7/X=3 · rule + panels: Delivery Accountability doc*
+_{a} slipping · {b} need scoping · {c} awaiting panel · commented on {k}_
 ```
 
-All-clear variant (every bucket empty):
+All-clear variant (every bucket empty) — exactly one line, no mention:
 
 ```
-**🧭 Delivery Hygiene — {YYYY-MM-DD}**
-
-✅ Nothing slipping and nothing waiting: owned work is on track, committed work is scoped, and no brief is stuck at a panel.
+🧭 Delivery hygiene · {YYYY-MM-DD}: all clear · owned work on track, committed work scoped, no brief stuck at a panel.
 ```
 
 ## Phase 4 — Comments (write-enabled, idempotent)

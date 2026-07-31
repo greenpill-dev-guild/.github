@@ -84,7 +84,7 @@ The Discord digest's final line records: `initiatives updated N · register rows
 
 ## Guardrails
 
-- Fail closed everywhere. A quiet month posts a short "quiet month" digest — never fabricated movement.
+- Fail closed everywhere. A quiet month posts exactly one line ("📇 Scorecard · {YYYY-MM}: quiet month, no indicator moved. Readouts → <url>") — never fabricated movement.
 - Every factual claim must trace to something read THIS run (a Linear id, URL, or explorer link). No remembered numbers from prior months.
 - One Discord message max per run. One status update per initiative per month.
 - This spec is canonical; the trigger is a thin wrapper that re-reads `origin/main:routines/claude/scorecard-pulse.md` each run.

@@ -92,7 +92,7 @@ One message, house style: lead with what needs the steward, per-contributor bull
 — *stipend-ledger · {month} · claims: check notes against this pack · playbook: <https://github.com/greenpill-dev-guild/.github/blob/main/routines/scoped-work-compensation.md>*
 ```
 
-If no issues were completed in the month at all, post a single quiet line ("💰 Stipend Ledger — {YYYY-MM}: no accepted work recorded this month.") and still write the document.
+If no issues were completed in the month at all, post exactly one line ("💰 Stipend ledger · {YYYY-MM}: no accepted work recorded this month. Ledger → <doc url>") and still write the document.
 
 ## Phase 4 — Write the Linear Document (idempotent)
 
