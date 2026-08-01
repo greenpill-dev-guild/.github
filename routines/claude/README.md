@@ -10,35 +10,38 @@ All cadences in **UTC**.
 
 | File | Status | Cadence | Channel | Surface |
 |---|---|---|---|---|
-| `guild-weekly-synthesis.md` | active | Tue 01:00 (= Mon 18:00 PT) | `#community` excerpt + `#lead-council` private digest | Drive memo; reads all five Linear teams; carries the 🔬 Research block (replaced the Friday research-synthesis digest) |
+| `guild-weekly-synthesis.md` | active | Tue 01:00 (= Mon 18:00 PT) | `#community` excerpt + `#lead-council` private digest | Drive memo; reads all five Linear teams; both posts are single-message minimal digests (teams / research / design detail lives in the memo) |
 | `delivery-hygiene-pulse.md` | active | Mon & Thu 08:00 | `#scope-review` + Linear comments | All five teams: slippage (past-due / stalled / due-soon owned work) + scope hygiene (unscoped committed work; scoped briefs awaiting their team panel). Merges the retired accountability + scope-review pulses |
 | `network-steward-intent-pulse.md` | active | Tue 16:00 | Linear only | Initiative status update on `Network Presence`; no Issues or Customer Needs |
-| `guild-grant-scout.md` | active | Thu 02:00 (= Wed 19:00 PT) | `#funding` + Drive memo | The `funding:*` lifecycle on the **Growth team** (unprojected + saved views); awards stay on GROW, delivery links to Product |
+| `guild-grant-scout.md` | active | Thu 02:00 (= Wed 19:00 PT) | `#funding` + Drive memo | Funding **and partnership** scout: the `funding:*` lifecycle on the **Growth team** (unprojected + saved views) plus the PARTNERS ledger (call-note + Linear partnership signal); awards stay on GROW, delivery links to Product |
 | `stipend-ledger.md` | active | 1st of month 09:00 | `#lead-council` + one Linear Document | Monthly claims-review pack: accepted work per contributor across all five teams; no dollar math (see the [compensation playbook](../scoped-work-compensation.md)) |
 | `scorecard-pulse` | Linear | Linear = read outcome initiatives + Indicator Registers, refresh auto-derivable Currents, write one status update per active outcome initiative with drift flags; Discord digest (to `#lead-council`); monthly on the 1st 10:00 UTC |
 | `profile-refresh.md` | active | Mon 20:00 | GitHub PR on `.github` | Opens a PR refreshing the three auto-managed `profile/README.md` sections (Now building, Recently shipped, team-shipping); PR only, never pushes `main` |
 | `meet-filer.md` | active | Tue–Sat 00:00 | Drive only | Files Gemini meeting notes + recordings into per-meeting Drive destinations; nothing to any tracker |
-| `research-synthesis.md` | active (v2) | Sat 00:00 (= Fri 17:00 PT) | `#research` + Drive memo | Researcher-facing digest: corpus-grounded themes (gated by the active RESR cycle + open issues), bi-directional 📋 From-the-board block, ≤1 gated Issue + ≤2 comments per run, comment-over-create |
+| `research-synthesis.md` | active (v3) | Sat 00:00 (= Fri 17:00 PT) | `#research` + Drive memo | Working synthesis of the research itself: reads the RESR corpus in full (bodies, comments, linked docs), gathers 2–4 verified outside sources on the active theme, names cross-workstream connections, and helps finish near-done work (≤1 Issue, ≤3 comments, ≤1 draft doc per run, comment-over-create) |
 | `research-accountability-pulse.md` | **retired 2026-07-17** | — | — | Merged into delivery-hygiene-pulse (slippage lane, all five teams) |
 | `scope-review-pulse.md` | **retired 2026-07-17** | — | — | Merged into delivery-hygiene-pulse (scope-hygiene lane, per-team panels) |
 | `coop-intent-pulse.md` | **retired 2026-07-04** | — | — | Sunset (Coop dropped from routine scope); trigger disabled, spec kept for history |
 | `software-ecology-pulse.md` | **retired 2026-07-04** | — | — | Sunset (meta-introspection, low signal); trigger disabled, spec kept for history |
 
-The week, in order: the cross-project synthesis lands Tue 01:00 UTC (Mon evening PT) and primes the week; delivery-hygiene sweeps Monday and Thursday mornings; Tuesday checks Network steward intent; grant scouting lands Thu 02:00 UTC (Wed evening PT); profile-refresh closes Monday by opening its PR; meet-filer files meeting notes overnight Tue–Sat; the stipend ledger compiles the month on the 1st. **The 2026-07 streamlining merged the two hygiene pulses into one and rebuilt research-synthesis as v2** (corpus-grounded, researcher-facing, bi-directional): 8 weekly-firing guild routines → 7, each covering all five teams in the house style. Research-synthesis closes the week at Sat 00:00 UTC (Fri evening PT).
+The week, in order: the cross-project synthesis lands Tue 01:00 UTC (Mon evening PT) and primes the week; delivery-hygiene sweeps Monday and Thursday mornings; Tuesday checks Network steward intent; grant scouting lands Thu 02:00 UTC (Wed evening PT); profile-refresh closes Monday by opening its PR; meet-filer files meeting notes overnight Tue–Sat; the stipend ledger compiles the month on the 1st. **The 2026-07 streamlining merged the two hygiene pulses into one and rebuilt research-synthesis (v2, then v3 on 2026-07-30 as a working synthesis of the research corpus itself)**: 8 weekly-firing guild routines → 7, each covering all five teams. **The 2026-07-30 quiet-Discord revamp** put every posting routine on house style v2: one message per post, a conversational lede, and a one-line all-clear on quiet runs. Research-synthesis closes the week at Sat 00:00 UTC (Fri evening PT).
 
 The Green Goods routines portfolio (product-scoped: bug-intake, qa-triage-pulse, health-watch, growth-pulse, pr-review) lives at [`greenpill-dev-guild/green-goods/docs/routines/`](https://github.com/greenpill-dev-guild/green-goods/tree/main/docs/routines).
 
-## House style (applies to every posting routine)
+## House style v2 (applies to every posting routine)
 
-One style governs every Discord post a guild routine makes:
+One style governs every Discord post a guild routine makes. The goal is a post a teammate would write: short, warm, and readable in one glance — with the full detail one click away in the durable artifact.
 
-- **Bold section headers**, a blank line between blocks, bullets with bold labels.
-- **Lead with what needs a human** — a `🔴 Needs you` (or equivalent) block goes first, and the afo `@`-mention fires only there.
-- **A thing appears only if it moved or needs attention.** Never post a "quiet" bullet, a zero-count, or an empty section header.
-- **Fold metrics into the line they describe**; no telemetry or coverage blocks in Discord (run stats go in the memo).
-- **One message** per channel per run (chunk only when Discord's 2000-char limit forces it).
-- Rank action items when there are several: P0 (past-due / decision owed) before P1 (stalled / SLA-breached) before P2 (watch).
-- **Get short by cutting content, not by compressing prose.** Drop anything that would not change what a reader does next, then write what remains in complete sentences. Never pad a post to look thorough, and never compress it into fragments, arrow chains, or invented abbreviations.
+1. **One message, always.** Hard ceiling ~1,500 characters, target under ~900. Never chunk a post across messages; if it does not fit, cut content until it does. (The green-goods `release-prep` brief is the one stated exception, at two.)
+2. **Lede first.** Open with 1–2 plain conversational sentences saying what the run means — "Quiet week; nothing needs you." or "Two things need attention: the Octant deadline and a stalled brief." — before any bullets. A reader who stops after the lede should still have the point.
+3. **Then at most ~5 bullets total** across at most 2–3 sections. Bullets carry bold labels; blank line between blocks.
+4. **A quiet run posts exactly one line** in the routine's home channel — `{emoji} {Routine} · {date}: all clear` (phrased per routine), plus the artifact link where one exists. Public-facing channels (`#community`) are exempt: they get no quiet-week post at all. Failures still post loudly; a failed run is never disguised as a quiet one.
+5. **Lead with what needs a human** — a `🔴 Needs you` block goes first when it exists, and the afo `@`-mention fires only there (per the notification policy).
+6. **A thing appears only if it moved or needs attention.** Never post a "quiet" bullet, a zero-count, or an empty section header. Numbers appear only when they changed meaningfully; fold them into the line they describe. No tables, no telemetry or coverage blocks in Discord (run stats go in the memo).
+7. **One identity emoji in the header**, at most a couple of section markers (🔴 / 🤝 / 📋). No per-line emoji decoration.
+8. **The durable artifact carries the detail** (Linear status update, Linear Document, Drive memo) and the post always links it.
+9. Rank action items when there are several: P0 (past-due / decision owed) before P1 (stalled / SLA-breached) before P2 (watch).
+10. **Get short by cutting content, not by compressing prose.** Drop anything that would not change what a reader does next, then write what remains in complete sentences. Never pad a post to look thorough, and never compress it into fragments, arrow chains, or invented abbreviations. In output text, prefer `·` and plain punctuation over em dashes.
 
 ## Active repo scope
 
@@ -73,16 +76,17 @@ Each spec names its own model in frontmatter; this is the portfolio view. Every 
 
 | Model | Routines | Why |
 |---|---|---|
-| `claude-fable-5` | guild-grant-scout, scorecard-pulse | The two low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine) and the monthly indicator refresh under a never-invent-a-value contract. Weekly and monthly cadence, so the higher token price is a few dollars a month. |
-| `claude-opus-5` | delivery-hygiene-pulse, guild-weekly-synthesis, meet-filer, network-steward-intent-pulse, research-synthesis, stipend-ledger | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
+| `claude-fable-5` | guild-grant-scout, scorecard-pulse, research-synthesis | The low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine), the monthly indicator refresh under a never-invent-a-value contract, and the v3 research synthesis (cross-workstream connection-finding and literature scanning are genuine-ambiguity work; its v3 spec was de-prescribed for exactly this flip). Weekly and monthly cadence, so the higher token price is a few dollars a month. |
+| `claude-opus-5` | delivery-hygiene-pulse, guild-weekly-synthesis, meet-filer, network-steward-intent-pulse, stipend-ledger | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
 | `claude-opus-4-8[1m]` | profile-refresh | **Outstanding, not a decision.** Blocked on a tooling limitation, see below. |
 
 Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error.
 
-Rollout watchlist for the two Fable routines, since a declined run looks identical to a quiet one:
+Rollout watchlist for the Fable routines, since a declined run looks identical to a quiet one:
 
 - **`guild-grant-scout`** (Thu 02:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Thursday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
 - **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
+- **`research-synthesis`** (Sat 00:00 UTC, on Fable since the 2026-07-30 v3 rewrite): watch the first fire. Low decline risk (academic/ecosystem sources), but under house style v2 a quiet week is one line — a Saturday with *no* line at all means the transcript needs checking.
 
 ## Channel mapping
 
@@ -93,7 +97,7 @@ Rollout watchlist for the two Fable routines, since a declined run looks identic
 | Linear initiative `Network Presence` | network-steward-intent-pulse | weekly Network steward-hub intent check |
 | `#funding` | guild-grant-scout | grant opportunities + pipeline (Growth team) |
 | `#scope-review` | delivery-hygiene-pulse; stipend-ledger (monthly claims pack) | slippage + scoping/panel queue across all five teams; contributor-visible claims review |
-| `#research` | research-synthesis (v2, Fri close) | researcher-facing weekly digest + board state; the weekly synthesis 🔬 block is the separate leads-facing fold |
+| `#research` | research-synthesis (v3, Fri close) | researcher-facing working synthesis: corpus state, connections, gathered sources, explore-next; leads get research context in the weekly-synthesis Drive memo |
 
 ## Notification policy
 

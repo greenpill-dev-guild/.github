@@ -181,71 +181,61 @@ When other guild projects (PGSP, etc.) get their own growth-pulse-equivalents, t
 
 ## Output schema (fixed)
 
-One **house style** governs both posts, tuned for a fast human read:
-
-- **Bold section headers** are the anchors; leave a **blank line between every block**.
-- Bullets carry a **bold label** (`**Decide** · …`, `**Green Goods** —  …`); no walls of prose.
-- **Omit any section that is empty this week** — never emit a header with "none" under it.
-- **A project appears only if it actually moved this week.** Never post a "quiet" bullet.
-- **Lead with what needs a human.** Decisions and red risks go at the top, not the bottom.
+Both posts follow **house style v2** ([README](README.md#house-style-v2-applies-to-every-posting-routine)): ONE message each, hard ceiling ~1,500 chars (target under ~900), a 1–2 sentence conversational lede before any bullets, at most ~5 bullets total, omit every empty section, numbers only when they moved, `·` and plain punctuation instead of em dashes. **If a draft does not fit in one message, cut content — never chunk.** Everything cut still lives in the Drive memo, which both posts link.
 
 ### `#community` excerpt (public-safe, posted first)
 
 ```
-**🌍 Guild Pulse — Week of {YYYY-MM-DD}**
+**🌍 Guild Pulse · Week of {YYYY-MM-DD}**
+
+{Lede: 1–2 friendly, public-safe sentences on what the guild got done this week, written like a person — not a report. If a Come-along event exists, it can share the lede.}
 
 **What's moving**
-{at most 4 bullets, one per project or cross-project theme that actually moved; combine GitHub + Linear so a commit-only week still surfaces work; each ≤ 1 sentence. Omit a quiet project — never write "quiet" here.}
+{at most 3 bullets, one per project or cross-project theme that actually moved; combine GitHub + Linear so a commit-only week still surfaces work; each ≤ 1 sentence. Omit a quiet project · never write "quiet" here.}
 
 **📅 Come along**
-{ONLY the Community Sync and Builder Spaces (per the Calendar scope contract's public-shareable list) — at most 3 bullets, each with its RSVP/join link (Luma > Google Meet > event page). Nothing else appears here: no Build Sync, no Steward Sync, no other guild call, no grant / demo deadline. **Omit this entire block — the heading AND the Luma line below it — whenever no Community Sync or Builder Space falls in the window.** The guild has no standing public events this quarter, so expect this block to be absent most weeks.}
+{ONLY the Community Sync and Builder Spaces (per the Calendar scope contract's public-shareable list) · at most 2 bullets, each with its RSVP/join link (Luma > Google Meet > event page). Nothing else appears here: no Build Sync, no Steward Sync, no other guild call, no grant / demo deadline. **Omit this entire block — the heading AND the Luma line below it — whenever no Community Sync or Builder Space falls in the window.** The guild has no standing public events this quarter, so expect this block to be absent most weeks.}
 _RSVP to guild events → https://luma.com/greenpilldevguild_
-
-**🎨 Shipped & shared**
-{at most 2 bullets — publicly shareable Miro / Figma / Canva movement. Omit entirely if nothing is shareable.}
-
-**📚 From the council**
-{at most 2 bullets — publicly shareable notes from `#lead-council`. Omit entirely if nothing is shareable.}
-
-{if any_failure: "⚠ Scope failures this run: {short list}"}
 ```
 
-The `#community` post never @mentions Afo. Hard caps on bullet counts — drop overflow rather than expanding.
+The `#community` post never @mentions Afo. **On a week with nothing publicly shareable, post nothing to `#community` at all** — a public channel gets signal or silence, never a heartbeat line. (The council digest below carries the routine's alive-signal.) Scope-failure lines never appear here; failures surface in the council digest.
 
 ### `#lead-council` digest (private, posted second)
 
 ```
-{if any_action_required: "<@${DISCORD_USER_ID_AFO}> "}**🌍 Guild Pulse — Week of {YYYY-MM-DD}**  ·  _private_
+{if any_action_required: "<@${DISCORD_USER_ID_AFO}> "}**🌍 Guild Pulse · Week of {YYYY-MM-DD}** · _private_
+
+{Lede: 1–2 sentences on what the week amounted to and whether anything needs a decision — e.g. "Steady shipping week: Green Goods landed the vault work and nothing is blocked." A reader who stops here should still have the picture.}
 
 **🔴 Needs you**
-{This block LEADS the post. At most 3 bullets, each an overdue decision (open > 1 week) or a red risk/signal — explicit, not vague — citing the Linear status update or Discord thread. Omit this whole block, and the @mention, when nothing needs a human this week.}
+{At most 3 bullets, each an overdue decision (open > 1 week) or a red risk/signal · explicit, not vague · citing the Linear status update or Discord thread. Omit this whole block, and the @mention, when nothing needs a human this week.}
 - **Decide** · {the decision owed} → <URL>
 - **Risk** · {the red signal} → <URL>
 
-**⚙️ Moved this week**
-{one bullet per active project that actually moved (green-goods, pgsp, network-website), combining GitHub + Linear + Vercel; bold the project name; fold the growth-pulse metrics headline onto an indented second line when one exists. Omit a quiet project entirely. Close the block with one **Teams** line folding per-team movement counts — only teams that moved, never a zero (e.g. `**Teams** — COM cycle 1: 3→Done · GROW: 1 submitted · MAR: 2 briefs shipped`).}
-- **Green Goods** — {e.g. "3 PRs merged · 5 Issues to Done · 4 prod deploys (0 rollbacks)"}
-  {growth-pulse headline, e.g. "Onboarding funnel **+12% WoW**"} → <status-update URL>
-- **{Project}** — {1-line combined summary} → <URL>
-- **Teams** — {per-team fold line, moved teams only}
-
-**🔬 Research**
-{at most 2 bullets, only when RESR actually moved: the active theme's progress (cycle name + issues advanced) and any decision-ready artifact accepted this week. Sourced from Linear RESR movement, not from reading `#research` (this routine's channel allow-list is unchanged). Omit the whole block on a quiet research week. This leads-facing fold complements the researcher-facing Friday `research-synthesis` digest in `#research`; it does not replace it.}
-
-**🎨 Design & assets**
-{at most 3 bullets — Figma handoffs, Miro/Canva outputs that bear on a leadership decision; cite URL. Omit if none.}
+**⚙️ Moved**
+{one bullet per active project that actually moved (green-goods, pgsp, network-website), combining GitHub + Linear + Vercel; bold the project name; fold the growth-pulse headline metric into the same line when one exists. Omit a quiet project entirely. Max 4 bullets.}
+- **Green Goods** · {e.g. "3 PRs merged, 5 issues Done, 4 clean deploys · onboarding funnel +12% WoW"} → <URL>
 
 **🗓️ Ahead**
-{at most 4 bullets — leadership-relevant: hires, partnerships, grant deadlines, demos, council decisions. Omit if none.}
+{at most 3 bullets · leadership-relevant only: hires, partnerships, grant deadlines, demos, council decisions. Omit if none.}
 
 **📄 Full memo** → {drive_doc_url}
+{if any_failure: "⚠ {short failure list}"}
+```
+
+**What no longer appears in Discord (memo-only since 2026-07-30):** the per-team movement fold line, the 🔬 Research block, and the 🎨 Design & assets block. Their content moves to dedicated memo sections (see Drive memo below); the digest stays a fast read. The `#research` channel already gets its own researcher-facing digest from `research-synthesis`.
+
+**Quiet-week council line.** When nothing moved, nothing needs a decision, and nothing is ahead, the council digest is exactly one line (and the `#community` post is skipped):
+
+```
+🌍 Guild Pulse · week of {YYYY-MM-DD}: quiet week — nothing needs you. Memo → {drive_doc_url}
 ```
 
 `<@${DISCORD_USER_ID_AFO}>` mention fires only when the `🔴 Needs you` block is present (at least one red risk/signal or an overdue decision).
 
 ### Drive memo (archive)
 
-A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shared-drive** folder **"Weekly Synthesis"** (folder ID `137N3WClmFANFBk1kv5yZsbuPNJA5dRmM`). Body is the long-form synthesis: full per-project paragraphs (GitHub + Linear together), full council discussion summary (with attribution), full calendar context, full design-asset narrative, full risks/decisions narrative, full PostHog/growth-pulse context. The Discord posts are excerpts of this memo.
+A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shared-drive** folder **"Weekly Synthesis"** (folder ID `137N3WClmFANFBk1kv5yZsbuPNJA5dRmM`). Body is the long-form synthesis: full per-project paragraphs (GitHub + Linear together), **a per-team movement section (the former Teams fold line, expanded)**, **a Research section (the former 🔬 block: cycle theme progress, issues advanced, decision-ready artifacts)**, **a Design & assets section (the former 🎨 block: Figma handoffs, Miro/Canva movement)**, full council discussion summary (with attribution), full calendar context, full risks/decisions narrative, full PostHog/growth-pulse context. The Discord posts are excerpts of this memo — the memo is where a leader digs in after the one-message digest.
 
 ## Phases
 
@@ -253,7 +243,7 @@ A Drive doc titled `Guild Weekly — {YYYY-MM-DD}` lands in the dev-guild **shar
 
 For each allow-listed Discord channel, fetch the last 7 days of messages. For each allow-listed repo, query the GitHub MCP for the last 7 days of commits / PRs / issues / releases. For Drive, run the content-scoped query and apply the reject step to every candidate doc. For Calendar, query the next 7 days of events, apply the calendar reject heuristics, and classify each surviving event as public-shareable or internal-only per the Calendar scope contract (only the two named public event types may reach `#community`).
 
-For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `ai:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts for the council digest's **Teams** fold line, and RESR movement for the **🔬 Research** block.
+For Linear: query all five teams for initiatives, active projects, project status updates, Issue updates, Customer Needs, initiative changes, and project state changes (all `updatedAt > 7d ago`). Apply the Linear filter (drop Issues whose only signal is `ai:routine` provenance; ignore staging/completed projects unless they had updates this week). Tally per-team moved counts and RESR movement for the memo's per-team and Research sections (Discord carries neither since 2026-07-30).
 
 For Miro: list boards updated in last 7d filtered by title containing guild project / call type names; resolve any board URLs linked from `#community` or `#lead-council`. Apply Miro reject step.
 
@@ -296,7 +286,7 @@ If a project had zero activity (GitHub silent + zero Linear movement), record it
 2. If the PR is missing or older than this Monday's expected fire window, fall back to the direct PostHog path described in the **PostHog usage** section. Note the fallback in the failure block.
 3. When other guild projects' growth-pulse-equivalents exist (future), pull from those status updates the same way.
 
-The metrics context lands in the `📊 Metrics context` section of the council digest. Headline numbers only; the growth-pulse status update carries the full table.
+The metrics context folds into the council digest's **⚙️ Moved** project line (one headline number at most) and lands in full in the Drive memo. The growth-pulse status update carries the full table.
 
 ### Phase 5: Always-create umbrella check
 
@@ -322,7 +312,7 @@ Before posting:
          -H "Authorization: Bot ${DISCORD_BOT_TOKEN}" \
          -H "Content-Type: application/json" --data-binary @-
    ```
-   - **2000-char limit:** Discord rejects `content` > 2000 chars. Split overflowing posts on section/bullet boundaries into ordered chunks ≤ 1900 chars and POST sequentially (~0.5s between chunks for rate limits). The `#community` excerpt usually fits in one message; the `#lead-council` digest usually needs 2–3.
+   - **One message each (house style v2):** both posts must fit in a single Discord message — hard ceiling ~1,500 chars, target under ~900. If a draft overflows, cut content (the memo has it all) rather than chunking. Never split a post across messages.
    - **`allowed_mentions.parse:["users"]`** lets the single `<@${DISCORD_USER_ID_AFO}>` council ping resolve while blocking accidental `@everyone`/`@here`/role pings.
 3. **Post the `#community` excerpt** to `${DISCORD_COMMUNITY_CHANNEL_ID}` first.
 4. **Post the `#lead-council` digest** to `${DISCORD_LEAD_COUNCIL_CHANNEL_ID}` second.
@@ -331,9 +321,9 @@ Before posting:
 
 ## Caps and guardrails
 
-- **Cap: 4 community bullets, 5 council 'this week ahead' bullets, 3 risks, 3 decisions, 4 design-asset bullets**. Hard ceilings.
+- **Caps: one message per post; 3 community bullets; council digest = 3 Needs-you + 4 Moved + 3 Ahead bullets max.** Hard ceilings — drop overflow to the memo rather than expanding.
 - **Cap: 90 minutes runtime**. Timeout → write partial output with `⚠ Failures this run: timed out at phase X`.
-- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. The **🔬 Research** block is digest-only; the researcher-facing digest and any corpus-gated research Issue creation belong to `research-synthesis` (Fri), never to this routine.
+- **Drive memo only**. No PRs, no GitHub issues, no Linear writes. Cross-project synthesis is observation, not tracker work. Research context lives in the memo's Research section; the researcher-facing digest and any corpus-gated research Issue creation belong to `research-synthesis` (Fri), never to this routine.
 - **Strict scope contract**. Out-of-allow-list content is dropped at Phase 1.
 - **Public-safe by default**. The `#community` post is public; assume the audience includes contributors who are not under any NDA.
 - **Channel guards** at every post. Fail loud if env var unset.
