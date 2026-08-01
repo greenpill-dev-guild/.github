@@ -26,7 +26,7 @@ Provide the "Lego bricks" for the regenerative movement: anyone, anywhere can st
 
 Strategy is not an initiative. Initiatives come from it.
 
-- **Strategy** → this folder (`docs/strategy/`), canon, PR-reviewed.
+- **Strategy** → quarterly editions as Linear documents on the `Guild Operating System` shelf (`Strategy — Q3 2026`, `Strategy — Q4 2026`, ...). A new edition each quarter; the series is the version history. Strategy is an operating artifact, not canon, so it lives next to the initiatives it governs.
 - **Outcomes** → Linear initiatives (Lean Outcome Cards: Outcome + Success signals + Target).
 - **Indicators** → each initiative's `Indicator Register` Linear document.
 - **Outputs** → projects and issues.
