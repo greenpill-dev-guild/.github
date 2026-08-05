@@ -22,18 +22,18 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is now on a monthly release cadence — v1.2.0 shipped in July, with the August v1.3.0 cut and rolling QA the current focus.
-- **Public Goods Staking (PGSP)**: an operator-first relaunch — standing up the Genesis validator squad and first operator cohort on the path to testnet.
+- **Green Goods**: the flagship regen-documentation PWA closed July with a v1.2.1 patch to app recovery and sign-in; the August v1.3.0 cut and rolling QA are the current focus.
+- **Commitment Pooling**: the implementation architecture is frozen and work is moving to build — per-garden pools where a community names a need, members promise help, and the person helped confirms it.
+- **Public Goods Staking (PGSP)**: the operator-first relaunch is refreshing node setups and assembling the first operator cohort ahead of testnet onboarding.
+- **Community Needs & Signals**: settling the attestation architecture for naming requests, offers, and initiatives so a need-to-proof thread stays legible end to end.
 - **Greenpill Network website**: polishing the public site and community map after June's launch, and onboarding stewards so the map and content stay accurate.
-- **Commitment Pooling**: building durable per-garden commitment pools that link community requests, offers, accepted work, and evidence into one confirmable on-chain thread.
-- **Community Needs & Signals**: an independent community app for naming requests, offers, and initiatives and following a legible need-to-proof thread.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-- **Greenpill Network website**: merged an [Astro 5.x modernization](https://github.com/greenpill-dev-guild/network/pull/16) — absolute canonical and Open Graph URLs so link previews resolve correctly, a migration to Astro's Content Layer API, and retiring the unused Tailwind stack.
-- **Guild org repo**: restructured how the guild runs, in the open — a [five-team operating model](https://github.com/greenpill-dev-guild/.github/pull/42) with per-team charters, a [monthly stipend model](https://github.com/greenpill-dev-guild/.github/pull/43) backed by Linear-tracked work, and the [strategy canon](https://github.com/greenpill-dev-guild/.github/pull/47) moved into the repo.
+- **Green Goods**: tagged [v1.2.1](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.1) — a recovery screen when the app shell fails to start, passkey sign-in on by default in production, open tabs preserved through service-worker updates, and post-deploy asset recovery. The [Envio HyperIndex 3.2.1 migration](https://github.com/greenpill-dev-guild/green-goods/pull/649) also landed.
+- **Guild org repo**: moved [strategy into quarterly editions](https://github.com/greenpill-dev-guild/.github/pull/48) tracked alongside the work itself, and refreshed the shared routine playbooks — a [quieter house style](https://github.com/greenpill-dev-guild/.github/pull/54) for automated updates and a [model refresh](https://github.com/greenpill-dev-guild/.github/pull/51) across guild routines.
 <!-- recently-shipped:end -->
 
 ## Across the guild
@@ -41,11 +41,11 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
 
 <!-- team-shipping:start -->
-- **Product** — driving Green Goods to the August v1.3.0 release after shipping v1.2.0 in July, and building per-garden commitment pooling.
-- **Research** — refreshing the Greenpill Impact Framework to v0.1 and reconciling the impact-domain and assessment taxonomy.
-- **Community** — bringing on the next cohort of pilot gardens and onboarding the first PGSP operator cohort, kicked off at Builder Space #23.
-- **Growth** — running the funding pipeline: the active Octant Epoch 12 partnership, the opening Artizen Season 7 raise, and a live grant queue.
-- **Marketing** — producing the Green Goods PWA onboarding how-to videos and the docs demo-video batch.
+- **Product** — cutting the August v1.3.0 release after shipping the v1.2.1 patch and the indexer migration, having just locked the Commitment Pooling implementation architecture.
+- **Research** — lining up methodology reviewers for the Impact Framework v0.1 refresh, and shaping the community engagement model behind Needs & Signals.
+- **Community** — onboarding the Season Two pilot gardens, most recently an agroforestry pilot, with PGSP first-cohort readiness next in line.
+- **Growth** — running the funding pipeline: the Artizen Season 7 raise opened this month, alongside the ongoing Octant Epoch 12 partnership and active grant awards.
+- **Marketing** — producing the Green Goods demo-video batch for the docs site, after finishing the PWA onboarding how-to guides and the end-to-end flow video.
 <!-- team-shipping:end -->
 
 ## Past work
