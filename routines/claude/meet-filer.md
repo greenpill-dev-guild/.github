@@ -175,7 +175,7 @@ This is the only nudge mechanism. No Discord.
     { "order": 19, "regex": "^\\s*Carbon Copy",                       "targetFolderId": "18J-fF-Yc13gJq1aFV2gFMPnG9eagIPxQ",   "label": "Writers Guild / Community" },
     { "order": 20, "regex": "^(YCC|Yoruba)\\b",                       "targetFolderId": "1nInuwH2zkQJv6lbFaR9qaA5NnEslTG6W",   "label": "YCC My Drive (root)" },
     { "order": 21, "regex": "^Coffee Meet",                           "targetFolderId": "1BBxzsHYvKX_hnPN4cc27pssUs6pyCJ2Y",   "label": "Afo / Coffees" },
-    { "order": 22, "regex": "^Odunde\\b",                             "targetFolderId": "1qzaRzNWhbVgZOSwMCDVDLaUZYvWwbGBc",   "label": "Odunde 2026 / Weekly Village Planning" },
+    { "order": 22, "regex": "^Odunde\\b",                             "targetFolderId": "1hD4zf1yf_o0Id3sv0iO1yhcQEjnfmdMT",   "label": "YCC SD / Odunde / Meetings (previous target folder no longer exists; where the 2026-05-27+ planning notes already live)" },
     { "order": 23, "regex": "^Regen Commons",                       "targetFolderId": "1Rr1xv4pWMflMY1OTMfd79yxZzNfQ6t0T",   "label": "Regen Coordination SD / Council (Regen Commons: Council Call / Steward Jam; was SD root until 2026-09-02)" },
     { "order": 24, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
     { "order": 25, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
