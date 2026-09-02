@@ -6,7 +6,7 @@ model: claude-opus-5
 
 # Prompt
 
-You are the **meet-filer** routine. Gemini auto-files every meeting note Afo's calendar generates into one Drive folder — **Meet Recordings** (`15rffge0LlFlD_sa7hH5vv2SFag7SEDfa`). Your job is to move each new note (and its sibling Recording / Transcript files where Gemini dropped them) into the right per-meeting destination folder.
+You are the **meet-filer** routine. Gemini auto-files every meeting note Afo's calendar generates into one Drive folder — **Meet Recordings** (`15rffge0LlFlD_sa7hH5vv2SFag7SEDfa`) — and, since 2026-08-26, into per-meeting subfolders of a **Google Meet** folder (`1s7bSi10gftbD5avYTBjQEn0LUfZrC3Gg`; see Phase 2c). Your job is to move each new note (and its sibling Recording / Chat / Transcript files where Gemini dropped them) into the right per-meeting destination folder.
 
 You do NOT post to Discord. You do NOT write Linear. You do NOT push code. You do NOT open PRs. Your sole job is move-files-into-folders. Feedback lives in Drive (moved files appear in destinations; unclassifiable files land in `Meet Recordings — Review`) and the routine run log.
 
@@ -19,7 +19,7 @@ You do NOT post to Discord. You do NOT write Linear. You do NOT push code. You d
 
 ### Phase 1: Parse mapping
 
-Read the JSON in the **Mapping (read at runtime)** section below (this same prompt). Validate `{meetRecordingsFolderId, userCalendarId, reviewFolderName, fallbackCalendars[], rules[]}`. Sort rules by `order` ascending; first match wins.
+Read the JSON in the **Mapping (read at runtime)** section below (this same prompt). Validate `{meetRecordingsFolderId, googleMeetFolderId, oneOffsFolderId, userCalendarId, reviewFolderName, fallbackCalendars[], rules[]}`; the three folder IDs must be non-empty strings, and a missing or empty `googleMeetFolderId` is a configuration error (abort and write `meet-filer-errors-YYYY-MM-DD.md`, as in Phase 5) rather than a reason to skip Phase 2c. Sort rules by `order` ascending; first match wins.
 
 ### Phase 2: Discover candidates
 
@@ -33,11 +33,13 @@ Follow the 302 redirect. Parse the JSON response `{ok: true, folderId, count, fi
 
 Client-side filter:
 1. Drop files whose `name` starts with `meet-filer-` (this routine's own output docs).
-2. Keep only files with `modifiedTime > <now-30d RFC3339>`. The lookback is deliberately much wider than the run cadence: the cron runs Tue-Sat 00:00 UTC, so a 12h window (the old value) left a 72-hour weekend hole — Friday-evening through Monday-morning meetings (e.g. the Sunday WEFA Studio Sessions) were never candidates and stranded in Meet Recordings forever. A wide window is safe: moved files leave the folder, the `meet-filer-` prefix filter skips this routine's own docs, and the Phase 4 no-op filter drops anything already in place — so anything still sitting in Meet Recordings is by definition unprocessed and should be retried every run.
+2. **No age filter.** Every non-`meet-filer-` file in Meet Recordings is a candidate regardless of `modifiedTime`. History: a 12h window left a 72-hour weekend hole, and the 30-day window that replaced it (2026-05) stranded 11 files that a failed run had skipped once and could then never retry (found 2026-09-02: six WEFA Studio Sessions, one Gardens Core Weekly Sync, three Odunde Optional Friday Sync, one `Meeting started`). No window is safe: moved files leave the folder, the `meet-filer-` prefix filter skips this routine's own docs, and the Phase 4 no-op filter drops anything already in place — so anything still sitting in Meet Recordings is by definition unprocessed and must be retried every run.
 
 The returned candidates include ALL file types — Notes by Gemini docs, Recording mp4s, Chat transcripts. They each go through Phase 3 independently. The legacy "Phase 4 sibling search" approach is gone: every sibling is already in the candidate set, so classifying each by title rule handles them uniformly.
 
-**Phase 2b — Review-folder self-healing (added 2026-07-18):** also call the list endpoint for the **Review** folder (`reviewFolderId` from the Phase 5 health check) and take up to **15 residents per run, oldest `modifiedTime` first** (bounded so the nightly run stays cheap; the backlog drains over a few nights). Re-run Phase 3 classification on each: a rule added since the file was parked now moves it to its proper home, and the calendar fallback's One-Offs path catches identified-but-homeless meetings. Residents that still classify to Review simply stay (no churn, no re-move). This is what makes mapping-rule additions retroactive instead of forward-only.
+**Phase 2b — Review-folder self-healing (added 2026-07-18, reordered 2026-09-02):** also call the list endpoint for the **Review** folder. Its `reviewFolderId` comes from the GET health response described in Phase 5, so make that GET **now, before listing Review**, and reuse the same response in Phase 5 rather than calling it twice (if the GET reports `advancedDriveServiceLoaded === false` or `secretConfigured === false`, abort here exactly as Phase 5 says). Take up to **15 residents per run, newest `modifiedTime` first**, skipping residents whose `modifiedTime` is older than 90 days. Re-run Phase 3 classification on each: a rule added since the file was parked now moves it to its proper home, and the calendar fallback's One-Offs path catches identified-but-homeless meetings. Residents that still classify to Review simply stay (no churn, no re-move). This is what makes mapping-rule additions retroactive instead of forward-only. Why newest-first with a 90-day cutoff: the folder carries a permanent core of unidentifiable codename / `Meeting started` files (calendar lookup finds nothing for them) and oldest-first let those ten fill the 15 slots every night, so newly parked files were never retried even after a rule for them landed.
+
+**Phase 2c — Google Meet per-meeting folders (added 2026-09-02):** since 2026-08-26 Meet no longer drops every file flat into Meet Recordings. It creates a **Google Meet** folder (`googleMeetFolderId` in the mapping JSON) with one subfolder per meeting — `<Title> (recurring)` for series, `<Title> - YYYY/MM/DD HH:MM TZ` for single events — and files the Notes / Recording / Chat / Transcript inside it. Call the list endpoint on `googleMeetFolderId`, then on every subfolder it returns (one level; nothing nests deeper), and add every non-folder file to the candidate set. Files inside these subfolders carry the normal `<MeetingTitle> - date - kind` name, so Phase 3 rules apply unchanged; ignore the subfolder's own name except as a hint in the run log. Leave empty subfolders in place — Meet reuses the `(recurring)` one for the next occurrence. **Prerequisite:** the Apps Script source-lock currently accepts moves only out of Meet Recordings and Review (see the GET health response `sourceLock`). Until it also accepts descendants of `googleMeetFolderId`, every move from these folders fails with `source restricted`; when that happens, list the affected files once in the run log, do not write a per-file entry to the errors doc for them, and continue.
 
 ### Phase 3: Classify
 
@@ -78,7 +80,7 @@ Include the matched rule's `label` per move when known — the webhook records i
 
 ### Phase 5: Bootstrap via GET
 
-Before POST: `GET $MEET_FILER_WEBHOOK_URL` (no `action` param). Parse the JSON response. If `advancedDriveServiceLoaded === false` OR `secretConfigured === false`: abort, write `meet-filer-errors-YYYY-MM-DD.md` inside Meet Recordings, exit. Otherwise read `reviewFolderId` and use it for any Review-bound files.
+Before POST: `GET $MEET_FILER_WEBHOOK_URL` (no `action` param), or reuse the response already fetched at the start of Phase 2b. Parse the JSON response. If `advancedDriveServiceLoaded === false` OR `secretConfigured === false`: abort, write `meet-filer-errors-YYYY-MM-DD.md` inside Meet Recordings, exit. Otherwise read `reviewFolderId` and use it for any Review-bound files.
 
 ### Phase 6: Dry-run or POST
 
@@ -128,13 +130,17 @@ This is the only nudge mechanism. No Discord.
 | Send a manifest > 25 moves in one POST | Apps Script chunk limit; split into ≤25-move batches |
 | POST a move where `originalParents` already includes `targetFolderId` | No-op move; source-lock rejects and pollutes audit log |
 | Post to Discord | User opted out |
+| Filter Meet Recordings candidates by age | Any window strands files a failed run skipped once (11 files sat for 3 months behind the 30-day window) |
+| Retry Review residents oldest-first | Permanent unidentifiable residents starve the retry budget; newest-first with a 90-day cutoff |
+| List only the flat Meet Recordings folder | Since 2026-08-26 most files land in `Google Meet/<Title> (recurring)/` subfolders (Phase 2c) |
 
 ### Mapping (read at runtime)
 
 ```json
 {
-  "version": 4,
+  "version": 5,
   "meetRecordingsFolderId": "15rffge0LlFlD_sa7hH5vv2SFag7SEDfa",
+  "googleMeetFolderId": "1s7bSi10gftbD5avYTBjQEn0LUfZrC3Gg",
   "oneOffsFolderId": "1oAx3SFXriR3eE301ZWJwGIGbqgj6Fa9-",
   "userCalendarId": "afo@greenpill.builders",
   "reviewFolderName": "Meet Recordings — Review",
@@ -153,25 +159,29 @@ This is the only nudge mechanism. No Discord.
     { "order": 3,  "regex": "^Coop\\b",                               "targetFolderId": "10ZVa9O01Ll7XCaja0SckKtL5gjec6Ip5",   "label": "DevGuild SD / Product / Coop / Sync" },
     { "order": 4,  "regex": "^Lead Sync",                             "targetFolderId": "1hbI6Q7Z31vLXAE3ANzTqafodkX0rzwjT",   "label": "DevGuild SD / Leads / Sync" },
     { "order": 5,  "regex": "^(Capital Sync|Working Capital Sync)",   "targetFolderId": "1_eWzu9OIFa3sXra8V665tOJNVrSNUnXL",   "label": "DevGuild SD / Leads / Working Capital" },
-    { "order": 6,  "regex": "^(Greenpill )?Growth Sync",              "targetFolderId": "1PboB6eEGJ-v8sPldN2aOtYdq-Kge88SY",   "label": "DevGuild SD / Growth / Sync" },
+    { "order": 6,  "regex": "^(Greenpill )?Growth (Working Group )?Sync", "targetFolderId": "1dSC2VyjoT-iWsupBzpyHLF_5BXGqKeXI", "label": "Network SD / Growth / Sync (Network meeting; was DevGuild Growth/Sync until 2026-09-02)" },
     { "order": 7,  "regex": "^Partner 1:1",                           "targetFolderId": "1wMQvCHKL_0I7pKYyBFtEwU6SZP8-c66V",   "label": "DevGuild SD / Growth / Partners" },
     { "order": 8,  "regex": "^Community Chat",                        "targetFolderId": "1PZPXZF8SIlLiL_XZSKb_Aez1acGyRKdj",   "label": "DevGuild SD / Community / Chat" },
     { "order": 9,  "regex": "^Community Sync",                        "targetFolderId": "1iisBzbIRYqQcSEsZBq1N8iZboCgRUXee",   "label": "DevGuild SD / Community / Sync (retired)" },
     { "order": 10, "regex": "^Builder Space",                         "targetFolderId": "1DRhht8txHt2Biu5F4Jb1Rl3oTV5pd80e",   "label": "DevGuild SD / Community (Builder Spaces)" },
     { "order": 11, "regex": "^(Copy of )?(Stewards Sync|ste-ward-s sync)", "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL", "label": "Network SD / Stewards / Sync (incl. Gemini's ste-ward-s spelling + Copy-of dupes)" },
-    { "order": 12, "regex": "^Greenpill Monthly Community Call",      "targetFolderId": "1BC9cPzV9MFzo51-rbRXqQAv_D0nQz7Dl",   "label": "Workspace / Network / Community (Monthly Call)" },
+    { "order": 12, "regex": "^Greenpill Monthly Community Call",      "targetFolderId": "1b5FnwelMXqNv0srKZOK3IVe9Ny3GLrK1",   "label": "Network SD / Community / Calls (previous target folder no longer exists)" },
     { "order": 13, "regex": "^Greenpill Network Website",             "targetFolderId": "0ADPqiYLt4dW0Uk9PVA",                "label": "Network SD root" },
     { "order": 14, "regex": "^Tech\\s*[&]\\s*Sun",                    "targetFolderId": "1B_Yo1N5WPxIk46CeSyehDTa-0Y6P4jzM",   "label": "Tech & Sun SD / Meetings" },
     { "order": 15, "regex": "^(WEFA|Massiah WEFA)\\b",                "targetFolderId": "1xTao-aEvk3nmPp3NRXd9RaDrB63v7DF1",   "label": "WEFA / Studio / Meetings" },
     { "order": 16, "regex": "^Gardens Core Weekly Sync",              "targetFolderId": "0ALUt-0VHWOLRUk9PVA",                "label": "Gardens SD (root)" },
-    { "order": 17, "regex": "^Regen Coordination Council Sync",       "targetFolderId": "0AHKbTaY-pk03Uk9PVA",                "label": "Regen Coordination SD (root)" },
-    { "order": 18, "regex": "^\\s*Carbon Copy",                       "targetFolderId": "18J-fF-Yc13gJq1aFV2gFMPnG9eagIPxQ",   "label": "Writers Guild / Community" },
-    { "order": 19, "regex": "^(YCC|Yoruba)\\b",                       "targetFolderId": "1nInuwH2zkQJv6lbFaR9qaA5NnEslTG6W",   "label": "YCC My Drive (root)" },
-    { "order": 20, "regex": "^Coffee Meet",                           "targetFolderId": "1BBxzsHYvKX_hnPN4cc27pssUs6pyCJ2Y",   "label": "Afo / Coffees" },
-    { "order": 21, "regex": "^Odunde\\b",                             "targetFolderId": "1qzaRzNWhbVgZOSwMCDVDLaUZYvWwbGBc",   "label": "Odunde 2026 / Weekly Village Planning" },
-    { "order": 22, "regex": "^Regen Commons",                       "targetFolderId": "0AHKbTaY-pk03Uk9PVA",                "label": "Regen Coordination SD (Regen Commons: Council Call / Steward Jam)" },
-    { "order": 23, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
-    { "order": 24, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
+    { "order": 17, "regex": "^Rege[rn]n? Coordination[: -]+Artizen",   "targetFolderId": "1CVfNabrkLRWJj1yeH8X7oqwHbc2SqP9G",   "label": "Regen Coordination SD / Community (Artizen; tolerates the 'Regern' calendar typo; must precede rule 22)" },
+    { "order": 18, "regex": "^Regen Coordination Council Sync",       "targetFolderId": "1Rr1xv4pWMflMY1OTMfd79yxZzNfQ6t0T",   "label": "Regen Coordination SD / Council (was SD root until 2026-09-02)" },
+    { "order": 19, "regex": "^\\s*Carbon Copy",                       "targetFolderId": "18J-fF-Yc13gJq1aFV2gFMPnG9eagIPxQ",   "label": "Writers Guild / Community" },
+    { "order": 20, "regex": "^(YCC|Yoruba)\\b",                       "targetFolderId": null,                                 "label": "YCC — target folder needed (previous 'YCC My Drive' folder no longer exists; null routes to Review with a warning until a YCC SD meetings folder is chosen)" },
+    { "order": 21, "regex": "^Coffee Meet",                           "targetFolderId": "1BBxzsHYvKX_hnPN4cc27pssUs6pyCJ2Y",   "label": "Afo / Coffees" },
+    { "order": 22, "regex": "^Odunde\\b",                             "targetFolderId": "1hD4zf1yf_o0Id3sv0iO1yhcQEjnfmdMT",   "label": "YCC SD / Odunde / Meetings (previous target folder no longer exists; where the 2026-05-27+ planning notes already live)" },
+    { "order": 23, "regex": "^Regen Commons",                       "targetFolderId": "1Rr1xv4pWMflMY1OTMfd79yxZzNfQ6t0T",   "label": "Regen Coordination SD / Council (Regen Commons: Council Call / Steward Jam; was SD root until 2026-09-02)" },
+    { "order": 24, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
+    { "order": 25, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
+    { "order": 26, "regex": "^Artizen\\b",                            "targetFolderId": "1CVfNabrkLRWJj1yeH8X7oqwHbc2SqP9G",   "label": "Regen Coordination SD / Community (Artizen Money Games Sync, Artizen Summit fund-drive calls)" },
+    { "order": 27, "regex": "^Regen (Knowledge Commons|(Web3 )?Toolkit)\\b", "targetFolderId": "1mpSjW3bePpEo189RNffSP3wIPhOd0Gk_", "label": "Regen Coordination SD / Knowledge Commons / Meetings (Toolkit + Knowledge Commons syncs and planning calls)" },
+    { "order": 28, "regex": "^AgroforestDAO\\b",                      "targetFolderId": "1UKO-WiZUyzFbGN6yLAbk39lM0wf2Ma4u",   "label": "DevGuild SD / Product / Green Goods / Pilots (AgroforestDAO & Green Goods Sync)" },
     { "order": 90, "regex": "^Meeting started \\d{4}[/ ]\\d{2}[/ ]\\d{2}", "targetFolderId": null,                            "label": "→ Calendar fallback for 'Meeting started' titles (accepts slash or space dates)" },
     { "order": 91, "regex": "^[a-z]{3}-[a-z]{4}-[a-z]{3} \\(\\d{4}-\\d{2}-\\d{2} \\d{2}:\\d{2} GMT[+\\-]\\d+\\)", "targetFolderId": null, "label": "→ Calendar fallback for raw Meet codename titles" },
     { "order": 99, "regex": ".*",                                     "targetFolderId": null,                                 "label": "Meet Recordings — Review (auto-created)" }
