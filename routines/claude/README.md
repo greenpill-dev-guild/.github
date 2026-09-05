@@ -13,7 +13,7 @@ All cadences in **UTC**.
 | `guild-weekly-synthesis.md` | active | Tue 01:00 (= Mon 18:00 PT) | `#community` excerpt + `#lead-council` private digest | Drive memo; reads all five Linear teams; both posts are single-message minimal digests (teams / research / design detail lives in the memo) |
 | `delivery-hygiene-pulse.md` | active | Mon & Thu 08:00 | `#scope-review` + Linear comments | All five teams: slippage (past-due / stalled / due-soon owned work) + scope hygiene (unscoped committed work; scoped briefs awaiting their team panel). Merges the retired accountability + scope-review pulses |
 | `network-steward-intent-pulse.md` | active | Tue 16:00 | Linear only | Initiative status update on `Network Presence`; no Issues or Customer Needs |
-| `guild-grant-scout.md` | active | Thu 02:00 (= Wed 19:00 PT) | `#funding` + Drive memo | Funding **and partnership** scout: the `funding:*` lifecycle on the **Growth team** (unprojected + saved views) plus the PARTNERS ledger (call-note + Linear partnership signal); awards stay on GROW, delivery links to Product |
+| `guild-grant-scout.md` | active | Fri 18:00 (= Fri 11:00 PT) | `#funding` + radar comment on the Growth radar issue + Drive memo | Green Goods grant scout: weekly deadline radar, window watch on named programs, and a few new prospects that pass the `Grant Scout Focus` Linear document's filters; writes only to the Growth team; PGSP and Coop are out of scope |
 | `stipend-ledger.md` | active | 1st of month 09:00 | `#lead-council` + one Linear Document | Monthly claims-review pack: accepted work per contributor across all five teams; no dollar math (see the [compensation playbook](../scoped-work-compensation.md)) |
 | `scorecard-pulse` | Linear | Linear = read outcome initiatives + Indicator Registers, refresh auto-derivable Currents, write one status update per active outcome initiative with drift flags; Discord digest (to `#lead-council`); monthly on the 1st 10:00 UTC |
 | `profile-refresh.md` | active | Mon 20:00 | GitHub PR on `.github` | Opens a PR refreshing the three auto-managed `profile/README.md` sections (Now building, Recently shipped, team-shipping); PR only, never pushes `main` |
@@ -24,7 +24,7 @@ All cadences in **UTC**.
 | `coop-intent-pulse.md` | **retired 2026-07-04** | — | — | Sunset (Coop dropped from routine scope); trigger disabled, spec kept for history |
 | `software-ecology-pulse.md` | **retired 2026-07-04** | — | — | Sunset (meta-introspection, low signal); trigger disabled, spec kept for history |
 
-The week, in order: the cross-project synthesis lands Tue 01:00 UTC (Mon evening PT) and primes the week; delivery-hygiene sweeps Monday and Thursday mornings; Tuesday checks Network steward intent; grant scouting lands Thu 02:00 UTC (Wed evening PT); profile-refresh closes Monday by opening its PR; meet-filer files meeting notes overnight Tue–Sat; the stipend ledger compiles the month on the 1st. **The 2026-07 streamlining merged the two hygiene pulses into one and rebuilt research-synthesis (v2, then v3 on 2026-07-30 as a working synthesis of the research corpus itself)**: 8 weekly-firing guild routines → 7, each covering all five teams. **The 2026-07-30 quiet-Discord revamp** put every posting routine on house style v2: one message per post, a conversational lede, and a one-line all-clear on quiet runs. Research-synthesis closes the week at Sat 00:00 UTC (Fri evening PT).
+The week, in order: the cross-project synthesis lands Tue 01:00 UTC (Mon evening PT) and primes the week; delivery-hygiene sweeps Monday and Thursday mornings; Tuesday checks Network steward intent; grant scouting lands Fri 18:00 UTC (Fri morning PT, right after the weekly usage window resets); profile-refresh closes Monday by opening its PR; meet-filer files meeting notes overnight Tue–Sat; the stipend ledger compiles the month on the 1st. **The 2026-07 streamlining merged the two hygiene pulses into one and rebuilt research-synthesis (v2, then v3 on 2026-07-30 as a working synthesis of the research corpus itself)**: 8 weekly-firing guild routines → 7, each covering all five teams. **The 2026-07-30 quiet-Discord revamp** put every posting routine on house style v2: one message per post, a conversational lede, and a one-line all-clear on quiet runs. Research-synthesis closes the week at Sat 00:00 UTC (Fri evening PT).
 
 The Green Goods routines portfolio (product-scoped: bug-intake, qa-triage-pulse, health-watch, growth-pulse, pr-review) lives at [`greenpill-dev-guild/green-goods/docs/routines/`](https://github.com/greenpill-dev-guild/green-goods/tree/main/docs/routines).
 
@@ -64,8 +64,8 @@ Mon      20:00  profile-refresh
 Tue      01:00  guild-weekly-synthesis   (= Mon 18:00 PT)
 Tue      16:00  network-steward-intent-pulse
 Tue–Sat  00:00  meet-filer
-Thu      02:00  guild-grant-scout        (= Wed 19:00 PT)
 Thu      08:00  delivery-hygiene-pulse
+Fri      18:00  guild-grant-scout        (= Fri 11:00 PT)
 Sat      00:00  research-synthesis       (= Fri 17:00 PT)
 1st/mo   09:00  stipend-ledger
 ```
@@ -84,7 +84,7 @@ Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-
 
 Rollout watchlist for the Fable routines, since a declined run looks identical to a quiet one:
 
-- **`guild-grant-scout`** (Thu 02:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Thursday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
+- **`guild-grant-scout`** (Fri 18:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
 - **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
 - **`research-synthesis`** (Sat 00:00 UTC, on Fable since the 2026-07-30 v3 rewrite): watch the first fire. Low decline risk (academic/ecosystem sources), but under house style v2 a quiet week is one line — a Saturday with *no* line at all means the transcript needs checking.
 
@@ -104,7 +104,7 @@ Rollout watchlist for the Fable routines, since a declined run looks identical t
 Routines @mention Afo only when his action is required (via `DISCORD_USER_ID_AFO`):
 
 - `guild-weekly-synthesis` — only on the `#lead-council` post when at least one risk/decision is overdue
-- `guild-grant-scout` — when a grant deadline is < 7 days out, a new high-fit opportunity scores ≥ 4 on Green Goods, or a stale-prospect decision is needed
+- `guild-grant-scout` — when a deadline is inside 7 days, an item is past due, or a decision is owed (the `Needs you` block)
 - `delivery-hygiene-pulse` — Discord: afo in the 🔴 Needs-you block, plus the **owner** tagged on past-due and ⚠️③ struck-out items (three pulse nudges in 30 days = a steward decision per the Delivery Accountability rule); Linear: `@`-mentions the owner on slippage and the team panel on briefs awaiting sign-off
 - `stipend-ledger` — on the 🔴 Needs-you block (reopened / unassigned / unscoped completions, cap-relevant volume)
 - `research-synthesis` — only when a proposed action concretely maps to Afo's active Green Goods work
@@ -134,7 +134,7 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 | `guild-weekly-synthesis` | Google Drive, Google Calendar, Miro, Figma, Canva, Linear, PostHog, Vercel | Linear = source of truth for cross-project work across all five teams · Drive/Calendar = meeting + scheduling context · Miro/Figma/Canva = design + asset movement · PostHog = link to growth-pulse digest (rare direct fallback) · Vercel = deploy activity counts in per-project bullets (color, never primary) |
 | `network-steward-intent-pulse` | Linear | Linear = social truth for Network steward-hub status; the Network repo checkout provides `.plans` execution truth. No Discord, Drive, GitHub write, PostHog, Vercel, or design connectors. |
 | `meet-filer` | Google Calendar | Calendar = the `list_events` fallback for classifying meeting notes; file moves go through the Meet Recordings webhook (`MEET_FILER_WEBHOOK_URL`), not the Drive connector. No Discord, Linear, or GitHub. |
-| `guild-grant-scout` | Google Drive, Google Calendar, Miro, Canva, Linear, PostHog | Linear = `funding:*` lifecycle on the Growth team + saved views · Drive = drafts + reusable evidence · Calendar = deadlines · Miro = planning context · Canva = existing pitch decks to reference/reuse · PostHog = subtle grant-evidence signal (active gardens, action volume) |
+| `guild-grant-scout` | Google Drive, Linear | Linear = `funding:*` lifecycle on the Growth team, the `Grant Scout Focus` document, and the `Grant deadline radar` issue · Drive = one memo per run in the Green Goods Growth folder · Calendar, Miro, Canva, PostHog stay wired on the trigger but are not used |
 | `delivery-hygiene-pulse` | Linear | Linear = read all five teams for slippage + scope hygiene, post idempotent owner/panel comments; Discord digest via the shared bot token; no Drive/Calendar/design/PostHog |
 | `stipend-ledger` | Linear | Linear = read the closed month's completed issues across all five teams + write one ledger Document; Discord digest (to `#scope-review`) via the shared bot token; no other surfaces |
 | `research-synthesis` | Google Drive, Google Calendar, Linear | Drive = memo continuity + research-doc supplement · Calendar = upcoming research calls (light context) · Linear = the research corpus (cycle theme + open RESR issues) that gates writes + feeds the From-the-board block. Miro/Canva/PostHog/Mermaid dropped in v2. |
