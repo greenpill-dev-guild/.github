@@ -31,7 +31,7 @@ Everything you know about what fits lives in one Linear document, the focus docu
 - Connectors you use: Linear (required: the pipeline and the focus document) and Google Drive (the weekly memo). Other connectors may be wired to this trigger; do not call Miro, Canva, Calendar, or PostHog. They are not part of this routine.
 - Web: WebFetch and WebSearch. Search only to locate a funder's own page. Never take a date, amount, or eligibility rule from an aggregator, a newsletter, a social post, or your own memory.
 - Repos are cloned for context only. Do not edit files, run installs, or push.
-- Linear identity: your writes appear as Community Host. Every issue and comment you create carries the labels `routine` and `claude` (bare child names; the API rejects `group:child`).
+- Linear identity: your writes appear as Community Host. Every issue you create carries the label `routine` (bare child name; the API rejects `group:child`). The `ai` label group allows one label per issue, so `routine` and `claude` never go on the same issue; leave an existing `claude` label alone when you comment or update fields.
 - Where things live:
   - Pipeline: Growth team (`GROW`), unprojected. Lifecycle is a `funding` label: `prospect`, `drafting`, `submitted`, `active-award`, `not-rewarded`. You only ever add `prospect`; people move issues to later stages.
   - Focus document: a Linear document on the Growth team titled exactly `Grant Scout Focus`.
@@ -46,7 +46,7 @@ Run this first. It gates everything.
 
 0.2 Load the focus document. `list_documents` with `query: "Grant Scout Focus"` and the Growth `teamId`, then `get_document`. If it is missing, fail closed the same way, naming the document. Read every section by its heading: Target, Product in scope, Ecosystems, Non web3, Grant size band, Active awards, Already pursued, Hard filters, Soft signals, Framing rule, Peers, Warm paths, Owners, Window watch, Source allow list, Settings. Parse Settings as `key: value` lines. Defaults when a key is absent: `threshold: 12`, `threshold_mode: flag`, `max_new_issues_per_run: 3`, `radar_issue_title: Grant deadline radar`, `run_time_cap_minutes: 75`.
 
-0.3 Same cycle guard. Find the radar issue (`list_issues`, team Growth, `query` = the radar title, label `routine`). If it already carries a comment from you dated this ISO week, or the memo folder already holds a memo titled with this week's run date, the weekly run already happened. Append one line to that memo (`Same cycle re-trigger {timestamp}: no-op.`) and exit. Do not post, do not create, do not ask.
+0.3 Same cycle guard. Find the radar issue (`list_issues`, team Growth, `query` = the radar title; take the exact title match). If it already carries a comment from you dated this ISO week, or the memo folder already holds a memo titled with this week's run date, the weekly run already happened. Append one line to that memo (`Same cycle re-trigger {timestamp}: no-op.`) and exit. Do not post, do not create, do not ask.
 
 0.4 Recall. Read the newest memo in the memo folder (`search_files` with `parentId = '{memo_folder_id}' and title contains 'grant scout'`, newest `modifiedTime` first). Carry forward two tables: the window ledger (program, status, next window, amount, gates, source URL, checked on) and the dropped list (program, rule, date). Older memos live outside this folder and predate this spec; do not read them.
 
@@ -164,7 +164,7 @@ Title: Grant: {Funder}, {Program} ({Season or round})
 {funder page; related issues: active awards, prior attempts, same funder history}
 ```
 
-Fields: team Growth, no project; labels `prospect`, `growth`, `green-goods`, `routine`, `claude`; assignee Afolabi Aiyeloja; due date = the real deadline, or the decide by date for a rolling program; priority 2 (High) when the composite is 14 or more and the deadline is inside 30 days, otherwise 3 (Medium), and 4 (Low) for a below threshold issue in flag mode; `relatedTo` = the linked issues. Apply the framing rule: for traditional funders describe Green Goods as an MRV and field data tool for community led regenerative work; web3 language only in crypto ecosystem contexts.
+Fields: team Growth, no project; labels `prospect`, `growth`, `green-goods`, `routine`; assignee Afolabi Aiyeloja; due date = the real deadline, or the decide by date for a rolling program; priority 2 (High) when the composite is 14 or more and the deadline is inside 30 days, otherwise 3 (Medium), and 4 (Low) for a below threshold issue in flag mode; `relatedTo` = the linked issues. Apply the framing rule: for traditional funders describe Green Goods as an MRV and field data tool for community led regenerative work; web3 language only in crypto ecosystem contexts.
 
 Partnership issue, only when internal signal (call notes, `#funding`, Linear) shows a real conversation with a concrete next step and a date. Never cold prospect.
 
@@ -178,7 +178,7 @@ Title: Partner: {Org}, {what we are building together}
 **Links**
 ```
 
-Fields: labels `growth`, `green-goods`, `routine`, `claude`, plus `network` when the relationship spans the guild; assignee Afolabi Aiyeloja; due date = the by when date.
+Fields: labels `growth`, `green-goods`, `routine`, plus `network` when the relationship spans the guild; assignee Afolabi Aiyeloja; due date = the by when date.
 
 Ownership: the assignee is always Afo. When another person is the natural owner, say so in the Next step line, by name, using the Owners section (demo assets, build heavy hackathon tracks, garden applicants).
 
