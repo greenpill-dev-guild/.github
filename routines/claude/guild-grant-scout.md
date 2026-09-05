@@ -47,17 +47,17 @@ Run this first. It gates everything.
 
 0.2 Load the focus document. `list_documents` with `query: "Grant Scout Focus"` and the Growth `teamId`, then `get_document`. Read every section by its heading: Target, Product in scope, Ecosystems, Non web3, Grant size band, Active awards, Already pursued, Hard filters, Soft signals, Framing rule, Peers, Warm paths, Owners, Window watch, Source allow list, Settings. Parse Settings as `key: value` lines. Defaults when a key is absent: `threshold: 12`, `threshold_mode: flag`, `max_new_issues_per_run: 3`, `radar_issue_title: Grant deadline radar`, `run_time_cap_minutes: 75`, and the memo folder from Setup.
 
-Validate the document before anything else runs: every heading above is present; Target states a target period with a start and an end date; Hard filters has at least one bullet; Window watch has at least one row with a URL; Source allow list has at least one entry; `threshold` is a whole number from 8 to 20; `threshold_mode` is `gate` or `flag`; `max_new_issues_per_run` is a whole number from 0 to 5; `run_time_cap_minutes` is a whole number from 30 to 90 (a larger value is clamped to 90 and noted in the memo); `memo_folder_id`, when present, is a Drive folder id. If the document is missing, a heading is missing, or a value is malformed, fail closed the same way as 0.1, naming the missing or malformed item in the `#funding` line and in the memo.
+Validate the document before anything else runs: every heading above is present; Target states a target period with a start and an end date; Hard filters has at least one bullet; Window watch has at least one row with a URL; Source allow list has at least one entry; `threshold` is a whole number from 8 to 20; `threshold_mode` is `gate` or `flag`; `max_new_issues_per_run` is a whole number from 0 to 5; `run_time_cap_minutes` is a whole number of at least 30, and a value above 90 is accepted, clamped to 90 (the platform cap), and noted in the memo; `memo_folder_id`, when present, is a Drive folder id. If the document is missing, a heading is missing, or a value is malformed, fail closed the same way as 0.1, naming the missing or malformed item in the `#funding` line and in the memo.
 
 0.3 Same cycle guard. Find the radar issue (`list_issues`, team Growth, `query` = the radar title; take the exact title match). If it already carries a comment from you dated this ISO week, or the memo folder already holds a memo titled with this week's run date, the weekly run already happened. Append one line to that memo (`Same cycle re-trigger {timestamp}: no-op.`) and exit. Do not post, do not create, do not ask.
 
 0.4 Recall. Read the newest memo in the memo folder (`search_files` with `parentId = '{memo_folder_id}' and title contains 'grant scout'`, newest `modifiedTime` first). Carry forward three tables: the window ledger (program, status, next window, amount, gates, source URL, checked on), the dropped list (program, rule, date), and the issue snapshot (identifier, title, status, due date, and assignee of every open Growth issue at the end of that run). Older memos live outside this folder and predate this spec; do not read them.
 
-0.5 Load the pipeline. `list_issues` team Growth, `includeArchived: true`, `limit: 250`, fields id, title, description, status, statusType, labels, dueDate, assignee, team, url, updatedAt. Follow `cursor` while `hasNextPage` is true until every page is loaded. Then `list_issues` once per funding label (`prospect`, `drafting`, `submitted`, `active-award`, `not-rewarded`) with no team filter, paginated the same way, to catch strays on other teams. In this connector `id` is the display identifier (`GROW-46`) and `uuid` is the internal id; KNOWN keys on `id`. Build KNOWN: one row per issue with funder, program, season or round (from the title and body), status, due date, labels, and any `Decide by` line in the body.
+0.5 Load the pipeline. `list_issues` team Growth, `includeArchived: true`, `limit: 250`, fields id, title, description, status, statusType, labels, dueDate, assignee, team, url, updatedAt, archivedAt. Follow `cursor` while `hasNextPage` is true until every page is loaded. Then `list_issues` once per funding label (`prospect`, `drafting`, `submitted`, `active-award`, `not-rewarded`) with no team filter, paginated the same way, to catch strays on other teams. In this connector `id` is the display identifier (`GROW-46`) and `uuid` is the internal id; KNOWN keys on `id`. Build KNOWN: one row per issue with funder, program, season or round (from the title and body), status, due date, labels, any `Decide by` line in the body, and an archived flag (true when `archivedAt` is set). Archived rows count for dedupe only; they never enter the radar or window watch, whatever their status type.
 
 ## Phase 1: Deadline radar (post this before any web work)
 
-Build the radar from Linear only, so it lands even if the run is cut short. Open means the status type is not completed and not canceled. Growth issues only.
+Build the radar from Linear only, so it lands even if the run is cut short. Open means the status type is not completed and not canceled and `archivedAt` is empty. Growth issues only.
 
 - Due in the next 30 days: every open issue with a due date between today and today plus 30 days, sorted by date. One line each: `{due date} · GROW-n {title} · {status} · {assignee or "no owner"} · {confirmed | to confirm}`. Write `confirmed` only when the issue body carries that date with a source link marked confirmed, or last week's ledger shows the date verified on the funder's page within 14 days. Otherwise `to confirm`.
 - Past due: open issues with a due date before today.
@@ -82,7 +82,7 @@ Changed since last week
 - GROW-n: {what changed}
 ```
 
-Omit a section only when it is empty. No scores, no coverage stats, no telemetry. Post it with `save_comment` on the radar issue and record `radar_posted`: true only when `save_comment` returned a comment id. If the radar issue cannot be found or the post fails, set `radar_posted` to false with the reason, keep the radar text for the memo, and continue; do not create the issue.
+Omit a section only when it is empty. No scores, no coverage stats, no telemetry. Post it with `save_comment` on the radar issue and record `radar_posted`: true only when `save_comment` returned a comment id. When it did, also record `radar_comment_url`: the `url` returned by `save_comment` when present, otherwise the radar issue URL followed by `#comment-` and the comment id. If the radar issue cannot be found or the post fails, set `radar_posted` to false with the reason, keep the radar text for the memo, and continue; do not create the issue.
 
 ## Phase 2: Window watch
 
@@ -90,11 +90,11 @@ For each program in the focus document's Window watch section, fetch only the pr
 
 Then compare with KNOWN and last week's ledger:
 
-- The program has an open Growth issue (status type not completed and not canceled) and its window moved, opened, or closed: update the issue's due date to the real deadline (or a decide by date for a rolling program) and post one plain comment on that issue saying what changed, the source, and the check date. Example: `GoodBuilders Season 5 opens 1 Oct and closes 31 Oct per the GoodDollar forum (checked 2 Sep). Moved the due date to 24 Oct.` If nothing changed, post nothing.
+- The program has an open Growth issue (status type not completed and not canceled, not archived) and its window moved, opened, or closed on the funder's page read this run: update the issue's due date to the real deadline (or a decide by date for a rolling program) and post one plain comment on that issue saying what changed, the source, and the check date. An unverified fetch changes nothing. Example: `GoodBuilders Season 5 opens 1 Oct and closes 31 Oct per the GoodDollar forum (checked 2 Sep). Moved the due date to 24 Oct.` If nothing changed, post nothing.
 - The program has an open Growth issue and the deadline is inside 7 days: no extra comment; the radar already carries it.
 - The program's only issues are done or canceled, or sit on another team: they are history and read only. Never comment on them or change their dates. A genuinely new season or round is a candidate for Phase 4, handled by 4.5.
 - The program has no issue and a window that falls inside the target period: it is a candidate for Phase 4. It still passes every filter.
-- A change touched something on this week's radar: reply once on this week's radar comment with the one line that changed. Never post a second radar.
+- A change touched something on this week's radar and `radar_posted` is true: reply once on this week's radar comment (the recorded comment id) with the one line that changed. When `radar_posted` is false, record the skipped reply in the memo and continue. Never post a second radar.
 
 ## Phase 3: Discovery, bounded
 
@@ -110,7 +110,7 @@ Every candidate goes to Phase 4 with: funder, program, season or round, funder U
 
 ## Phase 4: Filter, score, decide
 
-4.1 Existence gate. A candidate must have a funder controlled page fetched this run that names the program. Confirmed: the page names it and states open, rolling, or a concrete next window. Unverified: the page exists but the fetch failed or did not state status. Disproven: the funder's own site does not name it or shows it permanently closed. Disproven candidates and candidates with no funder URL never proceed; log them. An unverified candidate proceeds only when its funder page is on the Source allow list or the lead came from a person (`#funding`, a call note, or a Linear comment), and then every unverified field in its issue reads `to confirm`; an unverified candidate that came only from web search stays in the memo and the ledger.
+4.1 Existence gate. A candidate proceeds on one of two bases. Confirmed: a funder controlled page fetched this run names the program and states open, rolling, or a concrete next window. Approved unverified: the funder URL is on the Source allow list or the lead came from a person (`#funding`, a call note, or a Linear comment), the page exists but the fetch failed or did not state status, and every unverified field in the issue reads `to confirm`. Disproven: the funder's own site does not name the program or shows it permanently closed. Disproven candidates, candidates with no funder URL, and unverified candidates that came only from web search never proceed; log them in the memo and the ledger.
 
 4.2 Hard filters. Apply the Hard filters section of the focus document, in the order written there. The codes below name the filter classes as the focus document stated them on 2026-09-04, so the memo can log a short code; when the focus document's list differs, its list is the one applied and the log quotes the bullet instead. The first hit drops the candidate; log the rule and the evidence line. Never open an issue for a dropped candidate.
 
@@ -168,7 +168,7 @@ Title: Grant: {Funder}, {Program} ({Season or round})
 {funder page; related issues: active awards, prior attempts, same funder history}
 ```
 
-Fields: team Growth, no project; labels `prospect`, `growth`, `green-goods`, `routine`; assignee Afolabi Aiyeloja; due date = the real deadline, or the decide by date for a rolling program; priority 2 (High) when the composite is 14 or more and the deadline is inside 30 days, otherwise 3 (Medium), and 4 (Low) for a below threshold issue in flag mode; `relatedTo` = the linked issues. Apply the Framing rule section of the focus document as written there (on 2026-09-04: MRV and field data tool language for traditional funders, web3 language only in crypto ecosystem contexts).
+Fields: team Growth, no project; labels `prospect`, `growth`, `green-goods`, `routine`; assignee Afolabi Aiyeloja; due date = the real deadline when it is confirmed, otherwise a decide by date (for a rolling program, or when the deadline is unverified: a date by which a person confirms it, at most 14 days out and before any unverified deadline) written in Key dates as `Decide by {date}`; an unverified funder date never goes into the due date field; priority 2 (High) when the composite is 14 or more and the deadline is inside 30 days, otherwise 3 (Medium), and 4 (Low) for a below threshold issue in flag mode; `relatedTo` = the linked issues. Apply the Framing rule section of the focus document as written there (on 2026-09-04: MRV and field data tool language for traditional funders, web3 language only in crypto ecosystem contexts).
 
 Partnership issue, only when internal signal (call notes, `#funding`, Linear) shows a real conversation with a concrete next step and a date. Never cold prospect.
 
@@ -207,14 +207,14 @@ One message to `#funding`, house style v2: a one or two sentence lede, then at m
 📋 Windows
 - {program}: {what moved}
 
-Radar: <link to this week's radar comment>, or `Radar not posted: {reason}` inside the Needs you block when `radar_posted` is false
+Radar: <`radar_comment_url`>, or `Radar not posted: {reason}` inside the Needs you block when `radar_posted` is false
 ```
 
-Quiet run (nothing new, nothing moved, nothing due inside 14 days): one line, `💰 Grant scout · {date}: nothing new, radar posted → <link>`. When `radar_posted` is false the line is `💰 Grant scout · {date}: nothing new, radar not posted ({reason}), needs a person` and the mention fires. Never post twice in one week.
+Quiet run (nothing new, nothing moved, nothing due inside 14 days): one line, `💰 Grant scout · {date}: nothing new, radar posted → <radar_comment_url>`. When `radar_posted` is false the line is `💰 Grant scout · {date}: nothing new, radar not posted ({reason}), needs a person` and the mention fires. Never post twice in one week.
 
 ## Phase 7: Memo
 
-Create a Google Doc in the memo folder, title `YYYY-MM-DD grant scout`. This is the routine's memory and the only place scores live. Sections: Run outcome; Radar as posted, or the radar text with `not posted: {reason}`; Issue snapshot (identifier, title, status, due date, assignee of every open Growth issue at the end of the run); Window ledger (program, status, next window, amount, gates, source URL, checked on); Candidates considered (funder, program, source of lead, gate result, filter hits, Fit, Urgency, Effort, composite, decision, issue id or reason); Dropped this run (program, rule, date, carried forward so it is not rediscovered); Comments posted (issue, one line); Open questions for a person; Run stats (fetches, searches, minutes). If the Drive write fails, say so in the final message and do not retry; the run still counts.
+Before writing it, list open Growth issues again (`list_issues` team Growth, `includeArchived: true`, paginated, the same fields as 0.5) so the Issue snapshot reflects every issue created or changed in this run; never build the snapshot from the Phase 0 listing. Create a Google Doc in the memo folder, title `YYYY-MM-DD grant scout`. This is the routine's memory and the only place scores live. Sections: Run outcome; Radar as posted, or the radar text with `not posted: {reason}`; Issue snapshot (identifier, title, status, due date, assignee of every open Growth issue at the end of the run); Window ledger (program, status, next window, amount, gates, source URL, checked on); Candidates considered (funder, program, source of lead, gate result, filter hits, Fit, Urgency, Effort, composite, decision, issue id or reason); Dropped this run (program, rule, date, carried forward so it is not rediscovered); Comments posted (issue, one line); Open questions for a person; Run stats (fetches, searches, minutes). If the Drive write fails, say so in the final message and do not retry; the run still counts.
 
 ## Guardrails
 
