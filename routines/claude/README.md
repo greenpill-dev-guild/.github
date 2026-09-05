@@ -84,7 +84,7 @@ Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-
 
 Rollout watchlist for the Fable routines, since a declined run looks identical to a quiet one:
 
-- **`guild-grant-scout`** (Thu 02:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Thursday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
+- **`guild-grant-scout`** (Fri 18:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
 - **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
 - **`research-synthesis`** (Sat 00:00 UTC, on Fable since the 2026-07-30 v3 rewrite): watch the first fire. Low decline risk (academic/ecosystem sources), but under house style v2 a quiet week is one line — a Saturday with *no* line at all means the transcript needs checking.
 
