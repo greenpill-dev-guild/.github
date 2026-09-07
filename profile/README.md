@@ -22,9 +22,9 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is cutting its August v1.3.0 release, with the beta now a public surface people can be onboarded to and a QA pass running across the app and admin surfaces.
-- **Commitment Pooling**: per-garden pools where a community names a need, members promise help, and the person helped confirms it — the contracts, shared API, and settlement path are built, and a second QA pass is running ahead of release.
-- **Community Needs & Signals**: the community engagement model is settled and the attestation schemas are being consolidated, so a need-to-proof thread stays legible from request through confirmed help.
+- **Green Goods**: the flagship regen-documentation PWA is cutting its v1.3.0 release, with the beta now a public surface people can be onboarded to and a QA pass running across the app and admin surfaces.
+- **Commitment Pooling**: per-garden pools where a community names a need, members promise help, and the person helped confirms it — the contracts, shared API, and client interface are built, and the first garden cycle is opening while a second QA pass runs.
+- **Community Needs & Signals**: the community engagement model is settled and the attestation schemas have been consolidated, so a need-to-proof thread stays legible from request through confirmed help.
 - **Public Goods Staking (PGSP)**: the operator-first relaunch is refreshing node setups and building an operator base that practices on testnet before taking validator squads to mainnet.
 - **Greenpill Network website**: polishing the public site and community map after June's launch, and onboarding stewards so the map and content stay accurate.
 <!-- now-building:end -->
@@ -32,8 +32,7 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-- **Green Goods**: tagged [v1.2.1](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.1) — a recovery screen when the app shell fails to start, passkey sign-in on by default in production, open tabs preserved through service-worker updates, and post-deploy asset recovery. The [Envio HyperIndex 3.2.1 migration](https://github.com/greenpill-dev-guild/green-goods/pull/649) also landed.
-- **Guild org repo**: moved [strategy into quarterly editions](https://github.com/greenpill-dev-guild/.github/pull/48) tracked alongside the work itself, and refreshed the shared routine playbooks — a [quieter house style](https://github.com/greenpill-dev-guild/.github/pull/54) for automated updates and a [model refresh](https://github.com/greenpill-dev-guild/.github/pull/51) across guild routines.
+- **Guild org repo**: sharpened the shared routine playbooks — [grant scouting](https://github.com/greenpill-dev-guild/.github/pull/61) now works from a written focus document and filters candidates before it scores them, and the [meeting filer](https://github.com/greenpill-dev-guild/.github/pull/60) discovers Google Meet subfolders and routes recordings to live destinations instead of dead ones.
 <!-- recently-shipped:end -->
 
 ## Across the guild
@@ -41,11 +40,10 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
 
 <!-- team-shipping:start -->
-- **Product** — cutting the August v1.3.0 release while a second Commitment Pooling QA pass runs, after opening the beta as a public onboarding surface and clearing the first pooling QA pass.
+- **Product** — cutting the v1.3.0 release and working through QA findings across the client and admin surfaces, after finishing the Commitment Pooling shared API and client interface and repairing wallet and passkey session recovery in the installed app.
 - **Research** — reading an existing community-credit deployment before committing to voucher interoperability for Commitment Pooling, having just finished the community engagement model behind Needs & Signals.
-- **Community** — onboarding the current cohort of pilot gardens and the first Commitment Pooling operators, alongside weekly gardener check-ins and an end-of-August activity push.
-- **Growth** — running the Artizen Season 7 raise and reporting on active grant awards, after submitting the Season 6 impact report.
-- **Marketing** — producing the Green Goods demo-video batch for the docs site, with a garden anatomy and roles explainer in review.
+- **Community** — preparing a commitment-pooling workshop with a pilot hub and onboarding the first pooling operators, after closing out the end-of-August gardener activity wave and the work approvals behind it.
+- **Growth** — running the Artizen Season 7 raise and keeping reporting current on active grant awards, with the first distribution report for a funded garden pilot now being packaged.
 <!-- team-shipping:end -->
 
 ## Past work
