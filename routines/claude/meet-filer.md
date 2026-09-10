@@ -101,7 +101,8 @@ Do not proceed quietly. Send a `PushNotification` naming the mismatch, the candi
 **Otherwise**:
 
 - For each chunk of ≤25 moves: `POST $MEET_FILER_WEBHOOK_URL` with the manifest. `Content-Type: application/json`.
-- Follow the 302 redirect to retrieve the JSON response.
+- **Use `curl -sSL` and do NOT pass `-X POST`.** Apps Script answers the POST with a 302 to `script.googleusercontent.com`, and the response body lives there. Plain `-L` lets curl switch to GET on the redirect and returns the JSON; `-X POST` forces the method to persist, the echo host rejects it **405**, and you get a Google HTML error page instead of your result. Observed twice on 2026-09-09.
+- **A 405 here does not mean the moves failed.** Apps Script runs `doPost` and moves the files *before* it issues the redirect, so the work is already done when the 405 arrives. Never re-POST the chunk on a 405: re-read the result instead, either by retrying without `-X POST` or by capturing the `Location` header (`-D -`) and GETting it. A blind retry re-sends moves for files that already left their source folder, and those come back as `source restricted` failures that look alarming and mean nothing.
 - On non-2xx or `ok:false` or any `perFile[i].ok === false`: collect the failure into a per-run errors log; continue with remaining chunks (one chunk's failure shouldn't block the rest).
 - After all chunks complete, if any failures accumulated: write `meet-filer-errors-YYYY-MM-DD.md` inside Meet Recordings listing the failed entries. **Do not retry in-run**.
 
@@ -138,6 +139,8 @@ This is the only nudge mechanism. No Discord.
 | Create the Review folder via Drive `create_file` | Apps Script `ensureReviewFolder` (via GET) is the single owner |
 | Spam-create backlog docs daily | Phase 8 creates at most one backlog doc per 7 days; an uncleared Review backlog is nudged weekly, not nightly |
 | Send a manifest > 25 moves in one POST | Apps Script chunk limit; split into ≤25-move batches |
+| `curl -X POST` the webhook | Forces POST across the 302 to the echo host, which answers 405 with an HTML page. Use plain `-sSL` |
+| Re-POST a chunk after a 405 | The moves already ran server-side before the redirect. Re-read the response; a retry produces phantom `source restricted` failures |
 | POST a move where `originalParents` already includes `targetFolderId` | No-op move; source-lock rejects and pollutes audit log |
 | Post to Discord | User opted out |
 | Filter Meet Recordings candidates by age | Any window strands files a failed run skipped once (11 files sat for 3 months behind the 30-day window) |
