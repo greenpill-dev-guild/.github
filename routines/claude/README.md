@@ -88,7 +88,7 @@ To change a model:
 - **Through the API, re-send the whole job config.** The routines API does not merge `job_config`, so a model change re-emits it with only the model swapped. The API also accepts any model string, so a typo only fails when the routine runs.
 - **Change `profile-refresh` in the routines UI**, where its git-push setting is visible. The API does not return that setting on read, so an API re-emit would silently drop it.
 - **Confirm on the next run.** The run log from the routines API includes an `init: model=...` line naming the model that actually ran.
-- **Expect declines to look quiet.** Both models run safety classifiers that can decline a request, and for a cron routine a decline looks like a quiet run rather than an error. Fable 5.1 also requires 30-day data retention, so it is unavailable to a zero-data-retention org.
+- **Expect declines to look quiet.** Both models run safety classifiers that can decline a request, and for a cron routine a decline looks like a quiet run rather than an error. Fable 5.1 also requires 30-day data retention, so a zero-data-retention org can use it only with Anthropic's express authorization.
 
 Watch after the 2026-09-30 move:
 
