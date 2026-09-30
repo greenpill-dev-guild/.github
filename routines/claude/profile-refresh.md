@@ -11,7 +11,7 @@ environment: guild-routines
 network-access: full  # Linear + GitHub API + Discord REST (PR announcement)
 connectors:
   - linear
-model: claude-opus-4-8[1m]  # pending flip to claude-opus-5 — trigger still on 4.8 (see README)
+model: claude-opus-5-5
 allow-unrestricted-branch-pushes: false  # PR only: pushes a profile-refresh/* branch and opens a PR on .github; never pushes main. Requires GitHub write granted to this routine.
 status: active
 ---

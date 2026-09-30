@@ -1,7 +1,7 @@
 ---
 routine-name: meet-filer
 description: Move Gemini meeting notes/recordings from the Meet Recordings folder into per-meeting Drive destinations
-model: claude-opus-5
+model: claude-opus-5-5
 ---
 
 # Prompt
