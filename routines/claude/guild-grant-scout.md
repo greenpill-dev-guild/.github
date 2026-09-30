@@ -15,7 +15,7 @@ env-vars:
 connectors:
   - linear
   - google-drive
-model: claude-fable-5
+model: claude-fable-5-1
 allow-unrestricted-branch-pushes: false  # Linear + Drive + Discord only, no repo writes
 ---
 

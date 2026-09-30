@@ -72,21 +72,28 @@ Sat      00:00  research-synthesis       (= Fri 17:00 PT)
 
 ## Model tier
 
-Each spec names its own model in frontmatter; this is the portfolio view. Every guild routine except `profile-refresh` moved off `claude-opus-4-8[1m]` on 2026-07-26; that one exception is explained below and is tracked as outstanding.
+Each spec's `model:` frontmatter records the model its live routine runs. Editing the frontmatter does not change the running model, so change the routine and its spec together. This is the portfolio view after the 2026-09-30 move to Claude Opus 5.5 and Fable 5.1.
 
 | Model | Routines | Why |
 |---|---|---|
-| `claude-fable-5` | guild-grant-scout, scorecard-pulse, research-synthesis | The low-frequency, high-consequence runs with real ambiguity to navigate: open-ended grant discovery (historically the fabrication-prone routine), the monthly indicator refresh under a never-invent-a-value contract, and the v3 research synthesis (cross-workstream connection-finding and literature scanning are genuine-ambiguity work; its v3 spec was de-prescribed for exactly this flip). Weekly and monthly cadence, so the higher token price is a few dollars a month. |
-| `claude-opus-5` | delivery-hygiene-pulse, guild-weekly-synthesis, meet-filer, network-steward-intent-pulse, stipend-ledger | Same token price as the previous Opus tier with better instruction-following. The default; pick this unless a routine clears the bar above. |
-| `claude-opus-4-8[1m]` | profile-refresh | **Outstanding, not a decision.** Blocked on a tooling limitation, see below. |
+| `claude-fable-5-1` | guild-grant-scout | Open-ended grant discovery with real ambiguity to navigate, and historically the routine most prone to fabrication. It runs weekly, so a lost run costs one week. |
+| `claude-opus-5-5` | meet-filer, profile-refresh, scorecard-pulse, stipend-ledger | The default. Cheaper per token than Opus 5, and Anthropic reports it is less likely than Opus 5 to state a figure its sources don't support. Pick this unless a routine clears the bar above. |
 
-Two caveats worth carrying forward. `profile-refresh` still runs `claude-opus-4-8[1m]`: its source carries a broad git-push capability that the routines API does not echo back on read, so a full job-config re-emit risks silently stripping it. Flip that one from the routines UI, where the git-write toggle is visible, and update its frontmatter in the same change. Separately, `claude-fable-5` requires 30-day data retention and is unavailable to a zero-data-retention org, and its safety classifiers can decline a request outright, which for a cron routine means a silent no-op run rather than an error.
+`scorecard-pulse` left Fable on purpose. Fable runs draw on the account's weekly Fable usage allowance, and once it is spent a run stops within a second with "You're out of usage credits" and posts nothing. That cost `guild-grant-scout` its 2026-08-20 and 2026-08-27 runs and `scorecard-pulse` its 2026-09-01 run. A monthly routine that misses a run loses a month of indicator freshness, and the never-invent-a-value contract that first put it on Fable is the risk Opus 5.5 reduces.
 
-Rollout watchlist for the Fable routines, since a declined run looks identical to a quiet one:
+Not in the table: `delivery-hygiene-pulse`, whose trigger has been paused since late August, and `guild-weekly-synthesis`, `network-steward-intent-pulse`, and `research-synthesis`, which had no trigger on 2026-09-30. Their frontmatter still names the model they last ran. The Green Goods research synthesis (v4), which replaced `research-synthesis`, runs `claude-fable-5-1` from the green-goods portfolio.
 
-- **`guild-grant-scout`** (Fri 18:00 UTC): watch the first two fires. Highest decline risk in the portfolio, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#funding` post and no failure line needs the run transcript checked before it is read as a quiet week.
-- **`scorecard-pulse`** (1st of the month, 10:00 UTC): watch the first fire. Lower decline risk, but it only runs twelve times a year, so a silently skipped run costs a full month of indicator freshness before anyone notices.
-- **`research-synthesis`** (Sat 00:00 UTC, on Fable since the 2026-07-30 v3 rewrite): watch the first fire. Low decline risk (academic/ecosystem sources), but under house style v2 a quiet week is one line — a Saturday with *no* line at all means the transcript needs checking.
+To change a model:
+
+- **Through the API, re-send the whole job config.** The routines API does not merge `job_config`, so a model change re-emits it with only the model swapped. The API also accepts any model string, so a typo only fails when the routine runs.
+- **Change `profile-refresh` in the routines UI**, where its git-push setting is visible. The API does not return that setting on read, so an API re-emit would silently drop it.
+- **Confirm on the next run.** The run log from the routines API includes an `init: model=...` line naming the model that actually ran.
+- **Expect declines to look quiet.** Both models run safety classifiers that can decline a request, and for a cron routine a decline looks like a quiet run rather than an error. Fable 5.1 also requires 30-day data retention, so a zero-data-retention org can use it only with Anthropic's express authorization.
+
+Watch after the 2026-09-30 move:
+
+- **`guild-grant-scout`** (Fri 18:00 UTC): the routine most likely to hit a classifier decline, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#funding` post and no failure line needs its run log checked before it is read as a quiet week; a spent usage allowance looks the same.
+- **`profile-refresh`** (Mon 20:00 UTC): its first run on the new model is 2026-10-05, after a change made in the UI. If no profile PR opens, check that its git-push capability survived.
 
 ## Channel mapping
 
