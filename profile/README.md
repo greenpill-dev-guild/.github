@@ -22,17 +22,16 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is cutting its 2.0 release — commitment pools reaching gardens, Operator renamed to Steward with a rebuilt steward cockpit, and an app that holds up offline — with a QA pass gating the cut.
-- **Commitment Pooling**: per-garden pools where a community names a need, members promise help, and the person helped confirms it — the first garden pool is being configured season by season while operator onboarding and a second QA pass run alongside it.
-- **Reporting over WhatsApp and SMS**: a participation path for gardeners who do not want another app — the entry criteria are now written, and the channel is being built behind that gate toward a pilot.
-- **Garden payouts**: paying gardeners for approved work inside the app, with in-app transfers limited to verified gardeners and the first distribution to selected gardens going out.
+- **Green Goods**: the flagship regen-documentation PWA is holding at its 2.0 cut — commitment pools reaching gardens, Operator renamed to Steward, a rebuilt steward cockpit, and work that submits offline and syncs when the connection returns — with a walk of the pooling journeys on beta gating the release.
+- **Commitment Pooling**: per-garden pools where a community names a need, members promise help, and the person helped confirms it — a first rehearsal with real members turned into a queue of fixes, now landing alongside the second QA pass, release ops, and the first garden's pool setup.
+- **Reporting over WhatsApp and SMS**: a participation path for gardeners who do not want another app — with the entry criteria settled, the build has started on linking a chat to an existing account, keeping drafts and photos safe until a report is finished, and confirming back in the chat once the work is on chain.
+- **Garden payouts**: paying gardeners for approved work inside the app, with the first distribution to selected gardens going out and the first quarterly usage and impact report already filed.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-- **Green Goods**: [v1.2.2](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v1.2.2) repaired passkey signing, so people sign back in without their account moving underneath them.
-- **Guild org repo**: the [meeting filer](https://github.com/greenpill-dev-guild/.github/pull/63) now fails loudly when its source lock does not match, and clears out the stale documents it created itself.
+- **Guild org repo**: the [meeting filer](https://github.com/greenpill-dev-guild/.github/pull/64) now files Regen Commons calls to the Regen Commons drive instead of the guild's own.
 <!-- recently-shipped:end -->
 
 ## Across the guild
@@ -40,10 +39,10 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
 
 <!-- team-shipping:start -->
-- **Product** — QA-gating the 2.0 cut across the app and the steward cockpit, after making the whole work-submission flow complete offline and sync once the connection comes back.
-- **Research** — planning voucher interoperability for Commitment Pooling and conservative yield strategies for garden endowments, having finished reading an existing community-credit deployment and set the entry criteria for reporting impact over WhatsApp and SMS.
-- **Community** — configuring the first garden commitment pool and paying gardeners for approved work, after running the commitment-pooling community workshop and clearing the work approvals behind it.
-- **Growth** — working a live pipeline of grant applications and keeping reporting current on active awards, having just delivered the first quarterly usage and impact report and settled the allocation model for the first garden distribution.
+- **Product** — QA-gating the 2.0 cut across the app and the steward cockpit while starting the WhatsApp reporting build, after making queued work and decisions survive a lost send without going out twice.
+- **Research** — planning voucher interoperability for commitment pools and conservative yield strategies for garden endowments, after reading an existing community-credit deployment end to end and setting the entry criteria for reporting impact over WhatsApp and SMS.
+- **Community** — configuring the first garden's commitment pool and bringing operators into it, after paying gardeners for their approved work and supporting them through pooling onboarding.
+- **Growth** — working a live pipeline of grant applications and keeping reporting current on active awards, after closing out the Arbitrum DAO award that funded Green Goods work and delivering the first quarterly usage and impact report.
 <!-- team-shipping:end -->
 
 ## Past work
