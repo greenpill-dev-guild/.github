@@ -22,16 +22,16 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 ## Now building
 
 <!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is in the QA pass that gates its 2.0 release — commitment pools reaching gardens, Operator renamed to Steward with a rebuilt steward cockpit, and an app that holds up offline — with this round's fixes covering translations, saved work drafts, and the admin create flows.
-- **Commitment Pooling**: per-garden pools where a community names a need, members promise help, and the person helped confirms it — the second QA pass is done, and the first garden pool is being configured with its season, commitments, and seed transfer.
-- **Reporting over chat**: a participation path for gardeners who do not want another app — a Telegram reporting bot is connected for a buildathon demo, and the WhatsApp connection is being built toward a pilot.
-- **Greenpill Network website**: a steward-friendly editing and publishing loop for chapter and guild content, with a watchdog that flags content changes waiting too long to go live.
+- **Green Goods**: the flagship regen-documentation PWA has its 2.0 release candidate on beta and is in its release week — commitment pools reaching gardens, Operator renamed to Steward with a rebuilt steward cockpit, and an app that holds up offline — with the last QA round closing out work recovery, passkey sign-in across Green Goods sites, and the admin confirm queue.
+- **Cosmo-Local Integration**: the next step for commitment pooling now that its foundation is complete — hub-service credits that members earn and use, with the first garden's season, commitments, and requests and offers being set up.
+- **Reporting over chat**: a participation path for gardeners who do not want another app — after the Telegram buildathon demo, the work is now usability fixes and a path from the bot to a first report, with the WhatsApp pilot planned for early 2027.
+- **Greenpill Network website**: a steward-friendly editing and publishing loop for chapter and guild content, now with image alt text and credits edited in the steward form.
 <!-- now-building:end -->
 
 ## Recently shipped
 
 <!-- recently-shipped:start -->
-- **Greenpill Network website**: a [publish-health watchdog](https://github.com/greenpill-dev-guild/network/pull/19) now alerts when approved content has waited too long to reach the public site, and a [mobile menu fix](https://github.com/greenpill-dev-guild/network/pull/21) makes its links tappable on phones.
+- **Greenpill Network website**: chapter images are now [served from the site itself](https://github.com/greenpill-dev-guild/network/pull/24) instead of the admin service, stewards can [edit image alt text and credits](https://github.com/greenpill-dev-guild/network/pull/23) in their form, and a [hung Pages deploy now recovers on its own](https://github.com/greenpill-dev-guild/network/pull/22).
 <!-- recently-shipped:end -->
 
 ## Across the guild
@@ -39,10 +39,11 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
 
 <!-- team-shipping:start -->
-- **Product** — QA-gating the 2.0 cut across the app and the steward cockpit, after finishing the second Commitment Pooling QA pass and keeping unapproved work and internal gardens off the public site.
-- **Research** — planning voucher interoperability for Commitment Pooling and conservative yield strategies for garden endowments, having just settled which gardeners may create offers and requests in a pool.
-- **Community** — configuring the first garden commitment pool, from its season and commitments to the seed transfer, with follow-up from the community workshop queued behind it.
-- **Growth** — working a live pipeline of grant applications and reporting on active awards, having just wrapped the Arbitrum Open House Singapore buildathon with a working chat-reporting demo.
+- **Product** — taking Green Goods 2.0 through its release week, after closing the QA gate's phone, two-device, and commitment-pooling walks on beta and moving chapter images onto the network website itself.
+- **Research** — scoping the Cosmo-Local service-credit integration and the questions the chat-reporting pilot must answer first, having just identified which gardens have recent work and should stay publicly featured.
+- **Community** — setting up the first garden's commitment pool and its requests and offers, with community support running alongside and follow-up from the community workshop queued.
+- **Growth** — working the October funding push and its strategy, entering the SustainableFinance.Live hackathon, and having just funded the stipend Cookie Jar.
+- **Marketing** — preparing the SustainableFinance.Live pitch, a one-page commitment-pooling case study for funders and partners, and weekly public updates on commitment pooling through October.
 <!-- team-shipping:end -->
 
 ## Past work
