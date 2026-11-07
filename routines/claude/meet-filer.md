@@ -25,6 +25,10 @@ You do NOT post to Discord. You do NOT write Linear. You do NOT push code. You d
 
 Read the JSON in the **Mapping (read at runtime)** section below (this same prompt). Validate `{meetRecordingsFolderId, googleMeetFolderId, oneOffsFolderId, userCalendarId, reviewFolderName, fallbackCalendars[], rules[]}`; the three folder IDs must be non-empty strings, and a missing or empty `googleMeetFolderId` is a configuration error (abort and write `meet-filer-errors-YYYY-MM-DD.md`, as in Phase 5) rather than a reason to skip Phase 2c. Sort rules by `order` ascending; first match wins.
 
+**Check that every destination is live (added 2026-11-06).** Before classifying anything, call the Drive connector's `get_file_metadata` (`excludeContentSnippets: true`) once for each distinct non-null `targetFolderId` and once for `oneOffsFolderId`. Shared-drive roots (`0A…` IDs) answer the same call. A destination passes when the call returns, `mimeType` is `application/vnd.google-apps.folder`, and `trashed` is false. A not-found answer fails it; any other error means the check could not run, so abort as in Phase 5 rather than move files unchecked.
+
+Treat a failed destination like a `null` target: its matches go to Review, and the run log and `meet-filer-errors-YYYY-MM-DD.md` name the rule's `order + label`, the folder ID and the reason (not found, not a folder, trashed). If `oneOffsFolderId` fails, identified-but-homeless meetings go to Review too. Send one `PushNotification` listing the failed destinations, then finish the run: one dead folder does not stop the other rules. Never move a file into a trashed folder, because it would sit in the trash with that folder, and Drive empties the trash after 30 days. Why: on 2026-11-06 Afo trashed the folder rule 25 had pointed at since July, and nothing in this spec would have kept the next run from filing that Monday's Engineering Sync into the trash.
+
 ### Phase 2: Discover candidates
 
 Call the webhook list endpoint:
@@ -148,12 +152,24 @@ This is the only nudge mechanism. No Discord.
 | List only the flat Meet Recordings folder | Since 2026-08-26 all new files land in `Google Meet/<Title> (recurring)/` subfolders (Phase 2c); Meet Recordings holds only stragglers |
 | Log a source-lock mismatch and continue | Every move is rejected, so the run is a guaranteed no-op. Ten runs passed this way while 65 files accumulated. Assert in Phase 5 and exit non-zero |
 | Let this routine's own backlog docs accumulate forever | 51 `meet-filer-review-backlog-*.md` docs built up in Meet Recordings between 2026-05 and 2026-08. Phase 8 trashes its own docs older than 30 days |
+| Create a folder, for a rule's target or anything else | A new folder can share its name and path with the real one. The `Engineering/Sync` duplicate created on 2026-07-17 took every Engineering Sync for 15 weeks. Rules point at the folder that already holds the meeting's notes, or at `null` until Afo picks one |
+| Move files into a destination without checking it | A trashed destination takes the files into the trash, which Drive empties after 30 days. Phase 1 checks every destination before anything is classified |
+
+### Changing the mapping (for whoever edits this file; a nightly run skips this)
+
+A run never decides where a meeting belongs. It follows the table below, so a wrong `targetFolderId` misfiles every occurrence of that meeting, night after night, while the run log reads clean. Before you add a rule or change a target:
+
+1. **Find the meeting's existing home.** Search Drive for `title contains '<meeting title>'` and read the `parentId` of the earlier Notes by Gemini docs. If they share one folder, use it.
+2. **No home yet? Ask.** If there are no earlier notes, or they are scattered, ask Afo which folder to use, and set `targetFolderId` to `null` until there is an answer. Matches then go to Review with a warning, which is easy to undo.
+3. **Never create a folder for a rule.** A new folder can carry the same name and path as the real one, so neither the label nor the Phase 1 check can tell them apart. On 2026-07-17 the session behind PR #44 added the `Engineering Sync` rule, created a new `Engineering/Sync` at the root of the Green Goods shared drive beside the `Engineering/Sync` that already held the 2026-06-23 and 2026-07-07 notes, and pointed the rule at the new one. Each Engineering Sync from 2026-07-21 through 2026-11-02 was filed there until Afo moved them back and trashed the duplicate on 2026-11-06.
+
+Labels written before November 2026 call the Green Goods shared drive "DevGuild SD". It is the same drive.
 
 ### Mapping (read at runtime)
 
 ```json
 {
-  "version": 5,
+  "version": 6,
   "meetRecordingsFolderId": "15rffge0LlFlD_sa7hH5vv2SFag7SEDfa",
   "googleMeetFolderId": "1s7bSi10gftbD5avYTBjQEn0LUfZrC3Gg",
   "oneOffsFolderId": "1oAx3SFXriR3eE301ZWJwGIGbqgj6Fa9-",
@@ -193,7 +209,7 @@ This is the only nudge mechanism. No Discord.
     { "order": 22, "regex": "^Odunde\\b",                             "targetFolderId": "1hD4zf1yf_o0Id3sv0iO1yhcQEjnfmdMT",   "label": "YCC SD / Odunde / Meetings (previous target folder no longer exists; where the 2026-05-27+ planning notes already live)" },
     { "order": 23, "regex": "^Regen Commons",                       "targetFolderId": "1XpYDQcJuhSFdXuBRfEO4KTPykKy4nFAd",   "label": "Regen Commons SD / Council / Meetings (Council Call + Steward Jam; was Regen Coordination SD / Council until 2026-09-11, which is a different shared drive)" },
     { "order": 24, "regex": "^Steward 1:1",                         "targetFolderId": "1I7HiSWHqJCFpESbXl9RF34CJ1twBDcKL",   "label": "Network SD / Stewards / Sync (1:1s)" },
-    { "order": 25, "regex": "^Engineering Sync",                    "targetFolderId": "1iopoH1ChrjcRbB8sNTWdU6G2zsSnmcPA",   "label": "DevGuild SD / Engineering / Sync" },
+    { "order": 25, "regex": "^Engineering Sync",                    "targetFolderId": "1k5JXlGD7mtzwbVpyirf3EAQV-9FPuQsO",   "label": "Green Goods SD / Engineering / Sync (home of the June and July 2026 notes; from 2026-07-17 to 2026-11-06 this rule pointed at a same-named duplicate a session created, since trashed)" },
     { "order": 26, "regex": "^Artizen\\b",                            "targetFolderId": "1CVfNabrkLRWJj1yeH8X7oqwHbc2SqP9G",   "label": "Regen Coordination SD / Community (Artizen Money Games Sync, Artizen Summit fund-drive calls)" },
     { "order": 27, "regex": "^Regen (Knowledge Commons|(Web3 )?Toolkit)\\b", "targetFolderId": "1mpSjW3bePpEo189RNffSP3wIPhOd0Gk_", "label": "Regen Coordination SD / Knowledge Commons / Meetings (Toolkit + Knowledge Commons syncs and planning calls)" },
     { "order": 28, "regex": "^AgroforestDAO\\b",                      "targetFolderId": "1UKO-WiZUyzFbGN6yLAbk39lM0wf2Ma4u",   "label": "DevGuild SD / Product / Green Goods / Pilots (AgroforestDAO & Green Goods Sync)" },
