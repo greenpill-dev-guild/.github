@@ -59,5 +59,5 @@ Templates live **globally at the workspace level** (steward decision 2026-07-18)
 ## Surfaces
 
 - **Discord:** `#product` (routine acks and summaries), `#engineering` (health-watch red alerts), `#bug-report` (raw reports), `#growth` (Green Goods growth pulse).
-- **Routines:** bug-intake, qa-triage-pulse, health-watch, growth-pulse, pr-review (green-goods scoped); delivery-hygiene and weekly synthesis (guild level).
+- **Routines:** bug-intake, sync-triage-pulse, health-watch, growth-pulse, and release-prep (green-goods scoped).
 - **Common labels:** `protocol:*`, `package:*`, `activity:build` / `qa` / `maintenance` / `design`.

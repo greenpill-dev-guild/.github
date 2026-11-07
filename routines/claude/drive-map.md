@@ -24,10 +24,8 @@ The "Notes by Gemini" automatic-meeting-notes parent folder appears to be `15rff
 | Pattern | What it captures | Used by |
 |---|---|---|
 | `title contains 'Notes by Gemini'` | Gemini-generated meeting notes | active routines may read only when their prompt allow-list and reject step permits |
-| `title contains 'Guild Weekly'` | prior `guild-weekly-synthesis` outputs | `guild-weekly-synthesis` prior context |
 | `title contains 'Proposal' or title contains 'Grant'` | grant/funding docs | `guild-grant-scout` (allow), all others (reject) |
 | `title contains 'Sync'` | recurring guild sync notes (often Gemini-generated) | informational |
-| `title contains 'research synthesis'` | prior research memos | `research-synthesis` prior context |
 
 ### Topic indicators (use in `fullText contains` for content classification)
 
@@ -38,18 +36,6 @@ The "Notes by Gemini" automatic-meeting-notes parent folder appears to be `15rff
 - **Bug-intake (Green Goods user pain)**: `'doesn\'t work'`, `'broken'`, `'confusing'`, `'crashed'`, `'lost data'`, `'operator'`, `'gardener'`
 
 ## Query patterns by active routine
-
-### `research-synthesis` — Drive supplement (only when channel had >=5 messages)
-```
-modifiedTime > '<7d ago>' and (fullText contains 'paper' or fullText contains 'protocol' or fullText contains 'mechanism design' or title contains 'research')
-```
-Plus: any Drive doc directly linked from a `#research` Discord message in the 7-day window. Drop grant/treasury/strategy hits.
-
-### `guild-weekly-synthesis` — Drive context (7-day)
-```
-modifiedTime > '<7d ago>' and (title contains 'Notes by Gemini' or title contains 'Dev Guild' or title contains 'Greenpill' or title contains 'Guild Weekly')
-```
-The routine prompt applies the full allow-list and reject step. Grants/funding, treasury, private agreements, and unrelated WEFA/personal content are rejected before synthesis.
 
 ### `guild-grant-scout` — Drive (broad-by-design)
 ```

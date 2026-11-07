@@ -21,31 +21,15 @@ This profile focuses on guild-owned GitHub projects and earlier guild artifacts.
 
 ## Now building
 
-<!-- now-building:start -->
-- **Green Goods**: the flagship regen-documentation PWA is finishing its November 2.1 release — Home now opens in the member's active garden, work and evidence run through one submission flow, and the member app and steward cockpit now share one design language — with a 2.2 release planned to carry that consistency further.
-- **Cosmo-Local Integration**: service vouchers that garden members earn and funders buy — the first voucher offers are published and the full voucher loop has been rehearsed end to end, and the focus now is the final sign-offs and reward data before the first pilot runs in full.
-- **Reporting over chat**: a participation path for gardeners who do not want another app — Telegram now shows only the gardens an account reports to, and the reporting service is hardened against restarts and runaway costs, ahead of the WhatsApp pilot planned for early 2027.
-- **Season Two cohort**: onboarding and monthly support for the committed pilot garden, with more gardens joining once fresh participation and readiness are confirmed.
-- **Impact framework refresh**: research translating the Greenpill Impact Framework into current claim, evidence, evaluator, and funder language, working through dated milestones toward a framework definition review in mid-December.
-<!-- now-building:end -->
+Green Goods, our flagship, is where most of the building happens. Its [open pull requests](https://github.com/greenpill-dev-guild/green-goods/pulls) show what is in progress.
 
 ## Recently shipped
 
-<!-- recently-shipped:start -->
-- **Green Goods**: [v2.0.0](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v2.0.0) took Green Goods 2.0 to production — promises and seasons in one flow with documented work and review, a rebuilt steward workspace, and an installed app that keeps drafts and queued work through connection changes — followed a day later by [v2.0.1](https://github.com/greenpill-dev-guild/green-goods/releases/tag/v2.0.1), which recovers queued uploads in production.
-<!-- recently-shipped:end -->
+Every Green Goods release, with its notes, is on the [releases page](https://github.com/greenpill-dev-guild/green-goods/releases).
 
 ## Across the guild
 
-How work is organized: five teams — Product, Research, Community, Growth, and Marketing — tracked in Linear ([how we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md)). What each is on right now:
-
-<!-- team-shipping:start -->
-- **Product** — finishing the Green Goods 2.1 release around a garden-scoped Home and one submission flow, having just completed the work that makes the member app and steward cockpit read as one product and the end-to-end voucher rehearsal for the first Cosmo-Local pilot.
-- **Research** — validating the cross-chain Safe ownership design and weighing shared-evidence pilots with external impact projects, having just completed a recommendation on conservative yield strategies for garden endowments.
-- **Community** — onboarding the Season Two cohort and preparing participants, consent, and requests and offers for the first voucher pilot, after both pilot issuers approved their voucher terms.
-- **Growth** — working the October funding push and the public Q4 strategy and theory of change, having submitted the guild's SustainableFinance.Live hackathon entry.
-- **Marketing** — preparing funder pitch decks, a one-page commitment-pooling case study, and pilot social preview assets, having delivered the SustainableFinance.Live pitch and the Green Goods 2.0 pilot announcement.
-<!-- team-shipping:end -->
+Five teams organize the work: Product, Research, Community, Growth, and Marketing, all tracked in Linear. [How we run them](https://github.com/greenpill-dev-guild/.github/blob/main/docs/teams/README.md) explains what each team is for and how its work flows.
 
 ## Past work
 

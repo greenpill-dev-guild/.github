@@ -4,7 +4,7 @@
 
 These are **documentation, not enforcement**. Each playbook describes how the guild has agreed to handle a recurring flow. Anyone in the guild can adopt or adapt them; project teams can override locally as needed.
 
-Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prompts for **scheduled Claude automations**. The playbooks here describe manual guild processes; the Claude routines automate specific slices of weekly synthesis, grant scouting, and research synthesis.
+Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prompts for **scheduled Claude automations**. The playbooks here describe manual guild processes; the Claude routines automate grant scouting and meeting-note filing.
 
 ## Index
 
@@ -30,17 +30,11 @@ Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prom
 
 All cadences UTC.
 
-- [claude/guild-weekly-synthesis.md](./claude/guild-weekly-synthesis.md) - Tue 01:00 (Mon evening PT) cross-project synthesis over all five Linear teams, with public community excerpt, private lead-council digest (incl. the 🔬 Research block), and Drive memo
-- [claude/delivery-hygiene-pulse.md](./claude/delivery-hygiene-pulse.md) - Mon & Thu 08:00 sweep of all five teams for slippage (past-due / stalled / due-soon owned work) and scope hygiene (unscoped committed work; scoped briefs awaiting their team panel), posting one #scope-review digest with idempotent owner/panel comments
-- [claude/network-steward-intent-pulse.md](./claude/network-steward-intent-pulse.md) - Tue 16:00 Greenpill Network steward-hub intent pulse with one Linear initiative status update and no automatic work creation
 - [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Fri 18:00 UTC (Fri morning PT) Green Goods grant scout: weekly deadline radar, window watch, a shortlist of leads for a person to tick, Growth issues for the ticked rows, a `#growth` heartbeat and a Drive memo
-- [claude/stipend-ledger.md](./claude/stipend-ledger.md) - 1st of the month 09:00 claims-review pack for the stipend model: accepted work per contributor, one #lead-council digest + one Linear Document
-- [claude/profile-refresh.md](./claude/profile-refresh.md) - Mon 20:00 public-profile refresh PR (Now building / Recently shipped / team-shipping marker sections; PR only, never pushes main)
 - [claude/meet-filer.md](./claude/meet-filer.md) - Tue-Sat 00:00 files Gemini meeting notes and recordings into per-meeting Drive folders
+- [claude/drive-map.md](./claude/drive-map.md) - reference for the Drive queries the routines may run (not a routine)
 
-- [claude/research-synthesis.md](./claude/research-synthesis.md) - Sat 00:00 (Fri evening PT) researcher-facing #research digest: corpus-grounded synthesis, bi-directional From-the-board block, at most one gated Issue per run
-
-Retired (specs kept for history): research-accountability-pulse and scope-review-pulse (2026-07-17, merged into delivery-hygiene-pulse); coop-intent-pulse and software-ecology-pulse (2026-07-04).
+Retired routines, and where their work went, are listed in [claude/README.md](./claude/README.md#retired-routines). Their specs left this folder on 2026-11-07; git history keeps them.
 
 See [claude/README.md](./claude/README.md) for environment setup, schedule overview, model tiering, and the manual-skill overlap policy.
 

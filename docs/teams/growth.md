@@ -38,7 +38,7 @@ Backlog · Todo · In Progress · In Review · Done · Canceled · Duplicate
 
 ## Cycles
 
-None. Funding work is deadline-driven (program deadlines, epochs, rounds), not cycle-driven. Due dates and the pipeline view replace cycle planning; the delivery-hygiene routine chases past-due and stalled owned issues here like everywhere else.
+None. Funding work is deadline-driven (program deadlines, epochs, rounds), not cycle-driven. Due dates and the pipeline view replace cycle planning.
 
 ## Evaluator panel
 
@@ -53,5 +53,5 @@ Templates live **globally at the workspace level** (steward decision 2026-07-18)
 ## Surfaces
 
 - **Discord:** `#funding` (grant-scout digest, funding coordination).
-- **Routines:** guild-grant-scout (files and dedupes the pipeline weekly), delivery-hygiene (non-funding BD issues only; the grant pipeline itself is grant-scout's turf), weekly synthesis.
+- **Routines:** guild-grant-scout (files and dedupes the pipeline weekly).
 - **Common labels:** `funding:*` (the lifecycle axis), `activity:capital` (monetization work), `protocol:*` of the product being funded.

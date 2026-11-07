@@ -37,11 +37,11 @@ Use [Linear templates](./linear-templates.md) as the canonical body reference fo
 
 | Team | Discord | Routine coverage | Evaluator panel | Signature labels |
 | --- | --- | --- | --- | --- |
-| Product | `#product`, `#engineering`, `#bug-report`, `#growth` | bug-intake, qa-triage-pulse, health-watch, growth-pulse, pr-review, delivery-hygiene-pulse, weekly synthesis | afo · gferreira525 · coi | `protocol:*`, `package:*`, `activity:build/qa/maintenance/design` |
-| Research | `#research` (discussion) | delivery-hygiene-pulse, weekly synthesis (research block) | afo · coi · matt | `activity:research`, `activity:architecture` |
-| Community | `#community` | delivery-hygiene-pulse, weekly synthesis | afo · nansel · matt | `activity:community` |
-| Growth | `#funding` | guild-grant-scout, delivery-hygiene-pulse (non-funding issues), weekly synthesis | afo · matt | `funding:*`, `activity:capital` |
-| Marketing | `#design` (creative review) | delivery-hygiene-pulse, weekly synthesis | afo · nansel · kit | `activity:marketing`, `activity:design` |
+| Product | `#product`, `#engineering`, `#bug-report`, `#growth` | bug-intake, sync-triage-pulse, health-watch, growth-pulse, release-prep | afo · gferreira525 · coi | `protocol:*`, `package:*`, `activity:build/qa/maintenance/design` |
+| Research | `#research` (discussion) | research-synthesis, research-week | afo · coi · matt | `activity:research`, `activity:architecture` |
+| Community | `#community` | none | afo · nansel · matt | `activity:community` |
+| Growth | `#funding` | guild-grant-scout | afo · matt | `funding:*`, `activity:capital` |
+| Marketing | `#design` (creative review) | none | afo · nansel · kit | `activity:marketing`, `activity:design` |
 
 Panel rosters are confirmed in the Evaluator Panels Linear Document; the table above is the reference copy.
 
@@ -81,14 +81,14 @@ Do not recreate retired GitHub-era label families in Linear. In particular, avoi
 
 ## Scoped work, sizing & accountability
 
-Paid work is scoped, sized, and paid per the [compensation playbook](../routines/scoped-work-compensation.md): a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is what makes work claimable. Use the [Brief template](./linear-templates.md#brief). Dated, owned briefs on every team are chased for slippage by the `delivery-hygiene-pulse` routine under the **Delivery Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
+Paid work is scoped, sized, and paid per the [compensation playbook](../routines/scoped-work-compensation.md): a **scoped brief** (Output · Acceptance criteria · Boundary · Decision/exit) carries an **estimate** and an `activity:*` discipline label, and "Done" (accepted) is what makes work claimable. Use the [Brief template](./linear-templates.md#brief). Dated, owned briefs on every team follow the **Delivery Accountability** rule (scope → due date → pulse → escalation), kept as a Linear Document. Continuous roles (e.g. community support) are a monthly arrangement rather than per-brief.
 
 **Scope before assign, sign off before start:**
 
 - **Async scoping.** Briefs are prepared in Linear *before* the call that commits them, not invented live. Raw ideas stay in Discord / Drive until they cross the brief bar.
 - **Estimate means scoped.** Setting a Linear **estimate** is the signal that an issue is a scoped brief. No estimate means it is not yet scoped.
 - **Panel sign-off is the gate.** Anyone may scope a brief; the matching **team evaluator panel** (see the [team charters](./teams/README.md) and [GOVERNANCE.md](../GOVERNANCE.md#decision-making)) signs it off to move it **Backlog → Todo** (and, if funded, claimable). Async SLA: **3 days**; afo's ack counts on any panel.
-- **Mandatory peer review.** Every scoped brief gets at least one peer review before it is accepted as done. The `delivery-hygiene-pulse` routine routes waiting briefs to their panel on Mondays and Thursdays and chases dated / owned work for slippage.
+- **Mandatory peer review.** Every scoped brief gets at least one peer review before it is accepted as done.
 
 ## Cycle cadence and rollover
 
@@ -104,7 +104,7 @@ Place an issue on the team that owns its acceptance, and keep dependent work tog
 - **Research-led architecture briefs** (e.g. the Impact Framework v0.1 set) live on the team that signs them off.
 - **Keep a gate and its dependents in one cycle.** A QA gate and the issues it blocks, or a foundation brief and the briefs that depend on it, move together so a dependency chain is never split across cycles.
 
-Scope-review happens before Todo. Backlog and Triage issues that need a scoped brief or evaluator-panel sign-off are surfaced by `delivery-hygiene-pulse`; the routine can nudge the right panel, but it never accepts work or moves issues to Todo. Acceptance remains a human panel decision.
+Scope-review happens before Todo. Backlog and Triage issues that need a scoped brief or evaluator-panel sign-off wait for their team's panel. Acceptance remains a human panel decision.
 
 ## Agent delegation
 

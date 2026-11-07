@@ -40,13 +40,13 @@ Estimates (1/2/4/8) and any stated allocation are reference points for judging h
 ## Claiming: claim, then review
 
 1. **Claim from the Cookie Jar** as the month closes, for the amount that fairly reflects your accepted, tracked work, up to your cap.
-2. **Link your work in the claim note.** Every claim note must carry a Linear reference that backs it: the issue links themselves, the month's **Stipend Ledger** document, or the shared **"Stipend Claims — This Month"** saved view filtered to you (all teams · Done · completed this month · grouped by assignee). A claim without a Linear reference is invalid by convention and will be flagged.
+2. **Link your work in the claim note.** Every claim note must carry a Linear reference that backs it: the issue links themselves, or the shared **"Stipend Claims — This Month"** saved view filtered to you (all teams · Done · completed this month · grouped by assignee). A claim without a Linear reference is invalid by convention and will be flagged.
 3. **Steward review.** The steward reviews every claim against the Linear record, using the monthly stipend ledger as the reference pack. The review checks responsible usage; it does not re-litigate acceptance that already happened on the issue.
 4. **Over-claims** are flagged by the steward and either offset against the next month or returned. Repeated over-claiming is grounds for removal from the jar allowlist, a steward decision under [GOVERNANCE.md](../GOVERNANCE.md).
 
 ## The stipend ledger
 
-The `stipend-ledger` routine ([routines/claude/stipend-ledger.md](./claude/stipend-ledger.md)) compiles the review pack on the 1st of each month: every issue completed in the closed month across all five teams, grouped by contributor, with links, estimates, and payment-classification fields where present. It posts one digest for steward review and writes one Linear document, "Stipend Ledger — {month}". It computes no dollar amounts; it exists so the claim review takes minutes, not an evening.
+The stipend ledger is the month's accepted work: every issue completed in the month across all five teams, grouped by contributor. Stewards read it from the shared "Stipend Claims — This Month" saved view. Until November 2026 the `stipend-ledger` routine also compiled it on the 1st into a Linear document, "Stipend Ledger — {month}". The routine was retired on 2026-11-07, and the earlier documents stay in Linear.
 
 ## Payment classification, in the issue
 
@@ -106,7 +106,7 @@ What survives unchanged: the scoped-brief shape, estimates as the sizing signal 
 - [Funded Work Intake](./funded-work-intake.md) — how scoped work is identified and confirmed; this playbook is its payment layer.
 - [Linear operating model](../docs/linear-operating-model.md) and [team charters](../docs/teams/README.md) — teams, acceptance, estimates.
 - [Grant Application](./grant-application.md) — the funding-source side that fills the envelopes.
-- **Delivery Accountability** rule (Linear Document) — scope → due date → pulse → escalation; the `delivery-hygiene-pulse` routine chases the same flow this playbook pays.
+- **Delivery Accountability** rule (Linear Document) — scope → due date → pulse → escalation, the same flow this playbook pays.
 
 ---
 

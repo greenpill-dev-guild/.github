@@ -55,6 +55,6 @@ Templates live **globally at the workspace level** (steward decision 2026-07-18)
 
 ## Surfaces
 
-- **Discord:** `#community` (weekly synthesis excerpt, community coordination).
-- **Routines:** delivery-hygiene, weekly synthesis.
+- **Discord:** `#community` (community coordination).
+- **Routines:** none.
 - **Common labels:** `activity:community`, `protocol:*` of the product the work supports (for example `protocol:pgsp` for cohort work, `protocol:green-goods` for garden onboarding).
