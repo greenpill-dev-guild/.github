@@ -46,7 +46,7 @@ Estimates (1/2/4/8) and any stated allocation are reference points for judging h
 
 ## The stipend ledger
 
-The stipend ledger is the month's accepted work: every issue completed in the month across all five teams, grouped by contributor. Stewards read it from the shared "Stipend Claims — This Month" saved view. Until November 2026 the `stipend-ledger` routine also compiled it on the 1st into a Linear document, "Stipend Ledger — {month}". The routine was retired on 2026-11-07, and the earlier documents stay in Linear.
+The stipend ledger is the month's accepted work: every issue completed in the month across all five teams, grouped by contributor. Stewards read it from the shared "Stipend Claims — This Month" saved view, which shows the current month; to review a month that has closed, set the view's completed-date filter to that month. Unlike the old ledger, the view does not set grant-deliverable briefs apart, and those are paid on acceptance outside the stipend, so the steward checks the payment classification of any claimed issue that carries one. Until November 2026 the `stipend-ledger` routine also compiled it on the 1st into a Linear document, "Stipend Ledger — {month}". The routine was retired on 2026-11-07, and the earlier documents stay in Linear.
 
 ## Payment classification, in the issue
 

@@ -23,7 +23,7 @@ Use this text verbatim as the Linear team description:
 - Features, bugs, QA, polish, and maintenance on Green Goods and the Greenpill Network website (for example the "Q3 July — Commitment Pooling" cycle work).
 - Product and UX design (`activity:design` on this team means interface and experience design).
 - Delivery work unlocked by a grant award: filed here, linked back to the award issue on Growth.
-- Customer Needs for product surfaces, triaged by the bug-intake and qa-triage routines.
+- Customer Needs for product surfaces, triaged by the bug-intake and sync-triage-pulse routines.
 
 ## What doesn't
 
@@ -36,7 +36,7 @@ Use this text verbatim as the Linear team description:
 
 Triage · Backlog · Todo · In Progress · In Review · Done · Canceled · Duplicate
 
-- **Triage** is the intake gate: routine-filed issues (bug-intake, qa-triage-pulse) and external reports land here before acceptance.
+- **Triage** is the intake gate: routine-filed issues (bug-intake, sync-triage-pulse) and external reports land here before acceptance.
 - The former QA and Ready states were retired in the 2026-07 simplification. QA proof now lives in **In Review** plus the acceptance rule: merge evidence alone is not Done, close only when acceptance criteria are verified on the intended surface.
 - No state changes needed; this set matches the live Linear configuration.
 
