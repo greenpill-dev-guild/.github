@@ -28,7 +28,7 @@ Portfolio, WEFA, and TAS-Hub left the guild V1 set in 2026-W24 (personal or guil
 
 ### Pulse registry metadata
 
-Curated judgment fields consumed by the weekly pulse. A local twin lives in the dev-surfaces registry for local workflows; the pulse reads only this section.
+Curated judgment fields for reviewing the ecology. A local twin lives in the dev-surfaces registry for local workflows. The weekly pulse, retired on 2026-07-04, read only this section.
 
 **Green Goods**
 
@@ -44,7 +44,7 @@ Curated judgment fields consumed by the weekly pulse. A local twin lives in the 
 
 ## Signal definitions
 
-`dev ecology --json` is the local machine-readable inspection snapshot; `dev ecology --json --handoff` bundles it with a Markdown sibling for human review. Both are local conveniences: the hosted routine computes its own snapshot from cloud clones and does not consume these files. Treat them as point-in-time local snapshots, not as replacements for project repo truth.
+`dev ecology --json` is the local machine-readable inspection snapshot; `dev ecology --json --handoff` bundles it with a Markdown sibling for human review. Both are local conveniences; the retired hosted pulse computed its own snapshot from cloud clones and never consumed these files. Treat them as point-in-time local snapshots, not as replacements for project repo truth.
 
 The local snapshot records:
 
@@ -54,7 +54,7 @@ The local snapshot records:
 - Workbench dev-surface status for repos registered in `dev-surfaces`.
 - Curated risk tier, source-truth surfaces, API/privacy boundaries, release/rollback notes, and likely bottleneck.
 
-The hosted pulse computes a narrower, clone-derivable subset: plan-lane counts, guidance presence, root script inventory, last-commit recency, and main-develop drift. Working-tree state and dev-surface runtime are local-only signals and never appear in the pulse.
+The retired hosted pulse computed a narrower, clone-derivable subset: plan-lane counts, guidance presence, root script inventory, last-commit recency, and main-develop drift. Working-tree state and dev-surface runtime are local-only signals.
 
 Healthy ecology signals:
 
@@ -74,24 +74,7 @@ At-risk ecology signals:
 
 ## Weekly pulse
 
-The `software-ecology-pulse` routine is status-only and self-sufficient: each run computes its ecology snapshot from the fresh cloud clones of the three V1 repos (plan-lane counts, guidance presence, root script inventory, git recency, and main-develop drift where refs allow) plus the pulse registry metadata in this document. No local snapshot generation, upload, or attachment is required, and the routine must not search Drive for one.
-
-Allowed outputs:
-
-- One Linear initiative status update on `Software Ecology & Agentic Workflow Health`.
-- One Dev Guild shared Drive memo.
-- One private/dev-guild Discord summary.
-
-Forbidden outputs:
-
-- No Linear Issues or Customer Needs.
-- No GitHub Issues, pull requests, branches, or repo edits.
-- No production deploys.
-- No browser sessions.
-- No secret reads.
-- No heavy validation runs.
-
-If a V1 clone is missing or unreadable, the routine marks health `atRisk`, names the missing repo, and creates no work.
+The `software-ecology-pulse` routine that reported on this registry was retired on 2026-07-04, and its spec left `routines/claude/` on 2026-11-07; git history keeps it. Review the ecology by hand with the dashboard below.
 
 ## Reading the dashboard
 

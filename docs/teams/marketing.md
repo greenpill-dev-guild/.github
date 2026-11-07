@@ -42,7 +42,7 @@ Backlog · Todo · In Progress · In Review · Done · Canceled · Duplicate
 
 ## Cycles
 
-None. Marketing runs on briefs and campaign windows (epochs, seasons, launches), not sprint cycles. Due dates track the windows; the delivery-hygiene routine chases slippage.
+None. Marketing runs on briefs and campaign windows (epochs, seasons, launches), not sprint cycles. Due dates track the windows.
 
 ## Evaluator panel
 
@@ -61,5 +61,5 @@ Templates live **globally at the workspace level** (steward decision 2026-07-18)
 ## Surfaces
 
 - **Discord:** `#design` for creative review today; a dedicated marketing channel is an open decision.
-- **Routines:** delivery-hygiene, weekly synthesis.
+- **Routines:** none.
 - **Common labels:** `activity:marketing` (campaigns, content), `activity:design` (brand/creative), `protocol:*` of the product being told about.

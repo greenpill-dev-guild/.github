@@ -52,6 +52,6 @@ Templates live **globally at the workspace level** (steward decision 2026-07-18)
 
 ## Surfaces
 
-- **Discord:** `#research` (discussion; the automated Saturday synthesis is retired, research movement now appears in the weekly synthesis digest).
-- **Routines:** delivery-hygiene (owned and dated work, scope hygiene), weekly synthesis (research block).
+- **Discord:** `#research` (discussion, the Saturday research digest, and a Monday pointer to the week's brief).
+- **Routines:** research-synthesis (Saturday) and research-week (Monday), from the green-goods portfolio.
 - **Common labels:** `activity:research`, `activity:architecture`, `protocol:*` of the product the research serves.

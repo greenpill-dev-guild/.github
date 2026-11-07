@@ -27,7 +27,7 @@ At each quarter's kickoff:
 2. Hold every live initiative against it: continue, close, or create.
 3. **Re-point each initiative's strategy resource** at the new edition. An initiative nobody re-points is an initiative nobody confirmed still aligns, so the relinking is the alignment pass rather than overhead around it.
 
-The Theory of Change gets the same treatment yearly, if at all. The scorecard-pulse flags a missing edition for the current quarter.
+The Theory of Change gets the same treatment yearly, if at all.
 
 ## Branches, teams, labels
 
@@ -48,7 +48,7 @@ Branch labels sit directly on initiatives (`branch:*`); issues roll up through `
 1. **Auto-derivable first.** An indicator earns a register row only if a routine can read it: Linear (issue/cycle/label queries), PostHog (funnel, MAU), on-chain (squads, badges, TVL), or Karma GAP (CIDS records, Hypercerts). Metrics only a human can supply (service revenue, event attendance) live as narrative in status updates instead.
 2. **3-5 per outcome.** The vital few. If a signal matters but cannot be measured yet, it stays a Success signal on the card, not a register row.
 3. **Every Current carries an As-of date.** A value without a date is treated as unknown.
-4. **Registers are refreshed by the monthly scorecard-pulse** (1st of month): auto-derivable Currents updated, one status update per active outcome initiative, drift flagged (As-of over 30 days, card/field target mismatch, dead roadmap references, missing strategy edition for the current quarter).
+4. **Registers are refreshed by hand at the monthly scorecard review**, since the scorecard-pulse that did it was retired: auto-derivable Currents updated, one status update per active outcome initiative, and drift checked (As-of over 30 days, card/field target mismatch, dead roadmap references, missing strategy edition for the current quarter).
 
 ## Exemptions
 
@@ -66,3 +66,4 @@ Branch labels sit directly on initiatives (`branch:*`); issues roll up through `
 - 2026-06-21: first register built as a Google Sheet plus per-initiative docs. The sheet froze; it sat in nobody's workflow.
 - 2026-07-18: Linear-first flip. Registers became the canonical value tables; the sheet was archived; slim sets adopted; the scorecard-pulse commissioned.
 - 2026-07-19: strategy split into quarterly Linear editions (it is an operating artifact, not canon); the Theory of Change and this guide stay here as canon. Branch labels moved onto initiatives.
+- 2026-11-07: the scorecard-pulse retired; registers are refreshed by hand at the monthly scorecard review.
