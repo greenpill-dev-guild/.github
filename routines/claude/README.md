@@ -52,7 +52,7 @@ The guild routines read these active project repos:
 | green-goods | greenpill-dev-guild |
 | network-website | greenpill-dev-guild |
 
-Plus the central `greenpill-dev-guild/.github` for grant-related cross-project context, and PGSP (Public Goods Staking Protocol) where it surfaces in `#funding` or `#research` discussions.
+Plus the central `greenpill-dev-guild/.github` for grant-related cross-project context, and PGSP (Public Goods Staking Protocol) where it surfaces in `#growth` or `#research` discussions.
 
 **Coop, Cookie Jar, and TAS-Hub were dropped from routine scope on 2026-07-04** — Network Website remains first-class. Other guild repos (coop, cookie-jar, TAS-Hub, gardens, impact-reef, gg24-round-explorer, octant-v2(-core), regen-stack) are intentionally out of scope unless a routine prompt explicitly expands the active set.
 
@@ -92,7 +92,7 @@ To change a model:
 
 Watch after the 2026-09-30 move:
 
-- **`guild-grant-scout`** (Fri 18:00 UTC): the routine most likely to hit a classifier decline, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#funding` post and no failure line needs its run log checked before it is read as a quiet week; a spent usage allowance looks the same.
+- **`guild-grant-scout`** (Fri 18:00 UTC): the routine most likely to hit a classifier decline, because it reads government, security-adjacent, and climate funding portals. A Friday with no `#growth` post and no failure line needs its run log checked before it is read as a quiet week; a spent usage allowance looks the same.
 - **`profile-refresh`** (Mon 20:00 UTC): its first run on the new model is 2026-10-05, after a change made in the UI. If no profile PR opens, check that its git-push capability survived.
 
 ## Channel mapping
