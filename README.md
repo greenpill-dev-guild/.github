@@ -31,6 +31,7 @@ These files are reusable from this repo, but each consuming repository must adop
 
 - [`.github/workflows/labels-sync.yml`](./.github/workflows/labels-sync.yml) — syncs the guild label manifest into a repo that calls it
 - [`.github/workflows/claude-pr-review.yml`](./.github/workflows/claude-pr-review.yml) — runs non-blocking Claude PR review for a repo that calls it
+- [`.github/workflows/agents-doctor.yml`](./.github/workflows/agents-doctor.yml): checks that a repo follows the shared agent kit (AGENTS.md as the guide, CLAUDE.md importing it, one skills folder, valid `.agents` policies, a PR template and CODEOWNERS); `mode: advisory` only reports
 
 ## What does not propagate automatically
 
