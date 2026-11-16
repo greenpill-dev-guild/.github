@@ -36,7 +36,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout consumer repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           path: consumer
           fetch-depth: 1
@@ -44,7 +44,7 @@ jobs:
 
       - name: Checkout doctor source
         if: github.repository != 'greenpill-dev-guild/.github'
-        uses: actions/checkout@v4
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           repository: greenpill-dev-guild/.github
           ref: ${{ inputs.doctor-ref }}
