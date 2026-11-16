@@ -1,0 +1,85 @@
+name: Agents Doctor (reusable)
+
+# Reusable read-only check that a repository follows the shared agent kit:
+# AGENTS.md as the guide, CLAUDE.md importing it, one skills folder, valid
+# .agents policy files, hooks that read their event from stdin, a PR template,
+# CODEOWNERS, and the adapter the kit skills read. Consumer repos opt in with a
+# small local workflow that calls this one. scripts/agents-doctor.mjs is a
+# byte-identical copy of agents/kit/doctor/agents-doctor.mjs in the private
+# dev-surfaces repository, the source of truth; change it there first.
+
+on:
+  workflow_call:
+    inputs:
+      mode:
+        description: "ci fails on broken contracts; strict also fails on warnings; advisory only reports."
+        required: false
+        type: string
+        default: ci
+      working-directory:
+        description: "Path inside the consumer repo to check."
+        required: false
+        type: string
+        default: "."
+      doctor-ref:
+        description: "Ref of greenpill-dev-guild/.github to read the doctor script from for external callers."
+        required: false
+        type: string
+        default: main
+
+permissions:
+  contents: read
+
+jobs:
+  doctor:
+    name: Agents doctor
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout consumer repo
+        uses: actions/checkout@v4
+        with:
+          path: consumer
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Checkout doctor source
+        if: github.repository != 'greenpill-dev-guild/.github'
+        uses: actions/checkout@v4
+        with:
+          repository: greenpill-dev-guild/.github
+          ref: ${{ inputs.doctor-ref }}
+          path: _guild-defaults
+          fetch-depth: 1
+          persist-credentials: false
+
+      - name: Resolve doctor script
+        id: doctor
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [ "${{ github.repository }}" = "greenpill-dev-guild/.github" ]; then
+            script="$GITHUB_WORKSPACE/consumer/scripts/agents-doctor.mjs"
+          else
+            script="$GITHUB_WORKSPACE/_guild-defaults/scripts/agents-doctor.mjs"
+          fi
+          if [ ! -f "$script" ]; then
+            echo "::error::agents-doctor script not found: $script"
+            exit 1
+          fi
+          echo "script=$script" >> "$GITHUB_OUTPUT"
+
+      - name: Run agents doctor
+        shell: bash
+        env:
+          DOCTOR: ${{ steps.doctor.outputs.script }}
+          MODE: ${{ inputs.mode }}
+          WORKDIR: ${{ inputs.working-directory }}
+        run: |
+          set -euo pipefail
+          case "$MODE" in
+            ci) flag="" ;;
+            strict) flag="--strict" ;;
+            advisory) flag="--advisory" ;;
+            *) echo "::error::mode must be ci, strict or advisory, not $MODE"; exit 1 ;;
+          esac
+          node "$DOCTOR" $flag "$GITHUB_WORKSPACE/consumer/$WORKDIR"

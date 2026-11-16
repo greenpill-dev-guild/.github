@@ -1,0 +1,26 @@
+name: Agents Doctor
+
+# Runs the reusable doctor on this repository whenever the doctor changes.
+# Advisory: this repository's own CLAUDE.md does not import AGENTS.md yet,
+# which the doctor reports as a failure.
+
+on:
+  pull_request:
+    paths:
+      - "scripts/agents-doctor.mjs"
+      - ".github/workflows/agents-doctor*.yml"
+  push:
+    branches: [main]
+    paths:
+      - "scripts/agents-doctor.mjs"
+      - ".github/workflows/agents-doctor*.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  doctor:
+    uses: ./.github/workflows/agents-doctor.yml
+    with:
+      mode: advisory
