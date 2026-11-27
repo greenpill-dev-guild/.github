@@ -31,7 +31,6 @@ Distinct from [`claude/`](./claude/) - that subfolder holds source-of-truth prom
 All cadences UTC.
 
 - [claude/guild-grant-scout.md](./claude/guild-grant-scout.md) - Fri 18:00 UTC (Fri morning PT) Green Goods grant scout: weekly deadline radar, window watch, a shortlist of leads for a person to tick, Growth issues for the ticked rows, a `#growth` heartbeat and a Drive memo
-- [claude/meet-filer.md](./claude/meet-filer.md) - Tue-Sat 00:00 files Gemini meeting notes and recordings into per-meeting Drive folders
 - [claude/drive-map.md](./claude/drive-map.md) - reference for the Drive queries the routines may run (not a routine)
 
 Retired routines, and where their work went, are listed in [claude/README.md](./claude/README.md#retired-routines). Their specs left this folder on 2026-11-07; git history keeps them.

@@ -11,22 +11,22 @@ All cadences in **UTC**.
 | File | Status | Cadence | Channel | Surface |
 |---|---|---|---|---|
 | `guild-grant-scout.md` | active (v3) | Fri 18:00 (= Fri 11:00 PT) | `#growth` + radar comment on the Growth radar issue + the `Grant scout shortlist` Linear document + Drive memo | Green Goods funding scout: weekly deadline radar, window watch on named programs, and a shortlist of verified leads across grants, prizes, accelerators, investment, partnerships and in-kind, filtered by the `Grant Scout Focus` Linear document; files a Growth issue only for a shortlist row a person ticked; reads the Weave funder catalog as a lead source; PGSP and Coop are out of scope |
-| `meet-filer.md` | active | Tue–Sat 00:00 | Drive only | Files Gemini meeting notes + recordings into per-meeting Drive destinations; nothing to any tracker |
 
 `drive-map.md` is a reference for the Drive queries these routines may run, not a routine.
 
-The week, in order: meet-filer files meeting notes overnight Tue–Sat, and grant scouting lands Fri 18:00 UTC (Fri morning PT, right after the weekly usage window resets). The portfolio shrank to these two on 2026-11-07; [Retired routines](#retired-routines) says where the rest of the work went. **The 2026-07-30 quiet-Discord revamp** put every posting routine on house style v2: one message per post, a conversational lede, and a one-line all-clear on quiet runs.
+Grant scouting lands Fri 18:00 UTC (Fri morning PT, right after the weekly usage window resets). The portfolio shrank to two routines on 2026-11-07 and to one on 2026-11-27, when meet-filer left this repo; [Retired routines](#retired-routines) says where the rest of the work went. **The 2026-07-30 quiet-Discord revamp** put every posting routine on house style v2: one message per post, a conversational lede, and a one-line all-clear on quiet runs.
 
 The Green Goods routines (bug-intake, sync-triage-pulse, health-watch, growth-pulse, release-prep, research-synthesis, and research-week) live at [`greenpill-dev-guild/green-goods/docs/routines/`](https://github.com/greenpill-dev-guild/green-goods/tree/main/docs/routines).
 
 ## Retired routines
 
-These specs left this folder on 2026-11-07; git history keeps every version.
+These specs left this folder on 2026-11-07, except meet-filer, which left on 2026-11-27; git history keeps every version.
 
 | Routine | State before removal | Where the work went |
 |---|---|---|
 | `delivery-hygiene-pulse` | trigger paused since late August | No routine. Owners and team panels follow the Delivery Accountability rule directly |
 | `scorecard-pulse` | monthly | The monthly scorecard review refreshes the registers ([scorecard guide](../../docs/strategy/scorecard-and-branch-map.md)) |
+| `meet-filer` | weekdays, Drive only | Runs privately for Afo outside this repo; its spec held folder and calendar details that don't belong in a public repo |
 | `stipend-ledger` | monthly | Stewards review claims against the "Stipend Claims — This Month" saved view ([compensation playbook](../scoped-work-compensation.md)) |
 | `profile-refresh` | weekly | The [org profile](../../profile/README.md) links to live sources instead of dated lists |
 | `guild-weekly-synthesis` | no trigger since 2026-09-30 | Partnership and contact signal from calls belongs to the Green Goods research synthesis |
@@ -66,7 +66,6 @@ Plus the central `greenpill-dev-guild/.github` for grant-related cross-project c
 ## Schedule (UTC)
 
 ```text
-Tue–Sat  00:00  meet-filer
 Fri      18:00  guild-grant-scout        (= Fri 11:00 PT)
 ```
 
@@ -77,7 +76,7 @@ Each spec's `model:` frontmatter records the model its live routine runs. Editin
 | Model | Routines | Why |
 |---|---|---|
 | `claude-fable-5-1` | guild-grant-scout | Open-ended grant discovery with real ambiguity to navigate, and historically the routine most prone to fabrication. It runs weekly, so a lost run costs one week. |
-| `claude-opus-5-5` | meet-filer | The default. Cheaper per token than Opus 5, and Anthropic reports it is less likely than Opus 5 to state a figure its sources don't support. Pick this unless a routine clears the bar above. |
+| `claude-opus-5-5` | none at the moment | The default. Cheaper per token than Opus 5, and Anthropic reports it is less likely than Opus 5 to state a figure its sources don't support. Pick this unless a routine clears the bar above. |
 
 Fable runs draw on the account's weekly Fable usage allowance, and once it is spent a run stops within a second with "You're out of usage credits" and posts nothing. That cost `guild-grant-scout` its 2026-08-20 and 2026-08-27 runs.
 
@@ -114,14 +113,12 @@ All active routines use the `guild-routines` environment at claude.ai/code/routi
 - `DISCORD_BOT_TOKEN` (shared bot token)
 - `DISCORD_FUNDING_CHANNEL_ID`
 - `DISCORD_USER_ID_AFO` — Afo's Discord snowflake ID for `<@${DISCORD_USER_ID_AFO}>` mentions
-- meet-filer's webhook variables, as its spec lists them
 - **Linear: OAuth connector only — no `LINEAR_API_KEY` is stored in the guild-routines env** (standing rule as of 2026-07-04). `guild-grant-scout`, the one Linear-touching guild routine, reaches Linear through the wired OAuth connector and fails closed when it lapses; re-authorize the connector rather than adding a key.
 
 **Connector matrix:**
 
 | Routine | Connectors | Why each |
 |---|---|---|
-| `meet-filer` | Google Calendar | Calendar = the `list_events` fallback for classifying meeting notes; file moves go through the Meet Recordings webhook (`MEET_FILER_WEBHOOK_URL`), not the Drive connector. No Discord, Linear, or GitHub. |
 | `guild-grant-scout` | Google Drive, Linear | Linear = `funding:*` lifecycle on the Growth team, the `Grant Scout Focus` and `Grant scout shortlist` documents, and the `Grant deadline radar` issue · Drive = one memo per run in the Green Goods Growth folder · the `regen-commons/weave` repo is cloned read-only for its funder catalog · Calendar, Miro, Canva, PostHog stay wired on the trigger but are not used |
 
 Gmail is intentionally NOT wired. Personal-inbox content carries too much pollution / noise / private information for any of these routines.
@@ -166,7 +163,6 @@ Old label vocabularies (`area:*`, `work:*`, `task:*`, `band:*`, `migration:*`, `
 
 ## Conventions
 
-- `meet-filer` moves Gemini meeting notes/recordings into per-meeting Drive folders. It posts to no Discord channel and writes nothing to Linear or GitHub; unclassifiable files land in `Meet Recordings — Review`.
 - Grant lifecycle Issues live on the **Growth team** and are surfaced through saved views over `funding:prospect` / `funding:drafting` / `funding:submitted` / `funding:active-award`. They carry the active `funding:*` label plus the relevant `protocol:*`, and `ai:routine` **when routine-authored** (a human-filed grant Issue carries no `ai:*` label, since that family records authored provenance rather than lifecycle). Awards stay on Growth; delivery work is filed on Product by humans and linked.
 
 ## Rebuilding a routine
